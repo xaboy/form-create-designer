@@ -140,7 +140,7 @@
 </style>
 
 <template>
-    <ElContainer class="_fc-designer">
+    <ElContainer class="_fc-designer" :style="'height:'+height_">
         <ElMain>
             <ElContainer style="height: 100%;">
                 <el-aside class="_fc-l" width="266px">
@@ -246,7 +246,14 @@ export default {
         draggable,
         FormCreate: formCreate.$form(),
     },
-    props: ['menu'],
+    props: ['menu','height'],
+    computed:{
+        height_(){
+            const h =this.height;
+            if(!h) return '100%';
+            return is.Number(h) ? `${h}px` : h;
+        }
+    },
     provide: _ => ({
         fcx: {
             active: null

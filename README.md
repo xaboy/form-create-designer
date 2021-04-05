@@ -64,6 +64,8 @@ Vue.use(FcDesigner)
 ## 组件`props`
 
 - **menu**`MenuList` 重新配置拖拽的组件
+  
+- **height**`int|string` 设计器组件高度, 默认`100%`
 
 ## 组件方法
 
