@@ -40,7 +40,7 @@ npm install @form-create/designer
 <!-- import form-create/element -->
 <script src="//unpkg.com/@form-create/element-ui/dist/form-create.min.js"></script>
 <!-- import form-create/designer -->
-<script src="//unpkg.com/@form-create/designer/dist/index.js"></script>
+<script src="//unpkg.com/@form-create/designer/dist/index.min.js"></script>
 ```
 
 **NodeJs:**

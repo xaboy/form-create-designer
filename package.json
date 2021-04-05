@@ -1,7 +1,7 @@
 {
     "name": "@form-create/designer",
     "version": "1.0.0",
-    "description": "form-create 表单设计器组件",
+    "description": "vue表单设计器组件",
     "main": "./dist/index.min.js",
     "module": "./dist/index.min.js",
     "unpkg": "./dist/index.min.js",
