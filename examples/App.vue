@@ -14,11 +14,21 @@
         <fc-designer ref="designer"/>
 
         <ElFooter class="_fc-copyright" height="30px">
-            Powered by
-            <el-link type="primary" target="_blank" href="https://github.com/xaboy/designer"
-                     style="margin-left: 5px;font-size: 16px;">
-                form-create-designer
-            </el-link>
+          <div class="_fc-b-item">
+            <el-popover
+                placement="top"
+                width="400"
+                trigger="hover">
+              <el-image src="http://form-create.com/img/donation.jpg"></el-image>
+              <span slot="reference">赞助</span>
+            </el-popover>
+          </div> <span style="margin: 0 5px;">|</span>
+          <div class="_fc-b-item">
+              <iframe src="https://ghbtns.com/github-btn.html?user=xaboy&amp;repo=form-create-designer&amp;type=star&amp;count=true&amp;size=mini" frameborder="0" scrolling="0" width="80" height="21" title="GitHub"></iframe>
+          </div> <span style="margin: 0 5px;">|</span>
+          <div class="_fc-b-item">
+            <a href='https://gitee.com/xaboy/form-create-designer/stargazers' style="display: inline-flex;"><img src='https://gitee.com/xaboy/form-create-designer/badge/star.svg?theme=dark' alt='gitee'/></a>
+          </div>
         </ElFooter>
 
         <el-dialog :title="title[type]" :visible.sync="state" class="_fc-t-dialog">
@@ -235,6 +245,7 @@ export default {
         font-size: 16px;
         border-top: 1px solid #ECECEC;
         background-color: #fff;
+        cursor: pointer;
     }
 
     ._fc-t-dialog .CodeMirror {
@@ -252,6 +263,9 @@ export default {
 
     ._fc-t-dialog .el-dialog__body {
         padding: 0px 20px;
+    }
+    ._fc-b-item{
+      display: flex;
     }
 
 </style>
