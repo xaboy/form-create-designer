@@ -19,7 +19,7 @@ import externals from 'rollup-plugin-node-externals';
 import buble from '@rollup/plugin-buble';
 import formCreateNodeResolve from './build/plugins/form-create-rollup-reslove-plugins/node-resolve';
 import {not_externals, isExternal} from './build/utils/isExternal';
-import copy from 'rollup-plugin-copy';
+import {cssUrl} from '@sixian/css-url';
 const OutputOptions = require('./build/output');
 const cwd = __dirname;
 
@@ -56,7 +56,19 @@ module.exports = {
         vuePlugin({
             css: false
         }),
-        postcss(),
+        postcss({
+            minimize: true,
+            extract: false,
+            plugins: [
+                cssUrl({
+                    imgExtensions : /\.(png|jpg|jpeg|gif|svg)$/,
+                    fontExtensions : /\.(ttf|woff|woff2|eot)$/,
+                    limit : 8192,
+                    hash : false,
+                    slash : false
+                }),
+            ]
+        }),
         externals({
             devDeps: false
         }),
@@ -80,11 +92,6 @@ module.exports = {
         replace({
             preventAssignment: true,
             'process.env.NODE_ENV': JSON.stringify('production'),
-        }),
-        copy({
-            targets: [
-                {src: 'src/style/fonts', dest: 'dist/fonts'},
-            ]
         }),
         buble(),
         visualizer()
