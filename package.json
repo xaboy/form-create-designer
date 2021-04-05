@@ -1,0 +1,113 @@
+{
+    "name": "@form-create/designer",
+    "version": "1.0.0",
+    "description": "form-create 表单设计器组件",
+    "main": "./dist/index.min.js",
+    "module": "./dist/index.min.js",
+    "unpkg": "./dist/index.min.js",
+    "jsdelivr": "./dist/index.min.js",
+    "typings": "./types/index.d.ts",
+    "scripts": {
+        "clean": "rimraf dist/",
+        "dev": "vue-cli-service serve",
+        "rollup": "rollup -c ./rollup.config.js",
+        "build": "npm-run-all clean rollup"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/xaboy/form-create-designer.git"
+    },
+    "keywords": [
+        "表单设计器",
+        "@form-create",
+        "form-builder",
+        "form-designer",
+        "draggable",
+        "form",
+        "components",
+        "vue.js",
+        "element-ui",
+        "json-form",
+        "dynamic-form"
+    ],
+    "files": [
+        "README.md",
+        "package.json",
+        "LICENSE",
+        "src",
+        "types",
+        "dist"
+    ],
+    "author": "xaboy",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/xaboy/form-create-designer/issues"
+    },
+    "homepage": "http://www.form-create.com",
+    "dependencies": {
+        "@form-create/component-wangeditor": "^2.5.2",
+        "@form-create/utils": "^2.5.0-alpha.4",
+        "@form-create/element-ui": "^2.5.2"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-customizable"
+        }
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,jsx,vue}": [
+            "eslint --fix",
+            "git add"
+        ]
+    },
+    "devDependencies": {
+        "@rollup/plugin-babel": "^5.3.0",
+        "@rollup/plugin-buble": "^0.21.3",
+        "@rollup/plugin-commonjs": "^18.0.0",
+        "@rollup/plugin-node-resolve": "^11.2.1",
+        "@rollup/plugin-replace": "^2.4.2",
+        "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-service": "^4.5.3",
+        "babel-eslint": "^10.1.0",
+        "chalk": "^4.1.0",
+        "codemirror": "^5.60.0",
+        "commander": "^6.0.0",
+        "commitizen": "^4.1.2",
+        "cross-env": "^7.0.2",
+        "css-loader": "^4.2.1",
+        "cz-conventional-changelog": "^3.2.0",
+        "cz-customizable": "^6.3.0",
+        "element-ui": "^2.13.2",
+        "eslint": "^7.7.0",
+        "eslint-plugin-vue": "^6.2.2",
+        "figlet": "^1.5.0",
+        "html-webpack-plugin": "^4.3.0",
+        "husky": "^4.2.5",
+        "jsonlint-mod": "^1.7.6",
+        "lint-staged": "^10.2.11",
+        "npm-run-all": "^4.1.5",
+        "ora": "^5.0.0",
+        "postcss": "^8.2.9",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.44.0",
+        "rollup-plugin-node-externals": "^2.2.0",
+        "rollup-plugin-postcss": "^4.0.0",
+        "rollup-plugin-terser": "^7.0.2",
+        "rollup-plugin-visualizer": "^5.3.0",
+        "rollup-plugin-vue": "^5.0.0",
+        "shelljs": "^0.8.4",
+        "vue": "^2.6.12",
+        "vue-loader": "^15.9.3",
+        "vue-style-loader": "^4.1.2",
+        "vue-template-compiler": "^2.6.12",
+        "vuedraggable": "2.24.3"
+    }
+}
