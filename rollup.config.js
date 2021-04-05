@@ -19,6 +19,7 @@ import externals from 'rollup-plugin-node-externals';
 import buble from '@rollup/plugin-buble';
 import formCreateNodeResolve from './build/plugins/form-create-rollup-reslove-plugins/node-resolve';
 import {not_externals, isExternal} from './build/utils/isExternal';
+import copy from 'rollup-plugin-copy';
 const OutputOptions = require('./build/output');
 const cwd = __dirname;
 
@@ -79,6 +80,11 @@ module.exports = {
         replace({
             preventAssignment: true,
             'process.env.NODE_ENV': JSON.stringify('production'),
+        }),
+        copy({
+            targets: [
+                {src: 'src/style/fonts', dest: 'dist/fonts'},
+            ]
         }),
         buble(),
         visualizer()

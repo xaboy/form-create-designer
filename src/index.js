@@ -4,7 +4,7 @@ import Struct from './components/Struct.vue';
 import DragBox from './components/DragBox.vue';
 import formCreate from '@form-create/element-ui';
 import FcEditor from '@form-create/component-wangeditor';
-import './style/iconfont.css';
+import './style/index.css';
 import draggable from 'vuedraggable';
 import unique from '@form-create/utils/lib/unique';
 

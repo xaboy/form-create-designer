@@ -1,6 +1,7 @@
 @font-face {
     font-family: "iconfont";
-    src: url('iconfont.woff?t=1616326550923') format('woff');
+    src: url('fonts/fc-icons.woff?t=1616326550923') format('woff'),
+    url('fonts/fc-icons.ttf?t=1545807318834') format('truetype');
 }
 
 .iconfont {
