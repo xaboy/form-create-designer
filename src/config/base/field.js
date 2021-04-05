@@ -35,7 +35,7 @@ export default function field() {
                             if (rule) {
                                 rule.__fc__.updateKey();
                                 rule.value = undefined;
-                                rule.__fc__.$handle.api.sync(rule);
+                                rule.__fc__.$api.sync(rule);
                             }
                         },
                     },
@@ -54,7 +54,7 @@ export default function field() {
                             const rule = $f.activeRule;
                             if (rule) {
                                 rule.__fc__.updateKey(true);
-                                rule.__fc__.$handle.api.sync(rule);
+                                rule.__fc__.$api.sync(rule);
                             }
                         },
                     },
