@@ -45,6 +45,7 @@
         min-width: 70px;
         width: 33.33%;
         height: 70px;
+        line-height: 1;
         text-align: center;
         transition: all .2s ease;
         cursor: pointer;
@@ -83,7 +84,7 @@
         align-items: center;
     }
 
-    ._fc-m-tools .iconfont {
+    ._fc-m-tools .fc-icon {
         font-size: 14px;
         margin-right: 2px;
     }
@@ -152,7 +153,7 @@
                                 <div class="_fc-l-item" v-for="(data, index) in item.list"
                                      :key="index">
                                     <div class="_fc-l-icon">
-                                        <i class="iconfont" :class="data.icon"></i>
+                                        <i class="fc-icon" :class="data.icon"></i>
                                     </div>
                                     <span class="_fc-l-name">{{data.label}}</span>
                                 </div>
@@ -162,10 +163,10 @@
                 </el-aside>
                 <ElContainer class="_fc-m">
                     <el-header class="_fc-m-tools" height="45">
-                        <el-button type="primary" icon="iconfont icon-preview" plain round size="mini"
+                        <el-button type="primary" icon="fc-icon icon-preview" plain round size="mini"
                                    @click="previewFc">预 览
                         </el-button>
-                        <el-button type="danger" icon="iconfont icon-delete" plain round size="mini"
+                        <el-button type="danger" icon="fc-icon icon-delete" plain round size="mini"
                                    @click="clearDragRule">清 空
                         </el-button>
                     </el-header>

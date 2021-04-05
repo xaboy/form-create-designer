@@ -4,8 +4,8 @@
             <img class="_fc-t-logo" src="http://form-create.com/logo.png">
             <div class="_fc-t-name">form-create-designer</div>
             <div class="_fc-t-menu">
-                <el-button size="mini" icon="iconfont icon-import" @click="setJson"> 导入JSON</el-button>
-                <el-button size="mini" icon="iconfont icon-import" @click="setOption"> 导入Options</el-button>
+                <el-button size="mini" icon="fc-icon icon-import" @click="setJson"> 导入JSON</el-button>
+                <el-button size="mini" icon="fc-icon icon-import" @click="setOption"> 导入Options</el-button>
                 <el-button size="mini" type="primary" @click="showJson">生成JSON</el-button>
                 <el-button size="mini" type="success" @click="showOption">生成Options</el-button>
                 <el-button size="mini" type="danger" @click="showTemplate">生成组件</el-button>

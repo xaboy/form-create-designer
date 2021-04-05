@@ -2,21 +2,21 @@
     <div class="drag-tool" @click.stop="active" :class="{active: state.active === id}">
         <div class="drag-l">
             <div class="drag-btn _fc-drag-btn" v-if="state.active === id && dragBtn !== false" style="cursor: move;">
-                <i class="iconfont icon-move"></i>
+                <i class="fc-icon icon-move"></i>
             </div>
         </div>
         <div class="drag-r">
             <div class="drag-btn" @click="$emit('add')">
-                <i class="iconfont icon-add"></i>
+                <i class="fc-icon icon-add"></i>
             </div>
             <div class="drag-btn" @click="$emit('copy')">
-                <i class="iconfont icon-copy"></i>
+                <i class="fc-icon icon-copy"></i>
             </div>
             <div class="drag-btn" v-if="children" @click="$emit('addChild')">
-                <i class="iconfont icon-add-child"></i>
+                <i class="fc-icon icon-add-child"></i>
             </div>
             <div class="drag-btn drag-btn-danger" @click="$emit('delete')">
-                <i class="iconfont icon-delete"></i>
+                <i class="fc-icon icon-delete"></i>
             </div>
         </div>
         <slot name="default"></slot>

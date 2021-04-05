@@ -13,7 +13,7 @@ const {globals} = require('./common.var');
 
 /// banner
 const banner = {
-    author: `2021-${new Date().getFullYear()} ${author}\n * Github https://github.com/xaboy/designer`,
+    author: `2021-${new Date().getFullYear()} ${author}\n * Github https://github.com/xaboy/form-create-designer`,
     license,
     name,
     version

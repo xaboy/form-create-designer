@@ -1,11 +1,11 @@
 @font-face {
-    font-family: "iconfont";
+    font-family: "fc-icon";
     src: url('fonts/fc-icons.woff?t=1616326550923') format('woff'),
     url('fonts/fc-icons.ttf?t=1545807318834') format('truetype');
 }
 
-.iconfont {
-    font-family: "iconfont" !important;
+.fc-icon {
+    font-family: "fc-icon" !important;
     font-size: 16px;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
