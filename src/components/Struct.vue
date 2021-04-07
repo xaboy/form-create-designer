@@ -1,7 +1,7 @@
 <template>
     <div class="_fc_struct">
         <ElButton @click="visible=true" style="width: 100%;">{{title}}</ElButton>
-        <ElDialog :title="title" :visible.sync="visible" :close-on-click-modal="false">
+        <ElDialog :title="title" :visible.sync="visible" :close-on-click-modal="false" append-to-body>
             <div ref="editor" v-if="visible"></div>
             <span slot="footer" class="dialog-footer">
                 <span style="color: red;float:left;" v-if="err">输入内容格式有误!</span>
