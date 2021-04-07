@@ -24,7 +24,7 @@
             </el-popover>
           </div> <span style="margin: 0 5px;">|</span>
           <div class="_fc-b-item">
-              <iframe src="https://ghbtns.com/github-btn.html?user=xaboy&amp;repo=form-create-designer&amp;type=star&amp;count=true&amp;size=mini" frameborder="0" scrolling="0" width="80" height="21" title="GitHub"></iframe>
+              <iframe src="https://ghbtns.com/github-btn.html?user=xaboy&amp;repo=form-create-designer&amp;type=star&amp;count=true&amp;size=mini" frameborder="0" scrolling="0" width="90" height="21" title="GitHub"></iframe>
           </div> <span style="margin: 0 5px;">|</span>
           <div class="_fc-b-item">
             <a href='https://gitee.com/xaboy/form-create-designer/stargazers' style="display: inline-flex;"><img src='https://gitee.com/xaboy/form-create-designer/badge/star.svg?theme=dark' alt='gitee'/></a>
@@ -61,6 +61,7 @@ import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/pug/pug';
 
 import is from '@form-create/utils/lib/type';
+import formCreate from '@form-create/element-ui';
 
 const TITLE = ['生成规则', '表单规则', '生成组件', '设置生成规则', '设置表单规则'];
 
@@ -89,7 +90,14 @@ export default {
     },
     methods: {
         load() {
-            const val = this.type === 2 ? this.value : JSON.stringify(this.value, null, 2);
+            let val;
+            if(this.type === 2){
+                val = this.value;
+            }else if(this.type === 0){
+                val = formCreate.toJson(this.value, 2);
+            }else{
+                val = JSON.stringify(this.value, null, 2);
+            }
             this.$nextTick(() => {
                 this.editor = CodeMirror(this.$refs.editor, {
                     lineNumbers: true,
@@ -171,7 +179,7 @@ export default {
   data () {
     return {
         fapi: null,
-        rule: formCreate.parseJson('${JSON.stringify(rule)}'),
+        rule: formCreate.parseJson('${formCreate.toJson(rule).replaceAll('\\','\\\\')}'),
         option: formCreate.parseJson('${JSON.stringify(opt)}')
     }
   },
