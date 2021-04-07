@@ -226,7 +226,7 @@
 import form from '../config/base/form';
 import field from '../config/base/field';
 import validate from '../config/base/validate';
-import deepExtend from '@form-create/utils/lib/deepextend';
+import {deepCopy} from '@form-create/utils/lib/deepextend';
 import uniqueId from '@form-create/utils/lib/unique';
 import is, {hasProperty} from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
@@ -489,10 +489,10 @@ export default {
             this.preview.option = this.getOption();
         },
         getRule() {
-            return this.parseRule(deepExtend(this.dragForm.api.rule[0].children, []));
+            return this.parseRule(deepCopy(this.dragForm.api.rule[0].children));
         },
         getOption() {
-            const option = deepExtend(this.form.value);
+            const option = deepCopy(this.form.value);
             delete option.submitBtn;
             return option;
         },
