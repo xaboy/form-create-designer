@@ -398,8 +398,16 @@ export default {
         removeMenuItem(item) {
             this.menuList.forEach(v => {
                 let idx;
-                if ((idx = v.list.indexOf(item)) > -1) {
-                    v.list.splice(idx, 1);
+                if (is.String(item)) {
+                    [...v.list].forEach((menu, idx) => {
+                        if (menu.name === item) {
+                            v.list.splice(idx, 1);
+                        }
+                    });
+                } else {
+                    if ((idx = v.list.indexOf(item)) > -1) {
+                        v.list.splice(idx, 1);
+                    }
                 }
             });
         },
