@@ -74,7 +74,7 @@ Vue.use(FcDesigner)
     ```ts
     type getRule = () => Rule[]
     ```
-  示例: `this.$refs.designer.getRule()`
+  **示例: `this.$refs.designer.getRule()`**
 
 - 获取当前表单的全局配置
 
@@ -120,7 +120,7 @@ Vue.use(FcDesigner)
 - 删除一个拖拽组件
 
     ```ts
-    type removeMenuItem = (item: MenuItem) => void;
+    type removeMenuItem = (item: string | MenuItem) => void;
     ```
 
 - 新增一个拖拽组件的生成规则
