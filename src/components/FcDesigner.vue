@@ -699,9 +699,11 @@ export default {
                 rule.children = [{
                     type: 'DragTool',
                     props: {
-                        unique: uniqueId(),
                         dragBtn: config.dragBtn !== false,
                         children: config.children,
+                    },
+                    effect:{
+                        _fc_tool:true
                     },
                     inject: true,
                     on: {
@@ -735,9 +737,11 @@ export default {
                 return {
                     type: 'DragTool',
                     props: {
-                        unique: uniqueId(),
                         dragBtn: config.dragBtn !== false,
                         children: config.children,
+                    },
+                    effect:{
+                        _fc_tool:true
                     },
                     inject: true,
                     on: {

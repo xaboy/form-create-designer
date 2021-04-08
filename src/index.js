@@ -22,6 +22,12 @@ formCreate.register('_fc', {
     }
 });
 
+formCreate.register('_fc_tool', {
+    init(_, rule) {
+        rule.props.unique = unique();
+    }
+});
+
 FcDesigner.install = function (Vue) {
     Vue.component('FcDesigner', FcDesigner);
 };
