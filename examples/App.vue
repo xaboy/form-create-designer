@@ -145,7 +145,7 @@ export default {
         onOk() {
             if (this.err) return;
             let val = JSON.parse(this.editor.getValue());
-            if (this.type === 2) {
+            if (this.type === 3) {
                 if (!Array.isArray(val)) {
                     this.err = true;
                     return;
