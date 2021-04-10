@@ -1,6 +1,7 @@
 <style>
     ._fc-designer {
         height: 100%;
+        min-height: 500px;
         overflow: hidden;
         cursor: default;
         position: relative;
@@ -209,7 +210,7 @@
                         </ElMain>
                     </ElContainer>
                 </ElAside>
-                <ElDialog :visible.sync="preview.state" width="800px">
+                <ElDialog :visible.sync="preview.state" width="800px" append-to-body>
                     <FormCreate :rule="preview.rule" :option="preview.option" v-if="preview.state"></FormCreate>
                 </ElDialog>
             </ElContainer>
