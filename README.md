@@ -48,7 +48,7 @@ npm install @form-create/designer
 请自行导入`ElementUI`并挂载
 
 ```js
-import formCreate from '@form-create/form-create'
+import formCreate from '@form-create/element-ui'
 import FcDesigner from '@form-create/designer'
 
 Vue.use(formCreate)
