@@ -781,6 +781,12 @@ export default {
                 };
             }
         },
+    },
+    created() {
+        document.body.ondrop = e=>{
+            e.preventDefault();
+            e.stopPropagation();
+        };
     }
 };
 </script>
