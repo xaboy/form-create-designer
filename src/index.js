@@ -15,10 +15,13 @@ formCreate.component('Struct', Struct);
 formCreate.component('FcEditor', FcEditor);
 
 formCreate.register('_fc', {
-    init(_, rule) {
+    init(fc, rule) {
         rule.id = unique();
-        if (rule.field)
+        if (!fc.value && rule.field)
             rule.field = unique();
+        if (fc.value) {
+            rule.effect._fc = false;
+        }
     }
 });
 
