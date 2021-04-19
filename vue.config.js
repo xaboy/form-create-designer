@@ -11,7 +11,8 @@ module.exports = {
     configureWebpack: {
         resolve: {
             alias: {
-                'vue$': 'vue/dist/vue.js'
+                'vue$': 'vue/dist/vue.js',
+                '@form-create/element-ui$': '@form-create/element-ui/dist/form-create.js',
             }
         }
     }

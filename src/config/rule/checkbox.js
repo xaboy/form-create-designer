@@ -14,6 +14,9 @@ export default {
             title: label,
             info: '',
             props: {},
+            effect:{
+                fetch:{}
+            },
             options: [
                 {value: '1', label: '选项1'},
                 {value: '2', label: '选项2'},
@@ -23,10 +26,39 @@ export default {
     props() {
         return [
             {
-                type: 'Struct',
-                field: 'formCreateOptions',
-                title: '选项配置',
-                props: {defaultValue: []}
+                type: 'radio',
+                title: '数据类型',
+                field: '_optionType',
+                value: 0,
+                options: [
+                    {'label': '静态数据', 'value': 0},
+                    {'label': '动态数据', 'value': 1},
+                ],
+                props: {
+                    type: 'button'
+                },
+                control: [
+                    {
+                        value: 0,
+                        rule: [
+                            {
+                                type: 'Struct',
+                                field: 'formCreateOptions',
+                                props: {defaultValue: []}
+                            },
+                        ],
+                    },
+                    {
+                        value: 1,
+                        rule: [
+                            {
+                                type: 'Fetch',
+                                field: 'formCreateEffect>fetch',
+                            }
+                        ]
+                    }
+                ]
+
             },
             {
                 type: 'switch',

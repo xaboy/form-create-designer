@@ -571,7 +571,8 @@ export default {
 
                 delete rule.id;
                 delete rule.config;
-                delete rule.effect;
+                delete rule.effect._fc;
+                delete rule.effect._fc_tool;
                 Object.keys(rule).filter(k => (Array.isArray(rule[k]) && rule[k].length === 0) || (is.Object(rule[k]) && Object.keys(rule[k]).length === 0)).forEach(k => {
                     delete rule[k];
                 });
@@ -589,9 +590,12 @@ export default {
                 this.dragForm.api.sync(this.activeRule);
                 if (field.indexOf('formCreate') === 0) {
                     field = field.replace('formCreate', '');
+                    console.log(field, value);
                     if (!field) return;
                     field = lower(field);
-                    if (field === 'child') {
+                    if(field.indexOf('effect') === 0 && field.indexOf('>')>-1){
+                      this.$set(this.activeRule.effect, field.split('>')[1], value);
+                    } else if (field === 'child') {
                         this.$set(this.activeRule.children, 0, value);
                     } else {
                         this.$set(this.activeRule, field, value);
@@ -636,6 +640,9 @@ export default {
             Object.keys(rule).forEach(k => {
                 if (['effect', 'config', 'payload', 'id', 'type'].indexOf(k) < 0)
                     formData['formCreate' + upper(k)] = rule[k];
+            });
+            rule.effect && Object.keys(rule.effect).forEach(k => {
+                formData['formCreateEffect>' + k] = rule.effect[k];
             });
             this.propsForm.options.formData = formData;
 
@@ -683,9 +690,8 @@ export default {
         makeRule(config, _rule) {
             const rule = _rule || config.rule();
             rule.config = {config};
-            rule.effect = {
-                _fc: true
-            };
+            if(!rule.effect) rule.effect = {};
+            rule.effect._fc = true;
             rule._fc_drag_tag = config.name;
 
             let drag;
