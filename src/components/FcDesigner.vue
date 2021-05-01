@@ -154,7 +154,7 @@
                 <div class="_fc-l-item" v-for="(data, index) in item.list"
                      :key="index">
                   <div class="_fc-l-icon">
-                    <i class="fc-icon" :class="data.icon"></i>
+                    <i class="fc-icon" :class="data.icon || 'icon-input'"></i>
                   </div>
                   <span class="_fc-l-name">{{ data.label }}</span>
                 </div>
@@ -235,7 +235,7 @@ import ruleList from '../config/rule';
 import draggable from 'vuedraggable';
 import formCreate from '@form-create/element-ui';
 import createMenu from '../config/menu';
-import {upper} from '../utils/index';
+import {upper} from '@/utils';
 
 
 export default {
