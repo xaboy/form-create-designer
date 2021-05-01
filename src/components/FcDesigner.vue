@@ -1,222 +1,222 @@
 <style>
-    ._fc-designer {
-        height: 100%;
-        min-height: 500px;
-        overflow: hidden;
-        cursor: default;
-        position: relative;
-    }
+._fc-designer {
+  height: 100%;
+  min-height: 500px;
+  overflow: hidden;
+  cursor: default;
+  position: relative;
+}
 
-    ._fc-designer > .el-main {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 0px;
-    }
+._fc-designer > .el-main {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0px;
+}
 
-    ._fc-m .form-create ._fc-l-item {
-        background: #2E73FF;
-        width: 100%;
-        height: 10px;
-        overflow: hidden;
-        transition: all .3s ease;
-    }
+._fc-m .form-create ._fc-l-item {
+  background: #2E73FF;
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  transition: all .3s ease;
+}
 
-    ._fc-l, ._fc-m, ._fc-r {
-        border-top: 1px solid #ECECEC;
-        box-sizing: border-box;
-    }
+._fc-l, ._fc-m, ._fc-r {
+  border-top: 1px solid #ECECEC;
+  box-sizing: border-box;
+}
 
-    ._fc-l-group {
-        padding: 0 12px;
-    }
+._fc-l-group {
+  padding: 0 12px;
+}
 
-    ._fc-l-title {
-        font-weight: 600;
-        font-size: 14px;
-        margin: 18px 0px 5px;
-    }
+._fc-l-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 18px 0px 5px;
+}
 
-    ._fc-l-item {
-        display: inline-block;
-        background: #FFF;
-        color: #000;
-        min-width: 70px;
-        width: 33.33%;
-        height: 70px;
-        line-height: 1;
-        text-align: center;
-        transition: all .2s ease;
-        cursor: pointer;
-    }
+._fc-l-item {
+  display: inline-block;
+  background: #FFF;
+  color: #000;
+  min-width: 70px;
+  width: 33.33%;
+  height: 70px;
+  line-height: 1;
+  text-align: center;
+  transition: all .2s ease;
+  cursor: pointer;
+}
 
-    ._fc-l-item i {
-        font-size: 21px;
-        display: inline-block;
-    }
+._fc-l-item i {
+  font-size: 21px;
+  display: inline-block;
+}
 
-    ._fc-l-item ._fc-l-name {
-        font-size: 12px;
-    }
+._fc-l-item ._fc-l-name {
+  font-size: 12px;
+}
 
-    ._fc-l-item ._fc-l-icon {
-        padding: 10px 5px 12px;
-    }
+._fc-l-item ._fc-l-icon {
+  padding: 10px 5px 12px;
+}
 
-    ._fc-l-item:hover {
-        background: #2E73FF;
-        color: #fff;
-    }
+._fc-l-item:hover {
+  background: #2E73FF;
+  color: #fff;
+}
 
-    ._fc-m-tools {
-        height: 40px;
-        align-items: center;
-        display: flex;
-        justify-content: flex-end;
-        border: 1px solid #ECECEC;
-        border-top: 0 none;
-    }
+._fc-m-tools {
+  height: 40px;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid #ECECEC;
+  border-top: 0 none;
+}
 
-    ._fc-m-tools button.el-button {
-        padding: 5px 14px;
-        display: flex;
-        align-items: center;
-    }
+._fc-m-tools button.el-button {
+  padding: 5px 14px;
+  display: flex;
+  align-items: center;
+}
 
-    ._fc-m-tools .fc-icon {
-        font-size: 14px;
-        margin-right: 2px;
-    }
+._fc-m-tools .fc-icon {
+  font-size: 14px;
+  margin-right: 2px;
+}
 
-    ._fc-r .el-tabs__nav-wrap::after {
-        height: 1px;
-        background-color: #ECECEC;
-    }
+._fc-r .el-tabs__nav-wrap::after {
+  height: 1px;
+  background-color: #ECECEC;
+}
 
-    ._fc-r ._fc-r-tabs {
-        display: flex;
-        padding: 0;
-        border-bottom: 1px solid #ECECEC;
-    }
+._fc-r ._fc-r-tabs {
+  display: flex;
+  padding: 0;
+  border-bottom: 1px solid #ECECEC;
+}
 
-    ._fc-r ._fc-r-tab {
-        height: 40px;
-        box-sizing: border-box;
-        line-height: 40px;
-        display: inline-block;
-        list-style: none;
-        font-size: 14px;
-        font-weight: 600;
-        color: #303133;
-        position: relative;
-        flex: 1;
-        text-align: center;
-    }
+._fc-r ._fc-r-tab {
+  height: 40px;
+  box-sizing: border-box;
+  line-height: 40px;
+  display: inline-block;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+  position: relative;
+  flex: 1;
+  text-align: center;
+}
 
-    ._fc-r ._fc-r-tab.active {
-        color: #409EFF;
-        border-bottom: 2px solid #409EFF;
-    }
+._fc-r ._fc-r-tab.active {
+  color: #409EFF;
+  border-bottom: 2px solid #409EFF;
+}
 
-    .drag-box {
-        min-height: 60px;
-    }
+.drag-box {
+  min-height: 60px;
+}
 
-    ._fc-m-drag {
-        overflow: auto;
-        padding: 2px;
-        box-sizing: border-box;
-    }
+._fc-m-drag {
+  overflow: auto;
+  padding: 2px;
+  box-sizing: border-box;
+}
 
-    ._fc-m-drag, .draggable-drag {
-        background: #fff;
-        height: 100%;
-        position: relative;
-    }
+._fc-m-drag, .draggable-drag {
+  background: #fff;
+  height: 100%;
+  position: relative;
+}
 
-    ._fc-m-drag > form, ._fc-m-drag > form > .el-row {
-        height: 100%;
-    }
+._fc-m-drag > form, ._fc-m-drag > form > .el-row {
+  height: 100%;
+}
 </style>
 
 <template>
-    <ElContainer class="_fc-designer" :style="'height:'+height_">
-        <ElMain>
-            <ElContainer style="height: 100%;">
-                <el-aside class="_fc-l" width="266px">
-                    <template v-for="(item, index) in menuList">
-                        <div class="_fc-l-group" :key="index">
-                            <h4 class="_fc-l-title">{{item.title}}</h4>
-                            <draggable :group="{name:'default', pull:'clone',put:false}" :sort="false"
-                                       :list="item.list">
-                                <div class="_fc-l-item" v-for="(data, index) in item.list"
-                                     :key="index">
-                                    <div class="_fc-l-icon">
-                                        <i class="fc-icon" :class="data.icon"></i>
-                                    </div>
-                                    <span class="_fc-l-name">{{data.label}}</span>
-                                </div>
-                            </draggable>
-                        </div>
-                    </template>
-                </el-aside>
-                <ElContainer class="_fc-m">
-                    <el-header class="_fc-m-tools" height="45">
-                        <slot name="handle"></slot>
-                        <el-button type="primary" icon="fc-icon icon-preview" plain round size="mini"
-                                   @click="previewFc">预 览
-                        </el-button>
-                        <el-button type="danger" icon="fc-icon icon-delete" plain round size="mini"
-                                   @click="clearDragRule">清 空
-                        </el-button>
-                    </el-header>
-                    <ElMain style="background: #F5F5F5;padding: 20px;">
-                        <div class="_fc-m-drag">
-                            <FormCreate :rule="dragForm.rule" :option="form.value"
-                                        v-model="dragForm.api"></FormCreate>
-                        </div>
-                    </ElMain>
-                </ElContainer>
-                <ElAside class="_fc-r" width="320px">
-                    <ElContainer style="height: 100%;">
-                        <el-header height="40px" class="_fc-r-tabs">
-                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!!activeRule"
-                                 @click="activeTab='props'">组件配置
-                            </div>
-                            <div class="_fc-r-tab" :class="{active: activeTab==='form' && !!activeRule}"
-                                 @click="activeTab='form'">表单配置
-                            </div>
-                        </el-header>
-                        <ElMain v-show="activeTab==='form'">
-                            <FormCreate :rule="form.rule" :option="form.option"
-                                        :value.sync="form.value.form"></FormCreate>
-                        </ElMain>
-                        <ElMain v-show="activeTab==='props'" style="padding: 0 20px;"
-                                :key="activeRule? activeRule.id: ''">
-                            <div>
-                                <ElDivider v-if="showBaseRule">基础配置</ElDivider>
-                                <FormCreate v-show="showBaseRule" v-model="baseForm.api" :rule="baseForm.rule"
-                                            :option="baseForm.options"
-                                            @change="baseChange"></FormCreate>
-                                <ElDivider>属性配置</ElDivider>
-                                <FormCreate v-model="propsForm.api" :rule="propsForm.rule" :option="propsForm.options"
-                                            @change="propChange" @removeField="propRemoveField"></FormCreate>
-                                <ElDivider v-if="showBaseRule">验证规则</ElDivider>
-                                <FormCreate v-show="showBaseRule" v-model="validateForm.api" :rule="validateForm.rule"
-                                            :option="validateForm.options"
-                                            @update:value="validateChange"></FormCreate>
-                            </div>
-                        </ElMain>
-                    </ElContainer>
-                </ElAside>
-                <ElDialog :visible.sync="preview.state" width="800px" append-to-body>
-                    <FormCreate :rule="preview.rule" :option="preview.option" v-if="preview.state"></FormCreate>
-                </ElDialog>
-            </ElContainer>
-        </ElMain>
-    </ElContainer>
+  <ElContainer class="_fc-designer" :style="'height:'+height_">
+    <ElMain>
+      <ElContainer style="height: 100%;">
+        <el-aside class="_fc-l" width="266px">
+          <template v-for="(item, index) in menuList">
+            <div class="_fc-l-group" :key="index">
+              <h4 class="_fc-l-title">{{ item.title }}</h4>
+              <draggable :group="{name:'default', pull:'clone',put:false}" :sort="false"
+                         :list="item.list">
+                <div class="_fc-l-item" v-for="(data, index) in item.list"
+                     :key="index">
+                  <div class="_fc-l-icon">
+                    <i class="fc-icon" :class="data.icon"></i>
+                  </div>
+                  <span class="_fc-l-name">{{ data.label }}</span>
+                </div>
+              </draggable>
+            </div>
+          </template>
+        </el-aside>
+        <ElContainer class="_fc-m">
+          <el-header class="_fc-m-tools" height="45">
+            <slot name="handle"></slot>
+            <el-button type="primary" icon="fc-icon icon-preview" plain round size="mini"
+                       @click="previewFc">预 览
+            </el-button>
+            <el-button type="danger" icon="fc-icon icon-delete" plain round size="mini"
+                       @click="clearDragRule">清 空
+            </el-button>
+          </el-header>
+          <ElMain style="background: #F5F5F5;padding: 20px;">
+            <div class="_fc-m-drag">
+              <FormCreate :rule="dragForm.rule" :option="form.value"
+                          v-model="dragForm.api"></FormCreate>
+            </div>
+          </ElMain>
+        </ElContainer>
+        <ElAside class="_fc-r" width="320px">
+          <ElContainer style="height: 100%;">
+            <el-header height="40px" class="_fc-r-tabs">
+              <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!!activeRule"
+                   @click="activeTab='props'">组件配置
+              </div>
+              <div class="_fc-r-tab" :class="{active: activeTab==='form' && !!activeRule}"
+                   @click="activeTab='form'">表单配置
+              </div>
+            </el-header>
+            <ElMain v-show="activeTab==='form'">
+              <FormCreate :rule="form.rule" :option="form.option"
+                          :value.sync="form.value.form"></FormCreate>
+            </ElMain>
+            <ElMain v-show="activeTab==='props'" style="padding: 0 20px;"
+                    :key="activeRule? activeRule.id: ''">
+              <div>
+                <ElDivider v-if="showBaseRule">基础配置</ElDivider>
+                <FormCreate v-show="showBaseRule" v-model="baseForm.api" :rule="baseForm.rule"
+                            :option="baseForm.options"
+                            @change="baseChange"></FormCreate>
+                <ElDivider>属性配置</ElDivider>
+                <FormCreate v-model="propsForm.api" :rule="propsForm.rule" :option="propsForm.options"
+                            @change="propChange" @removeField="propRemoveField"></FormCreate>
+                <ElDivider v-if="showBaseRule">验证规则</ElDivider>
+                <FormCreate v-show="showBaseRule" v-model="validateForm.api" :rule="validateForm.rule"
+                            :option="validateForm.options"
+                            @update:value="validateChange"></FormCreate>
+              </div>
+            </ElMain>
+          </ElContainer>
+        </ElAside>
+        <ElDialog :visible.sync="preview.state" width="800px" append-to-body>
+          <FormCreate :rule="preview.rule" :option="preview.option" v-if="preview.state"></FormCreate>
+        </ElDialog>
+      </ElContainer>
+    </ElMain>
+  </ElContainer>
 </template>
 
 <style>
@@ -244,11 +244,11 @@ export default {
         draggable,
         FormCreate: formCreate.$form(),
     },
-    props: ['menu','height'],
-    computed:{
-        height_(){
-            const h =this.height;
-            if(!h) return '100%';
+    props: ['menu', 'height'],
+    computed: {
+        height_() {
+            const h = this.height;
+            if (!h) return '100%';
             return is.Number(h) ? `${h}px` : h;
         }
     },
@@ -564,10 +564,10 @@ export default {
                 }
 
                 delete rule.id;
-                if(rule.config){
+                if (rule.config) {
                     delete rule.config.config;
                 }
-                if(rule.effect){
+                if (rule.effect) {
                     delete rule.effect._fc;
                     delete rule.effect._fc_tool;
                 }
@@ -583,23 +583,23 @@ export default {
                 this.$set(this.activeRule, field, value);
             }
         },
-        propRemoveField(field,_,fapi) {
-            if(this.activeRule && fapi.activeRule === this.activeRule){
+        propRemoveField(field, _, fapi) {
+            if (this.activeRule && fapi.activeRule === this.activeRule) {
                 this.dragForm.api.sync(this.activeRule);
                 if (field.indexOf('formCreate') === 0) {
                     field = field.replace('formCreate', '');
                     if (!field) return;
                     field = lower(field);
-                    if(field.indexOf('effect') === 0 && field.indexOf('>')>-1){
+                    if (field.indexOf('effect') === 0 && field.indexOf('>') > -1) {
                         this.$delete(this.activeRule.effect, field.split('>')[1]);
-                    } else if(field.indexOf('props') === 0 && field.indexOf('>')>-1){
+                    } else if (field.indexOf('props') === 0 && field.indexOf('>') > -1) {
                         this.$delete(this.activeRule.props, field.split('>')[1]);
                     } else if (field === 'child') {
                         this.$delete(this.activeRule.children, 0);
-                    } else if(field) {
+                    } else if (field) {
                         this.$set(this.activeRule, field, undefined);
                     }
-                }else{
+                } else {
                     this.$delete(this.activeRule.props, field);
                 }
             }
@@ -610,9 +610,9 @@ export default {
                     field = field.replace('formCreate', '');
                     if (!field) return;
                     field = lower(field);
-                    if(field.indexOf('effect') === 0 && field.indexOf('>')>-1){
+                    if (field.indexOf('effect') === 0 && field.indexOf('>') > -1) {
                         this.$set(this.activeRule.effect, field.split('>')[1], value);
-                    } else if(field.indexOf('props') === 0 && field.indexOf('>')>-1){
+                    } else if (field.indexOf('props') === 0 && field.indexOf('>') > -1) {
                         this.$set(this.activeRule.props, field.split('>')[1], value);
                     } else if (field === 'child') {
                         this.$set(this.activeRule.children, 0, value);
@@ -660,9 +660,9 @@ export default {
                 if (['effect', 'config', 'payload', 'id', 'type'].indexOf(k) < 0)
                     formData['formCreate' + upper(k)] = rule[k];
             });
-            ['props','effect'].forEach(name=>{
+            ['props', 'effect'].forEach(name => {
                 rule[name] && Object.keys(rule[name]).forEach(k => {
-                    formData['formCreate'+ upper(name)+'>' + k] = rule[name][k];
+                    formData['formCreate' + upper(name) + '>' + k] = rule[name][k];
                 });
             });
             this.propsForm.options.formData = formData;
@@ -711,7 +711,7 @@ export default {
         makeRule(config, _rule) {
             const rule = _rule || config.rule();
             rule.config = {config};
-            if(!rule.effect) rule.effect = {};
+            if (!rule.effect) rule.effect = {};
             rule.effect._fc = true;
             rule._fc_drag_tag = config.name;
 
@@ -739,8 +739,8 @@ export default {
                         dragBtn: config.dragBtn !== false,
                         children: config.children,
                     },
-                    effect:{
-                        _fc_tool:true
+                    effect: {
+                        _fc_tool: true
                     },
                     inject: true,
                     on: {
@@ -777,8 +777,8 @@ export default {
                         dragBtn: config.dragBtn !== false,
                         children: config.children,
                     },
-                    effect:{
-                        _fc_tool:true
+                    effect: {
+                        _fc_tool: true
                     },
                     inject: true,
                     on: {
@@ -810,7 +810,7 @@ export default {
         },
     },
     created() {
-        document.body.ondrop = e=>{
+        document.body.ondrop = e => {
             e.preventDefault();
             e.stopPropagation();
         };

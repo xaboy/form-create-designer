@@ -1,7 +1,7 @@
 <template>
-    <div class="_fc_fetch">
-        <form-create v-model="api" :value="formValue" :rule="rule" :option="option" @change="input"/>
-    </div>
+  <div class="_fc_fetch">
+    <form-create v-model="api" :value="formValue" :rule="rule" :option="option" @change="input"/>
+  </div>
 </template>
 
 <script>
@@ -11,91 +11,93 @@ import is from '@form-create/utils/lib/type';
 export default {
     name: 'Fetch',
     props: {
-        value: [Object,String],
+        value: [Object, String],
         to: String,
     },
-    computed:{
-        formValue(){
+    computed: {
+        formValue() {
             const val = this.value;
-            if(!val) return {};
-            if(is.String(val)){
-                return  {
-                    action:val
+            if (!val) return {};
+            if (is.String(val)) {
+                return {
+                    action: val
                 };
             }
-            if(!val._parse && val.parse){
-                return {...val,_parse: ''+val.parse};
-            }else{
-                return  val;
+            if (!val._parse && val.parse) {
+                return {...val, _parse: '' + val.parse};
+            } else {
+                return val;
             }
         }
     },
     data() {
         return {
-            api:{},
-            fetch:{},
-            option:{
-                form:{
+            api: {},
+            fetch: {},
+            option: {
+                form: {
                     labelPosition: 'right',
                     size: 'mini',
                     labelWidth: '90px'
                 },
-                submitBtn:false,
+                submitBtn: false,
             },
-            rule:[
+            rule: [
                 {
-                    type:'input',
+                    type: 'input',
                     field: 'action',
                     title: '接口: ',
-                    validate:[{required:true,message:'请数据接口'}]
+                    validate: [{required: true, message: '请数据接口'}]
                 },
                 {
-                    type:'select',
+                    type: 'select',
                     field: 'method',
                     title: '请求方式: ',
-                    value:'GET',
+                    value: 'GET',
                     options: [
-                        {label:'GET',value:'GET'},
-                        {label:'POST',value:'POST'},
+                        {label: 'GET', value: 'GET'},
+                        {label: 'POST', value: 'POST'},
                     ]
                 },
                 {
-                    type:'Struct',
+                    type: 'Struct',
                     field: 'data',
                     title: '附带数据: ',
-                    value:{},
+                    value: {},
                     props: {
-                        defaultValue:{},
+                        defaultValue: {},
                     }
                 },
                 {
-                    type:'Struct',
+                    type: 'Struct',
                     field: 'headers',
                     title: 'header信息: ',
-                    value:{},
+                    value: {},
                     props: {
-                        defaultValue:{},
+                        defaultValue: {},
                     }
                 },
                 {
-                    type:'input',
+                    type: 'input',
                     field: '_parse',
                     title: '解析函数',
                     info: '解析接口数据，返回组件所需的数据结构',
-                    value:'function (res){\n   return res.data;\n}',
-                    props:{
-                        type:'textarea',
+                    value: 'function (res){\n   return res.data;\n}',
+                    props: {
+                        type: 'textarea',
                         rows: 8,
                     },
-                    validate:[{validator:(_,v,cb)=>{
-                        if(!v) return cb();
-                        try{
-                            this.parseFn(v);
-                        }catch (e){
-                            return cb(false);
-                        }
-                        cb();
-                    },message: '请输入正确的解析函数'}]
+                    validate: [{
+                        validator: (_, v, cb) => {
+                            if (!v) return cb();
+                            try {
+                                this.parseFn(v);
+                            } catch (e) {
+                                return cb(false);
+                            }
+                            cb();
+                        }, message: '请输入正确的解析函数'
+                    }]
                 },
             ]
         };
@@ -104,16 +106,16 @@ export default {
         parseFn(v){
             return eval(`(function(){return ${v} })()`);
         },
-        _input(){
-            this.api.submit((formData)=>{
+        _input() {
+            this.api.submit((formData) => {
                 formData.to = this.to || 'options';
-                if(formData._parse) formData.parse = this.parseFn(formData._parse);
-                this.$emit('input',formData);
+                if (formData._parse) formData.parse = this.parseFn(formData._parse);
+                this.$emit('input', formData);
             });
         },
-        input:debounce(function(){
+        input: debounce(function () {
             this._input();
-        },1500),
+        }, 1500),
     },
     mounted() {
         this._input();
@@ -127,7 +129,8 @@ export default {
   text-align: right;
   padding-right: 5px;
 }
-._fc_fetch{
+
+._fc_fetch {
   background-color: #bfdaf7;
   padding: 10px;
 }
