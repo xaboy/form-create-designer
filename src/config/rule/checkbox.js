@@ -1,4 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
+import {makeOptionsRule} from '@/utils';
 
 const label = '多选框';
 const name = 'checkbox';
@@ -13,6 +14,9 @@ export default {
             field: uniqueId(),
             title: label,
             info: '',
+            effect: {
+                fetch: ''
+            },
             props: {},
             options: [
                 {value: '1', label: '选项1'},
@@ -22,12 +26,7 @@ export default {
     },
     props() {
         return [
-            {
-                type: 'Struct',
-                field: 'formCreateOptions',
-                title: '选项配置',
-                props: {defaultValue: []}
-            },
+            makeOptionsRule('options'),
             {
                 type: 'switch',
                 field: 'type',

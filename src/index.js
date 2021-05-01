@@ -1,6 +1,7 @@
 import FcDesigner from './components/FcDesigner.vue';
 import DragTool from './components/DragTool.vue';
 import Struct from './components/Struct.vue';
+import Fetch from './components/Fetch.vue';
 import DragBox from './components/DragBox.vue';
 import formCreate from '@form-create/element-ui';
 import FcEditor from '@form-create/component-wangeditor';
@@ -12,6 +13,7 @@ formCreate.component('draggable', draggable);
 formCreate.component('DragTool', DragTool);
 formCreate.component('DragBox', DragBox);
 formCreate.component('Struct', Struct);
+formCreate.component('Fetch', Fetch);
 formCreate.component('FcEditor', FcEditor);
 
 formCreate.register('_fc', {
