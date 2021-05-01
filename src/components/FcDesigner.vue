@@ -202,7 +202,7 @@
                                             @change="baseChange"></FormCreate>
                                 <ElDivider>属性配置</ElDivider>
                                 <FormCreate v-model="propsForm.api" :rule="propsForm.rule" :option="propsForm.options"
-                                            @change="propChange"></FormCreate>
+                                            @change="propChange" @removeField="propRemoveField"></FormCreate>
                                 <ElDivider v-if="showBaseRule">验证规则</ElDivider>
                                 <FormCreate v-show="showBaseRule" v-model="validateForm.api" :rule="validateForm.rule"
                                             :option="validateForm.options"
@@ -229,18 +229,13 @@ import form from '../config/base/form';
 import field from '../config/base/field';
 import validate from '../config/base/validate';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
-import uniqueId from '@form-create/utils/lib/unique';
 import is, {hasProperty} from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
 import ruleList from '../config/rule';
 import draggable from 'vuedraggable';
 import formCreate from '@form-create/element-ui';
 import createMenu from '../config/menu';
-
-
-export function upper(str) {
-    return str.replace(str[0], str[0].toLocaleUpperCase());
-}
+import {upper} from '../utils/index';
 
 
 export default {
@@ -273,7 +268,6 @@ export default {
             children,
             menuList: this.menu || createMenu(),
             showBaseRule: false,
-            ruleProps: new WeakMap(),
             visible: {
                 preview: false
             },
@@ -507,7 +501,7 @@ export default {
             return option;
         },
         setRule(rules) {
-            const children = this.loadRule(rules);
+            const children = this.loadRule(is.String(rules) ? formCreate.parseJson(rules) : rules);
             this.children = children;
             this.clearActiveRule();
             this.dragForm.rule = this.makeDragRule(children);
@@ -528,7 +522,7 @@ export default {
                 if (is.String(rule)) {
                     return loadRule.push(rule);
                 }
-                const config = ruleList[rule._fc_drag_tag];
+                const config = ruleList[rule._fc_drag_tag] || ruleList[rule.type];
                 const _children = rule.children;
                 rule.children = [];
                 if (config) {
@@ -570,9 +564,13 @@ export default {
                 }
 
                 delete rule.id;
-                delete rule.config;
-                delete rule.effect._fc;
-                delete rule.effect._fc_tool;
+                if(rule.config){
+                    delete rule.config.config;
+                }
+                if(rule.effect){
+                    delete rule.effect._fc;
+                    delete rule.effect._fc_tool;
+                }
                 Object.keys(rule).filter(k => (Array.isArray(rule[k]) && rule[k].length === 0) || (is.Object(rule[k]) && Object.keys(rule[k]).length === 0)).forEach(k => {
                     delete rule[k];
                 });
@@ -585,16 +583,37 @@ export default {
                 this.$set(this.activeRule, field, value);
             }
         },
-        propChange(field, value, _, fapi, flag) {
-            if (!flag && this.activeRule && fapi.activeRule === this.activeRule) {
+        propRemoveField(field,_,fapi) {
+            if(this.activeRule && fapi.activeRule === this.activeRule){
                 this.dragForm.api.sync(this.activeRule);
                 if (field.indexOf('formCreate') === 0) {
                     field = field.replace('formCreate', '');
-                    console.log(field, value);
                     if (!field) return;
                     field = lower(field);
                     if(field.indexOf('effect') === 0 && field.indexOf('>')>-1){
-                      this.$set(this.activeRule.effect, field.split('>')[1], value);
+                        this.$delete(this.activeRule.effect, field.split('>')[1]);
+                    } else if(field.indexOf('props') === 0 && field.indexOf('>')>-1){
+                        this.$delete(this.activeRule.props, field.split('>')[1]);
+                    } else if (field === 'child') {
+                        this.$delete(this.activeRule.children, 0);
+                    } else if(field) {
+                        this.$set(this.activeRule, field, undefined);
+                    }
+                }else{
+                    this.$delete(this.activeRule.props, field);
+                }
+            }
+        },
+        propChange(field, value, _, fapi, flag) {
+            if (!flag && this.activeRule && fapi.activeRule === this.activeRule) {
+                if (field.indexOf('formCreate') === 0) {
+                    field = field.replace('formCreate', '');
+                    if (!field) return;
+                    field = lower(field);
+                    if(field.indexOf('effect') === 0 && field.indexOf('>')>-1){
+                        this.$set(this.activeRule.effect, field.split('>')[1], value);
+                    } else if(field.indexOf('props') === 0 && field.indexOf('>')>-1){
+                        this.$set(this.activeRule.props, field.split('>')[1], value);
                     } else if (field === 'child') {
                         this.$set(this.activeRule.children, 0, value);
                     } else {
@@ -641,8 +660,10 @@ export default {
                 if (['effect', 'config', 'payload', 'id', 'type'].indexOf(k) < 0)
                     formData['formCreate' + upper(k)] = rule[k];
             });
-            rule.effect && Object.keys(rule.effect).forEach(k => {
-                formData['formCreateEffect>' + k] = rule.effect[k];
+            ['props','effect'].forEach(name=>{
+                rule[name] && Object.keys(rule[name]).forEach(k => {
+                    formData['formCreate'+ upper(name)+'>' + k] = rule[name][k];
+                });
             });
             this.propsForm.options.formData = formData;
 
