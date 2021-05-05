@@ -43,7 +43,7 @@
     "bugs": {
         "url": "https://github.com/xaboy/form-create-designer/issues"
     },
-    "homepage": "http://www.form-create.com",
+    "homepage": "http://designer.form-create.com",
     "dependencies": {
         "@form-create/component-wangeditor": "^2.5.2",
         "@form-create/element-ui": "^2.5.6",
