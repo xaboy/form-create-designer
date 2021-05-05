@@ -8,7 +8,7 @@ import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
 import draggable from 'vuedraggable';
 import unique from '@form-create/utils/lib/unique';
-import {makeOptionsRule} from '@/utils';
+import {makeOptionsRule} from './utils/index';
 
 formCreate.component('draggable', draggable);
 formCreate.component('DragTool', DragTool);

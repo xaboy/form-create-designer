@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule} from '@/utils';
+import {makeOptionsRule} from '../../utils/index';
 
 const label = '选择器';
 const name = 'select';

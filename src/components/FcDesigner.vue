@@ -235,7 +235,7 @@ import ruleList from '../config/rule';
 import draggable from 'vuedraggable';
 import formCreate from '@form-create/element-ui';
 import createMenu from '../config/menu';
-import {upper} from '@/utils';
+import {upper} from '../utils/index';
 
 
 export default {
