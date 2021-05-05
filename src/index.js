@@ -8,6 +8,7 @@ import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
 import draggable from 'vuedraggable';
 import unique from '@form-create/utils/lib/unique';
+import {makeOptionsRule} from '@/utils';
 
 formCreate.component('draggable', draggable);
 formCreate.component('DragTool', DragTool);
@@ -36,5 +37,7 @@ formCreate.register('_fc_tool', {
 FcDesigner.install = function (Vue) {
     Vue.component('FcDesigner', FcDesigner);
 };
+
+FcDesigner.makeOptionsRule = makeOptionsRule;
 
 export default FcDesigner;
