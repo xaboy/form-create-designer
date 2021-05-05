@@ -495,6 +495,9 @@ export default {
         getRule() {
             return this.parseRule(deepCopy(this.dragForm.api.rule[0].children));
         },
+        getJson() {
+            return formCreate.toJson(this.getRule());
+        },
         getOption() {
             const option = deepCopy(this.form.value);
             delete option.submitBtn;
