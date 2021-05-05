@@ -144,13 +144,14 @@ export default {
         },
         onOk() {
             if (this.err) return;
-            let val = JSON.parse(this.editor.getValue());
+            const json = this.editor.getValue();
+            let val = JSON.parse(json);
             if (this.type === 3) {
                 if (!Array.isArray(val)) {
                     this.err = true;
                     return;
                 }
-                this.$refs.designer.setRule(val);
+                this.$refs.designer.setRule(formCreate.parseJson(json));
             } else {
                 if (!is.Object(val) || !val.form) {
                     this.err = true;
