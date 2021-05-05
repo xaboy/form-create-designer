@@ -11,7 +11,7 @@
 
 **form-create-designer 是基于 [@form-create/element-ui](https://github.com/xaboy/form-create) 实现的表单设计器组件。可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率，节省开发者的时间。**
 
-**[在线演示](http://form-create.com/designer?fr=github)**
+**[文档](http://designer.form-create.com/guide/) | [在线演示](http://form-create.com/designer?fr=github)**
 
 > 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！本项目还在不断开发完善中,如有任何建议或问题[请在这里提出](https://github.com/xaboy/form-create-designer/issues/new)
 
