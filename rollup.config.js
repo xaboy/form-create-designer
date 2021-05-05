@@ -39,13 +39,6 @@ module.exports = {
             return;
         }
         let message = warning.message;
-        if (code === 'unresolved_import' && warning.source) {
-            if (format !== 'umd' || context.unresolved.has(warning.source)) {
-                return;
-            }
-            context.unresolved.add(warning.source);
-            message = `${warning.source} is treated as external dependency`;
-        }
         console.log(`${colors.yellow(`${code}`)}${colors.dim(':')} ${message}`);
     },
     output: OutputOptions(),
