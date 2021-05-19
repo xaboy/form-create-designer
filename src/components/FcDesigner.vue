@@ -677,6 +677,7 @@ export default {
                     field: rule.field,
                     title: rule.title,
                     info: rule.info,
+                    control: rule.control,
                 };
 
                 let validate;
