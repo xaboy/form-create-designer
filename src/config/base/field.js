@@ -4,17 +4,17 @@ export default function field() {
             type: 'input',
             field: 'field',
             value: '',
-            title: 'field',
+            title: '字段 ID',
         }, {
             type: 'input',
             field: 'title',
             value: '',
-            title: 'title',
+            title: '字段名称',
         }, {
             type: 'input',
             field: 'info',
             value: '',
-            title: 'info',
+            title: '提示信息',
         }, {
             type: 'col',
             props: {
