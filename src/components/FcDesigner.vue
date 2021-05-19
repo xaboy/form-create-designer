@@ -229,7 +229,7 @@ import form from '../config/base/form';
 import field from '../config/base/field';
 import validate from '../config/base/validate';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
-import is, {hasProperty} from '@form-create/utils/lib/type';
+import is from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
 import ruleList from '../config/rule';
 import draggable from 'vuedraggable';
@@ -629,24 +629,11 @@ export default {
         },
         validateChange(formData) {
             if (!this.activeRule || this.validateForm.api.activeRule !== this.activeRule) return;
-            if (!formData.type) {
-                this.validateForm.api.setValue({required: false});
-                delete this.activeRule.validate;
-                this.dragForm.api.refreshValidate();
-                this.dragForm.api.nextTick(() => {
-                    this.dragForm.api.clearValidateState(this.activeRule.field);
-                });
-            } else if (hasProperty(formData, 'required')) {
-                if (formData.required) {
-                    this.activeRule.validate = [{required: true, type: formData.type}];
-                } else {
-                    delete this.activeRule.validate;
-                    this.dragForm.api.nextTick(() => {
-                        this.dragForm.api.clearValidateState(this.activeRule.field);
-                    });
-                }
-                this.dragForm.api.refreshValidate();
-            }
+            this.activeRule.validate = formData.validate || [];
+            this.dragForm.api.refreshValidate();
+            this.dragForm.api.nextTick(() => {
+                this.dragForm.api.clearValidateState(this.activeRule.field);
+            });
         },
         toolActive(rule) {
             this.$nextTick(() => {
@@ -679,13 +666,7 @@ export default {
                     info: rule.info,
                 };
 
-                let validate;
-                if (rule.validate) {
-                    validate = {...rule.validate[0]};
-                } else {
-                    validate = {type: ''};
-                }
-                this.validateForm.options.formData = validate;
+                this.validateForm.options.formData = {validate: rule.validate ? [...rule.validate] : []};
             }
         },
         dragAdd(children, evt) {
