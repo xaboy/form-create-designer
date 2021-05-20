@@ -25,9 +25,10 @@ export default {
             }
             if (!val._parse && val.parse) {
                 return {...val, _parse: '' + val.parse};
-            } else {
-                return val;
+            } else if(is.Function(val._parse)){
+                return {...val, _parse: '' + val._parse};
             }
+            return val;
         }
     },
     data() {

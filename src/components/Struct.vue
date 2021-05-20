@@ -32,12 +32,14 @@ export default {
         defaultValue: {
             require: false
         },
+        validate: Function,
     },
     data() {
         return {
             editor: null,
             visible: false,
             err: false,
+            oldVal: null,
         };
     },
     watch: {
@@ -55,6 +57,7 @@ export default {
     methods: {
         load() {
             const val = JSON.stringify(this.value || this.defaultValue, null, 2);
+            this.oldVal = val;
             this.$nextTick(() => {
                 this.editor = CodeMirror(this.$refs.editor, {
                     lineNumbers: true,
@@ -73,9 +76,15 @@ export default {
         },
         onOk() {
             if (this.err) return;
-            this.visible = false;
             const val = JSON.parse(this.editor.getValue());
-            this.$emit('input', val);
+            if (this.validate && false === this.validate(val)) {
+                this.err = true;
+                return;
+            }
+            this.visible = false;
+            if (JSON.stringify(val, null, 2) !== this.oldVal) {
+                this.$emit('input', val);
+            }
         },
     },
     beforeCreate() {
@@ -86,19 +95,19 @@ export default {
 
 <style>
 ._fc_struct .CodeMirror {
-  height: 450px;
+    height: 450px;
 }
 
 ._fc_struct .CodeMirror-line {
-  line-height: 16px !important;
-  font-size: 13px !important;
+    line-height: 16px !important;
+    font-size: 13px !important;
 }
 
 .CodeMirror-lint-tooltip {
-  z-index: 2021 !important;
+    z-index: 2021 !important;
 }
 
 ._fc_struct .el-dialog__body {
-  padding: 0px 20px;
+    padding: 0px 20px;
 }
 </style>

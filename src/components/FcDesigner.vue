@@ -229,7 +229,7 @@ import form from '../config/base/form';
 import field from '../config/base/field';
 import validate from '../config/base/validate';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
-import is, {hasProperty} from '@form-create/utils/lib/type';
+import is from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
 import ruleList from '../config/rule';
 import draggable from 'vuedraggable';
@@ -533,6 +533,10 @@ export default {
                 const config = ruleList[rule._fc_drag_tag] || ruleList[rule.type];
                 const _children = rule.children;
                 rule.children = [];
+                if(rule.control) {
+                    rule._control = rule.control;
+                    delete rule.control;
+                }
                 if (config) {
                     rule = this.makeRule(config, rule);
                     if (_children) {
@@ -578,6 +582,10 @@ export default {
                 if (rule.effect) {
                     delete rule.effect._fc;
                     delete rule.effect._fc_tool;
+                }
+                if(rule._control) {
+                    rule.control  = rule._control;
+                    delete rule._control;
                 }
                 Object.keys(rule).filter(k => (Array.isArray(rule[k]) && rule[k].length === 0) || (is.Object(rule[k]) && Object.keys(rule[k]).length === 0)).forEach(k => {
                     delete rule[k];
@@ -634,24 +642,11 @@ export default {
         },
         validateChange(formData) {
             if (!this.activeRule || this.validateForm.api.activeRule !== this.activeRule) return;
-            if (!formData.type) {
-                this.validateForm.api.setValue({required: false});
-                delete this.activeRule.validate;
-                this.dragForm.api.refreshValidate();
-                this.dragForm.api.nextTick(() => {
-                    this.dragForm.api.clearValidateState(this.activeRule.field);
-                });
-            } else if (hasProperty(formData, 'required')) {
-                if (formData.required) {
-                    this.activeRule.validate = [{required: true, type: formData.type}];
-                } else {
-                    delete this.activeRule.validate;
-                    this.dragForm.api.nextTick(() => {
-                        this.dragForm.api.clearValidateState(this.activeRule.field);
-                    });
-                }
-                this.dragForm.api.refreshValidate();
-            }
+            this.activeRule.validate = formData.validate || [];
+            this.dragForm.api.refreshValidate();
+            this.dragForm.api.nextTick(() => {
+                this.dragForm.api.clearValidateState(this.activeRule.field);
+            });
         },
         toolActive(rule) {
             this.$nextTick(() => {
@@ -685,13 +680,7 @@ export default {
                     _control: rule._control,
                 };
 
-                let validate;
-                if (rule.validate) {
-                    validate = {...rule.validate[0]};
-                } else {
-                    validate = {type: ''};
-                }
-                this.validateForm.options.formData = validate;
+                this.validateForm.options.formData = {validate: rule.validate ? [...rule.validate] : []};
             }
         },
         dragAdd(children, evt) {

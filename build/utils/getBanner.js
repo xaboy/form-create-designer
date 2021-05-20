@@ -25,7 +25,7 @@ function getBanner(banner, pkg) {
 
     return (
         '/*!\n' +
-    ' * form-create-designer 可视化表单设计器\n' +
+    ' * form-create 可视化表单设计器\n' +
     ` * ${banner.name} v${banner.version}\n` +
     ` * (c) ${author || ''}\n` +
     (license && ` * Released under the ${license} License.\n`) +

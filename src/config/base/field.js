@@ -4,24 +4,33 @@ export default function field() {
             type: 'input',
             field: 'field',
             value: '',
-            title: 'field',
+            title: '字段 ID',
         }, {
             type: 'input',
             field: 'title',
             value: '',
-            title: 'title',
+            title: '字段名称',
         }, {
             type: 'input',
             field: 'info',
             value: '',
-            title: 'info',
+            title: '提示信息',
         }, {
             type: 'Struct',
             field: '_control',
             value: [],
             title: '联动数据',
-            props: {defaultValue: []}
-        },{
+            props: {
+                defaultValue: [],
+                validate(val) {
+                    if (!Array.isArray(val)) return false;
+                    if (!val.length) return true;
+                    return !val.some(({rule}) => {
+                        return !Array.isArray(rule);
+                    });
+                }
+            }
+        }, {
             type: 'col',
             props: {
                 span: 24
