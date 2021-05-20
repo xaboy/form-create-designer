@@ -52,96 +52,96 @@ export default {
                             },
                             rule: [
                                 {
-                                    'type': 'group',
-                                    'field': 'validate',
-                                    'props': {
-                                        'expand': 1,
-                                        'rules': [
+                                    type: 'group',
+                                    field: 'validate',
+                                    props: {
+                                        expand: 1,
+                                        rules: [
                                             {
-                                                'type': 'select',
-                                                'title': '触发方式',
-                                                'field': 'trigger',
-                                                'value': 'change',
-                                                'options': [
+                                                type: 'select',
+                                                title: '触发方式',
+                                                field: 'trigger',
+                                                value: 'change',
+                                                options: [
                                                     {label: 'change', value: 'change'},
                                                     {label: 'submit', value: 'submit'},
                                                     {label: 'blur', value: 'blur'},
                                                 ]
                                             },
                                             {
-                                                'type': 'select',
-                                                'title': '验证方式',
-                                                'field': 'validate',
-                                                'options': [
-                                                    {'value': 'required', 'label': '必填'},
-                                                    {'value': 'pattern', 'label': '正则表达式'},
-                                                    {'value': 'min', 'label': '最小值'},
-                                                    {'value': 'max', 'label': '最大值'},
-                                                    {'value': 'len', 'label': '长度'},
+                                                type: 'select',
+                                                title: '验证方式',
+                                                field: 'mode',
+                                                options: [
+                                                    {value: 'required', label: '必填'},
+                                                    {value: 'pattern', label: '正则表达式'},
+                                                    {value: 'min', label: '最小值'},
+                                                    {value: 'max', label: '最大值'},
+                                                    {value: 'len', label: '长度'},
                                                 ],
-                                                'value': '',
-                                                'control': [
+                                                value: '',
+                                                control: [
                                                     {
-                                                        'value': 'required',
-                                                        'rule': [
+                                                        value: 'required',
+                                                        rule: [
                                                             {
-                                                                'type': 'hidden',
-                                                                'field': 'required',
-                                                                'value': true
+                                                                type: 'hidden',
+                                                                field: 'required',
+                                                                value: true
                                                             }
                                                         ]
                                                     },
                                                     {
-                                                        'value': 'pattern',
-                                                        'rule': [
+                                                        value: 'pattern',
+                                                        rule: [
                                                             {
-                                                                'type': 'input',
-                                                                'field': 'pattern',
-                                                                'title': '正则表达式'
+                                                                type: 'input',
+                                                                field: 'pattern',
+                                                                title: '正则表达式'
                                                             }
                                                         ]
                                                     },
                                                     {
-                                                        'value': 'min',
-                                                        'rule': [
+                                                        value: 'min',
+                                                        rule: [
                                                             {
-                                                                'type': 'inputNumber',
-                                                                'field': 'min',
-                                                                'title': '最小值'
+                                                                type: 'inputNumber',
+                                                                field: 'min',
+                                                                title: '最小值'
                                                             }
                                                         ]
                                                     },
                                                     {
-                                                        'value': 'max',
-                                                        'rule': [
+                                                        value: 'max',
+                                                        rule: [
                                                             {
-                                                                'type': 'inputNumber',
-                                                                'field': 'max',
-                                                                'title': '最大值'
+                                                                type: 'inputNumber',
+                                                                field: 'max',
+                                                                title: '最大值'
                                                             }
                                                         ]
                                                     },
                                                     {
-                                                        'value': 'len',
-                                                        'rule': [
+                                                        value: 'len',
+                                                        rule: [
                                                             {
-                                                                'type': 'inputNumber',
-                                                                'field': 'len',
-                                                                'title': '长度'
+                                                                type: 'inputNumber',
+                                                                field: 'len',
+                                                                title: '长度'
                                                             }
                                                         ]
                                                     },
                                                 ]
                                             },
                                             {
-                                                'type': 'input',
-                                                'title': '错误信息',
-                                                'field': 'message',
-                                                'value': ''
+                                                type: 'input',
+                                                title: '错误信息',
+                                                field: 'message',
+                                                value: ''
                                             }
                                         ]
                                     },
-                                    'value': []
+                                    value: []
                                 }
                             ]
                         }
@@ -171,10 +171,10 @@ export default {
                 type: n.length ? n[0].type : undefined
             };
             val.validate.forEach(v => {
-                if (!v.validate) {
+                if (!v.mode) {
                     Object.keys(v).forEach(k => {
-                        if (['message', 'type', 'trigger', 'validate'].indexOf(k) < 0) {
-                            v.validate = k;
+                        if (['message', 'type', 'trigger', 'mode'].indexOf(k) < 0) {
+                            v.mode = k;
                         }
                     });
                 }

@@ -1,9 +1,9 @@
 export default function validate() {
     return [
         {
-            type:'validate',
-            field:'validate',
-            value:[]
+            type: 'validate',
+            field: 'validate',
+            value: []
         },
     ];
 }
