@@ -17,11 +17,20 @@ export default function field() {
             title: '提示信息',
         }, {
             type: 'Struct',
-            field: 'control',
+            field: '_control',
             value: [],
             title: '联动数据',
-            props: {defaultValue: []}
-        },{
+            props: {
+                defaultValue: [],
+                validate(val) {
+                    if (!Array.isArray(val)) return false;
+                    if (!val.length) return true;
+                    return !val.some(({rule}) => {
+                        return !Array.isArray(rule);
+                    });
+                }
+            }
+        }, {
             type: 'col',
             props: {
                 span: 24

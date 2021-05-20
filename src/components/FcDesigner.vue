@@ -528,6 +528,10 @@ export default {
                 const config = ruleList[rule._fc_drag_tag] || ruleList[rule.type];
                 const _children = rule.children;
                 rule.children = [];
+                if(rule.control) {
+                    rule._control = rule.control;
+                    delete rule.control;
+                }
                 if (config) {
                     rule = this.makeRule(config, rule);
                     if (_children) {
@@ -573,6 +577,10 @@ export default {
                 if (rule.effect) {
                     delete rule.effect._fc;
                     delete rule.effect._fc_tool;
+                }
+                if(rule._control) {
+                    rule.control  = rule._control;
+                    delete rule._control;
                 }
                 Object.keys(rule).filter(k => (Array.isArray(rule[k]) && rule[k].length === 0) || (is.Object(rule[k]) && Object.keys(rule[k]).length === 0)).forEach(k => {
                     delete rule[k];
@@ -664,7 +672,7 @@ export default {
                     field: rule.field,
                     title: rule.title,
                     info: rule.info,
-                    control: rule.control,
+                    _control: rule._control,
                 };
 
                 this.validateForm.options.formData = {validate: rule.validate ? [...rule.validate] : []};
