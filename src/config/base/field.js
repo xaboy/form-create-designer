@@ -16,6 +16,12 @@ export default function field() {
             value: '',
             title: '提示信息',
         }, {
+            type: 'Struct',
+            field: 'control',
+            value: [],
+            title: '联动数据',
+            props: {defaultValue: []}
+        },{
             type: 'col',
             props: {
                 span: 24

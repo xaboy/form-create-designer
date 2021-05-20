@@ -664,6 +664,7 @@ export default {
                     field: rule.field,
                     title: rule.title,
                     info: rule.info,
+                    control: rule.control,
                 };
 
                 this.validateForm.options.formData = {validate: rule.validate ? [...rule.validate] : []};
