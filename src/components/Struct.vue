@@ -75,9 +75,7 @@ export default {
             if (this.err) return;
             this.visible = false;
             const val = JSON.parse(this.editor.getValue());
-            if (JSON.stringify(val) !== JSON.stringify(this.defaultValue)) {
-                this.$emit('input', val);
-            }
+            this.$emit('input', val);
         },
     },
     beforeCreate() {

@@ -17,7 +17,7 @@ export default function field() {
             title: 'info',
         }, {
             type: 'Struct',
-            field: 'control',
+            field: '_control',
             value: [],
             title: '联动数据',
             props: {defaultValue: []}

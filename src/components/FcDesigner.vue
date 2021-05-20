@@ -493,7 +493,12 @@ export default {
             this.preview.option = this.getOption();
         },
         getRule() {
-            return this.parseRule(deepCopy(this.dragForm.api.rule[0].children));
+            const updateControlRule = this.parseRule(deepCopy(this.dragForm.api.rule[0].children))
+            updateControlRule.length && updateControlRule.forEach(e => {
+                e.control = e._control
+                delete e._control
+            })
+            return updateControlRule;
         },
         getJson() {
             return formCreate.toJson(this.getRule());
@@ -677,7 +682,7 @@ export default {
                     field: rule.field,
                     title: rule.title,
                     info: rule.info,
-                    control: rule.control,
+                    _control: rule._control,
                 };
 
                 let validate;
