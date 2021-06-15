@@ -94,7 +94,7 @@ export default {
             if(this.type === 2){
                 val = this.value;
             }else if(this.type === 0){
-                val = formCreate.toJson(this.value, 2).replaceAll('\\','\\\\');
+                val = formCreate.toJson(this.value, 2);//.replaceAll('\\','\\\\');
             }else{
                 val = JSON.stringify(this.value, null, 2);
             }
