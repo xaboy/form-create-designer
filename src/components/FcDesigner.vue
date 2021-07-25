@@ -229,7 +229,7 @@ import form from '../config/base/form';
 import field from '../config/base/field';
 import validate from '../config/base/validate';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
-import is from '@form-create/utils/lib/type';
+import is, {hasProperty} from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
 import ruleList from '../config/rule';
 import draggable from 'vuedraggable';
@@ -665,7 +665,7 @@ export default {
             });
             this.propsForm.options.formData = formData;
 
-            this.showBaseRule = !!rule.field;
+            this.showBaseRule = hasProperty(rule, 'field');
 
             if (this.showBaseRule) {
                 this.baseForm.options.formData = {
