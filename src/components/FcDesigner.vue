@@ -194,7 +194,7 @@
                           :value.sync="form.value.form"></FormCreate>
             </ElMain>
             <ElMain v-show="activeTab==='props'" style="padding: 0 20px;"
-                    :key="activeRule? activeRule.id: ''">
+                    :key="activeRule ? activeRule._id: ''">
               <div>
                 <ElDivider v-if="showBaseRule">基础配置</ElDivider>
                 <FormCreate v-show="showBaseRule" v-model="baseForm.api" :rule="baseForm.rule"
@@ -570,7 +570,7 @@ export default {
                     rule.children = this.parseRule(rule.children);
                 }
 
-                delete rule.id;
+                delete rule._id;
                 if (rule.config) {
                     delete rule.config.config;
                 }
@@ -590,12 +590,12 @@ export default {
             }, []);
         },
         baseChange(field, value, _, fapi, flag) {
-            if (!flag && this.activeRule && fapi.activeRule === this.activeRule) {
+            if (!flag && this.activeRule && fapi[this.activeRule._id] === this.activeRule) {
                 this.$set(this.activeRule, field, value);
             }
         },
         propRemoveField(field, _, fapi) {
-            if (this.activeRule && fapi.activeRule === this.activeRule) {
+            if (this.activeRule && fapi[this.activeRule._id] === this.activeRule) {
                 this.dragForm.api.sync(this.activeRule);
                 if (field.indexOf('formCreate') === 0) {
                     field = field.replace('formCreate', '');
@@ -616,7 +616,7 @@ export default {
             }
         },
         propChange(field, value, _, fapi, flag) {
-            if (!flag && this.activeRule && fapi.activeRule === this.activeRule) {
+            if (!flag && this.activeRule && fapi[this.activeRule._id] === this.activeRule) {
                 if (field.indexOf('formCreate') === 0) {
                     field = field.replace('formCreate', '');
                     if (!field) return;
@@ -636,7 +636,7 @@ export default {
             }
         },
         validateChange(formData) {
-            if (!this.activeRule || this.validateForm.api.activeRule !== this.activeRule) return;
+            if (!this.activeRule || this.validateForm.api[this.activeRule._id] !== this.activeRule) return;
             this.activeRule.validate = formData.validate || [];
             this.dragForm.api.refreshValidate();
             this.dragForm.api.nextTick(() => {
@@ -644,13 +644,21 @@ export default {
             });
         },
         toolActive(rule) {
+            if(this.activeRule){
+                delete this.propsForm.api[this.activeRule._id];
+                delete this.baseForm.api[this.activeRule._id];
+                delete this.validateForm.api[this.activeRule._id];
+            }
+            this.activeRule = rule;
+
             this.$nextTick(() => {
                 this.activeTab = 'props';
+                this.$nextTick(()=>{
+                    this.propsForm.api[this.activeRule._id] = this.activeRule;
+                    this.baseForm.api[this.activeRule._id] = this.activeRule;
+                    this.validateForm.api[this.activeRule._id] = this.activeRule;
+                });
             });
-            this.activeRule = rule;
-            this.propsForm.api.activeRule = rule;
-            this.baseForm.api.activeRule = rule;
-            this.validateForm.api.activeRule = rule;
 
             this.propsForm.rule = rule.config.config.props();
             const formData = {...rule.props, formCreateChild: rule.children[0]};

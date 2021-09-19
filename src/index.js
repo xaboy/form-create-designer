@@ -21,8 +21,8 @@ formCreate.component('FcEditor', FcEditor);
 
 formCreate.register('_fc', {
     init(fc, rule) {
-        rule.id = unique();
-        if (!fc.value && rule.field)
+        rule._id = unique();
+        if (fc.repeat)
             rule.field = unique();
         if (fc.value) {
             rule.effect._fc = false;
