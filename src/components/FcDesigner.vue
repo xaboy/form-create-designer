@@ -244,7 +244,7 @@ export default {
         draggable,
         FormCreate: formCreate.$form(),
     },
-    props: ['menu', 'height'],
+    props: ['menu', 'height', 'config'],
     computed: {
         height_() {
             const h = this.height;
@@ -682,6 +682,12 @@ export default {
                     info: rule.info,
                     _control: rule._control,
                 };
+
+                if (this.config && this.config.disabled) {
+                    this.baseForm.api.disabled(false);
+                    this.baseForm.api.disabled(true, this.config.disabled);
+                    this.baseForm.api.hidden(this.config.disabled.indexOf('control') > -1, '_control');
+                }
 
                 this.validateForm.options.formData = {validate: rule.validate ? [...rule.validate] : []};
             }
