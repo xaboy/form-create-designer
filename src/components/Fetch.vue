@@ -38,8 +38,8 @@ export default {
             option: {
                 form: {
                     labelPosition: 'right',
-                    size: 'mini',
-                    labelWidth: '90px'
+                    size: 'small',
+                    labelWidth: 90
                 },
                 submitBtn: false,
             },

@@ -47,7 +47,10 @@
     "dependencies": {
         "@form-create/component-wangeditor": "^2.5.2",
         "@form-create/element-ui": "^2.5.9",
-        "@form-create/utils": "^2.5.0-alpha.4"
+        "@form-create/iview4": "^2.5.12",
+        "@form-create/utils": "^2.5.0-alpha.4",
+        "view-design": "^4.7.0",
+        "element-ui": "^2.13.2"
     },
     "publishConfig": {
         "access": "public"
@@ -74,6 +77,7 @@
         "@rollup/plugin-commonjs": "^18.0.0",
         "@rollup/plugin-node-resolve": "^11.2.1",
         "@rollup/plugin-replace": "^2.4.2",
+        "@sixian/css-url": "^1.0.3",
         "@vue/cli-plugin-babel": "~4.5.0",
         "@vue/cli-service": "^4.5.3",
         "babel-eslint": "^10.1.0",
@@ -85,7 +89,6 @@
         "css-loader": "^4.2.1",
         "cz-conventional-changelog": "^3.2.0",
         "cz-customizable": "^6.3.0",
-        "element-ui": "^2.13.2",
         "eslint": "^7.7.0",
         "eslint-plugin-vue": "^6.2.2",
         "figlet": "^1.5.0",
@@ -97,7 +100,6 @@
         "ora": "^5.0.0",
         "postcss": "^8.2.9",
         "rimraf": "^3.0.2",
-        "@sixian/css-url": "^1.0.3",
         "rollup": "^2.44.0",
         "rollup-plugin-node-externals": "^2.2.0",
         "rollup-plugin-postcss": "^4.0.0",

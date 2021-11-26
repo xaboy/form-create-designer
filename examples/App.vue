@@ -61,7 +61,7 @@ import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/pug/pug';
 
 import is from '@form-create/utils/lib/type';
-import formCreate from '@form-create/element-ui';
+import formCreate from '@form-create/iview4';
 
 const TITLE = ['生成规则', '表单规则', '生成组件', '设置生成规则', '设置表单规则'];
 
@@ -174,7 +174,7 @@ export default {
 </template>
 
 <script>
-import formCreate from "@form-create/element-ui";
+import formCreate from "@form-create/iview4";
 
 export default {
   data () {

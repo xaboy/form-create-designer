@@ -12,7 +12,9 @@ const not_externals = [
     'Vue',
     'element-ui',
     'elementUI',
-    '@form-create/element-ui'
+    '@form-create/element-ui',
+    'view-design',
+    '@form-create/iview4'
 ];
 
 const isExternal = (not_externals, id) => {
