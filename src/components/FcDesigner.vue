@@ -257,10 +257,7 @@ export default {
             active: null
         }
     }),
-
-    mounted() {
-        console.log(this);
-    },
+    
     data() {
         const children = [];
         return {
