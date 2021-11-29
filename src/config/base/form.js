@@ -23,7 +23,7 @@ export default function form() {
         }, {
             type: 'input',
             field: 'labelWidth',
-            value: '125px',
+            value: 125,
             title: '标签宽度',
         }, {
             type: 'switch',

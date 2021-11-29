@@ -20,8 +20,8 @@ export default {
             option: {
                 form: {
                     labelPosition: 'top',
-                    size: 'mini',
-                    labelWidth: '90px'
+                    size: 'small',
+                    labelWidth: 90
                 },
                 submitBtn: false,
                 formData: this.parseValue(this.value)
@@ -30,10 +30,10 @@ export default {
                 {
                     type: 'select',
                     field: 'type',
-                    value: undefined,
+                    value: '',
                     title: '字段类型',
                     options: [
-                        {value: undefined, label: '请选择'},
+                        {value: '', label: '请选择'},
                         {value: 'string', label: 'String'},
                         {value: 'array', label: 'Array'},
                         {value: 'number', label: 'Number'},

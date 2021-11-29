@@ -136,7 +136,7 @@
   position: relative;
 }
 
-._fc-m-drag > form, ._fc-m-drag > form > .el-row {
+._fc-m-drag > form, ._fc-m-drag > form > .ivu-row {
   height: 100%;
 }
 </style>
@@ -233,7 +233,7 @@ import is, {hasProperty} from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
 import ruleList from '../config/rule';
 import draggable from 'vuedraggable';
-import formCreate from '@form-create/element-ui';
+import formCreate from '@form-create/iview4';
 import createMenu from '../config/menu';
 import {upper} from '../utils/index';
 
@@ -257,6 +257,7 @@ export default {
             active: null
         }
     }),
+    
     data() {
         const children = [];
         return {
@@ -285,7 +286,7 @@ export default {
                 option: {
                     form: {
                         labelPosition: 'top',
-                        size: 'mini'
+                        size: 'small'
                     },
                     submitBtn: false
                 },
@@ -294,8 +295,8 @@ export default {
                         inline: false,
                         hideRequiredAsterisk: false,
                         labelPosition: 'right',
-                        size: 'mini',
-                        labelWidth: '125px'
+                        size: 'small',
+                        labelWidth: 125
                     },
                     submitBtn: false
                 }
@@ -306,7 +307,7 @@ export default {
                 options: {
                     form: {
                         labelPosition: 'top',
-                        size: 'mini'
+                        size: 'small'
                     },
                     submitBtn: false,
                     mounted: (fapi) => {
@@ -321,7 +322,7 @@ export default {
                 options: {
                     form: {
                         labelPosition: 'top',
-                        size: 'mini'
+                        size: 'small'
                     },
                     submitBtn: false,
                     mounted: (fapi) => {
@@ -336,7 +337,7 @@ export default {
                 options: {
                     form: {
                         labelPosition: 'top',
-                        size: 'mini'
+                        size: 'small'
                     },
                     submitBtn: false,
                     mounted: (fapi) => {

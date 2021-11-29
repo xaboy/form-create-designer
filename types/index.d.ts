@@ -1,4 +1,4 @@
-import {Rule} from "@form-create/element-ui";
+import {Rule} from "@form-create/iview4";
 
 export interface MenuItem {
     label: string,

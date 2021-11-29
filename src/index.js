@@ -4,7 +4,7 @@ import Struct from './components/Struct.vue';
 import Fetch from './components/Fetch.vue';
 import Validate from './components/Validate.vue';
 import DragBox from './components/DragBox.vue';
-import formCreate from '@form-create/element-ui';
+import formCreate from '@form-create/iview4';
 import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
 import draggable from 'vuedraggable';

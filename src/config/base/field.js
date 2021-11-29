@@ -40,7 +40,7 @@ export default function field() {
                     type: 'el-button',
                     props: {
                         type: 'primary',
-                        size: 'mini',
+                        size: 'small',
                         icon: 'el-icon-delete',
                     },
                     inject: true,
@@ -60,7 +60,7 @@ export default function field() {
                     type: 'el-button',
                     props: {
                         type: 'success',
-                        size: 'mini',
+                        size: 'small',
                         icon: 'el-icon-refresh',
                     },
                     inject: true,
