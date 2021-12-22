@@ -589,8 +589,8 @@ export default {
                 return initial;
             }, []);
         },
-        baseChange(field, value, _, fapi, flag) {
-            if (!flag && this.activeRule && fapi[this.activeRule._id] === this.activeRule) {
+        baseChange(field, value, _, fapi) {
+            if (this.activeRule && fapi[this.activeRule._id] === this.activeRule) {
                 this.$set(this.activeRule, field, value);
             }
         },
@@ -615,8 +615,8 @@ export default {
                 }
             }
         },
-        propChange(field, value, _, fapi, flag) {
-            if (!flag && this.activeRule && fapi[this.activeRule._id] === this.activeRule) {
+        propChange(field, value, _, fapi) {
+            if (this.activeRule && fapi[this.activeRule._id] === this.activeRule) {
                 if (field.indexOf('formCreate') === 0) {
                     field = field.replace('formCreate', '');
                     if (!field) return;
