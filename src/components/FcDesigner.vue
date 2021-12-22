@@ -644,7 +644,7 @@ export default {
             });
         },
         toolActive(rule) {
-            if(this.activeRule){
+            if (this.activeRule) {
                 delete this.propsForm.api[this.activeRule._id];
                 delete this.baseForm.api[this.activeRule._id];
                 delete this.validateForm.api[this.activeRule._id];
@@ -653,7 +653,7 @@ export default {
 
             this.$nextTick(() => {
                 this.activeTab = 'props';
-                this.$nextTick(()=>{
+                this.$nextTick(() => {
                     this.propsForm.api[this.activeRule._id] = this.activeRule;
                     this.baseForm.api[this.activeRule._id] = this.activeRule;
                     this.validateForm.api[this.activeRule._id] = this.activeRule;
@@ -673,21 +673,15 @@ export default {
             });
             this.propsForm.options.formData = formData;
 
-            this.showBaseRule = hasProperty(rule, 'field');
+            this.showBaseRule = hasProperty(rule, 'field') && rule.input !== false;
 
             if (this.showBaseRule) {
                 this.baseForm.options.formData = {
                     field: rule.field,
-                    title: rule.title,
+                    title: rule.title || '',
                     info: rule.info,
                     _control: rule._control,
                 };
-
-                if (this.config && this.config.disabled) {
-                    this.baseForm.api.disabled(false);
-                    this.baseForm.api.disabled(true, this.config.disabled);
-                    this.baseForm.api.hidden(this.config.disabled.indexOf('control') > -1, '_control');
-                }
 
                 this.validateForm.options.formData = {validate: rule.validate ? [...rule.validate] : []};
             }
