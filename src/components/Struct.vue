@@ -1,25 +1,24 @@
 <template>
-  <div class="_fc_struct">
-    <ElButton @click="visible=true" style="width: 100%;">{{ title }}</ElButton>
-    <ElDialog :title="title" :visible.sync="visible" :close-on-click-modal="false" append-to-body>
-      <div ref="editor" v-if="visible"></div>
-      <span slot="footer" class="dialog-footer">
-                <span style="color: red;float:left;" v-if="err">输入内容格式有误!</span>
+    <div class="_fc_struct">
+        <ElButton @click="visible=true" style="width: 100%;">{{ title }}</ElButton>
+        <ElDialog :title="title" :visible.sync="visible" :close-on-click-modal="false" append-to-body>
+            <div ref="editor" v-if="visible"></div>
+            <span slot="footer" class="dialog-footer">
+                <span style="color: red;float:left;text-align: left;" v-if="err">
+                    输入内容格式有误{{ err !== true ? err : '' }}</span>
                 <ElButton @click="visible = false" size="small">取 消</ElButton>
                 <ElButton type="primary" @click="onOk" size="small">确 定</ElButton>
             </span>
-    </ElDialog>
-  </div>
+        </ElDialog>
+    </div>
 </template>
 
 <script>
-import jsonlint from 'jsonlint-mod';
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/addon/lint/lint.css';
 import CodeMirror from 'codemirror/lib/codemirror';
-import 'codemirror/addon/lint/lint';
-import 'codemirror/addon/lint/json-lint';
 import 'codemirror/mode/javascript/javascript';
+import {deepParseFn, toJSON} from '../utils/index';
+import {deepCopy} from '@form-create/utils/lib/deepextend';
 
 export default {
     name: 'Struct',
@@ -56,12 +55,12 @@ export default {
     },
     methods: {
         load() {
-            const val = JSON.stringify(this.value || this.defaultValue, null, 2);
+            const val = toJSON(this.value ? deepParseFn(deepCopy(this.value)) : this.defaultValue);
             this.oldVal = val;
             this.$nextTick(() => {
                 this.editor = CodeMirror(this.$refs.editor, {
                     lineNumbers: true,
-                    mode: 'application/json',
+                    mode: 'javascript',
                     gutters: ['CodeMirror-lint-markers'],
                     lint: true,
                     line: true,
@@ -76,19 +75,23 @@ export default {
         },
         onOk() {
             if (this.err) return;
-            const val = JSON.parse(this.editor.getValue());
+            const str = this.editor.getValue();
+            let val;
+            try {
+                val = eval('(function (){return ' + str + '}())');
+            } catch (e) {
+                this.err = ` (${e})`;
+                return;
+            }
             if (this.validate && false === this.validate(val)) {
                 this.err = true;
                 return;
             }
             this.visible = false;
-            if (JSON.stringify(val, null, 2) !== this.oldVal) {
+            if (toJSON(val, null, 2) !== this.oldVal) {
                 this.$emit('input', val);
             }
         },
-    },
-    beforeCreate() {
-        window.jsonlint = jsonlint;
     }
 };
 </script>
