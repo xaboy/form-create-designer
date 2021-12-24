@@ -45,9 +45,9 @@
     },
     "homepage": "http://designer.form-create.com",
     "dependencies": {
-        "@form-create/component-wangeditor": "^2.5.2",
-        "@form-create/element-ui": "^2.5.14",
-        "@form-create/utils": "^2.5.0-alpha.4"
+        "@form-create/component-wangeditor": "^2.5.15",
+        "@form-create/element-ui": "^2.5.15",
+        "@form-create/utils": "^2.5.15"
     },
     "publishConfig": {
         "access": "public"
