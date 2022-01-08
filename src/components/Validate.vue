@@ -79,7 +79,7 @@ export default {
                                                     {value: 'max', label: '最大值'},
                                                     {value: 'len', label: '长度'},
                                                 ],
-                                                value: '',
+                                                value: 'required',
                                                 control: [
                                                     {
                                                         value: 'required',
@@ -155,7 +155,7 @@ export default {
         onInput: function (formData) {
             let val = [];
             const {validate, type} = formData;
-            if (type && !validate) {
+            if (type && (!validate.length)) {
                 return;
             } else if (type) {
                 validate.forEach(v => {
