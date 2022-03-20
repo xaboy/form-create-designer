@@ -14,7 +14,7 @@ export default function form() {
             type: 'radio',
             field: 'size',
             value: 'mini',
-            title: '标签位置',
+            title: '表单尺寸',
             options: [
                 {value: 'medium', label: 'medium'},
                 {value: 'small', label: 'small'},
