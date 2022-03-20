@@ -27,4 +27,5 @@ export interface DragRule {
     inside?: true;
     drag?: true | String;
     dragBtn?: false;
+    mark?: false;
 }

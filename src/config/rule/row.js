@@ -5,6 +5,7 @@ export default {
     icon: 'icon-row',
     label,
     name,
+    mark: false,
     rule() {
         return {
             type: 'FcRow',

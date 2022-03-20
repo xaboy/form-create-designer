@@ -244,7 +244,7 @@ export default {
         draggable,
         FormCreate: formCreate.$form(),
     },
-    props: ['menu', 'height', 'config'],
+    props: ['menu', 'height', 'config', 'mark'],
     computed: {
         height_() {
             const h = this.height;
@@ -738,6 +738,8 @@ export default {
                 const child = this.makeRule(ruleList[config.children]);
                 (drag || rule).children.push(child);
             }
+            
+            const mark = this.mark !== undefined ? this.mark !== false : config.mark !== false;
 
             if (config.inside) {
                 rule.children = [{
@@ -745,6 +747,7 @@ export default {
                     props: {
                         dragBtn: config.dragBtn !== false,
                         children: config.children,
+                        mark,
                     },
                     effect: {
                         _fc_tool: true
@@ -783,6 +786,7 @@ export default {
                     props: {
                         dragBtn: config.dragBtn !== false,
                         children: config.children,
+                        mark,
                     },
                     effect: {
                         _fc_tool: true

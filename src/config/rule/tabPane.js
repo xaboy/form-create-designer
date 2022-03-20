@@ -7,6 +7,7 @@ export default {
     inside: true,
     drag: true,
     dragBtn: false,
+    mark: false,
     rule() {
         return {
             type: 'el-tab-pane',
