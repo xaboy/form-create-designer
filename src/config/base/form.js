@@ -40,6 +40,16 @@ export default function form() {
             field: 'inlineMessage',
             value: false,
             title: '以行内形式展示校验信息',
+        }, {
+            type: 'switch',
+            field: 'formCreateSubmitBtn',
+            value: true,
+            title: '是否显示表单提交按钮',
+        }, {
+            type: 'switch',
+            field: 'formCreateResetBtn',
+            value: false,
+            title: '是否显示表单重置按钮',
         },
     ];
 }

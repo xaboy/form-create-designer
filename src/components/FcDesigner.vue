@@ -296,7 +296,9 @@ export default {
                         hideRequiredAsterisk: false,
                         labelPosition: 'right',
                         size: 'mini',
-                        labelWidth: '125px'
+                        labelWidth: '125px',
+                        formCreateSubmitBtn: true,
+                        formCreateResetBtn: false
                     },
                     submitBtn: false
                 }
@@ -501,7 +503,10 @@ export default {
         },
         getOption() {
             const option = deepCopy(this.form.value);
-            delete option.submitBtn;
+            option.submitBtn = option.form.formCreateSubmitBtn;
+            option.resetBtn = option.form.formCreateResetBtn;
+            delete option.form.formCreateSubmitBtn;
+            delete option.form.formCreateResetBtn;
             return option;
         },
         setRule(rules) {
@@ -515,10 +520,11 @@ export default {
             this.activeTab = 'form';
         },
         setOption(option) {
-            const _ = option;
-            _.submitBtn = false;
-            delete _.resetBtn;
-            this.form.value = _;
+            option.form.formCreateSubmitBtn = !!option.submitBtn;
+            option.form.formCreateResetBtn = !!option.resetBtn;
+            delete option.submitBtn;
+            delete option.resetBtn;
+            this.form.value = option;
         },
         loadRule(rules) {
             const loadRule = [];
@@ -738,7 +744,7 @@ export default {
                 const child = this.makeRule(ruleList[config.children]);
                 (drag || rule).children.push(child);
             }
-            
+
             const mark = this.mark !== undefined ? this.mark !== false : config.mark !== false;
 
             if (config.inside) {
