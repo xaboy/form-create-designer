@@ -4,6 +4,7 @@ import Struct from './components/Struct.vue';
 import Fetch from './components/Fetch.vue';
 import Validate from './components/Validate.vue';
 import DragBox from './components/DragBox.vue';
+import Required from './components/Required.vue';
 import formCreate from '@form-create/element-ui';
 import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
@@ -17,6 +18,7 @@ formCreate.component('DragBox', DragBox);
 formCreate.component('Validate', Validate);
 formCreate.component('Struct', Struct);
 formCreate.component('Fetch', Fetch);
+formCreate.component('Required', Required);
 formCreate.component('FcEditor', FcEditor);
 
 formCreate.register('_fc', {

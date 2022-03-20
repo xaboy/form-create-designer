@@ -1,6 +1,12 @@
 import is, {hasProperty} from '@form-create/utils/lib/type';
 import {parseFn} from '@form-create/utils/lib/json';
 
+export function makeRequiredRule() {
+    return {
+        type: 'Required', field: 'formCreate$required', title: '是否必填'
+    };
+}
+
 export function makeOptionsRule(to) {
     return {
         type: 'radio',

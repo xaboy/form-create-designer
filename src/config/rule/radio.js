@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule} from '../../utils/index';
+import {makeOptionsRule, makeRequiredRule} from '../../utils/index';
 
 const label = '单选框';
 const name = 'radio';
@@ -26,6 +26,7 @@ export default {
     },
     props() {
         return [
+            makeRequiredRule(),
             makeOptionsRule('options'),
             {type: 'switch', field: 'disabled', title: '是否禁用'}, {
                 type: 'switch',

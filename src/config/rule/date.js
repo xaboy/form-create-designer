@@ -1,4 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
+import {makeRequiredRule} from '../../utils';
 
 const label = '日期选择器';
 const name = 'datePicker';
@@ -17,7 +18,7 @@ export default {
         };
     },
     props() {
-        return [{
+        return [makeRequiredRule(), {
             type: 'Struct',
             field: 'pickerOptions',
             title: '当前时间日期选择器特有的选项',

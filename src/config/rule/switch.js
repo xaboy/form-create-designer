@@ -1,4 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
+import {makeRequiredRule} from '../../utils';
 
 const label = '开关';
 const name = 'switch';
@@ -17,7 +18,7 @@ export default {
         };
     },
     props() {
-        return [{type: 'switch', field: 'disabled', title: '是否禁用'}, {
+        return [makeRequiredRule(), {type: 'switch', field: 'disabled', title: '是否禁用'}, {
             type: 'inputNumber',
             field: 'width',
             title: '宽度（px）'

@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule} from '../../utils/index';
+import {makeOptionsRule, makeRequiredRule} from '../../utils/index';
 
 const label = '多选框';
 const name = 'checkbox';
@@ -26,7 +26,7 @@ export default {
     },
     props() {
         return [
-            makeOptionsRule('options'),
+            makeRequiredRule(), makeOptionsRule('options'),
             {
                 type: 'switch',
                 field: 'type',

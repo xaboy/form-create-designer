@@ -1,4 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
+import {makeRequiredRule} from '../../utils';
 
 const label = '滑块';
 const name = 'slider';
@@ -17,7 +18,7 @@ export default {
         };
     },
     props() {
-        return [{type: 'inputNumber', field: 'min', title: '最小值'}, {
+        return [makeRequiredRule(), {type: 'inputNumber', field: 'min', title: '最小值'}, {
             type: 'inputNumber',
             field: 'max',
             title: '最大值'

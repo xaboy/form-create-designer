@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule} from '../../utils/index';
+import {makeOptionsRule, makeRequiredRule} from '../../utils/index';
 
 const label = '树形控件';
 const name = 'tree';
@@ -63,6 +63,7 @@ export default {
     },
     props() {
         return [
+            makeRequiredRule(),
             makeOptionsRule('props.data'),
             {type: 'input', field: 'emptyText', title: '内容为空的时候展示的文本'}, {
                 type: 'Struct',

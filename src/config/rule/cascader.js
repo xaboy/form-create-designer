@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule} from '../../utils/index';
+import {makeOptionsRule, makeRequiredRule} from '../../utils/index';
 
 const label = '级联选择器';
 const name = 'cascader';
@@ -123,6 +123,7 @@ export default {
     },
     props() {
         return [
+            makeRequiredRule(),
             makeOptionsRule('props.options'),
             {
                 type: 'Object',

@@ -1,4 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
+import {makeRequiredRule} from '../../utils';
 
 const label = '计数器';
 const name = 'inputNumber';
@@ -17,7 +18,7 @@ export default {
         };
     },
     props() {
-        return [{type: 'inputNumber', field: 'min', title: '设置计数器允许的最小值'}, {
+        return [makeRequiredRule(), {type: 'inputNumber', field: 'min', title: '设置计数器允许的最小值'}, {
             type: 'inputNumber',
             field: 'max',
             title: '设置计数器允许的最大值'
