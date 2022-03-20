@@ -23,6 +23,7 @@ designerForm.component('Fetch', Fetch);
 designerForm.component('Required', Required);
 designerForm.component('TableOptions', TableOptions);
 designerForm.component('FcEditor', FcEditor);
+formCreate.component('FcEditor', FcEditor);
 
 designerForm.register('_fc', {
     init(fc, rule) {
