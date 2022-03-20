@@ -252,11 +252,14 @@ export default {
             return is.Number(h) ? `${h}px` : h;
         }
     },
-    provide: _ => ({
-        fcx: {
-            active: null
-        }
-    }),
+    provide() {
+        return {
+            fcx: {
+                active: null
+            },
+            designer: this,
+        };
+    },
     data() {
         const children = [];
         return {

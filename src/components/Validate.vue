@@ -6,6 +6,7 @@
 <script>
 export default {
     name: 'Validate',
+    inject: ['designer'],
     props: {
         value: Array
     },
@@ -137,7 +138,28 @@ export default {
                                                 type: 'input',
                                                 title: '错误信息',
                                                 field: 'message',
-                                                value: ''
+                                                value: '',
+                                                children: [
+                                                    {
+                                                        type: 'span',
+                                                        slot: 'append',
+                                                        inject: true,
+                                                        class: 'append-msg',
+                                                        on: {
+                                                            click: (inject) => {
+                                                                if (this.designer.activeRule) {
+                                                                    let msg = '请输入';
+                                                                    if (inject.api.form.mode !== 'required') {
+                                                                        msg += '正确的';
+                                                                    }
+                                                                    msg += this.designer.activeRule.title;
+                                                                    inject.api.setValue('message', msg);
+                                                                }
+                                                            }
+                                                        },
+                                                        children: ['自动获取']
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -189,5 +211,13 @@ export default {
 <style>
 ._fc-validate .form-create .el-form-item {
     margin-bottom: 22px !important;
+}
+
+._fc-validate .append-msg {
+    cursor: pointer;
+}
+
+._fc-validate .el-input-group__append{
+    padding: 0 10px;
 }
 </style>
