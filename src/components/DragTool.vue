@@ -85,14 +85,14 @@ export default {
   position: absolute;
   right: 2px;
   bottom: 2px;
-  z-index: 999;
+  z-index: 1904;
 }
 
 .drag-l {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 2001
 
 }
 
@@ -122,7 +122,7 @@ export default {
 }
 
 .drag-mask{
-    z-index: 20;
+    z-index: 1905;
     position: absolute;
     top:0;
     left:0;

@@ -124,7 +124,7 @@ export default {
     props() {
         return [
             makeRequiredRule(),
-            makeOptionsRule('props.options'),
+            makeOptionsRule('props.options', false),
             {
                 type: 'Object',
                 field: 'props',

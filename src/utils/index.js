@@ -7,44 +7,61 @@ export function makeRequiredRule() {
     };
 }
 
-export function makeOptionsRule(to) {
+export function makeOptionsRule(to, flag) {
+    const options = [
+        {'label': 'JSON数据', 'value': 0},
+        {'label': '接口数据', 'value': 1},
+    ];
+
+    const control = [
+        {
+            value: 0,
+            rule: [
+                {
+                    type: 'Struct',
+                    field: 'formCreate' + upper(to).replace('.', '>'),
+                    props: {defaultValue: []}
+                },
+            ],
+        },
+        {
+            value: 1,
+            rule: [
+                {
+                    type: 'Fetch',
+                    field: 'formCreateEffect>fetch',
+                    props: {
+                        to
+                    }
+                }
+            ]
+        }
+    ];
+
+    if (flag !== false) {
+        options.splice(0, 0, {'label': '静态数据', 'value': 2});
+        control.push({
+            value: 2,
+            rule: [
+                {
+                    type: 'TableOptions',
+                    field: 'formCreate' + upper(to).replace('.', '>'),
+                    props: {defaultValue: []}
+                },
+            ],
+        });
+    }
+
     return {
         type: 'radio',
         title: '选项数据',
         field: '_optionType',
-        value: 0,
-        options: [
-            {'label': '静态数据', 'value': 0},
-            {'label': '接口数据', 'value': 1},
-        ],
+        value: flag !== false ? 2 : 0,
+        options,
         props: {
             type: 'button'
         },
-        control: [
-            {
-                value: 0,
-                rule: [
-                    {
-                        type: 'Struct',
-                        field: 'formCreate' + upper(to).replace('.', '>'),
-                        props: {defaultValue: []}
-                    },
-                ],
-            },
-            {
-                value: 1,
-                rule: [
-                    {
-                        type: 'Fetch',
-                        field: 'formCreateEffect>fetch',
-                        props: {
-                            to
-                        }
-                    }
-                ]
-            }
-        ]
-
+        control
     };
 }
 

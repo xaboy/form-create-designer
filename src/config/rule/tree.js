@@ -64,7 +64,7 @@ export default {
     props() {
         return [
             makeRequiredRule(),
-            makeOptionsRule('props.data'),
+            makeOptionsRule('props.data', false),
             {type: 'input', field: 'emptyText', title: '内容为空的时候展示的文本'}, {
                 type: 'Struct',
                 field: 'props',
