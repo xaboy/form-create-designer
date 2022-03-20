@@ -5,7 +5,7 @@ export default {
     drag: true,
     dragBtn: false,
     inside: true,
-    mark: false,
+    mask: false,
     rule() {
         return {
             type: name,

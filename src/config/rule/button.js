@@ -5,7 +5,7 @@ export default {
     icon: 'icon-button',
     label,
     name,
-    mark: false,
+    mask: false,
     rule() {
         return {
             type: name,

@@ -1,6 +1,6 @@
 <template>
   <div class="drag-tool" @click.stop="active" :class="{active: state.active === id}">
-    <div class="drag-mark" v-if="mark"></div>
+    <div class="drag-mask" v-if="mask"></div>
     <div class="drag-l">
       <div class="drag-btn _fc-drag-btn" v-if="state.active === id && dragBtn !== false" style="cursor: move;">
         <i class="fc-icon icon-move"></i>
@@ -29,7 +29,7 @@ let id = 1;
 export default {
     name: 'DragTool',
     inject: ['fcx'],
-    props: ['dragBtn', 'children', 'unique', 'mark'],
+    props: ['dragBtn', 'children', 'unique', 'mask'],
     data() {
         return {
             id: this.unique || id++,
@@ -121,7 +121,7 @@ export default {
   font-size: 13px;
 }
 
-.drag-mark{
+.drag-mask{
     z-index: 20;
     position: absolute;
     top:0;

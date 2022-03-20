@@ -246,7 +246,7 @@ export default {
         FormCreate: designerForm.$form(),
         ViewForm: viewForm.$form(),
     },
-    props: ['menu', 'height', 'config', 'mark'],
+    props: ['menu', 'height', 'config', 'mask'],
     computed: {
         height_() {
             const h = this.height;
@@ -673,7 +673,7 @@ export default {
             });
 
             if (!this.cacheProps[rule._id]) {
-                this.cacheProps[rule._id] = rule.config.config.props();
+                this.cacheProps[rule._id] = rule.config.config.props(rule);
             }
 
             this.propsForm.rule = this.cacheProps[rule._id];
@@ -750,7 +750,7 @@ export default {
                 (drag || rule).children.push(child);
             }
 
-            const mark = this.mark !== undefined ? this.mark !== false : config.mark !== false;
+            const mask = this.mask !== undefined ? this.mask !== false : config.mask !== false;
 
             if (config.inside) {
                 rule.children = [{
@@ -758,7 +758,7 @@ export default {
                     props: {
                         dragBtn: config.dragBtn !== false,
                         children: config.children,
-                        mark,
+                        mask,
                     },
                     effect: {
                         _fc_tool: true
@@ -803,7 +803,7 @@ export default {
                     props: {
                         dragBtn: config.dragBtn !== false,
                         children: config.children,
-                        mark,
+                        mask,
                     },
                     effect: {
                         _fc_tool: true

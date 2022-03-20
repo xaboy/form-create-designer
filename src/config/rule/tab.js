@@ -6,7 +6,7 @@ export default {
     label,
     name,
     children: 'tab-pane',
-    mark: false,
+    mask: false,
     rule() {
         return {
             type: 'el-tabs',
