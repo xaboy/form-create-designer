@@ -46,7 +46,7 @@
     "homepage": "http://designer.form-create.com",
     "dependencies": {
         "@form-create/component-wangeditor": "^2.5.15",
-        "@form-create/element-ui": "^2.5.15",
+        "@form-create/element-ui": "^2.5.19",
         "@form-create/utils": "^2.5.15"
     },
     "publishConfig": {
