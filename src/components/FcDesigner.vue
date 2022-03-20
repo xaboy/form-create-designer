@@ -212,7 +212,7 @@
                     </ElContainer>
                 </ElAside>
                 <ElDialog :visible.sync="preview.state" width="800px" append-to-body>
-                    <FormCreate :rule="preview.rule" :option="preview.option" v-if="preview.state"></FormCreate>
+                    <ViewForm :rule="preview.rule" :option="preview.option" v-if="preview.state"></ViewForm>
                 </ElDialog>
             </ElContainer>
         </ElMain>
@@ -233,16 +233,18 @@ import is, {hasProperty} from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
 import ruleList from '../config/rule';
 import draggable from 'vuedraggable';
-import formCreate from '@form-create/element-ui';
 import createMenu from '../config/menu';
 import {upper} from '../utils/index';
+import {designerForm} from '../utils/form';
+import viewForm from '../utils/form';
 
 
 export default {
     name: 'FcDesigner',
     components: {
         draggable,
-        FormCreate: formCreate.$form(),
+        FormCreate: designerForm.$form(),
+        ViewForm: viewForm.$form(),
     },
     props: ['menu', 'height', 'config', 'mark'],
     computed: {
@@ -502,7 +504,7 @@ export default {
             return this.parseRule(deepCopy(this.dragForm.api.rule[0].children));
         },
         getJson() {
-            return formCreate.toJson(this.getRule());
+            return designerForm.toJson(this.getRule());
         },
         getOption() {
             const option = deepCopy(this.form.value);
@@ -513,7 +515,7 @@ export default {
             return option;
         },
         setRule(rules) {
-            const children = this.loadRule(is.String(rules) ? formCreate.parseJson(rules) : rules);
+            const children = this.loadRule(is.String(rules) ? designerForm.parseJson(rules) : rules);
             this.children = children;
             this.clearActiveRule();
             this.dragForm.rule = this.makeDragRule(children);
@@ -780,7 +782,7 @@ export default {
                         },
                         copy: ({self}) => {
                             const top = this.getParent(self);
-                            top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, formCreate.copyRule(top.parent));
+                            top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, designerForm.copyRule(top.parent));
                         },
                         active: ({self}) => {
                             this.toolActive(this.getParent(self).parent);
@@ -818,7 +820,7 @@ export default {
                         },
                         copy: ({self}) => {
                             const top = this.getParent(self);
-                            top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, formCreate.copyRule(top.parent));
+                            top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, designerForm.copyRule(top.parent));
                         },
                         active: ({self}) => {
                             this.toolActive(self.children[0]);

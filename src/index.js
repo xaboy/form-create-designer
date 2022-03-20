@@ -5,23 +5,24 @@ import Fetch from './components/Fetch.vue';
 import Validate from './components/Validate.vue';
 import DragBox from './components/DragBox.vue';
 import Required from './components/Required.vue';
-import formCreate from '@form-create/element-ui';
+import {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
 import draggable from 'vuedraggable';
 import unique from '@form-create/utils/lib/unique';
 import {makeOptionsRule} from './utils/index';
+import formCreate from './utils/form';
 
-formCreate.component('draggable', draggable);
-formCreate.component('DragTool', DragTool);
-formCreate.component('DragBox', DragBox);
-formCreate.component('Validate', Validate);
-formCreate.component('Struct', Struct);
-formCreate.component('Fetch', Fetch);
-formCreate.component('Required', Required);
-formCreate.component('FcEditor', FcEditor);
+designerForm.component('draggable', draggable);
+designerForm.component('DragTool', DragTool);
+designerForm.component('DragBox', DragBox);
+designerForm.component('Validate', Validate);
+designerForm.component('Struct', Struct);
+designerForm.component('Fetch', Fetch);
+designerForm.component('Required', Required);
+designerForm.component('FcEditor', FcEditor);
 
-formCreate.register('_fc', {
+designerForm.register('_fc', {
     init(fc, rule) {
         rule._id = unique();
         if (fc.repeat)
@@ -32,7 +33,7 @@ formCreate.register('_fc', {
     }
 });
 
-formCreate.register('_fc_tool', {
+designerForm.register('_fc_tool', {
     init(_, rule) {
         rule.props.unique = unique();
     }
@@ -45,3 +46,5 @@ FcDesigner.install = function (Vue) {
 FcDesigner.makeOptionsRule = makeOptionsRule;
 
 export default FcDesigner;
+
+export {formCreate, designerForm};
