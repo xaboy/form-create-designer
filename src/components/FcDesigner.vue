@@ -766,11 +766,14 @@ export default {
                     inject: true,
                     on: {
                         delete: ({self}) => {
-                            this.getParent(self).parent.__fc__.rm();
+                            const parent = this.getParent(self).parent;
+                            parent.__fc__.rm();
+                            this.$emit('delete', parent);
                             this.clearActiveRule();
                         },
                         add: ({self}) => {
                             const top = this.getParent(self);
+                            this.$emit('add', top.parent);
                             top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, this.makeRule(top.parent.config.config));
                         },
                         addChild: ({self}) => {
@@ -782,10 +785,13 @@ export default {
                         },
                         copy: ({self}) => {
                             const top = this.getParent(self);
+                            this.$emit('copy', top.parent);
                             top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, designerForm.copyRule(top.parent));
                         },
                         active: ({self}) => {
-                            this.toolActive(this.getParent(self).parent);
+                            const top = this.getParent(self);
+                            this.$emit('active', top.parent);
+                            this.toolActive(top.parent);
                         }
                     },
                     children: rule.children
@@ -805,10 +811,12 @@ export default {
                     inject: true,
                     on: {
                         delete: ({self}) => {
+                            this.$emit('delete', self.children[0]);
                             self.__fc__.rm();
                             this.clearActiveRule();
                         },
                         add: ({self}) => {
+                            this.$emit('add', self.children[0]);
                             const top = this.getParent(self);
                             top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, this.makeRule(self.children[0].config.config));
                         },
@@ -819,10 +827,12 @@ export default {
                             (!config.drag ? self : self.children[0]).children[0].children.push(this.makeRule(item));
                         },
                         copy: ({self}) => {
+                            this.$emit('copy', self.children[0]);
                             const top = this.getParent(self);
                             top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, designerForm.copyRule(top.parent));
                         },
                         active: ({self}) => {
+                            this.$emit('active', self.children[0]);
                             this.toolActive(self.children[0]);
                         }
                     },
