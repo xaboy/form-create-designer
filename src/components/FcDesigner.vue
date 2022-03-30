@@ -174,8 +174,8 @@
                     </el-header>
                     <ElMain style="background: #F5F5F5;padding: 20px;">
                         <div class="_fc-m-drag">
-                            <FormCreate :rule="dragForm.rule" :option="form.value"
-                                        v-model="dragForm.api"></FormCreate>
+                            <component :is="FormCreate" :rule="dragForm.rule" :option="form.value"
+                                        v-model="dragForm.api"></component>
                         </div>
                     </ElMain>
                 </ElContainer>
@@ -190,23 +190,23 @@
                             </div>
                         </el-header>
                         <ElMain v-show="activeTab==='form'">
-                            <FormCreate :rule="form.rule" :option="form.option"
-                                        :value.sync="form.value.form"></FormCreate>
+                            <component :is="FormCreate" :rule="form.rule" :option="form.option"
+                                        :value.sync="form.value.form"></component>
                         </ElMain>
                         <ElMain v-show="activeTab==='props'" style="padding: 0 20px;"
                                 :key="activeRule ? activeRule._id: ''">
                             <div>
                                 <ElDivider v-if="showBaseRule">基础配置</ElDivider>
-                                <FormCreate v-show="showBaseRule" v-model="baseForm.api" :rule="baseForm.rule"
+                                <component :is="FormCreate" v-show="showBaseRule" v-model="baseForm.api" :rule="baseForm.rule"
                                             :option="baseForm.options"
-                                            @change="baseChange"></FormCreate>
+                                            @change="baseChange"></component>
                                 <ElDivider>属性配置</ElDivider>
-                                <FormCreate v-model="propsForm.api" :rule="propsForm.rule" :option="propsForm.options"
-                                            @change="propChange" @removeField="propRemoveField"></FormCreate>
+                                <component :is="FormCreate" v-model="propsForm.api" :rule="propsForm.rule" :option="propsForm.options"
+                                            @change="propChange" @removeField="propRemoveField"></component>
                                 <ElDivider v-if="showBaseRule">验证规则</ElDivider>
-                                <FormCreate v-show="showBaseRule" v-model="validateForm.api" :rule="validateForm.rule"
+                                <component :is="FormCreate" v-show="showBaseRule" v-model="validateForm.api" :rule="validateForm.rule"
                                             :option="validateForm.options"
-                                            @update:value="validateChange"></FormCreate>
+                                            @update:value="validateChange"></component>
                             </div>
                         </ElMain>
                     </ElContainer>
@@ -243,7 +243,6 @@ export default {
     name: 'FcDesigner',
     components: {
         draggable,
-        FormCreate: designerForm.$form(),
         ViewForm: viewForm.$form(),
     },
     props: ['menu', 'height', 'config', 'mask'],
@@ -265,6 +264,7 @@ export default {
     data() {
         const children = [];
         return {
+            FormCreate: designerForm.$form(),
             cacheProps: {},
             moveRule: null,
             addRule: null,

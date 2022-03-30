@@ -1,12 +1,13 @@
 <template>
   <div class="_fc_fetch">
-    <form-create v-model="api" :value="formValue" :rule="rule" :option="option" @change="input"/>
+    <component :is="FormCreate" v-model="api" :value="formValue" :rule="rule" :option="option" @change="input"/>
   </div>
 </template>
 
 <script>
 import debounce from '@form-create/utils/lib/debounce';
 import is from '@form-create/utils/lib/type';
+import {designerForm} from '../utils/form';
 
 export default {
     name: 'Fetch',
@@ -33,6 +34,7 @@ export default {
     },
     data() {
         return {
+            FormCreate: designerForm.$form(),
             api: {},
             fetch: {},
             option: {
@@ -116,7 +118,7 @@ export default {
         },
         input: debounce(function () {
             this._input();
-        }, 1500),
+        }, 1000),
     },
     mounted() {
         this._input();

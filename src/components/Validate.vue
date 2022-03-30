@@ -1,9 +1,11 @@
 <template>
-    <form-create class="_fc-validate" :rule="rule" :option="option" :value="formValue"
-                 @update:value="onInput"></form-create>
+    <component :is="FormCreate" class="_fc-validate" :rule="rule" :option="option" :value="formValue"
+                 @update:value="onInput"></component>
 </template>
 
 <script>
+import {designerForm} from '../utils/form';
+
 export default {
     name: 'Validate',
     inject: ['designer'],
@@ -17,6 +19,7 @@ export default {
     },
     data() {
         return {
+            FormCreate: designerForm.$form(),
             formValue: {},
             option: {
                 form: {
