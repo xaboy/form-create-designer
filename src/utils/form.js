@@ -1,6 +1,6 @@
 import formCreate from '@form-create/element-ui';
 
-const viewForm = formCreate.factory();
+const viewForm = formCreate;
 
 const designerForm = formCreate.factory();
 

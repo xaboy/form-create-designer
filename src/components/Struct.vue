@@ -4,7 +4,7 @@
         <ElDialog :title="title" :visible.sync="visible" :close-on-click-modal="false" append-to-body>
             <div ref="editor" v-if="visible"></div>
             <span slot="footer" class="dialog-footer">
-                <span style="color: red;float:left;text-align: left;" v-if="err">
+                <span class="_fc_err" v-if="err">
                     输入内容格式有误{{ err !== true ? err : '' }}</span>
                 <ElButton @click="visible = false" size="small">取 消</ElButton>
                 <ElButton type="primary" @click="onOk" size="small">确 定</ElButton>
@@ -68,9 +68,6 @@ export default {
                     lineWrapping: true,
                     value: val || ''
                 });
-                this.editor.on('blur', () => {
-                    this.err = this.editor.state.lint.marked.length > 0;
-                });
             });
         },
         onOk() {
@@ -112,5 +109,12 @@ export default {
 
 ._fc_struct .el-dialog__body {
     padding: 0px 20px;
+}
+
+._fc_err {
+    color: red;
+    float: left;
+    text-align: left;
+    width: 65%;
 }
 </style>
