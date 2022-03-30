@@ -42,17 +42,12 @@ export default {
     },
     methods: {
         onInput(item) {
-            if (item.key && item.value) {
+            if (item.label && item.value) {
                 this.input();
             }
         },
         input() {
-            this.$emit('input', this.value.reduce((i, v) => {
-                if (v.key && v.value) {
-                    i.push({...v});
-                }
-                return i;
-            }, []));
+            this.$emit('input', this.value);
         },
         add() {
             this.value.push(this.column.reduce((initial, v) => {
@@ -62,7 +57,7 @@ export default {
         },
         del(idx) {
             this.value.splice(idx, 1);
-            this.input();
+            this.input(this.value);
         }
     }
 };

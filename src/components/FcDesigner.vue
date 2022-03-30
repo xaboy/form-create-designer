@@ -524,10 +524,11 @@ export default {
             this.activeRule = null;
             this.activeTab = 'form';
         },
-        setOption(option) {
+        setOption(data) {
+            let option = {...data};
             option.form.formCreateSubmitBtn = !!option.submitBtn;
             option.form.formCreateResetBtn = !!option.resetBtn;
-            delete option.submitBtn;
+            option.submitBtn = false;
             delete option.resetBtn;
             this.form.value = option;
         },
