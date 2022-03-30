@@ -60,6 +60,23 @@ export default {
                     options: [
                         {label: 'GET', value: 'GET'},
                         {label: 'POST', value: 'POST'},
+                    ],
+                    control: [
+                        {
+                            value:'POST',
+                            rule: [
+                                {
+                                    type: 'select',
+                                    field: 'dataType',
+                                    title: '提交方式: ',
+                                    value: 'FormData',
+                                    options: [
+                                        {label: 'FormData', value: 'FormData'},
+                                        {label: 'JSON', value: 'JSON'},
+                                    ]
+                                },
+                            ]
+                        }
                     ]
                 },
                 {
