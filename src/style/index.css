@@ -1,0 +1,133 @@
+@font-face {
+    font-family: "fc-icon";
+    src: url(fonts/fc-icons.woff) format('woff');
+}
+
+.fc-icon {
+    font-family: "fc-icon" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add-child:before {
+    content: "\e789";
+}
+
+.icon-switch:before {
+    content: "\e77c";
+}
+
+.icon-tab:before {
+    content: "\e77b";
+}
+
+.icon-button:before {
+    content: "\e77e";
+}
+
+.icon-input:before {
+    content: "\e77f";
+}
+
+.icon-checkbox:before {
+    content: "\e780";
+}
+
+.icon-radio:before {
+    content: "\e781";
+}
+
+.icon-rate:before {
+    content: "\e782";
+}
+
+.icon-number:before {
+    content: "\e783";
+}
+
+.icon-upload:before {
+    content: "\e784";
+}
+
+.icon-cascader:before {
+    content: "\e785";
+}
+
+.icon-space:before {
+    content: "\e786";
+}
+
+.icon-color:before {
+    content: "\e787";
+}
+
+.icon-span:before {
+    content: "\e788";
+}
+
+.icon-alert:before {
+    content: "\e78a";
+}
+
+.icon-row:before {
+    content: "\e78b";
+}
+
+.icon-divider:before {
+    content: "\e78d";
+}
+
+.icon-select:before {
+    content: "\e78e";
+}
+
+.icon-transfer:before {
+    content: "\e78f";
+}
+
+.icon-editor:before {
+    content: "\e790";
+}
+
+.icon-slider:before {
+    content: "\e791";
+}
+
+.icon-tree:before {
+    content: "\e792";
+}
+
+.icon-date:before {
+    content: "\e793";
+}
+
+.icon-time:before {
+    content: "\e794";
+}
+
+.icon-delete:before {
+    content: "\e770";
+}
+
+.icon-copy:before {
+    content: "\e771";
+}
+
+.icon-import:before {
+    content: "\e773";
+}
+
+.icon-add:before {
+    content: "\e774";
+}
+
+.icon-preview:before {
+    content: "\e776";
+}
+
+.icon-move:before {
+    content: "\e777";
+}
+

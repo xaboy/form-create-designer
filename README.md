@@ -1,92 +1,240 @@
-# form-create-designer
+<p align="center">
+    <a href="http://www.form-create.com">
+        <img width="200" src="http://file.lotkk.com/form-create.png">
+    </a>
+</p>
 
-自定义流程表单源码仓库
 
-## Getting started
+# form-create v3
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+[![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/xaboy/form-create)
+[![github](https://img.shields.io/badge/Author-xaboy-blue.svg)](https://github.com/xaboy)
+[![document](https://img.shields.io/badge/Doc-welcome-red.svg)](http://www.form-create.com/v3/)
+[![vue3](https://img.shields.io/badge/VUE-3.0-green.svg)](http://www.form-create.com/v3/)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-## Add your files
+**form-create 是一个可以通过 JSON 生成具有动态渲染、数据收集、验证和提交功能的表单生成组件。支持3个UI框架，并且支持生成任何 Vue 组件。内置20种常用表单组件和自定义组件，再复杂的表单都可以轻松搞定。**
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+**Vue3 版本**
 
+[开源的vue可视化表单设计器组件](https://github.com/xaboy/form-create-designer) ([功能演示](http://form-create.com/designer?fr=fc))
+
+## 支持
+- **element-plus**
+- **ant-design-vue**
+- **naive-ui**
+- **arco-design**
+
+如果您有适合 form-create 的表单组件, 欢迎[点击这里留言](https://github.com/xaboy/form-create/issues/124)
+
+> 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！本项目还在不断开发完善中,如有任何建议或问题[请在这里提出](https://github.com/xaboy/form-create/issues/new)
+
+> 本项目QQ讨论群[629709230](https://jq.qq.com/?_wv=1027&k=F1FlEFIV)
+
+> [更新日志](http://www.form-create.com/v3/guide/update.html)
+
+- **预览**
+
+![demo1](https://raw.githubusercontent.com/xaboy/form-create/dev/images/demo-live3.gif)
+
+<details>
+<summary><b>更多</b></summary>
+
+- **操作表单**
+
+[详细说明](http://www.form-create.com/v3/instance.html)
+
+![demo2](https://raw.githubusercontent.com/xaboy/form-create/dev/images/demo-live2.gif)
+
+- **`group` 组件**
+
+[详细说明](http://www.form-create.com/v3/guide/group.html)
+
+![demo3](https://raw.githubusercontent.com/xaboy/form-create/dev/images/demo-group.gif)
+
+- **`control` 配置项**
+
+[详细说明](http://www.form-create.com/v3/guide/control.html)
+
+![demo2](https://raw.githubusercontent.com/xaboy/form-create/dev/images/demo-live4.gif)
+</details>
+
+## 文档
+
+[简体中文](http://www.form-create.com/v3/)
+
+## 包说明
+
+| 包名             | 说明                                                |
+| ------------------ | ---------------------------------------------------------- |
+| @form-create/element-ui [![version](https://img.shields.io/npm/v/@form-create/element-ui/next.svg)](https://www.npmjs.com/package/@form-create/element-ui) [![npm](https://img.shields.io/npm/dt/@form-create/element-ui.svg)](https://www.npmjs.com/package/@form-create/element-ui) | [element-plus 版本](http://form-create.com/v3/element-ui/)        |
+| @form-create/ant-design-vue [![version](https://img.shields.io/npm/v/@form-create/ant-design-vue/next.svg)](https://www.npmjs.com/package/@form-create/ant-design-vue) [![npm](https://img.shields.io/npm/dt/@form-create/ant-design-vue.svg)](https://www.npmjs.com/package/@form-create/ant-design-vue) | [ant-design-vue 版本](http://form-create.com/v3/ant-design-vue/)     |
+| @form-create/arco-design [![version](https://img.shields.io/npm/v/@form-create/arco-design/next.svg)](https://www.npmjs.com/package/@form-create/arco-design) [![npm](https://img.shields.io/npm/dt/@form-create/arco-design.svg)](https://www.npmjs.com/package/@form-create/arco-design) | [arco-design 版本](http://form-create.com/v3/arco-design/)     |
+| @form-create/naive-ui [![version](https://img.shields.io/npm/v/@form-create/naive-ui/next.svg)](https://www.npmjs.com/package/@form-create/naive-ui) [![npm](https://img.shields.io/npm/dt/@form-create/naive-ui.svg)](https://www.npmjs.com/package/@form-create/naive-ui) | [naive-ui 版本](http://form-create.com/v3/naive-ui/)     |
+
+
+
+## 示例
+
+- [演示案例](https://github.com/HeyMrLin/fc-demo) ([演示站](http://jeekweb.pro/form-create-demo))
+
+- [使用生成器生成](https://jsrun.net/NQhKp/edit)
+
+- [使用 json 生成](https://jsrun.net/NQhKp/edit)
+
+- [各种示例](http://www.form-create.com/v3/guide/demo.html)
+
+
+
+<details>
+<summary><b>图例</b></summary>
+
+![https://raw.githubusercontent.com/xaboy/form-create/dev/images/sample110.jpg](https://raw.githubusercontent.com/xaboy/form-create/dev/images/sample110.jpg)
+</details>
+
+
+## 安装
+
+> 根据自己使用的 UI 安装对应的版本
+
+element-ui
+```shell
+npm install @form-create/element-ui@next
 ```
-cd existing_repo
-git remote add origin http://192.168.169.247/gzcs/form-create-designer.git
-git branch -M main
-git push -uf origin main
+
+ant-design-vue
+```shell
+npm install @form-create/ant-design-vue@next
 ```
 
-## Integrate with your tools
+arco-design
+```shell
+npm install @form-create/arco-design@next
+```
 
-- [ ] [Set up project integrations](http://192.168.169.247/gzcs/form-create-designer/-/settings/integrations)
+naive-ui
+```shell
+npm install @form-create/naive-ui@next
+```
 
-## Collaborate with your team
+## 引入
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+**CDN:**
 
-## Test and Deploy
+element-plus
+```html
+<link href="https://unpkg.com/element-plus@2.0.1/dist/index.css"></link>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/element-plus@2.0.1/dist/index.full.js"></script>
+<script src="https://unpkg.com/@form-create/element-ui@next/dist/form-create.min.js"></script>
+```
 
-Use the built-in continuous integration in GitLab.
+ant-design-vue
+```html
+<link href="https://unpkg.com/ant-design-vue@3.0.0-alpha.11/dist/antd.min.css"></link>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/dayjs"></script>
+<script src="https://unpkg.com/ant-design-vue@3.0.0-alpha.11/dist/antd.min.js"></script>
+<script src="https://unpkg.com/@form-create/ant-design-vue@next/dist/form-create.min.js"></script>
+```
+**NodeJs:**
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+element-plus ^2.0
+```js
+import formCreate from '@form-create/element-ui'
+app.use(formCreate)
+```
 
-***
+ant-design-vue ^3.0
+```js
+import formCreate from '@form-create/ant-design-vue'
+app.use(formCreate)
+```
 
-# Editing this README
+arco-design ^2.0
+```js
+import formCreate from '@form-create/arco-design'
+app.use(formCreate)
+```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+naive-ui ^2.0
+```js
+import formCreate from '@form-create/naive-ui'
+app.use(formCreate)
+```
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+##  使用
 
-## Name
-Choose a self-explaining name for your project.
+```html
+<form-create :rule="rule" v-model:api="fApi" :option="options" v-model="value"/>
+```
+```javascript
+export default {
+    data(){
+        return {
+            fApi:{},
+            value:{field1:'111',field2:'222',time:'11:11:11'},
+            options:{
+                onSubmit:(formData)=>{
+                    alert(JSON.stringify(formData))
+                }
+            },
+            rule:[
+                {type:'input', field:'field1',title:'field1',value:'aaa'},
+                {type:'input', field:'field2',title:'field2',value:'sss'},
+                {type:'timePicker', field:'time',title:'time',value:'12:12:12'},
+                {
+                    type:'ElButton',
+                    title:'修改 field1',
+                    native: false,
+                    on:{
+                        click: ()=>{
+                            this.rule[0].value+='a'
+                        }
+                    },
+                    children: ['点击'],
+                }
+            ]
+        }
+    }
+}
+```
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+## 示例
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+下载项目
+```sh
+$ git clone https://github.com/xaboy/form-create.git
+$ cd form-create
+```
+安装依赖
+```sh
+$ npm run bootstrap
+```
+查看 element-ui 示例
+```sh 
+$ npm run dev:ele
+```
+查看 ant-design-vue 示例
+```sh 
+$ npm run dev:antd
+```
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## 感谢
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+[时光弧线](https://github.com/shiguanghuxian)  |  [wxxtqk](https://github.com/wxxtqk)  |  [williamBoss](https://github.com/williamBoss)  |  [HeyMrLin](https://github.com/HeyMrLin)  |  [djkloop](https://github.com/djkloop) | [JetBrains](https://www.jetbrains.com/?from=form-create)
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+## 捐赠
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+![donation.jpg](http://form-create.com/img/donation.jpg)
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## 联系
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+##### email : xaboy2005@qq.com
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2018-present xaboy
