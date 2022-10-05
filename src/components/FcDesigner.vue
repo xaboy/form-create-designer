@@ -699,7 +699,7 @@ export default {
             });
             this.propsForm.options.formData = formData;
 
-            this.showBaseRule = hasProperty(rule, 'field') && rule.input !== false;
+            this.showBaseRule = hasProperty(rule, 'field') && rule.input !== false && (!this.config || this.config.showBaseForm !== false);
 
             if (this.showBaseRule) {
                 this.baseForm.options.formData = {
