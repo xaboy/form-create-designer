@@ -168,9 +168,17 @@
                         <el-button type="primary" icon="fc-icon icon-preview" plain round size="mini"
                                    @click="previewFc">预 览
                         </el-button>
-                        <el-button type="danger" icon="fc-icon icon-delete" plain round size="mini"
-                                   @click="clearDragRule">清 空
-                        </el-button>
+                        <el-popconfirm
+                            title="清空后将不能恢复，确定要清空吗？"
+                            style="margin-left: 10px;"
+                            confirm-button-text="清空"
+                            cancel-button-text="取消"
+                            @confirm="clearDragRule"
+                        >
+                            <el-button slot="reference" type="danger" icon="fc-icon icon-delete" plain round size="mini">清 空
+                            </el-button>
+                        </el-popconfirm>
+
                     </el-header>
                     <ElMain style="background: #F5F5F5;padding: 20px;">
                         <div class="_fc-m-drag">
