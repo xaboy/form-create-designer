@@ -9,7 +9,7 @@ import TableOptions from './components/TableOptions.vue';
 import {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
-import draggable from 'vuedraggable';
+import draggable from 'vuedraggable/src/vuedraggable';
 import unique from '@form-create/utils/lib/unique';
 import {makeOptionsRule} from './utils/index';
 import formCreate from './utils/form';

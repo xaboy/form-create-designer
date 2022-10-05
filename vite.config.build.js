@@ -54,7 +54,7 @@ export default defineConfig({
         lib: {
             entry: 'src/index.js',
             name: 'FcDesigner',
-            fileName: format => `index.${format}.min.js`,
+            fileName: format => `index.${format}.js`,
         },
         rollupOptions: {
             output: {
@@ -69,7 +69,8 @@ export default defineConfig({
                 '@form-create/element-ui'
             ],
 
-        }
+        },
+        brotliSize: true
     },
     css: {
         postcss: {
