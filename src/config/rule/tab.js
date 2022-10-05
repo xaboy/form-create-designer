@@ -10,6 +10,7 @@ export default {
     rule() {
         return {
             type: 'el-tabs',
+            style:'width:100%;',
             children: []
         };
     },
@@ -18,7 +19,7 @@ export default {
             type: 'select',
             field: 'type',
             title: '风格类型',
-            options: [{label: 'default', value: 'default'}, {
+            options: [{
                 label: 'card',
                 value: 'card'
             }, {label: 'border-card', value: 'border-card'}]
