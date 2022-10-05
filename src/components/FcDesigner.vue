@@ -262,21 +262,6 @@ export default defineComponent({
         ViewForm: viewForm.$form(),
     },
     props: ['menu', 'height', 'config', 'mask'],
-    // computed: {
-    //     height_() {
-    //         const h = this.height;
-    //         if (!h) return '100%';
-    //         return is.Number(h) ? `${h}px` : h;
-    //     }
-    // },
-    // provide() {
-    //     return {
-    //         fcx: {
-    //             active: null
-    //         },
-    //         designer: this,
-    //     };
-    // },
     setup(props) {
         const {menu, height, config, mask} = toRefs(props);
         const vm = getCurrentInstance();
@@ -695,7 +680,7 @@ export default defineComponent({
                 });
                 data.propsForm.options.formData = formData;
 
-                data.showBaseRule = hasProperty(rule, 'field') && rule.input !== false;
+                data.showBaseRule = hasProperty(rule, 'field') && rule.input !== false && (!config.value || config.value.showBaseForm !== false);
 
                 if (data.showBaseRule) {
                     data.baseForm.options.formData = {
