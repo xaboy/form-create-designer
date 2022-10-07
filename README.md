@@ -44,7 +44,7 @@ npm install @form-create/designer@next
 **NodeJs:**
 
 ```shell
-npm install @form-create/designer
+npm install @form-create/designer@next
 ```
 
 请自行导入`ElementPlus`并挂载
