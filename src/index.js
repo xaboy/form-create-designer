@@ -42,12 +42,13 @@ designerForm.register('_fc_tool', {
     }
 });
 
-FcDesigner.install = function (Vue) {
+const install = function (Vue) {
     Vue.component('FcDesigner', FcDesigner);
 };
 
+FcDesigner.install = install;
 FcDesigner.makeOptionsRule = makeOptionsRule;
 
 export default FcDesigner;
 
-export {formCreate, designerForm};
+export {formCreate, designerForm, install};
