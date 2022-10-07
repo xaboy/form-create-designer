@@ -38,10 +38,14 @@ npm install @form-create/designer@next
 <script src="https://unpkg.com/vue@next"></script>
 <script src="https://unpkg.com/element-plus@2.0.1/dist/index.full.js"></script>
 <script src="https://unpkg.com/@form-create/element-ui@next/dist/form-create.min.js"></script>
-<script src="https://unpkg.com/@form-create/designer@next/dist/index.min.js"></script>
+<script src="https://unpkg.com/@form-create/designer@next/dist/index.umd.js"></script>
 ```
 
 **NodeJs:**
+
+```shell
+npm install @form-create/designer
+```
 
 请自行导入`ElementPlus`并挂载
 
@@ -49,8 +53,8 @@ npm install @form-create/designer@next
 import formCreate from '@form-create/element-ui'
 import FcDesigner from '@form-create/designer'
 
-Vue.use(formCreate)
-Vue.use(FcDesigner)
+app.use(formCreate)
+app.use(FcDesigner)
 ```
 
 ## 使用
