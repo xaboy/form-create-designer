@@ -513,8 +513,8 @@ export default defineComponent({
                 data.activeRule = null;
                 data.activeTab = 'form';
             },
-            setOption(data) {
-                let option = {...data};
+            setOption(datas) {
+                let option = {...datas};
                 option.form.formCreateSubmitBtn = !!option.submitBtn;
                 option.form.formCreateResetBtn = !!option.resetBtn;
                 option.submitBtn = false;
