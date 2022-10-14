@@ -3,12 +3,14 @@
         <ElButton @click="visible=true" style="width: 100%;">{{ title }}</ElButton>
         <ElDialog :title="title" v-model="visible" :close-on-click-modal="false" append-to-body>
             <div ref="editor" v-if="visible"></div>
-            <span slot="footer" class="dialog-footer">
-                <span class="_fc_err" v-if="err">
-                    输入内容格式有误{{ err !== true ? err : '' }}</span>
-                <ElButton @click="visible = false" size="small">取 消</ElButton>
-                <ElButton type="primary" @click="onOk" size="small">确 定</ElButton>
-            </span>
+            <template #footer>
+                <span class="dialog-footer">
+                    <span class="_fc_err" v-if="err">
+                        输入内容格式有误{{ err !== true ? err : '' }}</span>
+                    <ElButton @click="visible = false" size="small">取 消</ElButton>
+                    <ElButton type="primary" @click="onOk" size="small">确 定</ElButton>
+                </span>
+            </template>
         </ElDialog>
     </div>
 </template>
