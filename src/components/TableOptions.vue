@@ -9,7 +9,7 @@
                 <el-table-column :label="col.label">
                     <template #default="scope">
                         <el-input size="small" :modelValue="scope.row[col.key] || ''"
-                                  @onUpdate:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></el-input>
+                                  @Update:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></el-input>
                     </template>
                 </el-table-column>
             </template>
