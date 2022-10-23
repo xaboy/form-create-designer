@@ -23,12 +23,6 @@
 
 ![demo1](http://form-create.com/img/designer-review.png)
 
-## 安装
-
-```shell
-npm install @form-create/designer@next
-```
-
 ## 引入
 
 **CDN:**
