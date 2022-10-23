@@ -427,13 +427,13 @@ export default defineComponent({
                     }
                 });
             },
-            addComponent(data) {
-                if (Array.isArray(data)) {
-                    data.forEach(v => {
+            addComponent(component) {
+                if (Array.isArray(component)) {
+                    component.forEach(v => {
                         ruleList[v.name] = v;
                     });
                 } else {
-                    ruleList[data.name] = data;
+                    ruleList[component.name] = component;
                 }
             },
             getParent(rule) {
@@ -513,8 +513,8 @@ export default defineComponent({
                 data.activeRule = null;
                 data.activeTab = 'form';
             },
-            setOption(data) {
-                let option = {...data};
+            setOption(opt) {
+                let option = {...opt};
                 option.form.formCreateSubmitBtn = !!option.submitBtn;
                 option.form.formCreateResetBtn = !!option.resetBtn;
                 option.submitBtn = false;
