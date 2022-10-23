@@ -2,11 +2,17 @@
     "name": "@form-create/designer",
     "version": "3.0.1-beta.1",
     "description": "好用的vue可视化表单设计器组件",
-    "main": "./dist/index.umd.js",
-    "module": "./dist/index.umd.js",
     "unpkg": "./dist/index.umd.js",
     "jsdelivr": "./dist/index.umd.js",
     "typings": "./types/index.d.ts",
+    "main": "./dist/index.umd.js",
+    "module": "./dist/index.es.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.es.js",
+            "require": "./dist/index.umd.js"
+        }
+    },
     "scripts": {
         "clean": "rimraf dist/",
         "dev": "vue-cli-service serve",
