@@ -125,7 +125,7 @@
     },
     "dependencies": {
         "@form-create/component-wangeditor": "^3.1",
-        "@form-create/element-ui": "^3.1.15",
+        "@form-create/element-ui": "^3.1.16",
         "@form-create/utils": "^3.1.15",
         "vuedraggable": "4.1.0"
     }
