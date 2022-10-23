@@ -1,6 +1,6 @@
 {
     "name": "@form-create/designer",
-    "version": "3.0.1-beta.1",
+    "version": "3.0.2",
     "description": "好用的vue可视化表单设计器组件",
     "unpkg": "./dist/index.umd.js",
     "jsdelivr": "./dist/index.umd.js",
