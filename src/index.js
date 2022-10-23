@@ -48,6 +48,8 @@ const install = function (Vue) {
 
 FcDesigner.install = install;
 FcDesigner.makeOptionsRule = makeOptionsRule;
+FcDesigner.formCreate = formCreate;
+FcDesigner.designerForm = designerForm;
 
 export default FcDesigner;
 
