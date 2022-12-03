@@ -15,7 +15,7 @@ export default {
     },
     children: 'col',
     props() {
-        return [{type: 'inputNumber', field: 'gutter', title: '栅格间隔'}, {
+        return [{type: 'inputNumber', field: 'gutter', title: '栅格间隔',props: {min: 0}}, {
             type: 'switch',
             field: 'type',
             title: 'flex布局模式',
