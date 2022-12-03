@@ -36,7 +36,7 @@ export default {
                 type: 'switch',
                 field: 'collapseTags',
                 title: '多选时是否将选中值按文字的形式展示'
-            }, {type: 'inputNumber', field: 'multipleLimit', title: '多选时用户最多可以选择的项目数，为 0 则不限制'}, {
+            }, {type: 'inputNumber', field: 'multipleLimit', title: '多选时用户最多可以选择的项目数，为 0 则不限制',props: {min: 0}}, {
                 type: 'input',
                 field: 'autocomplete',
                 title: 'autocomplete 属性'

@@ -18,14 +18,16 @@ export default {
         };
     },
     props() {
-        return [makeRequiredRule(), {type: 'inputNumber', field: 'min', title: '最小值'}, {
+        return [makeRequiredRule(), {type: 'inputNumber', field: 'min', title: '最小值',props: {min: 0}}, {
             type: 'inputNumber',
             field: 'max',
-            title: '最大值'
+            title: '最大值',
+            props: {min: 0},
         }, {type: 'switch', field: 'disabled', title: '是否禁用'}, {
             type: 'inputNumber',
             field: 'step',
-            title: '步长'
+            title: '步长',
+            props: {min: 0},
         }, {type: 'switch', field: 'showInput', title: '是否显示输入框，仅在非范围选择时有效'}, {
             type: 'switch',
             field: 'showInputControls',

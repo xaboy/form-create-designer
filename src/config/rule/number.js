@@ -21,8 +21,8 @@ export default {
         return [makeRequiredRule(), {type: 'inputNumber', field: 'min', title: '设置计数器允许的最小值'}, {
             type: 'inputNumber',
             field: 'max',
-            title: '设置计数器允许的最大值'
-        }, {type: 'inputNumber', field: 'step', title: '计数器步长'}, {
+            title: '设置计数器允许的最大值',
+        }, {type: 'inputNumber', field: 'step', title: '计数器步长',props: {min: 0}}, {
             type: 'switch',
             field: 'stepStrictly',
             title: '是否只能输入 step 的倍数'

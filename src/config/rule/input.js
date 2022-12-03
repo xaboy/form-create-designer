@@ -26,10 +26,11 @@ export default {
                 label: 'textarea',
                 value: 'textarea'
             }, {label: 'number', value: 'number'}, {label: 'password', value: 'password'}]
-        }, {type: 'inputNumber', field: 'maxlength', title: '最大输入长度'}, {
+        }, {type: 'inputNumber', field: 'maxlength', title: '最大输入长度',props: {min: 0}}, {
             type: 'inputNumber',
             field: 'minlength',
-            title: '最小输入长度'
+            title: '最小输入长度',
+            props: {min: 0},
         }, {type: 'switch', field: 'showWordLimit', title: '是否显示输入字数统计'}, {
             type: 'input',
             field: 'placeholder',
@@ -46,7 +47,8 @@ export default {
             type: 'inputNumber',
             field: 'rows',
             info: '只对 type="textarea" 有效',
-            title: '输入框行数'
+            title: '输入框行数',
+            props: {min: 0},
         }, {
             type: 'select',
             field: 'autocomplete',
