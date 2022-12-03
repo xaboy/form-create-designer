@@ -1,15 +1,20 @@
 import {Rule} from "@form-create/element-ui";
+import {App, Component} from "@vue/runtime-core";
 
 export interface MenuItem {
-  label: string,
-  name: string,
-  icon: string;
+    label: string,
+    name: string,
+    icon: string;
 }
 
 export interface Menu {
-  title: string;
-  name: string;
-  list: MenuItem[]
+    title: string;
+    name: string;
+    list: MenuItem[]
+}
+
+export interface Config{
+    showBaseForm:Boolean;
 }
 
 export interface MenuList extends Array<Menu> {
@@ -17,15 +22,21 @@ export interface MenuList extends Array<Menu> {
 }
 
 export interface DragRule {
-  name: string;
+    name: string;
 
-  rule(): Rule;
+    rule(): Rule;
 
-  props(): Rule[];
+    props(): Rule[];
 
-  children?: string;
-  inside?: true;
-  drag?: true | String;
-  dragBtn?: false;
-  mask?: false;
+    children?: string;
+    inside?: true;
+    drag?: true | String;
+    dragBtn?: false;
+    mask?: false;
 }
+
+declare const FcDesigner: {
+    install: (app: App, ...options: any[]) => any;
+} & Component;
+
+export default FcDesigner;
