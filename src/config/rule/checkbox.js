@@ -35,8 +35,9 @@ export default {
             }, {type: 'switch', field: 'disabled', title: '是否禁用'}, {
                 type: 'inputNumber',
                 field: 'min',
-                title: '可被勾选的 checkbox 的最小数量'
-            }, {type: 'inputNumber', field: 'max', title: '可被勾选的 checkbox 的最大数量'}, {
+                title: '可被勾选的 checkbox 的最小数量',
+                props: {min:0}
+            }, {type: 'inputNumber', field: 'max', title: '可被勾选的 checkbox 的最大数量', props: {min:0}}, {
                 type: 'input',
                 field: 'textColor',
                 title: '按钮形式的 Checkbox 激活时的文本颜色'

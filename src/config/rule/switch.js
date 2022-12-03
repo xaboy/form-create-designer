@@ -21,7 +21,8 @@ export default {
         return [makeRequiredRule(), {type: 'switch', field: 'disabled', title: '是否禁用'}, {
             type: 'inputNumber',
             field: 'width',
-            title: '宽度（px）'
+            title: '宽度（px）',
+            props: {min:0}
         }, {type: 'input', field: 'activeText', title: 'switch 打开时的文字描述'}, {
             type: 'input',
             field: 'inactiveText',

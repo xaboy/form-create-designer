@@ -18,14 +18,16 @@ export default {
         };
     },
     props() {
-        return [makeRequiredRule(), {type: 'inputNumber', field: 'min', title: '设置计数器允许的最小值'}, {
+        return [makeRequiredRule(), {type: 'inputNumber', field: 'min', title: '设置计数器允许的最小值', props: {min:0}}, {
             type: 'inputNumber',
             field: 'max',
-            title: '设置计数器允许的最大值'
-        }, {type: 'inputNumber', field: 'step', title: '计数器步长'}, {
+            title: '设置计数器允许的最大值',
+            props: {min:0}
+        }, {type: 'inputNumber', field: 'step', title: '计数器步长', props: {min:0}}, {
             type: 'switch',
             field: 'stepStrictly',
-            title: '是否只能输入 step 的倍数'
+            title: '是否只能输入 step 的倍数',
+            props: {min:0}
         }, {type: 'switch', field: 'disabled', title: '是否禁用计数器'}, {
             type: 'switch',
             field: 'controls',

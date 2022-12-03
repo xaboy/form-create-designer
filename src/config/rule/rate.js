@@ -19,7 +19,7 @@ export default {
     },
     props() {
         return [
-            makeRequiredRule(), {type: 'inputNumber', field: 'max', title: '最大分值'}, {
+            makeRequiredRule(), {type: 'inputNumber', field: 'max', title: '最大分值', props: {min:0}}, {
                 type: 'switch',
                 field: 'disabled',
                 title: '是否为只读'

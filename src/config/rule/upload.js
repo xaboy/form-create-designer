@@ -58,7 +58,8 @@ export default {
         }, {
             type: 'inputNumber',
             field: 'limit',
-            title: '最大允许上传个数'
+            title: '最大允许上传个数',
+            props: {min:0},
         }];
     }
 };
