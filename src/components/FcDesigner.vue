@@ -694,19 +694,16 @@ export default defineComponent({
                 }
             },
             dragStart(children) {
-                console.log('dragStart');
                 data.moveRule = children;
                 data.added = false;
             },
             dragUnchoose(children, evt) {
-                console.log('dragUnchoose');
                 data.addRule = {
                     children,
                     oldIndex: evt.oldIndex
                 };
             },
             dragAdd(children, evt) {
-                console.log('dragAdd');
                 const newIndex = evt.newIndex;
                 const menu = evt.item._underlying_vm_;
                 if (!menu || menu.__fc__) {
@@ -722,7 +719,6 @@ export default defineComponent({
                 // data.dragForm.api.refresh();
             },
             dragEnd(children, {newIndex, oldIndex}) {
-                console.log('dragEnd');
                 if (!data.added && !(data.moveRule === children && newIndex === oldIndex)) {
                     const rule = data.moveRule.splice(oldIndex, 1);
                     children.splice(newIndex, 0, rule[0]);
