@@ -1,3 +1,5 @@
+import {localeProps} from '../../utils';
+
 const label = '栅格布局';
 const name = 'row';
 
@@ -14,8 +16,13 @@ export default {
         };
     },
     children: 'col',
-    props() {
-        return [{type: 'inputNumber', field: 'gutter', title: '栅格间隔',props: {min: 0}}, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{
+            type: 'inputNumber',
+            field: 'gutter',
+            title: '栅格间隔',
+            props: {min: 0}
+        }, {
             type: 'switch',
             field: 'type',
             title: 'flex布局模式',
@@ -36,6 +43,6 @@ export default {
                 label: 'bottom',
                 value: 'bottom'
             }]
-        }];
+        }]);
     }
 };

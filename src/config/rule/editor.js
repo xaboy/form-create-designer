@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeRequiredRule} from '../../utils';
+import {localeProps, makeRequiredRule} from '../../utils';
 
 const label = '富文本框';
 const name = 'fc-editor';
@@ -8,16 +8,20 @@ export default {
     icon: 'icon-editor',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.fc-editor.name'),
             info: '',
             props: {},
         };
     },
-    props() {
-        return [makeRequiredRule(), {type: 'switch', field: 'disabled', title: '是否禁用'}];
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [makeRequiredRule(), {
+            type: 'switch',
+            field: 'disabled',
+            title: '是否禁用'
+        }]);
     }
 };

@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeRequiredRule} from '../../utils';
+import {localeProps, makeRequiredRule} from '../../utils';
 
 const label = '评分';
 const name = 'rate';
@@ -8,18 +8,18 @@ export default {
     icon: 'icon-rate',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.rate.name'),
             info: '',
             props: {},
         };
     },
-    props() {
-        return [
-            makeRequiredRule(), {type: 'inputNumber', field: 'max', title: '最大分值',props: {min: 0}}, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [
+            makeRequiredRule(), {type: 'inputNumber', field: 'max', title: '最大分值', props: {min: 0}}, {
                 type: 'switch',
                 field: 'disabled',
                 title: '是否为只读'
@@ -39,6 +39,6 @@ export default {
                 type: 'input',
                 field: 'scoreTemplate',
                 title: '分数显示模板'
-            }];
+            }]);
     }
 };

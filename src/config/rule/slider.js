@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeRequiredRule} from '../../utils';
+import {localeProps, makeRequiredRule} from '../../utils';
 
 const label = '滑块';
 const name = 'slider';
@@ -8,17 +8,22 @@ export default {
     icon: 'icon-slider',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.slider.name'),
             info: '',
             props: {},
         };
     },
-    props() {
-        return [makeRequiredRule(), {type: 'inputNumber', field: 'min', title: '最小值',props: {min: 0}}, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [makeRequiredRule(), {
+            type: 'inputNumber',
+            field: 'min',
+            title: '最小值',
+            props: {min: 0}
+        }, {
             type: 'inputNumber',
             field: 'max',
             title: '最大值',
@@ -41,6 +46,6 @@ export default {
             type: 'input',
             field: 'height',
             title: 'Slider 高度，竖向模式时必填'
-        }];
+        }]);
     }
 };

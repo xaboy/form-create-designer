@@ -1,5 +1,8 @@
 import is, {hasProperty} from '@form-create/utils/lib/type';
 import {parseFn} from '@form-create/utils/lib/json';
+import toCase from '@form-create/utils/lib/tocase';
+import {computed, isRef, unref, ref} from 'vue';
+import ZhCn from '../locale/en';
 
 export function makeRequiredRule() {
     return {
@@ -7,10 +10,10 @@ export function makeRequiredRule() {
     };
 }
 
-export function makeOptionsRule(to, flag) {
+export function makeOptionsRule(t, to, flag) {
     const options = [
-        {'label': 'JSON数据', 'value': 0},
-        {'label': '接口数据', 'value': 1},
+        {'label': t('props.optionsType.json'), 'value': 0},
+        {'label': t('props.optionsType.fetch'), 'value': 1},
     ];
 
     const control = [
@@ -39,7 +42,7 @@ export function makeOptionsRule(to, flag) {
     ];
 
     if (flag !== false) {
-        options.splice(0, 0, {'label': '静态数据', 'value': 2});
+        options.splice(0, 0, {'label': t('props.optionsType.struct'), 'value': 2});
         control.push({
             value: 2,
             rule: [
@@ -54,7 +57,7 @@ export function makeOptionsRule(to, flag) {
 
     return {
         type: 'radio',
-        title: '选项数据',
+        title: t('props.options'),
         field: '_optionType',
         value: flag !== false ? 2 : 0,
         options,
@@ -130,3 +133,52 @@ export const deepParseFn = function (target) {
     }
     return target;
 };
+
+
+function get(object, path, defaultValue) {
+    path = (path || '').split('.');
+
+    let index = 0,
+        length = path.length;
+
+    while (object != null && index < length) {
+        object = object[path[index++]];
+    }
+    return (index && index === length) ? (object !== undefined ? object : defaultValue) : defaultValue;
+}
+
+export const buildTranslator = (locale) => (path, option) => translate(path, option, unref(locale));
+
+export const translate = (path, option, locale) =>
+    get(locale, path, '').replace(
+        /\{(\w+)\}/g,
+        (_, key) => `${option?.[key] ?? `{${key}}`}`
+    )
+
+export const buildLocaleContext = (locale) => {
+    const lang = computed(() => unref(locale).name)
+    const name = computed(() => upper(toCase(lang.value || '')))
+    const localeRef = isRef(locale) ? locale : ref(locale)
+    return {
+        lang,
+        name,
+        locale: localeRef,
+        t: buildTranslator(locale),
+    }
+}
+
+export const useLocale = (locale) => {
+    return buildLocaleContext(computed(() => locale.value || ZhCn))
+}
+
+
+export const localeProps = (t, prefix, rules) => {
+    return rules.map(rule => {
+        if (rule.field === 'formCreate$required') {
+            rule.title = t('props.required') || rule.title;
+        } else if (rule.field && rule.field !== '_optionType') {
+            rule.title = t('components.' + prefix + '.' + rule.field) || rule.title;
+        }
+        return rule;
+    })
+}

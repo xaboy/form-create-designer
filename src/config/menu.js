@@ -22,25 +22,25 @@ import button from './rule/button';
 import editor from './rule/editor';
 import tab from './rule/tab';
 
-export default function createMenu() {
+export default function createMenu({t}) {
     return [
         {
             name: 'main',
-            title: '表单组件',
+            title: t('menu.main'),
             list: [
                 input, number, radio, checkbox, select, _switch, time, date, slider, rate, color, cascader, upload, transfer, tree, editor
             ]
         },
         {
             name: 'aide',
-            title: '辅助组件',
+            title: t('menu.aide'),
             list: [
                 alert, button, span, divider
             ]
         },
         {
             name: 'layout',
-            title: '布局组件',
+            title: t('menu.layout'),
             list: [
                 row, tab, space
             ]

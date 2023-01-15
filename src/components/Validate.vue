@@ -6,6 +6,7 @@
 <script>
 import {designerForm} from '../utils/form';
 import {defineComponent} from 'vue';
+import {deepCopy} from '@form-create/utils/lib/deepextend';
 
 export default defineComponent({
     name: 'Validate',
@@ -22,8 +23,10 @@ export default defineComponent({
         }
     },
     data() {
+        const t = this.designer.t;
         return {
             formValue: {},
+            t,
             option: {
                 form: {
                     labelPosition: 'top',
@@ -38,9 +41,9 @@ export default defineComponent({
                     type: 'select',
                     field: 'type',
                     value: '',
-                    title: '字段类型',
+                    title: t('validate.type'),
                     options: [
-                        {value: '', label: '请选择'},
+                        {value: '', label: t('validate.typePlaceholder')},
                         {value: 'string', label: 'String'},
                         {value: 'array', label: 'Array'},
                         {value: 'number', label: 'Number'},
@@ -66,7 +69,7 @@ export default defineComponent({
                                         rule: [
                                             {
                                                 type: 'select',
-                                                title: '触发方式',
+                                                title: t('validate.trigger'),
                                                 field: 'trigger',
                                                 value: 'change',
                                                 options: [
@@ -77,14 +80,14 @@ export default defineComponent({
                                             },
                                             {
                                                 type: 'select',
-                                                title: '验证方式',
+                                                title: t('validate.mode'),
                                                 field: 'mode',
                                                 options: [
-                                                    {value: 'required', label: '必填'},
-                                                    {value: 'pattern', label: '正则表达式'},
-                                                    {value: 'min', label: '最小值'},
-                                                    {value: 'max', label: '最大值'},
-                                                    {value: 'len', label: '长度'},
+                                                    {value: 'required', label: t('validate.modes.required')},
+                                                    {value: 'pattern', label: t('validate.modes.pattern')},
+                                                    {value: 'min', label: t('validate.modes.min')},
+                                                    {value: 'max', label: t('validate.modes.max')},
+                                                    {value: 'len', label: t('validate.modes.len')},
                                                 ],
                                                 value: 'required',
                                                 control: [
@@ -104,7 +107,7 @@ export default defineComponent({
                                                             {
                                                                 type: 'input',
                                                                 field: 'pattern',
-                                                                title: '正则表达式'
+                                                                title: t('validate.modes.pattern')
                                                             }
                                                         ]
                                                     },
@@ -114,7 +117,7 @@ export default defineComponent({
                                                             {
                                                                 type: 'inputNumber',
                                                                 field: 'min',
-                                                                title: '最小值'
+                                                                title: t('validate.modes.min')
                                                             }
                                                         ]
                                                     },
@@ -124,7 +127,7 @@ export default defineComponent({
                                                             {
                                                                 type: 'inputNumber',
                                                                 field: 'max',
-                                                                title: '最大值'
+                                                                title: t('validate.modes.max')
                                                             }
                                                         ]
                                                     },
@@ -134,7 +137,7 @@ export default defineComponent({
                                                             {
                                                                 type: 'inputNumber',
                                                                 field: 'len',
-                                                                title: '长度'
+                                                                title: t('validate.modes.len')
                                                             }
                                                         ]
                                                     },
@@ -142,7 +145,7 @@ export default defineComponent({
                                             },
                                             {
                                                 type: 'input',
-                                                title: '错误信息',
+                                                title: t('validate.message'),
                                                 field: 'message',
                                                 value: '',
                                                 children: [
@@ -153,17 +156,13 @@ export default defineComponent({
                                                         class: 'append-msg',
                                                         on: {
                                                             click: (inject) => {
+                                                                const title = this.designer.activeRule.title;
                                                                 if (this.designer.activeRule) {
-                                                                    let msg = '请输入';
-                                                                    if (inject.api.form.mode !== 'required') {
-                                                                        msg += '正确的';
-                                                                    }
-                                                                    msg += this.designer.activeRule.title;
-                                                                    inject.api.setValue('message', msg);
+                                                                    inject.api.setValue('message', t(inject.api.form.mode !== 'required' ? 'validate.autoMode' : 'validate.autoRequired', {title}));
                                                                 }
                                                             }
                                                         },
-                                                        children: ['自动获取']
+                                                        children: [t('validate.auto')]
                                                     }
                                                 ]
                                             }
@@ -182,7 +181,7 @@ export default defineComponent({
     methods: {
         onInput: function (formData) {
             let val = [];
-            const {validate, type} = formData;
+            const {validate, type} = deepCopy(formData);
             if (type && (!validate || !validate.length)) {
                 return;
             } else if (type) {

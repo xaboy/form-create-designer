@@ -1,3 +1,5 @@
+import {localeProps} from '../../utils';
+
 const label = '文字';
 const name = 'span';
 
@@ -5,16 +7,16 @@ export default {
     icon: 'icon-span',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
-            title: '文字',
+            title: t('components.span.name'),
             native: false,
-            children: ['这是一段文字'],
+            children: [t('components.span.name')],
         };
     },
-    props() {
-        return [
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [
             {
                 type: 'input',
                 field: 'formCreateTitle',
@@ -28,6 +30,6 @@ export default {
                     type: 'textarea'
                 }
             }
-        ];
+        ]);
     }
 };

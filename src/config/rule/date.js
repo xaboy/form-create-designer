@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeRequiredRule} from '../../utils';
+import {localeProps, makeRequiredRule} from '../../utils';
 
 const label = '日期选择器';
 const name = 'datePicker';
@@ -8,17 +8,17 @@ export default {
     icon: 'icon-date',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.datePicker.name'),
             info: '',
             props: {},
         };
     },
-    props() {
-        return [makeRequiredRule(), {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [makeRequiredRule(), {
             type: 'Struct',
             field: 'pickerOptions',
             title: '当前时间日期选择器特有的选项',
@@ -70,6 +70,6 @@ export default {
             type: 'input',
             field: 'clearIcon',
             title: '自定义清空图标的类名'
-        }];
+        }]);
     }
 };

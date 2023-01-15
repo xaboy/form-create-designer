@@ -9,9 +9,10 @@
                 <el-button size="small" type="primary" @click="showJson">生成JSON</el-button>
                 <el-button size="small" type="success" @click="showOption">生成Options</el-button>
                 <el-button size="small" type="danger" @click="showTemplate">生成组件</el-button>
+                <el-button size="small" @click="changeLocale">中英切换</el-button>
             </div>
         </div>
-        <fc-designer ref="designer"/>
+        <fc-designer ref="designer" :locale="locale" />
 
         <ElFooter class="_fc-copyright" height="30px">
             <div class="_fc-b-item">
@@ -71,6 +72,8 @@ import 'codemirror/mode/pug/pug';
 
 import is from '@form-create/utils/lib/type';
 import formCreate from '@form-create/element-ui';
+import ZhCn from "../src/locale/zh-cn";
+import En from "../src/locale/en";
 
 
 const TITLE = ['生成规则', '表单规则', '生成组件', '设置生成规则', '设置表单规则'];
@@ -85,6 +88,8 @@ export default {
             editor: null,
             err: false,
             type: -1,
+            lang:'cn',
+            locale: ZhCn,
         };
     },
     watch: {
@@ -99,6 +104,15 @@ export default {
         }
     },
     methods: {
+        changeLocale() {
+            if (this.lang === 'cn') {
+                this.locale = En;
+                this.lang = 'en';
+            } else {
+                this.locale = ZhCn;
+                this.lang = 'cn';
+            }
+        },
         load() {
             let val;
             if (this.type === 2) {

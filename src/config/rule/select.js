@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule, makeRequiredRule} from '../../utils/index';
+import {localeProps, makeOptionsRule, makeRequiredRule} from '../../utils/index';
 
 const label = '选择器';
 const name = 'select';
@@ -8,26 +8,29 @@ export default {
     icon: 'icon-select',
     label,
     name,
-    rule() {
+    rule({t}) {
+        const opt = t('props.option');
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.select.name'),
             info: '',
             effect: {
                 fetch: ''
             },
             props: {},
-            options: [
-                {value: '1', label: '选项1'},
-                {value: '2', label: '选项2'},
-            ]
+            options: [1, 2].map(value => {
+                return {
+                    label: opt + value,
+                    value,
+                }
+            })
         };
     },
-    props() {
-        return [
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [
             makeRequiredRule(),
-            makeOptionsRule('options'),
+            makeOptionsRule(t, 'options'),
             {type: 'switch', field: 'multiple', title: '是否多选'}, {
                 type: 'switch',
                 field: 'disabled',
@@ -36,7 +39,7 @@ export default {
                 type: 'switch',
                 field: 'collapseTags',
                 title: '多选时是否将选中值按文字的形式展示'
-            }, {type: 'inputNumber', field: 'multipleLimit', title: '多选时用户最多可以选择的项目数，为 0 则不限制',props: {min: 0}}, {
+            }, {type: 'inputNumber', field: 'multipleLimit', title: '多选时用户最多可以选择的项目数，为 0 则不限制', props: {min: 0}}, {
                 type: 'input',
                 field: 'autocomplete',
                 title: 'autocomplete 属性'
@@ -57,6 +60,6 @@ export default {
                 field: 'popperAppendToBody',
                 title: '是否将弹出框插入至 body 元素',
                 value: true
-            }, {type: 'switch', field: 'automaticDropdown', title: '对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单'}];
+            }, {type: 'switch', field: 'automaticDropdown', title: '对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单'}])
     }
 };

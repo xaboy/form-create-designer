@@ -1,10 +1,10 @@
-export default function form() {
+export default function form({t}) {
     return [
         {
             type: 'radio',
             field: 'labelPosition',
             value: 'left',
-            title: '标签位置',
+            title: t('form.labelPosition'),
             options: [
                 {value: 'right', label: 'right'},
                 {value: 'left', label: 'left'},
@@ -14,7 +14,7 @@ export default function form() {
             type: 'radio',
             field: 'size',
             value: 'small',
-            title: '表单尺寸',
+            title: t('form.size'),
             options: [
                 {value: 'large', label: 'large'},
                 {value: 'default', label: 'default'},
@@ -24,32 +24,32 @@ export default function form() {
             type: 'input',
             field: 'labelWidth',
             value: '125px',
-            title: '标签宽度',
+            title: t('form.labelWidth'),
         }, {
             type: 'switch',
             field: 'hideRequiredAsterisk',
             value: false,
-            title: '隐藏必填字段的标签旁边的红色星号',
+            title: t('form.hideRequiredAsterisk'),
         }, {
             type: 'switch',
             field: 'showMessage',
             value: true,
-            title: '显示校验错误信息',
+            title: t('form.showMessage'),
         }, {
             type: 'switch',
             field: 'inlineMessage',
             value: false,
-            title: '以行内形式展示校验信息',
+            title: t('form.inlineMessage'),
         }, {
             type: 'switch',
             field: 'formCreateSubmitBtn',
             value: true,
-            title: '是否显示表单提交按钮',
+            title: t('form.submitBtn'),
         }, {
             type: 'switch',
             field: 'formCreateResetBtn',
             value: false,
-            title: '是否显示表单重置按钮',
+            title: t('form.resetBtn'),
         },
     ];
 }

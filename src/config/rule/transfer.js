@@ -1,9 +1,10 @@
 import uniqueId from '@form-create/utils/lib/unique';
+import {localeProps} from '../../utils';
 
 const label = '穿梭框';
 const name = 'el-transfer';
 
-const generateData = _ => {
+const generateData = () => {
     const data = [];
     for (let i = 1; i <= 15; i++) {
         data.push({
@@ -19,19 +20,19 @@ export default {
     icon: 'icon-transfer',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.el-transfer.name'),
             info: '',
             props: {
                 data: generateData()
             }
         };
     },
-    props() {
-        return [{
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{
             type: 'Struct',
             field: 'data',
             title: 'Transfer 的数据源',
@@ -79,6 +80,6 @@ export default {
             field: 'rightDefaultChecked',
             title: '初始状态下右侧列表的已勾选项的 key 数组',
             props: {defaultValue: []}
-        }];
+        }]);
     }
 };

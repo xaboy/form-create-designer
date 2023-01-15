@@ -1,3 +1,5 @@
+import {localeProps} from '../../utils';
+
 const label = '标签页';
 const name = 'tab';
 
@@ -10,12 +12,12 @@ export default {
     rule() {
         return {
             type: 'el-tabs',
-            style:'width:100%;',
+            style: 'width:100%;',
             children: []
         };
     },
-    props() {
-        return [{
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{
             type: 'select',
             field: 'type',
             title: '风格类型',
@@ -31,6 +33,6 @@ export default {
                 label: 'left',
                 value: 'left'
             }]
-        }, {type: 'switch', field: 'stretch', title: '标签的宽度是否自撑开'}];
+        }, {type: 'switch', field: 'stretch', title: '标签的宽度是否自撑开'}]);
     }
 };

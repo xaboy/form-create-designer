@@ -5,15 +5,15 @@
             border
             size="small"
             style="width: 100%">
-            <template v-for="(col,idx) in column" :key="col.label + idx">
-                <el-table-column :label="col.label">
+            <template v-for="(col,idx) in column">
+                <el-table-column :key="col.label + idx" :label="col.label">
                     <template #default="scope">
                         <el-input size="small" :modelValue="scope.row[col.key] || ''"
                                   @Update:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></el-input>
                     </template>
                 </el-table-column>
             </template>
-            <el-table-column min-width="35" align="center" fixed="right" label="操作">
+            <el-table-column min-width="50" align="center" fixed="right" :label="t('tableOptions.handle')">
 
                 <template #default="scope">
                     <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
@@ -21,7 +21,7 @@
             </el-table-column>
         </el-table>
         <el-button link type="primary" @click="add">
-            <i class="fc-icon icon-add"></i> 添加
+            <i class="fc-icon icon-add"></i> {{ t('tableOptions.add') }}
         </el-button>
     </div>
 </template>
@@ -35,9 +35,11 @@ export default defineComponent({
     props: {
         modelValue: [Object, Array, String]
     },
+    inject: ['designer'],
     data() {
         return {
-            column: [{label: 'label', key: 'label'}, {label: 'value', key: 'value'}]
+            column: [{label: 'label', key: 'label'}, {label: 'value', key: 'value'}],
+            t: this.designer.t,
         };
     },
     created() {

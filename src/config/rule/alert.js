@@ -1,3 +1,5 @@
+import {localeProps} from '../../utils';
+
 const label = '提示';
 const name = 'el-alert';
 
@@ -5,20 +7,20 @@ export default {
     icon: 'icon-alert',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             props: {
-                title: '提示',
-                description: 'form-create',
+                title: t('components.el-alert.name'),
+                description: t('components.el-alert.description'),
                 type: 'success',
                 effect: 'dark',
             },
             children: []
         };
     },
-    props() {
-        return [{type: 'input', field: 'title', title: '标题'}, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{type: 'input', field: 'title', title: '标题'}, {
             type: 'select',
             field: 'type',
             title: '主题',
@@ -40,6 +42,6 @@ export default {
             field: 'effect',
             title: '选择提供的主题',
             options: [{label: 'light', value: 'light'}, {label: 'dark', value: 'dark'}]
-        }];
+        }]);
     }
 };
