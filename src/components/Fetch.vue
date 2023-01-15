@@ -19,6 +19,7 @@ export default defineComponent({
     components: {
         DragForm: designerForm.$form(),
     },
+    inject: ['designer'],
     computed: {
         formValue() {
             const val = this.modelValue;
@@ -37,9 +38,11 @@ export default defineComponent({
         }
     },
     data() {
+        const t = this.designer.t;
         return {
             api: {},
             fetch: {},
+            t,
             option: {
                 form: {
                     labelPosition: 'right',
@@ -52,13 +55,13 @@ export default defineComponent({
                 {
                     type: 'input',
                     field: 'action',
-                    title: '接口: ',
-                    validate: [{required: true, message: '请数据接口'}]
+                    title: t('fetch.action') + ': ',
+                    validate: [{required: true, message: t('fetch.actionRequired')}]
                 },
                 {
                     type: 'select',
                     field: 'method',
-                    title: '请求方式: ',
+                    title: t('fetch.method') + ': ',
                     value: 'GET',
                     options: [
                         {label: 'GET', value: 'GET'},
@@ -71,7 +74,7 @@ export default defineComponent({
                                 {
                                     type: 'select',
                                     field: 'dataType',
-                                    title: '提交方式: ',
+                                    title: t('fetch.dataType') + ': ',
                                     value: 'FormData',
                                     options: [
                                         {label: 'FormData', value: 'FormData'},
@@ -85,7 +88,7 @@ export default defineComponent({
                 {
                     type: 'Struct',
                     field: 'data',
-                    title: '附带数据: ',
+                    title: t('fetch.data') + ': ',
                     value: {},
                     props: {
                         defaultValue: {},
@@ -94,7 +97,7 @@ export default defineComponent({
                 {
                     type: 'Struct',
                     field: 'headers',
-                    title: 'header信息: ',
+                    title: t('fetch.headers') + ': ',
                     value: {},
                     props: {
                         defaultValue: {},
@@ -103,8 +106,8 @@ export default defineComponent({
                 {
                     type: 'input',
                     field: '_parse',
-                    title: '解析函数',
-                    info: '解析接口数据，返回组件所需的数据结构',
+                    title: t('fetch.parse') + ': ',
+                    info: t('fetch.parseInfo'),
                     value: 'function (res){\n   return res.data;\n}',
                     props: {
                         type: 'textarea',
@@ -119,7 +122,7 @@ export default defineComponent({
                                 return cb(false);
                             }
                             cb();
-                        }, message: '请输入正确的解析函数'
+                        }, message: t('fetch.parseValidate')
                     }]
                 },
             ]

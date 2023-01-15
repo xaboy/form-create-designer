@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule, makeRequiredRule} from '../../utils/index';
+import {localeProps, makeOptionsRule, makeRequiredRule} from '../../utils/index';
 
 const label = '单选框';
 const name = 'radio';
@@ -8,26 +8,29 @@ export default {
     icon: 'icon-radio',
     label,
     name,
-    rule() {
+    rule({t}) {
+        const opt = t('props.option');
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.radio.name'),
             info: '',
             effect: {
                 fetch: ''
             },
             props: {},
-            options: [
-                {value: '1', label: '选项1'},
-                {value: '2', label: '选项2'},
-            ]
+            options: [1, 2].map(value => {
+                return {
+                    label: opt + value,
+                    value,
+                }
+            })
         };
     },
-    props() {
-        return [
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [
             makeRequiredRule(),
-            makeOptionsRule('options'),
+            makeOptionsRule(t, 'options'),
             {type: 'switch', field: 'disabled', title: '是否禁用'}, {
                 type: 'switch',
                 field: 'type',
@@ -37,6 +40,6 @@ export default {
                 type: 'input',
                 field: 'fill',
                 title: '按钮形式的 Radio 激活时的填充色和边框色'
-            }];
+            }]);
     }
 };

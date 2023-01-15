@@ -1,28 +1,28 @@
 import IconRefresh from '../../components/IconRefresh.vue';
 import {markRaw} from 'vue';
 
-export default function field() {
+export default function field({t}) {
     return [
         {
             type: 'input',
             field: 'field',
             value: '',
-            title: '字段 ID',
+            title: t('form.field'),
         }, {
             type: 'input',
             field: 'title',
             value: '',
-            title: '字段名称',
+            title: t('form.title'),
         }, {
             type: 'input',
             field: 'info',
             value: '',
-            title: '提示信息',
+            title: t('form.info'),
         }, {
             type: 'Struct',
             field: '_control',
             value: [],
-            title: '联动数据',
+            title: t('form.control'),
             props: {
                 defaultValue: [],
                 validate(val) {
@@ -57,7 +57,7 @@ export default function field() {
                         },
                     },
                     native: true,
-                    children: [{type: 'i', class: 'fc-icon icon-delete'}, '清空值']
+                    children: [{type: 'i', class: 'fc-icon icon-delete'}, t('form.clear')]
                 }, {
                     type: 'el-button',
                     props: {
@@ -76,7 +76,7 @@ export default function field() {
                         },
                     },
                     native: true,
-                    children: ['刷新']
+                    children: [t('form.refresh')]
                 },
             ]
         }

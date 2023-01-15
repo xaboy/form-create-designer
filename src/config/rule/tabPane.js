@@ -1,3 +1,5 @@
+import {localeProps} from '../../utils';
+
 const label = '标签页';
 const name = 'tab-pane';
 
@@ -8,15 +10,15 @@ export default {
     drag: true,
     dragBtn: false,
     mask: false,
-    rule() {
+    rule({t}) {
         return {
             type: 'el-tab-pane',
-            props: {label: '新标签页'},
+            props: {label: t('components.el-transfer.name')},
             children: []
         };
     },
-    props() {
-        return [{type: 'input', field: 'label', title: '选项卡标题'}, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{type: 'input', field: 'label', title: '选项卡标题'}, {
             type: 'switch',
             field: 'disabled',
             title: '是否禁用'
@@ -24,6 +26,6 @@ export default {
             type: 'switch',
             field: 'lazy',
             title: '标签是否延迟渲染'
-        }];
+        }]);
     }
 };

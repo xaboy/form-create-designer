@@ -1,3 +1,5 @@
+import {localeProps} from '../../utils';
+
 const label = '分割线';
 const name = 'el-divider';
 
@@ -14,8 +16,8 @@ export default {
             children: [''],
         };
     },
-    props() {
-        return [{
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{
             type: 'select',
             field: 'direction',
             title: '设置分割线方向',
@@ -32,6 +34,6 @@ export default {
                 label: 'center',
                 value: 'center'
             }]
-        }];
+        }]);
     }
 };

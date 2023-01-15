@@ -1,7 +1,7 @@
 <template>
     <div class="_fc-required">
         <ElSwitch v-model="required"></ElSwitch>
-        <ElInput v-model="requiredMsg" v-if="required" placeholder="请输入提示语"></ElInput>
+        <ElInput v-model="requiredMsg" v-if="required" :placeholder="t('validate.requiredPlaceholder')"></ElInput>
     </div>
 </template>
 
@@ -14,6 +14,7 @@ export default defineComponent({
     props: {
         modelValue: {}
     },
+    inject: ['designer'],
     watch: {
         required() {
             this.update();
@@ -29,7 +30,9 @@ export default defineComponent({
     },
     data() {
         const flag = is.String(this.modelValue);
+        const t = this.designer.t;
         return {
+            t,
             required: this.modelValue === undefined ? false : (flag ? true : !!this.modelValue),
             requiredMsg: flag ? this.modelValue : ''
         };

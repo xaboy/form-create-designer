@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeRequiredRule} from '../../utils';
+import {localeProps, makeRequiredRule} from '../../utils';
 
 const label = '上传';
 const name = 'upload';
@@ -8,11 +8,11 @@ export default {
     icon: 'icon-upload',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.upload.name'),
             info: '',
             props: {
                 action: '',
@@ -22,8 +22,8 @@ export default {
             }
         };
     },
-    props() {
-        return [makeRequiredRule(), {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [makeRequiredRule(), {
             type: 'select',
             field: 'uploadType',
             title: '上传类型',
@@ -60,6 +60,6 @@ export default {
             field: 'limit',
             title: '最大允许上传个数',
             props: {min: 0},
-        }];
+        }]);
     }
 };

@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeRequiredRule} from '../../utils';
+import {localeProps, makeRequiredRule} from '../../utils';
 
 const label = '开关';
 const name = 'switch';
@@ -8,17 +8,21 @@ export default {
     icon: 'icon-switch',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.switch.name'),
             info: '',
             props: {},
         };
     },
-    props() {
-        return [makeRequiredRule(), {type: 'switch', field: 'disabled', title: '是否禁用'}, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [makeRequiredRule(), {
+            type: 'switch',
+            field: 'disabled',
+            title: '是否禁用'
+        }, {
             type: 'inputNumber',
             field: 'width',
             title: '宽度（px）',
@@ -35,6 +39,6 @@ export default {
             type: 'input',
             field: 'inactiveColor',
             title: 'switch 关闭时的背景色'
-        }];
+        }]);
     }
 };

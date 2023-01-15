@@ -1,14 +1,14 @@
 <template>
     <div class="_fc_struct">
-        <ElButton @click="visible=true" style="width: 100%;">{{ title }}</ElButton>
-        <ElDialog :title="title" v-model="visible" :close-on-click-modal="false" append-to-body>
+        <ElButton @click="visible=true" style="width: 100%;">{{ title || t('struct.title') }}</ElButton>
+        <ElDialog :title="title || t('struct.title')" v-model="visible" :close-on-click-modal="false" append-to-body>
             <div ref="editor" v-if="visible"></div>
             <template #footer>
                 <span class="dialog-footer">
                     <span class="_fc_err" v-if="err">
-                        输入内容格式有误{{ err !== true ? err : '' }}</span>
-                    <ElButton @click="visible = false" size="small">取 消</ElButton>
-                    <ElButton type="primary" @click="onOk" size="small">确 定</ElButton>
+                        {{ t('struct.error') }}{{ err !== true ? err : '' }}</span>
+                    <ElButton @click="visible = false" size="small">{{ t('struct.cancel') }}</ElButton>
+                    <ElButton type="primary" @click="onOk" size="small">{{ t('struct.submit') }}</ElButton>
                 </span>
             </template>
         </ElDialog>
@@ -27,21 +27,20 @@ export default defineComponent({
     name: 'Struct',
     props: {
         modelValue: [Object, Array],
-        title: {
-            type: String,
-            default: '编辑数据'
-        },
+        title: String,
         defaultValue: {
             require: false
         },
         validate: Function,
     },
+    inject: ['designer'],
     data() {
         return {
             editor: null,
             visible: false,
             err: false,
             oldVal: null,
+            t: this.designer.t,
         };
     },
     watch: {
@@ -97,7 +96,7 @@ export default defineComponent({
 </script>
 
 <style>
-._fc_struct{
+._fc_struct {
     width: 100%;
 }
 

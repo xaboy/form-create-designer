@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeRequiredRule} from '../../utils';
+import {localeProps, makeRequiredRule} from '../../utils';
 
 const label = '输入框';
 const name = 'input';
@@ -8,17 +8,17 @@ export default {
     icon: 'icon-input',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.input.name'),
             info: '',
             props: {}
         };
     },
-    props() {
-        return [makeRequiredRule(), {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [makeRequiredRule(), {
             type: 'select',
             field: 'type',
             title: '类型',
@@ -26,7 +26,7 @@ export default {
                 label: 'textarea',
                 value: 'textarea'
             }, {label: 'number', value: 'number'}, {label: 'password', value: 'password'}]
-        }, {type: 'inputNumber', field: 'maxlength', title: '最大输入长度',props: {min: 0}}, {
+        }, {type: 'inputNumber', field: 'maxlength', title: '最大输入长度', props: {min: 0}}, {
             type: 'inputNumber',
             field: 'minlength',
             title: '最小输入长度',
@@ -46,7 +46,7 @@ export default {
         }, {type: 'input', field: 'suffixIcon', title: '输入框尾部图标'}, {
             type: 'inputNumber',
             field: 'rows',
-            info: '只对 type="textarea" 有效',
+            info: t('components.input.props.rowsInfo'),
             title: '输入框行数',
             props: {min: 0},
         }, {
@@ -62,6 +62,6 @@ export default {
                 label: 'horizontal',
                 value: 'horizontal'
             }, {label: 'vertical', value: 'vertical'}]
-        }, {type: 'switch', field: 'autofocus', title: '自动获取焦点'}];
+        }, {type: 'switch', field: 'autofocus', title: '自动获取焦点'}]);
     }
 };

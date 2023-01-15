@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule, makeRequiredRule} from '../../utils/index';
+import {localeProps, makeOptionsRule, makeRequiredRule} from '../../utils/index';
 
 const label = '树形控件';
 const name = 'tree';
@@ -8,11 +8,12 @@ export default {
     icon: 'icon-tree',
     label,
     name,
-    rule() {
+    rule({t}) {
+        const opt = t('props.option');
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.tree.name'),
             info: '',
             effect: {
                 fetch: ''
@@ -23,48 +24,20 @@ export default {
                 },
                 showCheckbox: true,
                 nodeKey: 'id',
-                data: [{
-                    id: 1,
-                    label: '一级 1',
-                    children: [{
-                        id: 4,
-                        label: '二级 1-1',
-                        children: [{
-                            id: 9,
-                            label: '三级 1-1-1'
-                        }, {
-                            id: 10,
-                            label: '三级 1-1-2'
-                        }]
-                    }]
-                }, {
-                    id: 2,
-                    label: '一级 2',
-                    children: [{
-                        id: 5,
-                        label: '二级 2-1'
-                    }, {
-                        id: 6,
-                        label: '二级 2-2'
-                    }]
-                }, {
-                    id: 3,
-                    label: '一级 3',
-                    children: [{
-                        id: 7,
-                        label: '二级 3-1'
-                    }, {
-                        id: 8,
-                        label: '二级 3-2'
-                    }]
-                }]
+                data: [1, 2].map(value => {
+                    return {
+                        label: opt + value,
+                        id: value,
+                        children: [],
+                    }
+                }),
             },
         };
     },
-    props() {
-        return [
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [
             makeRequiredRule(),
-            makeOptionsRule('props.data', false),
+            makeOptionsRule(t, 'props.data', false),
             {type: 'input', field: 'emptyText', title: '内容为空的时候展示的文本'}, {
                 type: 'Struct',
                 field: 'props',
@@ -95,6 +68,6 @@ export default {
                 type: 'input',
                 field: 'nodeKey',
                 title: '每个树节点用来作为唯一标识的属性，整棵树应该是唯一的'
-            }];
+            }]);
     }
 };

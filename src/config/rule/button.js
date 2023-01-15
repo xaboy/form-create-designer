@@ -1,3 +1,5 @@
+import {localeProps} from '../../utils';
+
 const label = '按钮';
 const name = 'el-button';
 
@@ -6,15 +8,15 @@ export default {
     label,
     name,
     mask: false,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             props: {},
-            children: ['按钮'],
+            children: [t('components.el-button.name')],
         };
     },
-    props() {
-        return [{
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{
             type: 'input',
             field: 'formCreateChild',
             title: '内容',
@@ -49,6 +51,6 @@ export default {
             type: 'input',
             field: 'icon',
             title: '图标类名'
-        }];
+        }]);
     }
 };

@@ -1,3 +1,5 @@
+import {localeProps} from '../../utils';
+
 const label = '间距';
 const name = 'div';
 
@@ -19,20 +21,20 @@ export default {
             children: []
         };
     },
-    props() {
+    props(_, {t}) {
         return [
             {
                 type: 'object',
                 field: 'formCreateStyle',
                 native: true,
                 props: {
-                    rule: [
+                    rule: localeProps(t, name + '.props', [
                         {
                             type: 'input',
                             field: 'height',
                             title: 'height',
                         },
-                    ]
+                    ])
                 }
             }
 

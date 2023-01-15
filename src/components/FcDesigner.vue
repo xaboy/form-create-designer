@@ -147,8 +147,8 @@
         <ElMain>
             <ElContainer style="height: 100%;">
                 <el-aside class="_fc-l" width="266px">
-                    <template v-for="(item, index) in menuList" :key="index">
-                        <div class="_fc-l-group">
+                    <template v-for="(item, index) in menuList" >
+                        <div class="_fc-l-group" :key="index">
                             <h4 class="_fc-l-title">{{ item.title }}</h4>
                             <draggable :group="{name:'default', pull:'clone',put:false}" :sort="false"
                                        itemKey="name"
@@ -158,7 +158,9 @@
                                         <div class="_fc-l-icon">
                                             <i class="fc-icon" :class="element.icon || 'icon-input'"></i>
                                         </div>
-                                        <span class="_fc-l-name">{{ element.label }}</span>
+                                        <span class="_fc-l-name">{{
+                                                t('components.' + element.name + '.name') || element.label
+                                            }}</span>
                                     </div>
                                 </template>
                             </draggable>
@@ -169,16 +171,17 @@
                     <el-header class="_fc-m-tools" height="45">
                         <slot name="handle"></slot>
                         <el-button type="primary" plain round size="small"
-                                   @click="previewFc"> <i class="fc-icon icon-preview"></i> 预 览
+                                   @click="previewFc"><i class="fc-icon icon-preview"></i> {{ t('designer.preview') }}
                         </el-button>
                         <el-popconfirm
-                            title="清空后将不能恢复，确定要清空吗？"
+                            :title="t('designer.clearConfirmTitle')"
                             width="200px"
-                            confirm-button-text="清空"
-                            cancel-button-text="取消"
+                            :confirm-button-text="t('designer.clearConfirm')"
+                            :cancel-button-text="t('designer.clearCancel')"
                             @confirm="clearDragRule">
                             <template #reference>
-                                <el-button type="danger" plain round size="small"> <i class="fc-icon icon-delete"></i>清 空
+                                <el-button type="danger" plain round size="small"><i
+                                    class="fc-icon icon-delete"></i>{{ t('designer.clear') }}
                                 </el-button>
                             </template>
                         </el-popconfirm>
@@ -195,29 +198,29 @@
                     <ElContainer style="height: 100%;">
                         <el-header height="40px" class="_fc-r-tabs">
                             <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!!activeRule"
-                                 @click="activeTab='props'">组件配置
+                                 @click="activeTab='props'"> {{ t('designer.config.component') }}
                             </div>
                             <div class="_fc-r-tab" :class="{active: activeTab==='form' && !!activeRule}"
-                                 @click="activeTab='form'">表单配置
+                                 @click="activeTab='form'">{{ t('designer.config.form') }}
                             </div>
                         </el-header>
                         <ElMain v-show="activeTab==='form'">
                             <DragForm :rule="form.rule" :option="form.option"
-                                      v-model="form.value.form"></DragForm>
+                                      v-model="form.value.form" v-model:api="form.api"></DragForm>
                         </ElMain>
                         <ElMain v-show="activeTab==='props'" style="padding: 0 20px;"
                                 :key="activeRule ? activeRule._id: ''">
                             <div>
-                                <ElDivider v-if="showBaseRule">基础配置</ElDivider>
+                                <ElDivider v-if="showBaseRule">{{ t('designer.config.rule') }}</ElDivider>
                                 <DragForm v-show="showBaseRule" v-model:api="baseForm.api"
                                           :rule="baseForm.rule"
                                           :option="baseForm.options"
                                           @change="baseChange"></DragForm>
-                                <ElDivider>属性配置</ElDivider>
+                                <ElDivider>{{ t('designer.config.props') }}</ElDivider>
                                 <DragForm v-model:api="propsForm.api" :rule="propsForm.rule"
                                           :option="propsForm.options"
                                           @change="propChange" @removeField="propRemoveField"></DragForm>
-                                <ElDivider v-if="showBaseRule">验证规则</ElDivider>
+                                <ElDivider v-if="showBaseRule">{{ t('designer.config.validate') }}</ElDivider>
                                 <DragForm v-show="showBaseRule" v-model:api="validateForm.api"
                                           :rule="validateForm.rule"
                                           :option="validateForm.options"
@@ -249,7 +252,7 @@ import {lower} from '@form-create/utils/lib/tocase';
 import ruleList from '../config/rule';
 import draggable from 'vuedraggable/src/vuedraggable';
 import createMenu from '../config/menu';
-import {upper} from '../utils/index';
+import {upper, useLocale} from '../utils/index';
 import {designerForm} from '../utils/form';
 import viewForm from '../utils/form';
 import {computed, reactive, toRefs, ref, getCurrentInstance, provide, nextTick, watch, defineComponent} from 'vue';
@@ -261,9 +264,9 @@ export default defineComponent({
         DragForm: designerForm.$form(),
         ViewForm: viewForm.$form(),
     },
-    props: ['menu', 'height', 'config', 'mask'],
+    props: ['menu', 'height', 'config', 'mask', 'locale'],
     setup(props) {
-        const {menu, height, config, mask} = toRefs(props);
+        const {menu, height, config, mask, locale} = toRefs(props);
         const vm = getCurrentInstance();
         provide('fcx', ref({active: null}));
         provide('designer', vm.ctx);
@@ -273,7 +276,7 @@ export default defineComponent({
             if (!h) return '100%';
             return is.Number(h) ? `${h}px` : h;
         })
-
+        const t = useLocale(locale).t;
         const data = reactive({
             cacheProps: {},
             moveRule: null,
@@ -282,7 +285,7 @@ export default defineComponent({
             activeTab: 'form',
             activeRule: null,
             children: ref([]),
-            menuList: menu.value || createMenu(),
+            menuList: menu.value || createMenu({t}),
             showBaseRule: false,
             visible: {
                 preview: false
@@ -297,7 +300,8 @@ export default defineComponent({
                 api: {},
             }),
             form: {
-                rule: form(),
+                rule: form({t}),
+                api: {},
                 option: {
                     form: {
                         labelPosition: 'top',
@@ -319,7 +323,7 @@ export default defineComponent({
                 }
             },
             baseForm: {
-                rule: field(),
+                rule: field({t}),
                 api: {},
                 options: {
                     form: {
@@ -334,7 +338,7 @@ export default defineComponent({
                 }
             },
             validateForm: {
-                rule: validate(),
+                rule: validate({t}),
                 api: {},
                 options: {
                     form: {
@@ -372,6 +376,20 @@ export default defineComponent({
                 });
             }
         })
+
+        watch(() => locale.value, () => {
+            const formVal = data.form.api.formData && data.form.api.formData();
+            const baseFormVal = data.baseForm.api.formData && data.baseForm.api.formData();
+            const validateFormVal = data.validateForm.api.formData && data.validateForm.api.formData();
+            data.validateForm.rule = validate({t});
+            data.baseForm.rule = field({t});
+            data.form.rule = form({t});
+            nextTick(() => {
+                formVal && data.form.api.setValue(formVal);
+                baseFormVal && data.baseForm.api.setValue(baseFormVal);
+                validateFormVal && data.validateForm.api.setValue(validateFormVal);
+            });
+        });
 
         const methods = {
             makeChildren(children) {
@@ -498,8 +516,14 @@ export default defineComponent({
             },
             getOption() {
                 const option = deepCopy(data.form.value);
-                option.submitBtn = option.form.formCreateSubmitBtn;
-                option.resetBtn = option.form.formCreateResetBtn;
+                option.submitBtn = {
+                    show: option.form.formCreateSubmitBtn,
+                    innerText: t('form.submit'),
+                };
+                option.resetBtn = {
+                    show: option.form.formCreateResetBtn,
+                    innerText: t('form.reset'),
+                };
                 delete option.form.formCreateSubmitBtn;
                 delete option.form.formCreateResetBtn;
                 return option;
@@ -663,7 +687,7 @@ export default defineComponent({
                 });
 
                 if (!data.cacheProps[rule._id]) {
-                    data.cacheProps[rule._id] = rule.config.config.props(rule);
+                    data.cacheProps[rule._id] = rule.config.config.props(rule, {t});
                 }
 
                 data.propsForm.rule = data.cacheProps[rule._id];
@@ -729,7 +753,7 @@ export default defineComponent({
                 // data.dragForm.api.refresh();
             },
             makeRule(config, _rule) {
-                const rule = _rule || config.rule();
+                const rule = _rule || config.rule({t});
                 rule.config = {config};
                 if (!rule.effect) rule.effect = {};
                 rule.effect._fc = true;
@@ -844,7 +868,7 @@ export default defineComponent({
         }
         data.dragForm.rule = methods.makeDragRule(methods.makeChildren(data.children));
         return {
-            ...toRefs(data), ...methods, dragHeight
+            ...toRefs(data), ...methods, dragHeight, t
         }
     },
     created() {

@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule, makeRequiredRule} from '../../utils/index';
+import {localeProps, makeOptionsRule, makeRequiredRule} from '../../utils/index';
 
 const label = '级联选择器';
 const name = 'cascader';
@@ -8,129 +8,37 @@ export default {
     icon: 'icon-cascader',
     label,
     name,
-    rule() {
+    rule({t}) {
+        const opt = t('props.option');
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('components.cascader.name'),
             info: '',
             effect: {
                 fetch: ''
             },
             props: {
-                options: [{
-                    value: 'zhinan',
-                    label: '指南',
-                    children: [{
-                        value: 'shejiyuanze',
-                        label: '设计原则',
-                        children: [{
-                            value: 'yizhi',
-                            label: '一致'
-                        }, {
-                            value: 'fankui',
-                            label: '反馈'
-                        }, {
-                            value: 'xiaolv',
-                            label: '效率'
-                        }, {
-                            value: 'kekong',
-                            label: '可控'
-                        }]
-                    }, {
-                        value: 'daohang',
-                        label: '导航',
-                        children: [{
-                            value: 'cexiangdaohang',
-                            label: '侧向导航'
-                        }, {
-                            value: 'dingbudaohang',
-                            label: '顶部导航'
-                        }]
-                    }]
-                }, {
-                    value: 'zujian',
-                    label: '组件',
-                    children: [{
-                        value: 'basic',
-                        label: 'Basic',
-                        children: [{
-                            value: 'layout',
-                            label: 'Layout 布局'
-                        }, {
-                            value: 'color',
-                            label: 'Color 色彩'
-                        }, {
-                            value: 'typography',
-                            label: 'Typography 字体'
-                        }, {
-                            value: 'icon',
-                            label: 'Icon 图标'
-                        }, {
-                            value: 'button',
-                            label: 'Button 按钮'
-                        }]
-                    }, {
-                        value: 'form',
-                        label: 'Form',
-                        children: [{
-                            value: 'radio',
-                            label: 'Radio 单选框'
-                        }, {
-                            value: 'checkbox',
-                            label: 'Checkbox 多选框'
-                        }, {
-                            value: 'input',
-                            label: 'Input 输入框'
-                        }, {
-                            value: 'input-number',
-                            label: 'InputNumber 计数器'
-                        }, {
-                            value: 'select',
-                            label: 'Select 选择器'
-                        }, {
-                            value: 'cascader',
-                            label: 'Cascader 级联选择器'
-                        }, {
-                            value: 'switch',
-                            label: 'Switch 开关'
-                        }, {
-                            value: 'slider',
-                            label: 'Slider 滑块'
-                        }, {
-                            value: 'time-picker',
-                            label: 'TimePicker 时间选择器'
-                        }, {
-                            value: 'date-picker',
-                            label: 'DatePicker 日期选择器'
-                        }, {
-                            value: 'datetime-picker',
-                            label: 'DateTimePicker 日期时间选择器'
-                        }, {
-                            value: 'upload',
-                            label: 'Upload 上传'
-                        }, {
-                            value: 'rate',
-                            label: 'Rate 评分'
-                        }, {
-                            value: 'form',
-                            label: 'Form 表单'
-                        }]
-                    }]
-                }]
+                options: [1, 2].map(value => {
+                    return {
+                        label: opt + value,
+                        value,
+                        children: [],
+                    }
+                }),
             }
         };
     },
-    props() {
-        return [
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [
             makeRequiredRule(),
-            makeOptionsRule('props.options', false),
+            makeOptionsRule(t, 'props.options', false),
             {
                 type: 'Object',
                 field: 'props',
                 title: '配置选项',
                 props: {
-                    rule: [{
+                    rule: localeProps(t, name + '.propsOpt', [{
                         type: 'select',
                         field: 'expandTrigger',
                         title: '次级菜单的展开方式',
@@ -144,15 +52,17 @@ export default {
                         field: 'emitPath',
                         title: '在选中节点改变时，是否返回由该节点所在的各级菜单的值所组成的数组，若设置 false，则只返回该节点的值',
                         value: true
-                    }, {type: 'input', field: 'value', title: '指定选项的值为选项对象的某个属性值'}, {
+                    }, {type: 'input', field: 'value', title: '指定选项的值为选项对象的某个属性值', value: 'value'}, {
                         type: 'input',
                         field: 'label',
-                        title: '指定选项标签为选项对象的某个属性值'
-                    }, {type: 'input', field: 'children', title: '指定选项的子选项为选项对象的某个属性值'}, {
+                        title: '指定选项标签为选项对象的某个属性值',
+                        value: 'label'
+                    }, {type: 'input', field: 'children', title: '指定选项的子选项为选项对象的某个属性值', value: 'children'}, {
                         type: 'input',
                         field: 'disabled',
-                        title: '指定选项的禁用为选项对象的某个属性值'
-                    }, {type: 'input', field: 'leaf', title: '指定选项的叶子节点的标志位为选项对象的某个属性值'}]
+                        title: '指定选项的禁用为选项对象的某个属性值',
+                        value: 'disabled'
+                    }, {type: 'input', field: 'leaf', title: '指定选项的叶子节点的标志位为选项对象的某个属性值'}])
                 }
             }, {
                 type: 'select',
@@ -175,6 +85,6 @@ export default {
                 type: 'input',
                 field: 'separator',
                 title: '选项分隔符'
-            }];
+            }]);
     }
 };
