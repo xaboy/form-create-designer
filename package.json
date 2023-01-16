@@ -18,6 +18,7 @@
         "dev": "vue-cli-service serve",
         "rollup": "rollup -c ./rollup.config.ts",
         "build": "vite build --config ./vite.config.build.js",
+        "build:locale": "gulp -f gulpfile.js",
         "build:preview": "vite build --config ./vite.config.preview.js"
     },
     "repository": {
@@ -43,7 +44,8 @@
         "LICENSE",
         "src",
         "types",
-        "dist"
+        "dist",
+        "locale"
     ],
     "author": "xaboy",
     "license": "MIT",
@@ -85,6 +87,7 @@
         "fast-glob": "^3.2.7",
         "figlet": "^1.5.0",
         "fs-extra": "^10.0.0",
+        "gulp": "^4.0.2",
         "html-webpack-plugin": "^4.3.0",
         "humps": "^2.0.1",
         "husky": "^4.2.5",

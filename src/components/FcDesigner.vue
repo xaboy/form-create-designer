@@ -147,8 +147,8 @@
         <ElMain>
             <ElContainer style="height: 100%;">
                 <el-aside class="_fc-l" width="266px">
-                    <template v-for="(item, index) in menuList" >
-                        <div class="_fc-l-group" :key="index">
+                    <template v-for="(item, index) in menuList" :key="index">
+                        <div class="_fc-l-group">
                             <h4 class="_fc-l-title">{{ item.title }}</h4>
                             <draggable :group="{name:'default', pull:'clone',put:false}" :sort="false"
                                        itemKey="name"

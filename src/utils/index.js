@@ -2,7 +2,7 @@ import is, {hasProperty} from '@form-create/utils/lib/type';
 import {parseFn} from '@form-create/utils/lib/json';
 import toCase from '@form-create/utils/lib/tocase';
 import {computed, isRef, unref, ref} from 'vue';
-import ZhCn from '../locale/en';
+import ZhCn from '../locale/zh-cn';
 
 export function makeRequiredRule() {
     return {
