@@ -5,8 +5,8 @@
             border
             size="small"
             style="width: 100%">
-            <template v-for="(col,idx) in column">
-                <el-table-column :key="col.label + idx" :label="col.label">
+            <template v-for="(col,idx) in column" :key="col.label + idx">
+                <el-table-column :label="col.label">
                     <template #default="scope">
                         <el-input size="small" :modelValue="scope.row[col.key] || ''"
                                   @Update:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></el-input>

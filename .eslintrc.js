@@ -1,10 +1,10 @@
 module.exports = {
     'env': {
-        "browser": true,
-        "node": true,
-        "es6": true,
-        "jest": true,
-        "commonjs": true
+        'browser': true,
+        'node': true,
+        'es6': true,
+        'jest': true,
+        'commonjs': true
     },
     'extends': [
         'eslint:recommended',
@@ -17,7 +17,7 @@ module.exports = {
             'experimentalObjectRestSpread': true,
             'jsx': true
         },
-        "parser": "babel-eslint",
+        'parser': 'babel-eslint',
     },
     'plugins': [
         'vue'
@@ -35,5 +35,9 @@ module.exports = {
         'no-unused-vars': 'warn',
         'object-curly-spacing': 'error',
         'no-console': 'warn',
+        'vue/valid-v-model': 'warn',
+        'vue/no-template-key': 'warn',
+        'vue/valid-v-for': 'warn',
+        'vue/require-v-for-key': 'warn',
     }
 };

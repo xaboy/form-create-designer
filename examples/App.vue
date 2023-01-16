@@ -89,7 +89,7 @@ export default {
             err: false,
             type: -1,
             lang:'cn',
-            locale: ZhCn,
+            locale: null,
         };
     },
     watch: {
