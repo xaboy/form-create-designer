@@ -38,7 +38,7 @@ export default defineComponent({
         }
     },
     data() {
-        const t = this.designer.t;
+        const t = this.designer.setupState.t;
         return {
             api: {},
             fetch: {},

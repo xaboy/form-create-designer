@@ -269,7 +269,7 @@ export default defineComponent({
         const {menu, height, config, mask, locale} = toRefs(props);
         const vm = getCurrentInstance();
         provide('fcx', ref({active: null}));
-        provide('designer', vm.ctx);
+        provide('designer', vm);
 
         const dragHeight = computed(() => {
             const h = height.value;

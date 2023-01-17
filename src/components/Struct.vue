@@ -40,7 +40,7 @@ export default defineComponent({
             visible: false,
             err: false,
             oldVal: null,
-            t: this.designer.t,
+            t: this.designer.setupState.t,
         };
     },
     watch: {
