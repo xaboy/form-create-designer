@@ -57,11 +57,37 @@ app.use(FcDesigner)
 <fc-designer ref="designer"/>
 ```
 
+## 设置多语言
+通过 locale 配置项设置语言
+
+```vue
+<template>
+  <fc-designer :locale="locale"></fc-designer>
+</template>
+
+<script>
+import En from "@form-create/designer/locale/en.js";
+export default {
+  data(){
+    return {
+        locale: En,
+    }
+  }
+}
+</script>
+```
+
 ## 组件`props`
 
 - **menu**`MenuList` 重新配置拖拽的组件
 
 - **height**`int|string` 设计器组件高度, 默认`100%`
+
+- **locale**`object` 设置多语言
+
+- **config**`Config` 设置多语言
+
+- **mask** `boolean` 设置拖拽表单中的组件是否可以操作
 
 ## 组件方法
 
