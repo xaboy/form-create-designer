@@ -30,7 +30,7 @@ export default defineComponent({
     },
     data() {
         const flag = is.String(this.modelValue);
-        const t = this.designer.t;
+        const t = this.designer.setupState.t;
         return {
             t,
             required: this.modelValue === undefined ? false : (flag ? true : !!this.modelValue),

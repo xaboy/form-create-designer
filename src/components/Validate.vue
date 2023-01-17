@@ -23,7 +23,7 @@ export default defineComponent({
         }
     },
     data() {
-        const t = this.designer.t;
+        const t = this.designer.setupState.t;
         return {
             formValue: {},
             t,
@@ -156,8 +156,8 @@ export default defineComponent({
                                                         class: 'append-msg',
                                                         on: {
                                                             click: (inject) => {
-                                                                const title = this.designer.activeRule.title;
-                                                                if (this.designer.activeRule) {
+                                                                const title = this.designer.setupState.activeRule.title;
+                                                                if (this.designer.setupState.activeRule) {
                                                                     inject.api.setValue('message', t(inject.api.form.mode !== 'required' ? 'validate.autoMode' : 'validate.autoRequired', {title}));
                                                                 }
                                                             }
