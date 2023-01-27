@@ -13,8 +13,8 @@ export interface Menu {
     list: MenuItem[]
 }
 
-export interface Config{
-    showBaseForm:Boolean;
+export interface Config {
+    showBaseForm: Boolean;
 }
 
 export interface MenuList extends Array<Menu> {
@@ -28,6 +28,9 @@ export interface DragRule {
 
     props(): Rule[];
 
+    watch?: {
+        [key: string]: (arg: { value: any, rule: object, api: object, field: string }) => void;
+    };
     children?: string;
     inside?: true;
     drag?: true | String;
