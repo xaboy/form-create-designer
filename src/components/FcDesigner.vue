@@ -597,6 +597,7 @@ export default defineComponent({
                     }
 
                     delete rule._id;
+                    delete rule.key;
                     if (rule.config) {
                         delete rule.config.config;
                     }
@@ -618,10 +619,17 @@ export default defineComponent({
             baseChange(field, value, _, fapi) {
                 if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
                     data.activeRule[field] = value;
+                    data.activeRule.config.config?.watch?.['$' + field]({
+                        field,
+                        value,
+                        api: fapi,
+                        rule: data.activeRule
+                    });
                 }
             },
             propRemoveField(field, _, fapi) {
                 if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
+                    const org = field;
                     data.dragForm.api.sync(data.activeRule);
                     if (field.indexOf('formCreate') === 0) {
                         field = field.replace('formCreate', '');
@@ -639,10 +647,17 @@ export default defineComponent({
                     } else {
                         delete data.activeRule.props[field];
                     }
+                    data.activeRule.config.config?.watch?.[org]({
+                        field: org,
+                        value: undefined,
+                        api: fapi,
+                        rule: data.activeRule
+                    });
                 }
             },
             propChange(field, value, _, fapi) {
                 if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
+                    const org = field;
                     if (field.indexOf('formCreate') === 0) {
                         field = field.replace('formCreate', '');
                         if (!field) return;
@@ -659,6 +674,12 @@ export default defineComponent({
                     } else {
                         data.activeRule.props[field] = value;
                     }
+                    data.activeRule.config.config?.watch?.[org]({
+                        field: org,
+                        value,
+                        api: fapi,
+                        rule: data.activeRule
+                    });
                 }
             },
             validateChange(formData) {
