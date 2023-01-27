@@ -619,7 +619,7 @@ export default defineComponent({
             baseChange(field, value, _, fapi) {
                 if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
                     data.activeRule[field] = value;
-                    data.activeRule.config.config?.watch?.['$' + field]({
+                    data.activeRule.config.config?.watch?.['$' + field]?.({
                         field,
                         value,
                         api: fapi,
@@ -647,7 +647,7 @@ export default defineComponent({
                     } else {
                         delete data.activeRule.props[field];
                     }
-                    data.activeRule.config.config?.watch?.[org]({
+                    data.activeRule.config.config?.watch?.[org]?.({
                         field: org,
                         value: undefined,
                         api: fapi,
@@ -674,7 +674,7 @@ export default defineComponent({
                     } else {
                         data.activeRule.props[field] = value;
                     }
-                    data.activeRule.config.config?.watch?.[org]({
+                    data.activeRule.config.config?.watch?.[org]?.({
                         field: org,
                         value,
                         api: fapi,
