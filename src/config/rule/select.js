@@ -56,6 +56,14 @@ export default {
                 type: 'input',
                 field: 'noMatchText',
                 title: '搜索条件无匹配时显示的文字'
+            }, {
+                type: 'switch',
+                field: 'remote',
+                title: '其中的选项是否从服务器远程加载'
+            }, {
+                type: 'Struct',
+                field: 'remoteMethod',
+                title: '自定义远程搜索方法'
             }, {type: 'input', field: 'noDataText', title: '选项为空时显示的文字'}, {
                 type: 'switch',
                 field: 'reserveKeyword',
