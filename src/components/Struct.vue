@@ -26,7 +26,7 @@ import {defineComponent} from 'vue';
 export default defineComponent({
     name: 'Struct',
     props: {
-        modelValue: [Object, Array],
+        modelValue: [Object, Array, Function],
         title: String,
         defaultValue: {
             require: false
