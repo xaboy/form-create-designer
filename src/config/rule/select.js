@@ -27,6 +27,11 @@ export default {
             })
         };
     },
+    watch: {
+        multiple({rule}) {
+            rule.key = uniqueId();
+        }
+    },
     props(_, {t}) {
         return localeProps(t, name + '.props', [
             makeRequiredRule(),
