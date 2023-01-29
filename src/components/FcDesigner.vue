@@ -529,7 +529,7 @@ export default defineComponent({
                 return option;
             },
             setRule(rules) {
-                data.children = methods.makeChildren(methods.loadRule(is.String(rules) ? designerForm.parseJson(rules) : rules));
+                data.children = methods.makeChildren(methods.loadRule(is.String(rules) ? designerForm.parseJson(rules) : deepCopy(rules)));
                 methods.clearActiveRule();
                 data.dragForm.rule = methods.makeDragRule(data.children);
             },
