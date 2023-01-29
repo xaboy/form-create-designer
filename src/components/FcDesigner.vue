@@ -695,8 +695,10 @@ export default defineComponent({
                     delete data.propsForm.api[data.activeRule._id];
                     delete data.baseForm.api[data.activeRule._id];
                     delete data.validateForm.api[data.activeRule._id];
+                    delete data.dragForm.api.activeRule;
                 }
                 data.activeRule = rule;
+                data.dragForm.api.activeRule = rule;
 
                 nextTick(() => {
                     data.activeTab = 'props';
@@ -708,7 +710,7 @@ export default defineComponent({
                 });
 
                 if (!data.cacheProps[rule._id]) {
-                    data.cacheProps[rule._id] = rule.config.config.props(rule, {t});
+                    data.cacheProps[rule._id] = rule.config.config.props(rule, {t, api: data.dragForm.api});
                 }
 
                 data.propsForm.rule = data.cacheProps[rule._id];
