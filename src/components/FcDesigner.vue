@@ -542,8 +542,8 @@ export default defineComponent({
             },
             setOption(opt) {
                 let option = {...opt};
-                option.form.formCreateSubmitBtn = !!option.submitBtn;
-                option.form.formCreateResetBtn = !!option.resetBtn;
+                option.form.formCreateSubmitBtn = !!option.submitBtn && option.submitBtn.show;
+                option.form.formCreateResetBtn = !!option.resetBtn && option.resetBtn.show;
                 option.submitBtn = false;
                 delete option.resetBtn;
                 data.form.value = option;
