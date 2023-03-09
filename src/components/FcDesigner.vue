@@ -154,7 +154,7 @@
                                 <div class="_fc-l-item" v-for="(data, index) in item.list"
                                      :key="index">
                                     <div class="_fc-l-icon">
-                                        <i :class="[data.icon.substring(0,3) === 'el-' ? data.icon : (data.icon.substring(0,4) === 'icon') ? 'fc-icon '+data.icon : 'fc-icon icon-input']"></i>
+                                        <i :class="[data.icon ? (data.icon.substring(0,3) === 'el-' ? data.icon : 'fc-icon '+data.icon) : 'fc-icon icon-input']"></i>
                                     </div>
                                     <span class="_fc-l-name">{{ data.label }}</span>
                                 </div>
