@@ -14,6 +14,7 @@ export default {
             field: uniqueId(),
             title: label,
             info: '',
+            $required: false,
             props: {},
         };
     },

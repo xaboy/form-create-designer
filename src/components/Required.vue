@@ -39,7 +39,7 @@ export default {
             if (this.required === false) {
                 val = false;
             } else {
-                val = this.requiredMsg;
+                val = this.requiredMsg || true;
             }
             this.$emit('input', val);
         },

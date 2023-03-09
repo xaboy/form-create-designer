@@ -17,6 +17,7 @@ export default {
             effect: {
                 fetch: ''
             },
+            $required: false,
             props: {},
             options: [
                 {value: '1', label: '选项1'},
