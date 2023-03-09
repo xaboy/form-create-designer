@@ -14,6 +14,7 @@ export default {
         };
     },
     children: 'col',
+    childrenLen: 2,
     props() {
         return [{type: 'inputNumber', field: 'gutter', title: '栅格间隔', props: {min:0}}, {
             type: 'switch',

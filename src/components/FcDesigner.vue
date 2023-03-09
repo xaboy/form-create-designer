@@ -767,8 +767,10 @@ export default {
             }
 
             if (config.children && !_rule) {
-                const child = this.makeRule(ruleList[config.children]);
-                (drag || rule).children.push(child);
+                for (let i = 0; i < (config.childrenLen || 1); i++) {
+                    const child = this.makeRule(ruleList[config.children]);
+                    (drag || rule).children.push(child);
+                }
             }
 
             const mask = this.mask !== undefined ? this.mask !== false : config.mask !== false;

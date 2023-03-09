@@ -30,6 +30,7 @@ export interface DragRule {
     props(): Rule[];
 
     children?: string;
+    childrenLen?: number,
     inside?: true;
     drag?: true | String;
     dragBtn?: false;
