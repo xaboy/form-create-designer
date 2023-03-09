@@ -516,11 +516,22 @@ export default {
         },
         getOption() {
             const option = deepCopy(this.form.value);
-            option.submitBtn = option.form.formCreateSubmitBtn;
-            option.resetBtn = option.form.formCreateResetBtn;
+            if (typeof option.submitBtn === 'object') {
+                option.submitBtn.show = option.form.formCreateSubmitBtn;
+            } else {
+                option.submitBtn = option.form.formCreateSubmitBtn;
+            }
+            if (typeof option.resetBtn === 'object') {
+                option.resetBtn.show = option.form.formCreateResetBtn;
+            } else {
+                option.resetBtn = option.form.formCreateResetBtn;
+            }
             delete option.form.formCreateSubmitBtn;
             delete option.form.formCreateResetBtn;
             return option;
+        },
+        getOptions() {
+            return this.getOption();
         },
         setRule(rules) {
             const children = this.loadRule(is.String(rules) ? designerForm.parseJson(rules) : rules);
@@ -534,11 +545,12 @@ export default {
         },
         setOption(data) {
             let option = {...data};
-            option.form.formCreateSubmitBtn = !!option.submitBtn;
-            option.form.formCreateResetBtn = !!option.resetBtn;
-            option.submitBtn = false;
-            delete option.resetBtn;
+            option.form.formCreateSubmitBtn = typeof option.submitBtn === 'object' ? (option.submitBtn.show === undefined ? true : !!option.submitBtn.show) : !!option.submitBtn;
+            option.form.formCreateResetBtn = typeof option.resetBtn === 'object' ? !!option.resetBtn.show : !!option.resetBtn;
             this.form.value = option;
+        },
+        setOptions(data) {
+            this.setOption(data);
         },
         loadRule(rules) {
             const loadRule = [];
