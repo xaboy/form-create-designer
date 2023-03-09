@@ -16,6 +16,11 @@ export interface MenuList extends Array<Menu> {
 
 }
 
+export interface Config {
+    showBaseForm: Boolean;
+    showConfig: Boolean;
+}
+
 export interface DragRule {
     name: string;
 
