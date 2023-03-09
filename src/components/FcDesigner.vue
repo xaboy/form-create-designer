@@ -190,14 +190,14 @@
                 <ElAside class="_fc-r" width="320px" v-if="!config || config.showConfig !== false">
                     <ElContainer style="height: 100%;">
                         <el-header height="40px" class="_fc-r-tabs">
-                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!!activeRule"
+                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!!activeRule || (config && config.showFormConfig === false)"
                                  @click="activeTab='props'">组件配置
                             </div>
-                            <div class="_fc-r-tab" :class="{active: activeTab==='form' && !!activeRule}"
+                            <div class="_fc-r-tab" v-if="!config || config.showFormConfig !== false" :class="{active: activeTab==='form' && !!activeRule}"
                                  @click="activeTab='form'">表单配置
                             </div>
                         </el-header>
-                        <ElMain v-show="activeTab==='form'">
+                        <ElMain v-show="activeTab==='form'" v-if="!config || config.showFormConfig !== false">
                             <component :is="FormCreate" :rule="form.rule" :option="form.option"
                                         :value.sync="form.value.form"></component>
                         </ElMain>
