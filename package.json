@@ -1,6 +1,6 @@
 {
     "name": "@form-create/designer",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "好用的vue可视化表单设计器组件",
     "main": "./dist/index.min.js",
     "module": "./dist/index.min.js",

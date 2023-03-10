@@ -1,6 +1,15 @@
 
+1.0.9 (2023-03-09)
+- 增加 `config.showFormConfig` 配置项,控制是否显示表单配置
+- 增加 `config.showConfig` 配置项,是否隐藏右侧配置栏
+- 增加 拖拽栏支持 `element-ui`原生icon
+- 增加 `childrenLen` 配置子组件初始生成几个
+- 优化 `setOption` 方法
+- 优化必填功能
+- 优化 `validate` 配置
+
 1.0.8 (2022-10-7)
-- 新增 `config.showBaseForm` 配置
+- 新增 `config.showBaseForm` 配置,隐藏表单组件专有的配置
 - 清空时增加二次确认
 - 优化组件挂载
 
