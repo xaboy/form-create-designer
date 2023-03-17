@@ -197,14 +197,14 @@
                 <ElAside class="_fc-r" width="320px" v-if="!config || config.showConfig !== false">
                     <ElContainer style="height: 100%;">
                         <el-header height="40px" class="_fc-r-tabs">
-                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!!activeRule"
+                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!activeRule || (config && config.showFormConfig === false)"
                                  @click="activeTab='props'"> {{ t('designer.config.component') }}
                             </div>
-                            <div class="_fc-r-tab" :class="{active: activeTab==='form' && !!activeRule}"
+                            <div class="_fc-r-tab" v-if="!config || config.showFormConfig !== false" :class="{active: activeTab==='form' && !!activeRule}"
                                  @click="activeTab='form'">{{ t('designer.config.form') }}
                             </div>
                         </el-header>
-                        <ElMain v-show="activeTab==='form'">
+                        <ElMain v-show="activeTab==='form'" v-if="!config || config.showFormConfig !== false">
                             <DragForm :rule="form.rule" :option="form.option"
                                       v-model="form.value.form" v-model:api="form.api"></DragForm>
                         </ElMain>
