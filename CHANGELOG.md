@@ -1,5 +1,13 @@
 ## 更新说明
 
+### 3.1.1(2023.03.17)
+- 增加 `config.showFormConfig` 配置项,控制是否显示表单配置
+- 增加 `config.showConfig` 配置项,是否隐藏右侧配置栏
+- 增加 `childrenLen` 配置子组件初始生成几个
+- 优化 `setOption` 方法
+- 优化必填功能
+- 优化 `validate` 配置
+
 ### 3.1.1(2023.01.31)
 
 - 新增 watch 配置项
