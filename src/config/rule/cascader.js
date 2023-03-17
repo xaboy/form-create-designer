@@ -18,6 +18,7 @@ export default {
             effect: {
                 fetch: ''
             },
+            $required: false,
             props: {
                 options: [1, 2].map(value => {
                     return {

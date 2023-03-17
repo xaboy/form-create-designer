@@ -14,6 +14,7 @@ export default {
             field: uniqueId(),
             title: t('components.switch.name'),
             info: '',
+            $required: false,
             props: {},
         };
     },

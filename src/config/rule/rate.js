@@ -14,6 +14,7 @@ export default {
             field: uniqueId(),
             title: t('components.rate.name'),
             info: '',
+            $required: false,
             props: {},
         };
     },

@@ -14,6 +14,7 @@ export default {
             field: uniqueId(),
             title: t('components.upload.name'),
             info: '',
+            $required: false,
             props: {
                 action: '',
                 onSuccess(res, file) {

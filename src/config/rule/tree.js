@@ -18,6 +18,7 @@ export default {
             effect: {
                 fetch: ''
             },
+            $required: false,
             props: {
                 props: {
                     label: 'label',

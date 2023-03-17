@@ -14,6 +14,7 @@ export default {
             field: uniqueId(),
             title: t('components.fc-editor.name'),
             info: '',
+            $required: false,
             props: {},
         };
     },
