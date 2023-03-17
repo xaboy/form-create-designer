@@ -17,6 +17,7 @@ export interface Menu {
 export interface Config {
     showBaseForm: Boolean;
     showConfig: Boolean;
+    showFormConfig: Boolean;
 }
 
 export interface MenuList extends Array<Menu> {
