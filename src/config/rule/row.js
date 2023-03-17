@@ -16,6 +16,7 @@ export default {
         };
     },
     children: 'col',
+    childrenLen: 2,
     props(_, {t}) {
         return localeProps(t, name + '.props', [{
             type: 'inputNumber',
