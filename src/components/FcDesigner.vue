@@ -797,8 +797,10 @@ export default defineComponent({
                 }
 
                 if (config.children && !_rule) {
-                    const child = methods.makeRule(ruleList[config.children]);
-                    (drag || rule).children.push(child);
+                    for (let i = 0; i < (config.childrenLen || 1); i++) {
+                        const child = methods.makeRule(ruleList[config.children]);
+                        (drag || rule).children.push(child);
+                    }
                 }
 
                 const dragMask = mask.value !== undefined ? mask.value !== false : config.mask !== false;

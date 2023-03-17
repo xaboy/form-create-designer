@@ -33,6 +33,7 @@ export interface DragRule {
         [key: string]: (arg: { value: any, rule: object, api: object, field: string }) => void;
     };
     children?: string;
+    childrenLen?: number;
     inside?: true;
     drag?: true | String;
     dragBtn?: false;
