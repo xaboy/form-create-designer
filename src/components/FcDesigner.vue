@@ -194,7 +194,7 @@
                         </div>
                     </ElMain>
                 </ElContainer>
-                <ElAside class="_fc-r" width="320px">
+                <ElAside class="_fc-r" width="320px" v-if="!config || config.showConfig !== false">
                     <ElContainer style="height: 100%;">
                         <el-header height="40px" class="_fc-r-tabs">
                             <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!!activeRule"
