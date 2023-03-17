@@ -516,6 +516,8 @@ export default {
         },
         getOption() {
             const option = deepCopy(this.form.value);
+            option.submitBtn = option._submitBtn;
+            option.resetBtn = option._resetBtn;
             if (typeof option.submitBtn === 'object') {
                 option.submitBtn.show = option.form.formCreateSubmitBtn;
             } else {
@@ -528,6 +530,8 @@ export default {
             }
             delete option.form.formCreateSubmitBtn;
             delete option.form.formCreateResetBtn;
+            delete option._submitBtn;
+            delete option._resetBtn;
             return option;
         },
         getOptions() {
@@ -547,6 +551,10 @@ export default {
             let option = {...data};
             option.form.formCreateSubmitBtn = typeof option.submitBtn === 'object' ? (option.submitBtn.show === undefined ? true : !!option.submitBtn.show) : !!option.submitBtn;
             option.form.formCreateResetBtn = typeof option.resetBtn === 'object' ? !!option.resetBtn.show : !!option.resetBtn;
+            option._resetBtn = option.resetBtn;
+            option.resetBtn = false;
+            option._submitBtn = option.submitBtn;
+            option.submitBtn = false;
             this.form.value = option;
         },
         setOptions(data) {
