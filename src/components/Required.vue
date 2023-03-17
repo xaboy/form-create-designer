@@ -43,7 +43,7 @@ export default defineComponent({
             if (this.required === false) {
                 val = false;
             } else {
-                val = this.requiredMsg;
+                val = this.requiredMsg || true;
             }
             this.$emit('update:modelValue', val);
         },

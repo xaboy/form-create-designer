@@ -26,6 +26,7 @@ export default {
             field: uniqueId(),
             title: t('components.el-transfer.name'),
             info: '',
+            $required: false,
             props: {
                 data: generateData()
             }

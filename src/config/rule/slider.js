@@ -14,6 +14,7 @@ export default {
             field: uniqueId(),
             title: t('components.slider.name'),
             info: '',
+            $required: false,
             props: {},
         };
     },

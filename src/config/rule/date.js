@@ -14,6 +14,7 @@ export default {
             field: uniqueId(),
             title: t('components.datePicker.name'),
             info: '',
+            $required: false,
             props: {},
         };
     },
