@@ -34,6 +34,7 @@ export default defineComponent({
                     labelWidth: '90px'
                 },
                 submitBtn: false,
+                appendValue: true,
                 formData: this.parseValue(this.modelValue)
             },
             rule: [
@@ -77,6 +78,11 @@ export default defineComponent({
                                                     {label: 'submit', value: 'submit'},
                                                     {label: 'blur', value: 'blur'},
                                                 ]
+                                            },
+                                            {
+                                                type: 'hidden',
+                                                field: 'validator',
+                                                value: undefined,
                                             },
                                             {
                                                 type: 'select',
@@ -195,7 +201,7 @@ export default defineComponent({
         parseValue(n) {
             let val = {
                 validate: n ? [...n] : [],
-                type: n.length ? n[0].type : undefined
+                type: n.length ? (n[0].type || 'string') : undefined
             };
             val.validate.forEach(v => {
                 if (!v.mode) {

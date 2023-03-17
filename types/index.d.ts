@@ -1,4 +1,5 @@
 import {Rule} from "@form-create/element-ui";
+import FormCreate from "@form-create/element-ui";
 import {App, Component} from "@vue/runtime-core";
 
 export interface MenuItem {
@@ -43,3 +44,6 @@ declare const FcDesigner: {
 } & Component;
 
 export default FcDesigner;
+
+export const formCreate: typeof FormCreate;
+export const designerForm: typeof FormCreate;
