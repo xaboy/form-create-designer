@@ -516,17 +516,32 @@ export default defineComponent({
             },
             getOption() {
                 const option = deepCopy(data.form.value);
-                option.submitBtn = {
-                    show: option.form.formCreateSubmitBtn,
-                    innerText: t('form.submit'),
-                };
-                option.resetBtn = {
-                    show: option.form.formCreateResetBtn,
-                    innerText: t('form.reset'),
-                };
+                option.submitBtn = option._submitBtn;
+                option.resetBtn = option._resetBtn;
+                if (typeof option.submitBtn === 'object') {
+                    option.submitBtn.show = option.form.formCreateSubmitBtn;
+                } else {
+                    option.submitBtn = {
+                        show: option.form.formCreateSubmitBtn,
+                        innerText: t('form.submit'),
+                    };
+                }
+                if (typeof option.resetBtn === 'object') {
+                    option.resetBtn.show = option.form.formCreateResetBtn;
+                } else {
+                    option.resetBtn = {
+                        show: option.form.formCreateResetBtn,
+                        innerText: t('form.reset'),
+                    };
+                }
                 delete option.form.formCreateSubmitBtn;
                 delete option.form.formCreateResetBtn;
+                delete option._submitBtn;
+                delete option._resetBtn;
                 return option;
+            },
+            getOptions() {
+                methods.getOption();
             },
             setRule(rules) {
                 if (!rules) {
@@ -542,11 +557,16 @@ export default defineComponent({
             },
             setOption(opt) {
                 let option = {...opt};
-                option.form.formCreateSubmitBtn = !!option.submitBtn;
-                option.form.formCreateResetBtn = !!option.resetBtn;
+                option.form.formCreateSubmitBtn = typeof option.submitBtn === 'object' ? (option.submitBtn.show === undefined ? true : !!option.submitBtn.show) : !!option.submitBtn;
+                option.form.formCreateResetBtn = typeof option.resetBtn === 'object' ? !!option.resetBtn.show : !!option.resetBtn;
+                option._resetBtn = option.resetBtn;
+                option.resetBtn = false;
+                option._submitBtn = option.submitBtn;
                 option.submitBtn = false;
-                delete option.resetBtn;
                 data.form.value = option;
+            },
+            setOptions(opt){
+                methods.setOption(opt);
             },
             loadRule(rules) {
                 const loadRule = [];
