@@ -197,7 +197,7 @@
                 <ElAside class="_fc-r" width="320px" v-if="!config || config.showConfig !== false">
                     <ElContainer style="height: 100%;">
                         <el-header height="40px" class="_fc-r-tabs">
-                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!activeRule || (config && config.showFormConfig === false)"
+                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!!activeRule || (config && config.showFormConfig === false)"
                                  @click="activeTab='props'"> {{ t('designer.config.component') }}
                             </div>
                             <div class="_fc-r-tab" v-if="!config || config.showFormConfig !== false" :class="{active: activeTab==='form' && !!activeRule}"
