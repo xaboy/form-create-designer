@@ -73,7 +73,6 @@ export default defineComponent({
             });
         },
         onOk() {
-            if (this.err) return;
             const str = this.editor.getValue();
             let val;
             try {
