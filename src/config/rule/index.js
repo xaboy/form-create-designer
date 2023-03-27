@@ -23,6 +23,7 @@ import space from './space';
 import tab from './tab';
 import button from './button';
 import editor from './editor';
+import group from './group';
 
 
 const ruleList = {
@@ -51,6 +52,7 @@ const ruleList = {
     [space.name]: space,
     [button.name]: button,
     [editor.name]: editor,
+    [group.name]: group,
 };
 
 export default ruleList;
