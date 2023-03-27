@@ -91,6 +91,13 @@ const _toJSON = {
         }
         return '{\n ' + json.join(',\n ') + '\n}';
     },
+    function: function (val) {
+        var exec = (/^ *([\w]+) *\(/).exec(val);
+        if (exec && exec[1] !== 'function') {
+            return 'function ' + val;
+        }
+        return val;
+    },
     array: function (val) {
         for (var i = 0, json = []; i < val.length; i++)
             json[i] = (val[i] != null) ? toJSON(val[i]) : 'null';
