@@ -8,6 +8,10 @@ export default {
     icon: 'el-icon-copy-document',
     label,
     name,
+    inside: true,
+    drag: true,
+    dragBtn: false,
+    mask: false,
     rule() {
         return {
             type: name,
@@ -19,14 +23,14 @@ export default {
     props() {
         return [
             makeRequiredRule(),
-            {
-                type: 'Struct',
-                title: '嵌套组件规则',
-                field: 'rule',
-                props: {
-                    defaultValue: [],
-                },
-            },
+            // {
+            //     type: 'Struct',
+            //     title: '嵌套组件规则',
+            //     field: 'rule',
+            //     props: {
+            //         defaultValue: [],
+            //     },
+            // },
             {
                 type: 'Struct',
                 title: '默认值数据',

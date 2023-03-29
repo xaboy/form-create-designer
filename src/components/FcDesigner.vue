@@ -567,7 +567,10 @@ export default {
                     return loadRule.push(rule);
                 }
                 const config = ruleList[rule._fc_drag_tag] || ruleList[rule.type];
-                const _children = rule.children;
+                let _children = rule.children;
+                if(rule.type == 'fc-group'){
+                    _children = rule.props && rule.props.rule;
+                }
                 rule.children = [];
                 if (rule.control) {
                     rule._control = rule.control;
@@ -607,10 +610,14 @@ export default {
                 }
                 if (!rule) return initial;
                 rule = {...rule};
-                if (rule.children.length) {
-                    rule.children = this.parseRule(rule.children);
+                if (rule.children && rule.children.length) {
+                    if (rule.type === 'fc-group') {
+                        rule.props.rule  = this.parseRule(rule.children);
+                        rule.children = [];
+                    }else{
+                        rule.children = this.parseRule(rule.children);
+                    }
                 }
-
                 delete rule._id;
                 if (rule.config) {
                     delete rule.config.config;
