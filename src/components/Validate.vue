@@ -67,6 +67,7 @@ export default defineComponent({
                                     field: 'validate',
                                     props: {
                                         expand: 1,
+                                        sortBtn: false,
                                         rule: [
                                             {
                                                 type: 'select',

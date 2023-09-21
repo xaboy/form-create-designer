@@ -14,6 +14,11 @@ import unique from '@form-create/utils/lib/unique';
 import {makeOptionsRule} from './utils/index';
 import formCreate from './utils/form';
 
+const addComponent = (id, component) => {
+    designerForm.component(id, component);
+    formCreate.component(id, component);
+}
+
 designerForm.component('draggable', draggable);
 designerForm.component('DragTool', DragTool);
 designerForm.component('DragBox', DragBox);
@@ -22,8 +27,7 @@ designerForm.component('Struct', Struct);
 designerForm.component('Fetch', Fetch);
 designerForm.component('Required', Required);
 designerForm.component('TableOptions', TableOptions);
-designerForm.component('FcEditor', FcEditor);
-formCreate.component('FcEditor', FcEditor);
+addComponent('FcEditor', FcEditor);
 
 designerForm.register('_fc', {
     init(fc, rule) {
@@ -50,6 +54,7 @@ FcDesigner.install = install;
 FcDesigner.makeOptionsRule = makeOptionsRule;
 FcDesigner.formCreate = formCreate;
 FcDesigner.designerForm = designerForm;
+FcDesigner.component = addComponent;
 
 export default FcDesigner;
 

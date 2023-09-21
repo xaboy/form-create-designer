@@ -27,6 +27,8 @@ export interface MenuList extends Array<Menu> {
 export interface DragRule {
     name: string;
 
+    component?: Component;
+
     rule(): Rule;
 
     props(): Rule[];
