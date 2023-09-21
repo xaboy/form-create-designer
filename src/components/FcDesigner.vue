@@ -215,15 +215,18 @@
                                 <DragForm v-show="showBaseRule" v-model:api="baseForm.api"
                                           :rule="baseForm.rule"
                                           :option="baseForm.options"
+                                          :modelValue="baseForm.value"
                                           @change="baseChange"></DragForm>
                                 <ElDivider>{{ t('designer.config.props') }}</ElDivider>
                                 <DragForm v-model:api="propsForm.api" :rule="propsForm.rule"
                                           :option="propsForm.options"
+                                          :modelValue="propsForm.value"
                                           @change="propChange" @removeField="propRemoveField"></DragForm>
                                 <ElDivider v-if="showBaseRule">{{ t('designer.config.validate') }}</ElDivider>
                                 <DragForm v-show="showBaseRule" v-model:api="validateForm.api"
                                           :rule="validateForm.rule"
                                           :option="validateForm.options"
+                                          :modelValue="validateForm.value"
                                           @update:modelValue="validateChange"></DragForm>
                             </div>
                         </ElMain>
@@ -325,6 +328,7 @@ export default defineComponent({
             baseForm: {
                 rule: field({t}),
                 api: {},
+                value: {},
                 options: {
                     form: {
                         labelPosition: 'top',
@@ -340,6 +344,7 @@ export default defineComponent({
             validateForm: {
                 rule: validate({t}),
                 api: {},
+                value: [],
                 options: {
                     form: {
                         labelPosition: 'top',
@@ -355,6 +360,7 @@ export default defineComponent({
             propsForm: {
                 rule: [],
                 api: {},
+                value: {},
                 options: {
                     form: {
                         labelPosition: 'top',
@@ -377,6 +383,8 @@ export default defineComponent({
             }
         })
 
+        let unWatchActiveRule = null;
+
         watch(() => locale.value, () => {
             const formVal = data.form.api.formData && data.form.api.formData();
             const baseFormVal = data.baseForm.api.formData && data.baseForm.api.formData();
@@ -392,6 +400,16 @@ export default defineComponent({
         });
 
         const methods = {
+            unWatchActiveRule(){
+                unWatchActiveRule && unWatchActiveRule();
+                unWatchActiveRule = null;
+            },
+            watchActiveRule(){
+                methods.unWatchActiveRule();
+                unWatchActiveRule = watch(() => data.activeRule, function (n) {
+                    methods.updateRuleFormData()
+                }, {deep: true, flush: "post"});
+            },
             makeChildren(children) {
                 return reactive({children}).children;
             },
@@ -641,7 +659,9 @@ export default defineComponent({
             },
             baseChange(field, value, _, fapi) {
                 if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
+                    methods.unWatchActiveRule();
                     data.activeRule[field] = value;
+                    methods.watchActiveRule();
                     data.activeRule.config.config?.watch?.['$' + field]?.({
                         field,
                         value,
@@ -652,6 +672,7 @@ export default defineComponent({
             },
             propRemoveField(field, _, fapi) {
                 if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
+                    methods.unWatchActiveRule();
                     const org = field;
                     data.dragForm.api.sync(data.activeRule);
                     if (field.indexOf('formCreate') === 0) {
@@ -670,6 +691,7 @@ export default defineComponent({
                     } else {
                         delete data.activeRule.props[field];
                     }
+                    methods.watchActiveRule();
                     data.activeRule.config.config?.watch?.[org]?.({
                         field: org,
                         value: undefined,
@@ -680,6 +702,7 @@ export default defineComponent({
             },
             propChange(field, value, _, fapi) {
                 if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
+                    methods.unWatchActiveRule();
                     const org = field;
                     if (field.indexOf('formCreate') === 0) {
                         field = field.replace('formCreate', '');
@@ -697,6 +720,7 @@ export default defineComponent({
                     } else {
                         data.activeRule.props[field] = value;
                     }
+                    methods.watchActiveRule();
                     data.activeRule.config.config?.watch?.[org]?.({
                         field: org,
                         value,
@@ -710,10 +734,11 @@ export default defineComponent({
                 data.activeRule.validate = formData.validate || [];
                 data.dragForm.api.refreshValidate();
                 data.dragForm.api.nextTick(() => {
-                    data.dragForm.api.clearValidateState(data.activeRule.field);
+                    data.dragForm.api.clearValidateState(data.activeRule.__fc__.id);
                 });
             },
             toolActive(rule) {
+                methods.unWatchActiveRule();
                 if (data.activeRule) {
                     delete data.propsForm.api[data.activeRule._id];
                     delete data.baseForm.api[data.activeRule._id];
@@ -737,30 +762,37 @@ export default defineComponent({
                 }
 
                 data.propsForm.rule = data.cacheProps[rule._id];
-
-                const formData = {...rule.props, formCreateChild: rule.children[0]};
+                methods.updateRuleFormData();
+                methods.watchActiveRule();
+            },
+            updateRuleFormData(){
+                const rule = data.activeRule;
+                const formData = {...rule.props, formCreateChild: deepCopy(rule.children[0])};
                 Object.keys(rule).forEach(k => {
                     if (['effect', 'config', 'payload', 'id', 'type'].indexOf(k) < 0)
-                        formData['formCreate' + upper(k)] = rule[k];
+                        formData['formCreate' + upper(k)] = deepCopy(rule[k]);
                 });
                 ['props', 'effect'].forEach(name => {
                     rule[name] && Object.keys(rule[name]).forEach(k => {
-                        formData['formCreate' + upper(name) + '>' + k] = rule[name][k];
+                        formData['formCreate' + upper(name) + '>' + k] = deepCopy(rule[name][k]);
                     });
                 });
-                data.propsForm.options.formData = formData;
+                data.propsForm.value = formData;
 
                 data.showBaseRule = hasProperty(rule, 'field') && rule.input !== false && (!config.value || config.value.showBaseForm !== false);
 
                 if (data.showBaseRule) {
-                    data.baseForm.options.formData = {
+                    data.baseForm.value = {
                         field: rule.field,
                         title: rule.title || '',
                         info: rule.info,
                         _control: rule._control,
                     };
-
-                    data.validateForm.options.formData = {validate: rule.validate ? [...rule.validate] : []};
+                    data.validateForm.value = {validate: rule.validate ? [...rule.validate] : []};
+                    data.dragForm.api.refreshValidate();
+                    data.dragForm.api.nextTick(() => {
+                        data.dragForm.api.clearValidateState(rule.__fc__.id);
+                    });
                 }
             },
             dragStart(children) {
