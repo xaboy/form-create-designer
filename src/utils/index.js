@@ -95,6 +95,7 @@ const _toJSON = {
         return '{\n ' + json.join(',\n ') + '\n}';
     },
     function: function (val) {
+        val = '' + val;
         var exec = (/^ *([\w]+) *\(/).exec(val);
         if (exec && exec[1] !== 'function') {
             return 'function ' + val;
