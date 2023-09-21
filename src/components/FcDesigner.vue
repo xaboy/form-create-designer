@@ -258,7 +258,18 @@ import createMenu from '../config/menu';
 import {upper, useLocale} from '../utils/index';
 import {designerForm} from '../utils/form';
 import viewForm from '../utils/form';
-import {computed, reactive, toRefs, ref, getCurrentInstance, provide, nextTick, watch, defineComponent} from 'vue';
+import {
+    computed,
+    reactive,
+    toRefs,
+    ref,
+    getCurrentInstance,
+    provide,
+    nextTick,
+    watch,
+    defineComponent,
+    markRaw
+} from 'vue';
 
 export default defineComponent({
     name: 'FcDesigner',
@@ -639,6 +650,7 @@ export default defineComponent({
 
                     delete rule._id;
                     delete rule.key;
+                    delete rule.component;
                     if (rule.config) {
                         delete rule.config.config;
                     }
@@ -833,6 +845,9 @@ export default defineComponent({
             makeRule(config, _rule) {
                 const rule = _rule || config.rule({t});
                 rule.config = {config};
+                if (config.component) {
+                    rule.component = markRaw(config.component);
+                }
                 if (!rule.effect) rule.effect = {};
                 rule.effect._fc = true;
                 rule._fc_drag_tag = config.name;
