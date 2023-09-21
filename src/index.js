@@ -28,8 +28,8 @@ formCreate.component('FcEditor', FcEditor);
 designerForm.register('_fc', {
     init(fc, rule) {
         rule._id = unique();
-        if (fc.repeat)
-            rule.field = unique();
+        // if (fc.repeat)
+        //     rule.field = unique();
         if (fc.value) {
             rule.effect._fc = false;
         }

@@ -1,5 +1,6 @@
 <script>
-import {h, resolveComponent, defineComponent} from 'vue';
+import {h, defineComponent} from 'vue';
+import draggable from 'vuedraggable/src/vuedraggable';
 
 export default defineComponent({
     name: 'DragBox',
@@ -23,7 +24,7 @@ export default defineComponent({
             })
         }
 
-        return h(resolveComponent('draggable'), subRule, {
+        return h(draggable, subRule, {
             item: ({element}) => {
                 return h('div', {}, keys[element.__fc__.key + 'fc'])
             }

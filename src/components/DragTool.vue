@@ -56,6 +56,7 @@ export default defineComponent({
 <style>
 .drag-tool {
     position: relative;
+    display: flex;
     min-height: 20px;
     box-sizing: border-box;
     padding: 2px;
