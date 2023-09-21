@@ -454,7 +454,7 @@ export default defineComponent({
             appendMenuItem(name, item) {
                 data.menuList.forEach(v => {
                     if (v.name === name) {
-                        v.list.push(item);
+                        v.list.push(...(Array.isArray(item) ? item : [item]));
                     }
                 });
             },
