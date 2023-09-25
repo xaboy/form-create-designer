@@ -29,11 +29,6 @@ export default defineComponent({
                     action: val
                 };
             }
-            if (!val._parse && val.parse) {
-                return {...val, _parse: '' + val.parse};
-            } else if (is.Function(val._parse)) {
-                return {...val, _parse: '' + val._parse};
-            }
             return val;
         }
     },
@@ -104,40 +99,50 @@ export default defineComponent({
                     }
                 },
                 {
-                    type: 'input',
-                    field: '_parse',
+                    type: 'Struct',
+                    field: 'parse',
                     title: t('fetch.parse') + ': ',
                     info: t('fetch.parseInfo'),
-                    value: 'function (res){\n   return res.data;\n}',
+                    value: null,
                     props: {
-                        type: 'textarea',
-                        rows: 8,
-                    },
-                    validate: [{
-                        validator: (_, v, cb) => {
-                            if (!v) return cb();
-                            try {
-                                this.parseFn(v);
-                            } catch (e) {
-                                return cb(false);
-                            }
-                            cb();
-                        }, message: t('fetch.parseValidate')
-                    }]
+                        defaultValue: function parse(res){
+                            return res
+},
+                    }
                 },
+                // {
+                //     type: 'input',
+                //     field: '_parse',
+                //     title: t('fetch.parse') + ': ',
+                //     info: t('fetch.parseInfo'),
+                //     value: 'function (res){\n   return res.data;\n}',
+                //     props: {
+                //         type: 'textarea',
+                //         rows: 8,
+                //     },
+                //     validate: [{
+                //         validator: (_, v, cb) => {
+                //             if (!v) return cb();
+                //             try {
+                //                 this.parseFn(v);
+                //             } catch (e) {
+                //                 return cb(false);
+                //             }
+                //             cb();
+                //         }, message: t('fetch.parseValidate')
+                //     }]
+                // },
             ]
         };
     },
     methods: {
         parseFn(v) {
-            return eval(`(function () {
-                return ${v}
-            })()`);
+            return (new Function('return ' + v))();
         },
         _input() {
             this.api.submit((formData) => {
                 formData.to = this.to || 'options';
-                if (formData._parse) formData.parse = this.parseFn(formData._parse);
+                // if (formData._parse) formData.parse = this.parseFn(formData._parse);
                 this.$emit('update:modelValue', formData);
             });
         },
