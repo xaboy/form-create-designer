@@ -13,11 +13,13 @@ import draggable from 'vuedraggable/src/vuedraggable';
 import unique from '@form-create/utils/lib/unique';
 import {makeOptionsRule} from './utils/index';
 import formCreate from './utils/form';
+import globalUseLocale, {t} from "./utils/locale";
 
 const addComponent = (id, component) => {
     designerForm.component(id, component);
     formCreate.component(id, component);
 }
+
 
 designerForm.component('draggable', draggable);
 designerForm.component('DragTool', DragTool);
@@ -55,6 +57,8 @@ FcDesigner.makeOptionsRule = makeOptionsRule;
 FcDesigner.formCreate = formCreate;
 FcDesigner.designerForm = designerForm;
 FcDesigner.component = addComponent;
+FcDesigner.useLocale = globalUseLocale;
+FcDesigner.t = t;
 
 export default FcDesigner;
 

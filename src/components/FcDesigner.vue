@@ -258,6 +258,7 @@ import createMenu from '../config/menu';
 import {upper, useLocale} from '../utils/index';
 import {designerForm} from '../utils/form';
 import viewForm from '../utils/form';
+import {t as globalT} from '../utils/locale';
 import {
     computed,
     reactive,
@@ -290,7 +291,11 @@ export default defineComponent({
             if (!h) return '100%';
             return is.Number(h) ? `${h}px` : h;
         })
-        const t = useLocale(locale).t;
+        let _t = globalT;
+        if(locale.value) {
+            _t = useLocale(locale).t
+        }
+        const t = (...args)=>_t(...args);
         const data = reactive({
             cacheProps: {},
             moveRule: null,
@@ -304,6 +309,7 @@ export default defineComponent({
             visible: {
                 preview: false
             },
+            t,
             preview: {
                 state: false,
                 rule: [],
@@ -396,17 +402,29 @@ export default defineComponent({
 
         let unWatchActiveRule = null;
 
-        watch(() => locale.value, () => {
+        watch(() => locale.value, (n) => {
+            _t = n ? useLocale(locale).t : globalT;
             const formVal = data.form.api.formData && data.form.api.formData();
             const baseFormVal = data.baseForm.api.formData && data.baseForm.api.formData();
             const validateFormVal = data.validateForm.api.formData && data.validateForm.api.formData();
             data.validateForm.rule = validate({t});
             data.baseForm.rule = field({t});
             data.form.rule = form({t});
+            data.cacheProps = {};
+            const rule = data.activeRule;
+            let propsVal = null;
+            if (rule) {
+                data.propsForm.rule = data.cacheProps[rule._id] = rule.config.config.props(rule, {
+                    t,
+                    api: data.dragForm.api
+                });
+                propsVal = data.propsForm.api.formData && data.propsForm.api.formData();
+            }
             nextTick(() => {
                 formVal && data.form.api.setValue(formVal);
                 baseFormVal && data.baseForm.api.setValue(baseFormVal);
                 validateFormVal && data.validateForm.api.setValue(validateFormVal);
+                propsVal && data.propsForm.api.setValue(propsVal);
             });
         });
 
@@ -418,7 +436,7 @@ export default defineComponent({
             watchActiveRule(){
                 methods.unWatchActiveRule();
                 unWatchActiveRule = watch(() => data.activeRule, function (n) {
-                    methods.updateRuleFormData()
+                    n && methods.updateRuleFormData()
                 }, {deep: true, flush: "post"});
             },
             makeChildren(children) {
