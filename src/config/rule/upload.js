@@ -26,12 +26,15 @@ export default {
     props(_, {t}) {
         return localeProps(t, name + '.props', [makeRequiredRule(), {
             type: 'select',
-            field: 'uploadType',
+            field: 'list-type',
             title: '上传类型',
-            value: 'image',
-            options: [{label: '图片', value: 'image'}, {
-                label: '文件',
-                value: 'file'
+            value: 'text',
+            options: [{label: '文字', value: 'text'}, {
+                label: '图片',
+                value: 'picture'
+            }, {
+                label: '卡片',
+                value: 'picture-card'
             }]
         }, {type: 'input', field: 'action', title: '上传的地址(必填)'}, {
             type: 'Struct',
