@@ -57,7 +57,7 @@ export default defineComponent({
     },
     methods: {
         load() {
-            const val = toJSON(this.modelValue ? deepParseFn(deepCopy(this.modelValue)) : this.defaultValue);
+            const val = toJSON(deepParseFn(this.modelValue ? deepCopy(this.modelValue) : this.defaultValue));
             this.oldVal = val;
             this.$nextTick(() => {
                 this.editor = CodeMirror(this.$refs.editor, {
@@ -76,7 +76,7 @@ export default defineComponent({
             const str = this.editor.getValue();
             let val;
             try {
-                val = eval('(function (){return ' + str + '}())');
+                val = (new Function('return ' + str))();
             } catch (e) {
                 this.err = ` (${e})`;
                 return;

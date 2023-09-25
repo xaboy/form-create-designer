@@ -128,14 +128,16 @@ const _toJSON = {
 };
 
 export const deepParseFn = function (target) {
-    for (let key in target) {
-        if (Object.prototype.hasOwnProperty.call(target, key)) {
-            let data = target[key];
-            if (Array.isArray(data) || is.Object(data)) {
-                deepParseFn(data);
-            }
-            if (is.String(data)) {
-                target[key] = parseFn(data);
+    if(target && typeof target === 'object'){
+        for (let key in target) {
+            if (Object.prototype.hasOwnProperty.call(target, key)) {
+                let data = target[key];
+                if (Array.isArray(data) || is.Object(data)) {
+                    deepParseFn(data);
+                }
+                if (is.String(data)) {
+                    target[key] = parseFn(data);
+                }
             }
         }
     }
