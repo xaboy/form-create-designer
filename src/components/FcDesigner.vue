@@ -713,6 +713,8 @@ export default defineComponent({
                             delete data.activeRule.effect[field.split('>')[1]];
                         } else if (field.indexOf('props') === 0 && field.indexOf('>') > -1) {
                             delete data.activeRule.props[field.split('>')[1]];
+                        } else if (field.indexOf('attrs') === 0 && field.indexOf('>') > -1) {
+                            data.activeRule.attrs[field.split('>')[1]] = value;
                         } else if (field === 'child') {
                             delete data.activeRule.children[0];
                         } else if (field) {
@@ -742,6 +744,8 @@ export default defineComponent({
                             data.activeRule.effect[field.split('>')[1]] = value;
                         } else if (field.indexOf('props') === 0 && field.indexOf('>') > -1) {
                             data.activeRule.props[field.split('>')[1]] = value;
+                        } else if (field.indexOf('attrs') === 0 && field.indexOf('>') > -1) {
+                            data.activeRule.attrs[field.split('>')[1]] = value;
                         } else if (field === 'child') {
                             data.activeRule.children[0] = value;
                         } else {
@@ -802,7 +806,7 @@ export default defineComponent({
                     if (['effect', 'config', 'payload', 'id', 'type'].indexOf(k) < 0)
                         formData['formCreate' + upper(k)] = deepCopy(rule[k]);
                 });
-                ['props', 'effect'].forEach(name => {
+                ['props', 'effect', 'attrs'].forEach(name => {
                     rule[name] && Object.keys(rule[name]).forEach(k => {
                         formData['formCreate' + upper(name) + '>' + k] = deepCopy(rule[name][k]);
                     });
