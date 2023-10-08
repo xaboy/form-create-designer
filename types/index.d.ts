@@ -1,6 +1,6 @@
 import {Rule} from "@form-create/element-ui";
 import FormCreate from "@form-create/element-ui";
-import {App, Component} from "@vue/runtime-core";
+import {Component, Plugin, Ref} from "@vue/runtime-core";
 
 export interface MenuItem {
     label: string,
@@ -15,9 +15,15 @@ export interface Menu {
 }
 
 export interface Config {
-    showBaseForm: Boolean;
-    showConfig: Boolean;
-    showFormConfig: Boolean;
+    showBaseForm?: Boolean;
+    showConfig?: Boolean;
+    showFormConfig?: Boolean;
+    baseRule?: (arg: { t: Object }) => Rule[] | { rule: (arg: { t: Object }) => Rule[], append?: boolean };
+    validateRule?: (arg: { t: Object }) => Rule[] | { rule: (arg: { t: Object }) => Rule[], append?: boolean };
+    formRule?: (arg: { t: Object }) => Rule[] | { rule: (arg: { t: Object }) => Rule[], append?: boolean };
+    componentRule?: {
+        [name: string]: (rule: Object, arg: { t: Object }) => Rule[] | { rule: (rule: Object, arg: { t: Object }) => Rule[], append?: boolean }
+    };
 }
 
 export interface MenuList extends Array<Menu> {
@@ -44,9 +50,32 @@ export interface DragRule {
     mask?: false;
 }
 
-declare const FcDesigner: {
-    install: (app: App, ...options: any[]) => any;
-} & Component;
+interface FcDesignerProtoType {
+    component(name: string, component: Component): void;
+
+    useLocale(locale: Object): {
+        name: Ref<string>;
+        lang: Ref<string>;
+        locale: Ref<Object>;
+        t(key: string): string | undefined;
+    }
+
+    t(key: string): string | undefined;
+
+    formCreate: typeof FormCreate;
+    designerForm: typeof FormCreate;
+
+    makeOptionsRule(t: (key: string) => string | undefined, to: string, flag?: boolean): Rule;
+}
+
+export declare const FcDesigner: import("vue").DefineComponent<{
+    height?: Number | String;
+    menu?: MenuList,
+    config?: Config;
+    mask?: boolean;
+    locale?: Object;
+}> & FcDesignerProtoType & Plugin & Record<string, any>;
+
 
 export default FcDesigner;
 
