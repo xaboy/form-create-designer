@@ -286,7 +286,8 @@ export default defineComponent({
     setup(props) {
         const {menu, height, mask, locale} = toRefs(props);
         const vm = getCurrentInstance();
-        provide('fcx', ref({active: null}));
+        const fcx = reactive({active: null});
+        provide('fcx', fcx);
         provide('designer', vm);
 
         const config = toRef(props, 'config', {});
