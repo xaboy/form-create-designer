@@ -197,10 +197,12 @@
                 <ElAside class="_fc-r" width="320px" v-if="!config || config.showConfig !== false">
                     <ElContainer style="height: 100%;">
                         <el-header height="40px" class="_fc-r-tabs">
-                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}" v-if="!!activeRule || (config && config.showFormConfig === false)"
+                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}"
+                                 v-if="!!activeRule || (config && config.showFormConfig === false)"
                                  @click="activeTab='props'"> {{ t('designer.config.component') }}
                             </div>
-                            <div class="_fc-r-tab" v-if="!config || config.showFormConfig !== false" :class="{active: activeTab==='form' && !!activeRule}"
+                            <div class="_fc-r-tab" v-if="!config || config.showFormConfig !== false"
+                                 :class="{active: activeTab==='form' && !!activeRule}"
                                  @click="activeTab='form'">{{ t('designer.config.form') }}
                             </div>
                         </el-header>
@@ -298,10 +300,10 @@ export default defineComponent({
             return is.Number(h) ? `${h}px` : h;
         })
         let _t = globalT;
-        if(locale.value) {
+        if (locale.value) {
             _t = useLocale(locale).t
         }
-        const t = (...args)=>_t(...args);
+        const t = (...args) => _t(...args);
 
         const tidyRuleConfig = (orgRule, configRule, ...args) => {
             if (configRule) {
@@ -366,7 +368,7 @@ export default defineComponent({
                 }
             },
             baseForm: {
-                rule: tidyRuleConfig(field,baseRule.value,{t}),
+                rule: tidyRuleConfig(field, baseRule.value, {t}),
                 api: {},
                 value: {},
                 options: {
@@ -382,7 +384,7 @@ export default defineComponent({
                 }
             },
             validateForm: {
-                rule: tidyRuleConfig(validate,validateRule.value,{t}),
+                rule: tidyRuleConfig(validate, validateRule.value, {t}),
                 api: {},
                 value: [],
                 options: {
@@ -430,16 +432,19 @@ export default defineComponent({
             const formVal = data.form.api.formData && data.form.api.formData();
             const baseFormVal = data.baseForm.api.formData && data.baseForm.api.formData();
             const validateFormVal = data.validateForm.api.formData && data.validateForm.api.formData();
-            data.validateForm.rule = tidyRuleConfig(validate,validateRule.value,{t});
-            data.baseForm.rule = tidyRuleConfig(field,baseRule.value,{t});
-            data.form.rule = tidyRuleConfig(form,formRule.value,{t});
+            data.validateForm.rule = tidyRuleConfig(validate, validateRule.value, {t});
+            data.baseForm.rule = tidyRuleConfig(field, baseRule.value, {t});
+            data.form.rule = tidyRuleConfig(form, formRule.value, {t});
             data.cacheProps = {};
             const rule = data.activeRule;
             let propsVal = null;
             if (rule) {
                 propsVal = data.propsForm.api.formData && data.propsForm.api.formData();
                 data.propsForm.rule = data.cacheProps[rule._id] =
-                    tidyRuleConfig(rule.config.config.props, componentRule.value && componentRule.value[rule.config.config.name], rule, {t, api: data.dragForm.api});
+                    tidyRuleConfig(rule.config.config.props, componentRule.value && componentRule.value[rule.config.config.name], rule, {
+                        t,
+                        api: data.dragForm.api
+                    });
             }
             nextTick(() => {
                 formVal && data.form.api.setValue(formVal);
@@ -450,11 +455,11 @@ export default defineComponent({
         });
 
         const methods = {
-            unWatchActiveRule(){
+            unWatchActiveRule() {
                 unWatchActiveRule && unWatchActiveRule();
                 unWatchActiveRule = null;
             },
-            watchActiveRule(){
+            watchActiveRule() {
                 methods.unWatchActiveRule();
                 unWatchActiveRule = watch(() => data.activeRule, function (n) {
                     n && methods.updateRuleFormData()
@@ -615,13 +620,13 @@ export default defineComponent({
                 if (!rules) {
                     rules = [];
                 }
-                data.children = methods.makeChildren(methods.loadRule(is.String(rules) ? designerForm.parseJson(rules) : deepCopy(rules)));
+                data.children = ref(methods.loadRule(is.String(rules) ? designerForm.parseJson(rules) : deepCopy(rules)));
                 methods.clearActiveRule();
-                data.dragForm.rule = methods.makeDragRule(data.children);
+                data.dragForm.rule = methods.makeDragRule(methods.makeChildren(data.children));
             },
             setBaseRuleConfig(rule, append) {
                 baseRule.value = {rule, append};
-                data.baseForm.rule = tidyRuleConfig(field,baseRule.value,{t});
+                data.baseForm.rule = tidyRuleConfig(field, baseRule.value, {t});
             },
             setComponentRuleConfig(name, rule, append) {
                 componentRule.value[name] = {rule, append};
@@ -630,7 +635,10 @@ export default defineComponent({
                 if (activeRule) {
                     const propsVal = data.propsForm.api.formData && data.propsForm.api.formData();
                     data.propsForm.rule = data.cacheProps[activeRule._id] =
-                            tidyRuleConfig(activeRule.config.config.props, componentRule.value && componentRule.value[activeRule.config.config.name], activeRule, {t, api: data.dragForm.api});
+                        tidyRuleConfig(activeRule.config.config.props, componentRule.value && componentRule.value[activeRule.config.config.name], activeRule, {
+                            t,
+                            api: data.dragForm.api
+                        });
                     nextTick(() => {
                         propsVal && data.propsForm.api.setValue(propsVal);
                     });
@@ -638,11 +646,11 @@ export default defineComponent({
             },
             setValidateRuleConfig(rule, append) {
                 validateRule.value = {rule, append};
-                data.validateForm.rule = tidyRuleConfig(field,validateRule.value,{t});
+                data.validateForm.rule = tidyRuleConfig(field, validateRule.value, {t});
             },
             setFormRuleConfig(rule, append) {
                 formRule.value = {rule, append};
-                data.form.rule = tidyRuleConfig(field,formRule.value,{t});
+                data.form.rule = tidyRuleConfig(field, formRule.value, {t});
             },
             clearActiveRule() {
                 data.activeRule = null;
@@ -658,7 +666,7 @@ export default defineComponent({
                 option.submitBtn = false;
                 data.form.value = option;
             },
-            setOptions(opt){
+            setOptions(opt) {
                 methods.setOption(opt);
             },
             loadRule(rules) {
@@ -837,14 +845,17 @@ export default defineComponent({
                     });
                 });
                 if (!data.cacheProps[rule._id]) {
-                    data.cacheProps[rule._id] = tidyRuleConfig(rule.config.config.props, componentRule.value && componentRule.value[rule.config.config.name], rule, {t, api: data.dragForm.api});// rule.config.config.props(rule, {t, api: data.dragForm.api});
+                    data.cacheProps[rule._id] = tidyRuleConfig(rule.config.config.props, componentRule.value && componentRule.value[rule.config.config.name], rule, {
+                        t,
+                        api: data.dragForm.api
+                    });
                 }
 
                 data.propsForm.rule = data.cacheProps[rule._id];
                 methods.updateRuleFormData();
                 methods.watchActiveRule();
             },
-            updateRuleFormData(){
+            updateRuleFormData() {
                 const rule = data.activeRule;
                 const formData = {...rule.props, formCreateChild: deepCopy(rule.children[0])};
                 Object.keys(rule).forEach(k => {
