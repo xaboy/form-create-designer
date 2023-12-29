@@ -49,7 +49,7 @@ export default defineComponent({
     },
     methods: {
         onInput(item) {
-            if (item.label && item.value) {
+            if (item.label !== undefined && item.value !== undefined) {
                 this.input();
             }
         },
