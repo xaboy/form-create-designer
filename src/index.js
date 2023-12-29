@@ -32,18 +32,18 @@ designerForm.component('TableOptions', TableOptions);
 addComponent('FcEditor', FcEditor);
 
 designerForm.register('_fc', {
-    init(fc, rule) {
+    load(fc, rule) {
         rule._id = unique();
         // if (fc.repeat)
         //     rule.field = unique();
-        if (fc.value) {
-            rule.effect._fc = false;
-        }
+        // if (fc.value) {
+        //     rule.effect._fc = false;
+        // }
     }
 });
 
 designerForm.register('_fc_tool', {
-    init(_, rule) {
+    load(_, rule) {
         rule.props.unique = unique();
     }
 });
