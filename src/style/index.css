@@ -11,6 +11,10 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-group:before {
+    content: "\eb77";
+}
+
 .icon-add-child:before {
     content: "\e789";
 }

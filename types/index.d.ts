@@ -22,7 +22,10 @@ export interface Config {
     validateRule?: (arg: { t: Object }) => Rule[] | { rule: (arg: { t: Object }) => Rule[], append?: boolean };
     formRule?: (arg: { t: Object }) => Rule[] | { rule: (arg: { t: Object }) => Rule[], append?: boolean };
     componentRule?: {
-        [name: string]: (rule: Object, arg: { t: Object }) => Rule[] | { rule: (rule: Object, arg: { t: Object }) => Rule[], append?: boolean }
+        [name: string]: (rule: Object, arg: { t: Object }) => Rule[] | {
+            rule: (rule: Object, arg: { t: Object }) => Rule[],
+            append?: boolean
+        }
     };
 }
 
@@ -38,6 +41,10 @@ export interface DragRule {
     rule(): Rule;
 
     props(): Rule[];
+
+    parseRule?: (rule: Rule) => void;
+
+    loadRule?: (rule: Rule) => void;
 
     watch?: {
         [key: string]: (arg: { value: any, rule: object, api: object, field: string }) => void;
