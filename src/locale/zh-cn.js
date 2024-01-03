@@ -87,6 +87,23 @@ const ZhCn = {
         }
     },
     components: {
+        group: {
+            name: '子表单',
+            props: {
+                disabled: '是否禁用',
+                syncDisabled: '是否与子表单强制同步 disabled 状态',
+                expand: '设置默认展开几项',
+                button: '是否显示操作按钮',
+                sortBtn: '是否显示排序按钮',
+                min: '设置最小添加几项',
+                max: '设置最多添加几项',
+                mode: '组件类型',
+                modeOpts: {
+                    subform: '对象',
+                    group: '数组'
+                }
+            }
+        },
         radio: {
             name: '单选框',
             props: {

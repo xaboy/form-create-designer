@@ -464,7 +464,7 @@ export default defineComponent({
                 methods.unWatchActiveRule();
                 unWatchActiveRule = watch(() => data.activeRule, function (n) {
                     n && methods.updateRuleFormData()
-                }, {deep: true, flush: "post"});
+                }, {deep: true, flush: 'post'});
             },
             makeChildren(children) {
                 return reactive({children}).children;
@@ -677,6 +677,7 @@ export default defineComponent({
                         return loadRule.push(rule);
                     }
                     const config = ruleList[rule._fc_drag_tag] || ruleList[rule.type];
+                    config && config.loadRule && config.loadRule(rule);
                     const _children = rule.children;
                     rule.children = [];
                     if (rule.control) {
@@ -725,6 +726,7 @@ export default defineComponent({
                     delete rule.key;
                     delete rule.component;
                     if (rule.config) {
+                        rule.config.config && rule.config.config.parseRule && rule.config.config.parseRule(rule);
                         delete rule.config.config;
                     }
                     if (rule.effect) {
@@ -769,7 +771,7 @@ export default defineComponent({
                         } else if (field.indexOf('props') === 0 && field.indexOf('>') > -1) {
                             delete data.activeRule.props[field.split('>')[1]];
                         } else if (field.indexOf('attrs') === 0 && field.indexOf('>') > -1) {
-                            data.activeRule.attrs[field.split('>')[1]] = value;
+                            delete data.activeRule.attrs[field.split('>')[1]];
                         } else if (field === 'child') {
                             delete data.activeRule.children[0];
                         } else if (field) {

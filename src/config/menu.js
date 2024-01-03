@@ -21,6 +21,7 @@ import space from './rule/space';
 import button from './rule/button';
 import editor from './rule/editor';
 import tab from './rule/tab';
+import group from './rule/group';
 
 export default function createMenu({t}) {
     return [
@@ -28,7 +29,7 @@ export default function createMenu({t}) {
             name: 'main',
             title: t('menu.main'),
             list: [
-                input, number, radio, checkbox, select, _switch, time, date, slider, rate, color, cascader, upload, transfer, tree, editor
+                input, number, radio, checkbox, select, _switch, time, date, slider, rate, color, cascader, upload, transfer, tree, editor, group
             ]
         },
         {

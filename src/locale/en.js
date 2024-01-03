@@ -87,6 +87,23 @@ const En = {
         }
     },
     components: {
+        group: {
+            name: 'Subform',
+            props: {
+                disabled: 'Whether to disable',
+                syncDisabled: 'Force synchronization of disabled status with subform',
+                expand: 'Set default expansion options',
+                button: 'The operation button displayed',
+                sortBtn: 'The sorting button displayed',
+                min: 'Minimum number of items to add',
+                max: 'How many items can be added at most',
+                mode: 'Mode',
+                modeOpts: {
+                    subform: 'SubForm',
+                    group: 'Group'
+                }
+            }
+        },
         radio: {
             name: 'Radio',
             props: {
