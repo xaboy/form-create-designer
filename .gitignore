@@ -66,4 +66,4 @@ typings/
 yarn.lock
 /index.html
 dist
-locale
+/locale
