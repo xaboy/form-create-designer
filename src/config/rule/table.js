@@ -23,7 +23,7 @@ export default {
         return localeProps(t, name + '.props', [{
             type: 'input',
             field: 'title',
-            title: '表名'
+            title: t('components.table.tableTitle'),
         }, {
             type: 'TableOptions',
             props: {

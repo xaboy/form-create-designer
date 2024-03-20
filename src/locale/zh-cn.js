@@ -297,7 +297,8 @@ const ZhCn = {
         table: {
             name: '表格',
             headerLabel:'标题',
-            headerName:'名称'
+            headerName:'名称',
+            tableTitle:'表名'
         },
         'tab-pane': {
             name: '标签页',
