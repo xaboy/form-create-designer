@@ -24,6 +24,7 @@ import tab from './tab';
 import button from './button';
 import editor from './editor';
 import group from './group';
+import table from './table';
 
 
 const ruleList = {
@@ -53,6 +54,8 @@ const ruleList = {
     [button.name]: button,
     [editor.name]: editor,
     [group.name]: group,
+    [table.name]: table,
+
 };
 
 export default ruleList;

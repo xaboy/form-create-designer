@@ -852,6 +852,12 @@ export default defineComponent({
                         t,
                         api: data.dragForm.api
                     });
+                    // eslint-disable-next-line no-debugger
+                    debugger
+                    // table表格需要特殊处理
+                    if (data.cacheProps[rule._id][0].type==='TableOptions'){
+                        data.cacheProps[rule._id][0].props.modelValue = rule.props.column;
+                    }
                 }
 
                 data.propsForm.rule = data.cacheProps[rule._id];

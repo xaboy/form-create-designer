@@ -294,6 +294,11 @@ const ZhCn = {
                 stretch: '标签的宽度是否自撑开'
             }
         },
+        table: {
+            name: '表格',
+            headerLabel:'标题',
+            headerName:'名称'
+        },
         'tab-pane': {
             name: '标签页',
             props: {

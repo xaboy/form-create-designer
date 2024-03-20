@@ -294,6 +294,11 @@ const En = {
                 stretch: 'Whether the width of the label is self-supporting'
             }
         },
+        table: {
+            name: 'Table',
+            headerLabel:'Label',
+            headerName:'Name'
+        },
         'tab-pane': {
             name: 'TabPane',
             props: {

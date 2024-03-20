@@ -33,12 +33,13 @@ export default defineComponent({
     name: 'TableOptions',
     inheritAttrs: false,
     props: {
-        modelValue: [Object, Array, String]
+        modelValue: [Object, Array, String],
+        column:[Object,Array]
     },
     inject: ['designer'],
     data() {
         return {
-            column: [{label: 'label', key: 'label'}, {label: 'value', key: 'value'}],
+            // column: [{label: 'label', key: 'label'}, {label: 'value', key: 'value'}],
             t: this.designer.setupState.t,
         };
     },
