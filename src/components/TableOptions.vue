@@ -1,28 +1,33 @@
 <template>
     <div class="_fc_table_opt">
-        <el-table
-            :data="modelValue"
-            border
-            size="small"
-            style="width: 100%">
+      <el-container>
+        <el-header v-if="title" class="_fc_table_header" height="40px">{{title}}</el-header>
+        <el-main>
+          <el-table
+              :data="modelValue"
+              border
+              size="small"
+              style="width: 100%">
             <template v-for="(col,idx) in column" :key="col.label + idx">
-                <el-table-column :label="col.label">
-                    <template #default="scope">
-                        <el-input size="small" :modelValue="scope.row[col.key] || ''"
-                                  @Update:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></el-input>
-                    </template>
-                </el-table-column>
+              <el-table-column :label="col.label">
+                <template #default="scope">
+                  <el-input size="small" :modelValue="scope.row[col.key] || ''"
+                            @Update:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></el-input>
+                </template>
+              </el-table-column>
             </template>
             <el-table-column min-width="50" align="center" fixed="right" :label="t('tableOptions.handle')">
 
-                <template #default="scope">
-                    <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
-                </template>
+              <template #default="scope">
+                <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
+              </template>
             </el-table-column>
-        </el-table>
-        <el-button link type="primary" @click="add">
+          </el-table>
+          <el-button link type="primary" @click="add">
             <i class="fc-icon icon-add"></i> {{ t('tableOptions.add') }}
-        </el-button>
+          </el-button>
+        </el-main>
+      </el-container>
     </div>
 </template>
 
@@ -34,7 +39,8 @@ export default defineComponent({
     inheritAttrs: false,
     props: {
         modelValue: [Object, Array, String],
-        column:[Object,Array]
+        column:[Object,Array],
+        title:[Object]
     },
     inject: ['designer'],
     data() {
@@ -74,5 +80,10 @@ export default defineComponent({
 <style scoped>
 ._fc_table_opt {
     width: 100%;
+}
+._fc_table_header {
+  text-align: center;
+  line-height: 40px;
+  vertical-align: middle;
 }
 </style>

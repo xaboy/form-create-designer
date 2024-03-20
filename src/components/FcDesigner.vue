@@ -853,8 +853,9 @@ export default defineComponent({
                         api: data.dragForm.api
                     });
                     // table表格需要特殊处理
-                    if (data.cacheProps[rule._id][0].type==='TableOptions'){
-                        data.cacheProps[rule._id][0].props.modelValue = rule.props.column;
+                    const obj = data.cacheProps[rule._id].find(i=>i.type==='TableOptions')
+                    if (obj){
+                        obj.props.modelValue = rule.props.column;
                     }
                 }
 
