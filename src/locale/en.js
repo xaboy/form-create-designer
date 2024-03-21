@@ -298,7 +298,8 @@ const En = {
             name: 'Table',
             headerLabel:'Label',
             headerName:'Name',
-            tableTitle:'TableTitle'
+            tableTitle:'TableTitle',
+            tableId:'Id'
         },
         'tab-pane': {
             name: 'TabPane',

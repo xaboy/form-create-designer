@@ -1,33 +1,29 @@
 <template>
     <div class="_fc_table_opt">
-      <el-container>
-        <el-header v-if="title" class="_fc_table_header" height="40px">{{title}}</el-header>
-        <el-main>
-          <el-table
-              :data="modelValue"
-              border
-              size="small"
-              style="width: 100%">
-            <template v-for="(col,idx) in column" :key="col.label + idx">
-              <el-table-column :label="col.label">
-                <template #default="scope">
-                  <el-input size="small" :modelValue="scope.row[col.key] || ''"
-                            @Update:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></el-input>
-                </template>
-              </el-table-column>
+      <div v-if="title" class="_fc_table_header" height="40px">{{title}}</div>
+      <el-table
+          :data="modelValue"
+          border
+          size="small"
+          style="width: 100%">
+        <template v-for="(col,idx) in column" :key="col.label + idx">
+          <el-table-column :label="col.label">
+            <template #default="scope">
+              <el-input size="small" :modelValue="scope.row[col.key] || ''"
+                        @Update:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></el-input>
             </template>
-            <el-table-column min-width="50" align="center" fixed="right" :label="t('tableOptions.handle')">
+          </el-table-column>
+        </template>
+        <el-table-column min-width="50" align="center" fixed="right" :label="t('tableOptions.handle')">
 
-              <template #default="scope">
-                <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
-              </template>
-            </el-table-column>
-          </el-table>
-          <el-button link type="primary" @click="add">
-            <i class="fc-icon icon-add"></i> {{ t('tableOptions.add') }}
-          </el-button>
-        </el-main>
-      </el-container>
+          <template #default="scope">
+            <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-button link type="primary" @click="add">
+        <i class="fc-icon icon-add"></i> {{ t('tableOptions.add') }}
+      </el-button>
     </div>
 </template>
 
@@ -39,8 +35,11 @@ export default defineComponent({
     inheritAttrs: false,
     props: {
         modelValue: [Object, Array, String],
-        column:[Object,Array],
-        title:[Object]
+        column:{
+            type:[Object,Array],
+            default:[{label: 'label', key: 'label'}, {label: 'value', key: 'value'}]
+        },
+        title:[String],
     },
     inject: ['designer'],
     data() {

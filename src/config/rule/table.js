@@ -24,6 +24,10 @@ export default {
             type: 'input',
             field: 'title',
             title: t('components.table.tableTitle'),
+        },{
+            type: 'input',
+            field: 'id',
+            title: t('components.table.tableId'),
         }, {
             type: 'TableOptions',
             props: {
