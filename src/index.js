@@ -13,7 +13,7 @@ import draggable from 'vuedraggable/src/vuedraggable';
 import unique from '@form-create/utils/lib/unique';
 import {makeOptionsRule} from './utils/index';
 import formCreate from './utils/form';
-import globalUseLocale, {t} from "./utils/locale";
+import globalUseLocale, {t} from './utils/locale';
 
 const addComponent = (id, component) => {
     designerForm.component(id, component);
