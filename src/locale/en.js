@@ -39,6 +39,7 @@ const En = {
     tableOptions: {
         handle: 'Delete',
         add: 'Add',
+        type: 'Field type',
     },
     struct: {
         title: 'Edit Data',

@@ -35,7 +35,7 @@ export default {
             //     title: t('components.table.tableId'),
             // },
             {
-                type: 'TableOptions',
+                type: 'CustomTableOptions',
                 props: {
                     title,
                     modelValue: [{label: '姓名', key: 'name'}, {label: '年龄', key: 'age'}],

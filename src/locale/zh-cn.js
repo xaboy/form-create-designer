@@ -39,6 +39,7 @@ const ZhCn = {
     tableOptions: {
         handle: '操作',
         add: '添加',
+        type: '字段类型',
     },
     struct: {
         title: '编辑数据',

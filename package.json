@@ -1,6 +1,6 @@
 {
     "name": "wjb-form-create-designer",
-    "version": "0.1.12",
+    "version": "0.2.0",
     "description": "好用的vue可视化表单设计器组件",
     "unpkg": "./dist/index.umd.js",
     "jsdelivr": "./dist/index.umd.js",
