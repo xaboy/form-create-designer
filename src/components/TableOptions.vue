@@ -45,7 +45,7 @@ export default defineComponent({
     data() {
         return {
             // column: [{label: 'label', key: 'label'}, {label: 'value', key: 'value'}],
-            t: this.designer.setupState.t,
+            t: this.designer.setupState?.t,
         };
     },
     created() {
