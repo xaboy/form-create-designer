@@ -5,7 +5,7 @@ import Fetch from './components/Fetch.vue';
 import Validate from './components/Validate.vue';
 import DragBox from './components/DragBox.vue';
 import Required from './components/Required.vue';
-import TableOptions from './components/CustomTable.vue';
+import CustomTable from './components/CustomTable.vue';
 import CustomTableOptions from './components/CustomTableOptions.vue';
 import {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor';
@@ -29,7 +29,7 @@ designerForm.component('Validate', Validate);
 designerForm.component('Struct', Struct);
 designerForm.component('Fetch', Fetch);
 designerForm.component('Required', Required);
-designerForm.component('TableOptions', TableOptions);
+designerForm.component('CustomTable', CustomTable);
 designerForm.component('CustomTableOptions', CustomTableOptions);
 addComponent('FcEditor', FcEditor);
 

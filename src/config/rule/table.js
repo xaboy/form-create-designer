@@ -11,7 +11,7 @@ export default {
     mask: false,
     rule() {
         return {
-            type: 'table-options',
+            type: 'custom-table',
             field:  uniqueId(),
             value:[{}],
             children: [],

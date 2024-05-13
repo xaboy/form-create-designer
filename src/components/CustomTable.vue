@@ -31,7 +31,7 @@
 import {defineComponent} from 'vue';
 
 export default defineComponent({
-    name: 'TableOptions',
+    name: 'CustomTable',
     inheritAttrs: false,
     props: {
         modelValue: [Object, Array, String],
