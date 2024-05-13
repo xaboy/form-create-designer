@@ -25,7 +25,7 @@ import button from './button';
 import editor from './editor';
 import group from './group';
 import table from './table';
-
+import tableColumn from '@/config/rule/tableColumn';
 
 const ruleList = {
     [radio.name]: radio,
@@ -55,6 +55,7 @@ const ruleList = {
     [editor.name]: editor,
     [group.name]: group,
     [table.name]: table,
+    [tableColumn.name]: tableColumn,
 
 };
 
