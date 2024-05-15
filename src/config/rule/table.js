@@ -13,11 +13,14 @@ export default {
     loadRule(rule) {
         rule.props.mode = ['fcSubForm', 'object', 'subForm'].indexOf(rule.type) > -1 ? 'subForm' : 'tableForm'
         rule.type = 'el-row';
+        rule.children.forEach(i=>i.type='MyRow')
 
     },
     parseRule(rule) {
         rule.props.columns = rule.children
         rule.type = rule.props.mode === 'subForm' ? 'subForm' : 'tableForm';
+        rule.props.columns.forEach(i=>i.type=undefined)
+        rule.props.children = undefined
         rule.value=[{}]
     },
 

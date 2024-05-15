@@ -2,7 +2,7 @@
 import {defineComponent} from 'vue';
 
 export default defineComponent({
-    name: 'TableForm',
+    name: 'MyRow',
     inheritAttrs: false,
     props: {
         title: [String]

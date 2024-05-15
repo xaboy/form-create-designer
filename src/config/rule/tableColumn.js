@@ -14,14 +14,12 @@ export default {
     rule() {
         return {
             type: 'MyRow',
-            field: uniqueId(),
-            props: {span: 8,title:'自定义名称'},
+            props: {title:'自定义名称'},
             children: []
         };
     },
     props(_, {t}) {
-        return localeProps(t, name + '.props', [{type: 'input', field: 'title', title: '选项卡标题'},
-            {type: 'input', field: 'field', title: '字段 ID'},
+        return localeProps(t, name + '.props', [{type: 'input', field: 'title', title: '选项卡标题'}
         ]);
     }
 };
