@@ -1,4 +1,4 @@
-import {localeProps} from '@/utils';
+import {localeProps} from '../../utils';
 
 const label = '标签页';
 const name = 'table-column';

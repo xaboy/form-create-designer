@@ -5,6 +5,9 @@ import Fetch from './components/Fetch.vue';
 import Validate from './components/Validate.vue';
 import DragBox from './components/DragBox.vue';
 import Required from './components/Required.vue';
+import TableOptions from './components/TableOptions.vue';
+import MyRow from './components/MyRow.vue';
+import TableForm from './components/TableForm.vue';
 import {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
@@ -12,10 +15,8 @@ import draggable from 'vuedraggable/src/vuedraggable';
 import unique from '@form-create/utils/lib/unique';
 import {makeOptionsRule} from './utils/index';
 import formCreate from './utils/form';
-import TableForm from '@/components/TableForm.vue';
-import MyRow from '@/components/MyRow.vue';
-import TableOptions from '@/components/TableOptions.vue';
 import globalUseLocale, {t} from './utils/locale';
+
 const addComponent = (id, component) => {
     designerForm.component(id, component);
     formCreate.component(id, component);
@@ -29,9 +30,9 @@ designerForm.component('Validate', Validate);
 designerForm.component('Struct', Struct);
 designerForm.component('Fetch', Fetch);
 designerForm.component('Required', Required);
-designerForm.component('TableForm', TableForm);
-designerForm.component('MyRow', MyRow);
 designerForm.component('TableOptions', TableOptions);
+designerForm.component('MyRow', MyRow);
+designerForm.component('TableForm', TableForm);
 
 addComponent('FcEditor', FcEditor);
 

@@ -25,7 +25,7 @@ import button from './button';
 import editor from './editor';
 import group from './group';
 import table from './table';
-import tableColumn from '@/config/rule/tableColumn';
+import tableColumn from './tableColumn';
 
 const ruleList = {
     [radio.name]: radio,
