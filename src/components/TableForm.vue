@@ -6,7 +6,7 @@
         size="small"
         style="width: 100%">
       <template v-for="(item, index) in columns" :key="index">
-        <el-table-column :label="(item.props.title,index)" :min-width="item.minWidth" :key="index">
+        <el-table-column :label="item.props.title" :min-width="item.minWidth">
           <template #default="scope">
             <component v-bind="i.props"  v-for="(i, j) in item.children" :key="j" :is="`el-${i.type}`.replace(/el-(el|fc)-/g,'\$1-')" size="small" :modelValue="scope.row[i.field] || ''"
                        @Update:modelValue="(n)=>(scope.row[i.field] = n, onInput(scope.row))">
