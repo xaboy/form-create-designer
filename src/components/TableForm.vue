@@ -1,15 +1,16 @@
 <template>
-  <div class="_fc_table_opt">
+  <div class="_fc_table_opt">{{modelValue}}
     <el-table
-        :data="data"
+        :data="modelValue"
         border
         size="small"
         style="width: 100%">
-      <template v-for="(col,idx) in column" :key="col.label + idx">
-        <el-table-column :label="col.label">
+      <template v-for="(item, index) in columns" :key="index">
+        <el-table-column :label="(item.props.title,index)" :min-width="item.minWidth" :key="index">
           <template #default="scope">
-            <component :is="'el-input'" size="small" :modelValue="scope.row[col.key] || ''"
-                       @Update:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></component>
+            <component v-bind="i.props"  v-for="(i, j) in item.children" :key="j" :is="`el-${i.type}`.replace(/el-(el|fc)-/g,'\$1-')" size="small" :modelValue="scope.row[i.field] || ''"
+                       @Update:modelValue="(n)=>(scope.row[i.field] = n, onInput(scope.row))">
+            </component>
           </template>
         </el-table-column>
       </template>
@@ -33,13 +34,18 @@ export default defineComponent({
     name: 'TableForm',
     inheritAttrs: false,
     props: {
-        modelValue: [Object, Array, String]
+        modelValue: {
+            type: Array,
+            default() {
+                return [];
+            }
+        },
+        columns: [Object, Array, String]
     },
     inject: ['designer'],
     data() {
         return {
             data:[{}],
-            column: [{label: 'label', key: 'label'}, {label: 'value', key: 'value'}],
             t: this.designer.setupState.t,
         };
     },
@@ -58,8 +64,8 @@ export default defineComponent({
             this.$emit('update:modelValue', this.modelValue);
         },
         add() {
-            this.modelValue.push(this.column.reduce((initial, v) => {
-                initial[v.key] = '';
+            this.modelValue.push(this.columns.reduce((initial, v) => {
+                initial[v.field] = '';
                 return initial;
             }, {}));
         },

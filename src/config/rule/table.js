@@ -11,27 +11,22 @@ export default {
     children: 'table-column',
     mask: false,
     loadRule(rule) {
-        rule.children = rule.props.columns || [];
-        if (!rule.props) rule.props = {};
         rule.props.mode = ['fcSubForm', 'object', 'subForm'].indexOf(rule.type) > -1 ? 'subForm' : 'tableForm'
         rule.type = 'el-row';
+
     },
     parseRule(rule) {
-        rule.props.columns=rule.children.map(i=>{
-            i.rule = i.children
-            i.children = undefined
-            return i
-        });
+        rule.props.columns = rule.children
         rule.type = rule.props.mode === 'subForm' ? 'subForm' : 'tableForm';
     },
 
     rule() {
         return {
             type: 'el-row',
-            field:  uniqueId(),
+            field: uniqueId(),
             style: 'width:100%;',
             props: {
-                columns:[]
+                columns: []
             },
             children: []
         };

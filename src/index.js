@@ -15,6 +15,8 @@ import unique from '@form-create/utils/lib/unique';
 import {makeOptionsRule} from './utils/index';
 import formCreate from './utils/form';
 import TableForm from '@/components/TableForm.vue';
+import MyRow from '@/components/MyRow.vue';
+import TableOptions from '@/components/TableOptions.vue';
 import globalUseLocale, {t} from './utils/locale';
 
 const addComponent = (id, component) => {
@@ -33,6 +35,8 @@ designerForm.component('Required', Required);
 designerForm.component('CustomTable', CustomTable);
 designerForm.component('CustomTableOptions', CustomTableOptions);
 designerForm.component('TableForm', TableForm);
+designerForm.component('MyRow', MyRow);
+designerForm.component('TableOptions', TableOptions);
 
 addComponent('FcEditor', FcEditor);
 

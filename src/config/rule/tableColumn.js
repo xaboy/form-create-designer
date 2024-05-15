@@ -1,4 +1,5 @@
 import {localeProps} from '../../utils';
+import uniqueId from '@form-create/utils/lib/unique';
 
 const label = '标签页';
 const name = 'table-column';
@@ -12,20 +13,15 @@ export default {
     mask: false,
     rule() {
         return {
-            type: 'el-col',
-            props: {span: 8},
+            type: 'MyRow',
+            field: uniqueId(),
+            props: {span: 8,title:'自定义名称'},
             children: []
         };
     },
     props(_, {t}) {
-        return localeProps(t, name + '.props', [{type: 'input', field: 'label', title: '选项卡标题'}, {
-            type: 'switch',
-            field: 'disabled',
-            title: '是否禁用'
-        }, {type: 'input', field: 'name', title: '与选项卡绑定值 value 对应的标识符，表示选项卡别名'}, {
-            type: 'switch',
-            field: 'lazy',
-            title: '标签是否延迟渲染'
-        }]);
+        return localeProps(t, name + '.props', [{type: 'input', field: 'title', title: '选项卡标题'},
+            {type: 'input', field: 'field', title: '字段 ID'},
+        ]);
     }
 };
