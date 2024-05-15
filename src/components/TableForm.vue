@@ -17,7 +17,7 @@
           </template>
         </el-table-column>
       </template>
-      <el-table-column min-width="50" align="center" fixed="right" :label="t('tableOptions.handle')">
+      <el-table-column min-width="50" align="center" fixed="right" label="操作">
 
         <template #default="scope">
           <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
@@ -25,7 +25,7 @@
       </el-table-column>
     </el-table>
     <el-button link type="primary" @click="add">
-      <i class="fc-icon icon-add"></i> {{ t('tableOptions.add') }}
+      <i class="fc-icon icon-add"></i> 添加
     </el-button>
   </div>
 </template>
@@ -46,7 +46,6 @@ export default defineComponent({
     data() {
         return {
             data:[{}],
-            t: this.designer.setupState?.t,
         };
     },
     computed: {

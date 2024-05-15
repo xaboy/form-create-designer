@@ -7,8 +7,11 @@
 # form-create-designer v3
 ## 在原有的基础上新增了表格控件
 ![img.png](img%2Fimg.png)  
-![img_1.png](img%2Fimg_1.png)
-
+![img_1.png](img%2Fimg_1.png)  
+**使用表单：**
+```js
+import {TableForm} from "wjb-form-create-designer"
+```
 **这个是 Vue3 版本**
 
 [![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/xaboy/form-create-designer)
