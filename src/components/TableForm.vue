@@ -1,5 +1,5 @@
 <template>
-  <div class="_fc_table_opt">{{modelValue}}
+  <div class="_fc_table_opt">
     <el-table
         :data="modelValue"
         border
@@ -36,9 +36,6 @@ export default defineComponent({
     props: {
         modelValue: {
             type: Array,
-            default() {
-                return [];
-            }
         },
         columns: [Object, Array, String]
     },
