@@ -9,8 +9,10 @@
       <template v-for="(item, index) in columns" :key="index">
         <el-table-column :label="item.props.title" :min-width="item.minWidth">
           <template #default="scope">
-            <component v-bind="i.props"  v-for="(i, j) in item.children" :key="j" :is="`el-${i.type}`" size="small" :modelValue="scope.row[i.field] || ''"
+            <component v-bind="i.props"  v-for="(i, j) in item.children" :key="j" :is="dynamicComponentName(i)"  size="small" :modelValue="scope.row[i.field] || ''"
                        @Update:modelValue="(n)=>(scope.row[i.field] = n, onInput(scope.row))">
+              <component v-for="k in i.options" :modelValue="scope.row[i.field] || ''"
+                         @Update:modelValue="(n)=>(scope.row[i.field] = n, onInput(scope.row))" :is="`el-${i.type}`" v-bind="k"/>
             </component>
           </template>
         </el-table-column>
@@ -47,9 +49,17 @@ export default defineComponent({
             t: this.designer.setupState.t,
         };
     },
-    created() {
-        if (!Array.isArray(this.modelValue)) {
-            this.$emit('input', []);
+    computed: {
+        dynamicComponentName() {
+            return ({type}) => {
+                if (type==='radio'){
+                    return 'el-radio-group'
+                }
+                if (type==='checkbox'){
+                    return 'el-radio-group'
+                }
+                return `el-${type}`.replace(/el-(el|fc)-/g, '$1-');
+            };
         }
     },
     methods: {
