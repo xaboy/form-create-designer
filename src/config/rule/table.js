@@ -1,4 +1,4 @@
-import {localeProps} from '../../utils';
+import {localeProps} from '@/utils';
 import uniqueId from '@form-create/utils/lib/unique';
 
 const label = '表格';

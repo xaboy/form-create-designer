@@ -1,5 +1,4 @@
-import {localeProps} from '../../utils';
-import uniqueId from '@form-create/utils/lib/unique';
+import {localeProps} from '@/utils';
 
 const label = '标签页';
 const name = 'table-column';

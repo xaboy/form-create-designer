@@ -46,7 +46,7 @@ export default defineComponent({
     data() {
         return {
             data:[{}],
-            t: this.designer.setupState.t,
+            t: this.designer.setupState?.t,
         };
     },
     computed: {

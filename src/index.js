@@ -16,7 +16,6 @@ import TableForm from '@/components/TableForm.vue';
 import MyRow from '@/components/MyRow.vue';
 import TableOptions from '@/components/TableOptions.vue';
 import globalUseLocale, {t} from './utils/locale';
-
 const addComponent = (id, component) => {
     designerForm.component(id, component);
     formCreate.component(id, component);
@@ -67,4 +66,4 @@ FcDesigner.t = t;
 
 export default FcDesigner;
 
-export {formCreate, designerForm, install};
+export {formCreate, designerForm, install,TableForm};
