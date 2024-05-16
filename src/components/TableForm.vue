@@ -2,7 +2,6 @@
   <div class="_fc_table_opt">
     <el-table
         :data="modelValue"
-        disabled
         border
         size="small"
         style="width: 100%">
@@ -40,6 +39,10 @@ export default defineComponent({
     props: {
         modelValue: {
             type: Array,
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         },
         columns: [Object, Array, String]
     },
