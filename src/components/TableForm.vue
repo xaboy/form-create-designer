@@ -2,6 +2,7 @@
   <div class="_fc_table_opt">
     <el-table
         :data="modelValue"
+        disabled
         border
         size="small"
         style="width: 100%">
@@ -9,9 +10,9 @@
       <template v-for="(item, index) in columns" :key="index">
         <el-table-column :label="item.props.title" :min-width="item.minWidth">
           <template #default="scope">
-            <component v-bind="i.props"  v-for="(i, j) in item.children" :key="j" :is="dynamicComponentName(i)"  size="small" :modelValue="scope.row[i.field] || ''"
+            <component :disabled="disabled" v-bind="i.props"  v-for="(i, j) in item.children" :key="j" :is="dynamicComponentName(i)"  size="small" :modelValue="scope.row[i.field] || ''"
                        @Update:modelValue="(n)=>(scope.row[i.field] = n, onInput(scope.row))">
-              <component v-for="k in i.options" :modelValue="scope.row[i.field] || ''"
+              <component :disabled="disabled" v-for="k in i.options" :modelValue="scope.row[i.field] || ''"
                          @Update:modelValue="(n)=>(scope.row[i.field] = n, onInput(scope.row))" :is="`el-${i.type}`" v-bind="k"/>
             </component>
           </template>
@@ -20,11 +21,11 @@
       <el-table-column min-width="50" align="center" fixed="right" label="操作">
 
         <template #default="scope">
-          <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
+          <el-button :disabled="disabled" type="text" @click="del(scope.$index)"><i class="fc-icon icon-delete"></i></el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-button link type="primary" @click="add">
+    <el-button :disabled="disabled" link type="primary" @click="add">
       <i class="fc-icon icon-add"></i> 添加
     </el-button>
   </div>
