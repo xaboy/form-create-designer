@@ -15,11 +15,23 @@ export default {
             title: t('components.input.name'),
             info: '',
             $required: false,
-            props: {}
+            props: {},
+            _on:{}
         };
     },
     props(_, {t}) {
-        return localeProps(t, name + '.props', [makeRequiredRule(), {
+        return localeProps(t, name + '.props', [ {
+            type: 'Struct',
+            field: '_on',
+            value: {},
+            title: '自定义on事件',
+            props: {
+              defaultValue: {},
+                validate(val) {
+                    return Object.prototype.toString.call(val) === '[object Object]';
+                }
+            }
+        },makeRequiredRule(),  {
             type: 'select',
             field: 'type',
             title: '类型',
