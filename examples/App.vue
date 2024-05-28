@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <fc-designer ref="designer" :locale="locale">
+        <fc-designer ref="designer" :config="config" :handle="handle" :locale="locale">
             <template #handle>
                 <div class="handle">
                     <el-dropdown>
@@ -131,6 +131,18 @@ export default {
             lang:'cn',
             locale: null,
             topImg: true,
+            config: {
+                fieldReadonly: false,
+                showSaveBtn: true,
+            },
+            handle: [
+                {
+                    label: '中英切换',
+                    handle: () => {
+                        this.changeLocale();
+                    },
+                },
+            ],
         };
     },
     watch: {
