@@ -1,18 +1,18 @@
 <script>
-import {h, defineComponent} from 'vue';
+import {defineComponent, h} from 'vue';
 import draggable from 'vuedraggable/src/vuedraggable';
 
 export default defineComponent({
     name: 'DragBox',
-    props: ['rule', 'tag', 'formCreateInject'],
+    props: ['rule', 'tag', 'formCreateInject', 'list'],
     render(ctx) {
-        const subRule = {...ctx.$props.rule.props, ...ctx.$attrs};
-        let _class = subRule.tag + '-drag drag-box';
+        const attrs = {...ctx.$props.rule.props, ...ctx.$attrs};
+        let _class = '_fd-' + ctx.$props.tag + '-drag _fd-drag-box';
         if (!Object.keys(ctx.$slots).length) {
-            _class += ' ' + subRule.tag + '-holder';
+            _class += ' drag-holder';
         }
-        subRule.class = _class;
-        subRule.modelValue = [...this.$props.formCreateInject.children];
+        attrs.class = _class;
+        attrs.modelValue = ctx.$props.list || [...ctx.$props.formCreateInject.children];
 
         const keys = {};
         if (ctx.$slots.default) {
@@ -23,10 +23,25 @@ export default defineComponent({
                 }
             })
         }
-
-        return h(draggable, subRule, {
-            item: ({element}) => {
-                return element?.__fc__?.key ? h('div', {}, keys[element.__fc__.key + 'fc']) : undefined;
+        return h(draggable, attrs, {
+            item: ({element, index}) => {
+                const key = element?.__fc__?.key;
+                if (key) {
+                    let vnode = keys['_' + element.slot];
+                    if (vnode) {
+                        vnode.children.forEach(v => {
+                            if (v.key === key + 'fc') {
+                                vnode = v
+                            }
+                        });
+                    } else {
+                        vnode = keys[key + 'fc'];
+                    }
+                    if (vnode) {
+                        return h('div', {class: '_fc-' + ctx.$props.tag + '-item _fd-drag-item', key}, vnode);
+                    }
+                }
+                return h('div', {class: '_fc-' + ctx.$props.tag + '-item _fd-drag-item', key: index}, null);
             }
         });
     }

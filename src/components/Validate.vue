@@ -1,5 +1,5 @@
 <template>
-    <DragForm class="_fc-validate" :rule="rule" :option="option" :modelValue="formValue"
+    <DragForm class="_fd-validate" :rule="rule" :option="option" :modelValue="formValue"
               @update:modelValue="onInput"></DragForm>
 </template>
 
@@ -7,12 +7,13 @@
 import {designerForm} from '../utils/form';
 import {defineComponent} from 'vue';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
+import {localeOptions} from '../utils';
 
 export default defineComponent({
     name: 'Validate',
     inject: ['designer'],
     props: {
-        modelValue: Array
+        modelValue: Array,
     },
     components: {
         DragForm: designerForm.$form(),
@@ -24,6 +25,35 @@ export default defineComponent({
     },
     data() {
         const t = this.designer.setupState.t;
+        const types = this.designer.setupState.activeRule._menu.validate || [];
+        const attrs = {
+            string: t('validate.types.string'),
+            array: t('validate.types.array'),
+            number: t('validate.types.number'),
+            integer: t('validate.types.integer'),
+            float: t('validate.types.float'),
+            object: t('validate.types.object'),
+            date: t('validate.types.date'),
+            url: t('validate.types.url'),
+            email: t('validate.types.email'),
+        }
+
+        const getOpts = lst => {
+            const opts = [];
+            lst && lst.forEach(k => {
+                opts.push({
+                    label: attrs[k],
+                    value: k
+                })
+            });
+            opts.push({
+                label: t('props.custom'),
+                value: 'validator'
+            })
+            return opts;
+        }
+        const opts = getOpts(types);
+
         return {
             formValue: {},
             t,
@@ -39,165 +69,147 @@ export default defineComponent({
             },
             rule: [
                 {
-                    type: 'select',
-                    field: 'type',
-                    value: '',
-                    title: t('validate.type'),
-                    options: [
-                        {value: '', label: t('validate.typePlaceholder')},
-                        {value: 'string', label: 'String'},
-                        {value: 'array', label: 'Array'},
-                        {value: 'number', label: 'Number'},
-                        {value: 'integer', label: 'Integer'},
-                        {value: 'float', label: 'Float'},
-                        {value: 'object', label: 'Object'},
-                        {value: 'date', label: 'Date'},
-                        {value: 'url', label: 'url'},
-                        {value: 'hex', label: 'hex'},
-                        {value: 'email', label: 'email'},
-                    ],
-                    control: [
-                        {
-                            handle: v => {
-                                return !!v;
+                    type: 'group',
+                    field: 'validate',
+                    props: {
+                        expand: 1,
+                        sortBtn: false,
+                        defaultValue: {type: opts[0].value},
+                        rule: [
+                            {
+                                type: opts.length === 1 ? 'hidden' : 'select',
+                                field: 'type',
+                                value: '',
+                                title: t('validate.type'),
+                                props: {
+                                    placeholder: t('validate.typePlaceholder')
+                                },
+                                control: [
+                                    {
+                                        value: ['url', 'date', 'email', 'object', 'validator'],
+                                        condition: 'notIn',
+                                        rule: ['mode', 'min', 'max', 'len', 'pattern']
+                                    },
+                                    {
+                                        value: 'validator',
+                                        rule: ['validator']
+                                    },
+                                ],
+                                options: opts,
                             },
-                            rule: [
-                                {
-                                    type: 'group',
-                                    field: 'validate',
-                                    props: {
-                                        expand: 1,
-                                        sortBtn: false,
+                            {
+                                type: 'select',
+                                title: t('validate.trigger'),
+                                field: 'trigger',
+                                value: 'change',
+                                options: localeOptions(t, [
+                                    {label: 'change', value: 'change'},
+                                    {label: 'submit', value: 'submit'},
+                                    {label: 'blur', value: 'blur'},
+                                ])
+                            },
+                            {
+                                type: 'FnEditor',
+                                field: 'validator',
+                                value: '',
+                                props: {
+                                    name: 'validator',
+                                    args: ['rule', 'value', 'callback'],
+                                    button: true,
+                                },
+                                style: 'height:300px;'
+                            },
+                            {
+                                type: 'select',
+                                title: t('validate.mode'),
+                                field: 'mode',
+                                options: [
+                                    {value: 'min', label: t('validate.modes.min')},
+                                    {value: 'max', label: t('validate.modes.max')},
+                                    {value: 'len', label: t('validate.modes.len')},
+                                    {value: 'pattern', label: t('validate.modes.pattern')},
+                                ],
+                                value: 'min',
+                                control: [
+                                    {
+                                        value: 'pattern',
                                         rule: [
                                             {
-                                                type: 'select',
-                                                title: t('validate.trigger'),
-                                                field: 'trigger',
-                                                value: 'change',
-                                                options: [
-                                                    {label: 'change', value: 'change'},
-                                                    {label: 'submit', value: 'submit'},
-                                                    {label: 'blur', value: 'blur'},
-                                                ]
-                                            },
-                                            {
-                                                type: 'hidden',
-                                                field: 'validator',
-                                                value: undefined,
-                                            },
-                                            {
-                                                type: 'select',
-                                                title: t('validate.mode'),
-                                                field: 'mode',
-                                                options: [
-                                                    {value: 'required', label: t('validate.modes.required')},
-                                                    {value: 'pattern', label: t('validate.modes.pattern')},
-                                                    {value: 'min', label: t('validate.modes.min')},
-                                                    {value: 'max', label: t('validate.modes.max')},
-                                                    {value: 'len', label: t('validate.modes.len')},
-                                                ],
-                                                value: 'required',
-                                                control: [
-                                                    {
-                                                        value: 'required',
-                                                        rule: [
-                                                            {
-                                                                type: 'hidden',
-                                                                field: 'required',
-                                                                value: true
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        value: 'pattern',
-                                                        rule: [
-                                                            {
-                                                                type: 'input',
-                                                                field: 'pattern',
-                                                                title: t('validate.modes.pattern')
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        value: 'min',
-                                                        rule: [
-                                                            {
-                                                                type: 'inputNumber',
-                                                                field: 'min',
-                                                                title: t('validate.modes.min')
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        value: 'max',
-                                                        rule: [
-                                                            {
-                                                                type: 'inputNumber',
-                                                                field: 'max',
-                                                                title: t('validate.modes.max')
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        value: 'len',
-                                                        rule: [
-                                                            {
-                                                                type: 'inputNumber',
-                                                                field: 'len',
-                                                                title: t('validate.modes.len')
-                                                            }
-                                                        ]
-                                                    },
-                                                ]
-                                            },
-                                            {
                                                 type: 'input',
-                                                title: t('validate.message'),
-                                                field: 'message',
-                                                value: '',
-                                                children: [
-                                                    {
-                                                        type: 'span',
-                                                        slot: 'append',
-                                                        inject: true,
-                                                        class: 'append-msg',
-                                                        on: {
-                                                            click: (inject) => {
-                                                                const title = this.designer.setupState.activeRule.title;
-                                                                if (this.designer.setupState.activeRule) {
-                                                                    inject.api.setValue('message', t(inject.api.form.mode !== 'required' ? 'validate.autoMode' : 'validate.autoRequired', {title}));
-                                                                }
-                                                            }
-                                                        },
-                                                        children: [t('validate.auto')]
-                                                    }
-                                                ]
+                                                field: 'pattern',
+                                                props: {
+                                                    size: 'small'
+                                                },
+                                                title: t('validate.modes.pattern')
                                             }
                                         ]
                                     },
-                                    value: []
-                                }
-                            ]
-                        }
-                    ]
+                                    {
+                                        value: 'min',
+                                        rule: [
+                                            {
+                                                type: 'inputNumber',
+                                                field: 'min',
+                                                title: t('validate.modes.min')
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        value: 'max',
+                                        rule: [
+                                            {
+                                                type: 'inputNumber',
+                                                field: 'max',
+                                                title: t('validate.modes.max')
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        value: 'len',
+                                        rule: [
+                                            {
+                                                type: 'inputNumber',
+                                                field: 'len',
+                                                title: t('validate.modes.len')
+                                            }
+                                        ]
+                                    },
+                                ]
+                            },
+                            {
+                                type: 'input',
+                                title: t('validate.message'),
+                                field: 'message',
+                                value: '',
+                                children: [
+                                    {
+                                        type: 'span',
+                                        slot: 'append',
+                                        inject: true,
+                                        class: 'append-msg',
+                                        on: {
+                                            click: (inject) => {
+                                                const title = this.designer.setupState.activeRule.title;
+                                                if (this.designer.setupState.activeRule) {
+                                                    inject.api.setValue('message', t(inject.api.form.mode !== 'required' ? 'validate.autoMode' : 'validate.autoRequired', {title}));
+                                                }
+                                            }
+                                        },
+                                        children: [t('validate.auto')]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    value: []
                 },
-
             ]
         };
     },
     methods: {
         onInput: function (formData) {
-            let val = [];
-            const {validate, type} = deepCopy(formData);
-            if (type && (!validate || !validate.length)) {
-                return;
-            } else if (type) {
-                validate.forEach(v => {
-                    v.type = type;
-                });
-                val = [...validate];
-            }
-            this.$emit('update:modelValue', val);
+            const {validate} = deepCopy(formData);
+            this.$emit('update:modelValue', (validate || []).filter(v => Object.keys(v).length > 1));
         },
         parseValue(n) {
             let val = {
@@ -221,15 +233,11 @@ export default defineComponent({
 </script>
 
 <style>
-._fc-validate .form-create .el-form-item {
-    margin-bottom: 22px !important;
-}
-
-._fc-validate .append-msg {
+._fd-validate .append-msg {
     cursor: pointer;
 }
 
-._fc-validate .el-input-group__append {
+._fd-validate .el-input-group__append {
     padding: 0 10px;
 }
 </style>

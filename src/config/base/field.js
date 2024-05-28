@@ -1,10 +1,7 @@
-import IconRefresh from '../../components/IconRefresh.vue';
-import {markRaw} from 'vue';
-
 export default function field({t}) {
     return [
         {
-            type: 'input',
+            type: 'FieldInput',
             field: 'field',
             value: '',
             title: t('form.field'),
@@ -19,10 +16,23 @@ export default function field({t}) {
             value: '',
             title: t('form.info'),
         }, {
+            type: 'SizeInput',
+            field: 'formCreateWrap>labelWidth',
+            value: '',
+            title: t('form.labelWidth'),
+        }, {
             type: 'Struct',
             field: '_control',
             value: [],
             title: t('form.control'),
+            info: {
+                type: 'tooltip',
+                native: true,
+                effect: 'light',
+                align: 'left',
+                content: t('form.document') + '：<a target="_blank" href="https://form-create.com/v3/guide/control">https://form-create.com/v3/guide/control</a>',
+                rawContent: true,
+            },
             props: {
                 defaultValue: [],
                 validate(val) {
@@ -33,52 +43,6 @@ export default function field({t}) {
                     });
                 }
             }
-        }, {
-            type: 'col',
-            props: {
-                span: 24
-            },
-            children: [
-                {
-                    type: 'el-button',
-                    props: {
-                        type: 'primary',
-                        size: 'small',
-                    },
-                    inject: true,
-                    on: {
-                        click({$f}) {
-                            const rule = $f.activeRule;
-                            if (rule) {
-                                rule.__fc__.updateKey();
-                                rule.value = undefined;
-                                rule.__fc__.$api.sync(rule);
-                            }
-                        },
-                    },
-                    native: true,
-                    children: [{type: 'i', class: 'fc-icon icon-delete'}, t('form.clear')]
-                }, {
-                    type: 'el-button',
-                    props: {
-                        type: 'success',
-                        size: 'small',
-                        icon: markRaw(IconRefresh),
-                    },
-                    inject: true,
-                    on: {
-                        click({$f}) {
-                            const rule = $f.activeRule;
-                            if (rule) {
-                                rule.__fc__.updateKey(true);
-                                rule.__fc__.$api.sync(rule);
-                            }
-                        },
-                    },
-                    native: true,
-                    children: [t('form.refresh')]
-                },
-            ]
-        }
+        },
     ];
 }

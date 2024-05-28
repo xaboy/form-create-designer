@@ -1,7 +1,7 @@
 {
     "name": "@form-create/designer",
-    "version": "3.1.5",
-    "description": "好用的vue可视化表单设计器组件",
+    "version": "3.2.0",
+    "description": "好用的Vue可视化表单设计器，可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率。",
     "unpkg": "./dist/index.umd.js",
     "jsdelivr": "./dist/index.umd.js",
     "typings": "./types/index.d.ts",
@@ -27,7 +27,7 @@
         "url": "git+https://github.com/xaboy/form-create-designer.git"
     },
     "keywords": [
-        "表单设计器",
+        "可视化表单设计器",
         "@form-create",
         "form-builder",
         "form-designer",
@@ -54,7 +54,7 @@
     "bugs": {
         "url": "https://github.com/xaboy/form-create-designer/issues"
     },
-    "homepage": "http://designer.form-create.com",
+    "homepage": "https://form-create.com",
     "publishConfig": {
         "access": "public"
     },
@@ -71,7 +71,7 @@
         "@vue/compiler-sfc": "^3.0.11",
         "babel-eslint": "^10.1.0",
         "chalk": "^4.1.2",
-        "codemirror": "^5.60.0",
+        "codemirror": "^6.65.7",
         "commander": "^6.0.0",
         "commitizen": "^4.1.2",
         "cross-env": "^7.0.2",

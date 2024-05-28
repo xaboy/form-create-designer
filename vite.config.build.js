@@ -30,7 +30,7 @@ function getBanner(banner, pkg) {
 }
 
 const __banner__ = {
-    author: `2021-${new Date().getFullYear()} ${author}\n * Github https://github.com/xaboy/form-create-designer`,
+    author: `2021-${new Date().getFullYear()} ${author}\n * Github https://github.com/xaboy/form-create-designer\n * Site https://form-create.com/`,
     license,
     name,
     version

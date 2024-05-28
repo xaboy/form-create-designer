@@ -1,27 +1,42 @@
+import {localeOptions} from '../../utils';
+
 export default function form({t}) {
     return [
         {
+            type: 'input',
+            field: '>formName',
+            value: '',
+            title: t('form.formName'),
+        }, {
             type: 'radio',
             field: 'labelPosition',
             value: 'left',
             title: t('form.labelPosition'),
-            options: [
-                {value: 'right', label: 'right'},
+            options: localeOptions(t, [
                 {value: 'left', label: 'left'},
+                {value: 'right', label: 'right'},
                 {value: 'top', label: 'top'},
-            ]
+            ])
         }, {
             type: 'radio',
             field: 'size',
             value: 'small',
             title: t('form.size'),
-            options: [
+            options: localeOptions(t, [
                 {value: 'large', label: 'large'},
                 {value: 'default', label: 'default'},
                 {value: 'small', label: 'small'},
-            ]
+            ])
         }, {
             type: 'input',
+            field: 'labelSuffix',
+            value: '',
+            title: t('form.labelSuffix'),
+            style: {
+                width: '150px'
+            }
+        }, {
+            type: 'SizeInput',
             field: 'labelWidth',
             value: '125px',
             title: t('form.labelWidth'),
@@ -42,14 +57,52 @@ export default function form({t}) {
             title: t('form.inlineMessage'),
         }, {
             type: 'switch',
-            field: 'formCreateSubmitBtn',
+            field: '_submitBtn>show',
             value: true,
             title: t('form.submitBtn'),
         }, {
             type: 'switch',
-            field: 'formCreateResetBtn',
+            field: '_resetBtn>show',
             value: false,
             title: t('form.resetBtn'),
+        }, {
+            type: 'FnConfig',
+            field: '>_event',
+            info: {
+                type: 'tooltip',
+                native: true,
+                effect: 'light',
+                align: 'left',
+                content: t('form.document') + '：<a target="_blank" href="https://form-create.com/v3/guide/global-event">https://form-create.com/v3/guide/global-event</a>',
+                rawContent: true,
+            },
+            value: {},
+            col: {show: true},
+            props: {
+                eventConfig: [
+                    {
+                        name: 'onSubmit',
+                        args: ['formData', 'api'],
+                    },
+                    {
+                        name: 'onCreated',
+                        args: ['api'],
+                    },
+                    {
+                        name: 'onMounted',
+                        args: ['api'],
+                    },
+                    {
+                        name: 'onChange',
+                        args: ['field', 'value', 'options'],
+                    },
+                    {
+                        name: 'beforeFetch',
+                        args: ['config', 'data'],
+                    },
+                ]
+            },
+            title: t('form.event'),
         },
     ];
 }
