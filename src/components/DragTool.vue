@@ -108,11 +108,6 @@ export default defineComponent({
     transition: outline-color 0.3s ease;
 }
 
-._fd-drag-tool:hover {
-    outline-color: #2E73FF;
-    outline-style: solid;
-}
-
 ._fd-drag-tool ._fd-drag-tool {
     height: calc(100% - 6px);
     margin: 3px;
@@ -133,10 +128,6 @@ export default defineComponent({
 ._fd-drag-tool._fd-drop-hover ._fd-drag-box {
     padding-top: 15px !important;
     padding-bottom: 15px !important;
-}
-
-._fd-drag-tool._fd-drop-hover:hover {
-    outline: 1px dashed var(--fc-tool-border-color);
 }
 
 ._fd-drag-tool ._fd-drag-btn {
