@@ -1,40 +1,52 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {localeProps, makeRequiredRule} from '../../utils';
+import {localeProps} from '../../utils';
 
 const label = '颜色选择器';
 const name = 'colorPicker';
 
 export default {
+    menu: 'main',
     icon: 'icon-color',
     label,
     name,
+    event: ['change', 'activeChange', 'focus', 'blur'],
+    validate: ['string'],
     rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: t('components.colorPicker.name'),
+            title: t('com.colorPicker.name'),
             info: '',
             $required: false,
             props: {},
         };
     },
     props(_, {t}) {
-        return localeProps(t, name + '.props', [makeRequiredRule(), {
-            type: 'switch',
-            field: 'disabled',
-            title: '是否禁用'
-        }, {
-            type: 'switch',
-            field: 'showAlpha',
-            title: '是否支持透明度选择'
-        }, {
-            type: 'select',
-            field: 'colorFormat',
-            title: '颜色的格式',
-            options: [{label: 'hsl', value: 'hsl'}, {label: 'hsv', value: 'hsv'}, {
-                label: 'hex',
-                value: 'hex'
-            }, {label: 'rgb', value: 'rgb'}]
-        }]);
+        return localeProps(t, name + '.props', [
+            {
+                type: 'switch',
+                field: 'disabled'
+            },
+            {
+                type: 'switch',
+                field: 'showAlpha'
+            },
+            {
+                type: 'select',
+                field: 'colorFormat',
+                options: [{label: 'hsl', value: 'hsl'}, {label: 'hsv', value: 'hsv'}, {
+                    label: 'hex',
+                    value: 'hex'
+                }, {label: 'rgb', value: 'rgb'}]
+            },
+            {
+                type: 'tableOptions',
+                field: 'predefine',
+                props: {
+                    column: [{label: t('props.value'), key: 'value'}],
+                    valueType: 'string'
+                }
+            },
+        ]);
     }
 };

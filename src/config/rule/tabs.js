@@ -1,18 +1,20 @@
-import {localeProps} from '../../utils';
+import {localeOptions, localeProps} from '../../utils';
 
 const label = '标签页';
-const name = 'tab';
+const name = 'elTabs';
 
 export default {
+    menu: 'layout',
     icon: 'icon-tab',
     label,
     name,
-    children: 'tab-pane',
     mask: false,
+    event: ['tabClick', 'tabChange', 'tabRemove', 'tabAdd', 'edit'],
+    children: 'elTabPane',
     rule() {
         return {
-            type: 'el-tabs',
-            style: 'width:100%;',
+            type: name,
+            style: {width: '100%'},
             children: []
         };
     },
@@ -20,19 +22,17 @@ export default {
         return localeProps(t, name + '.props', [{
             type: 'select',
             field: 'type',
-            title: '风格类型',
             options: [{
                 label: 'card',
                 value: 'card'
             }, {label: 'border-card', value: 'border-card'}]
-        }, {type: 'switch', field: 'closable', title: '标签是否可关闭'}, {
+        }, {type: 'switch', field: 'closable'}, {
             type: 'select',
             field: 'tabPosition',
-            title: '选项卡所在位置',
-            options: [{label: 'top', value: 'top'}, {label: 'right', value: 'right'}, {
+            options: localeOptions(t, [{label: 'top', value: 'top'}, {label: 'right', value: 'right'}, {
                 label: 'left',
                 value: 'left'
-            }]
-        }, {type: 'switch', field: 'stretch', title: '标签的宽度是否自撑开'}]);
+            }])
+        }, {type: 'switch', field: 'stretch'}]);
     }
 };

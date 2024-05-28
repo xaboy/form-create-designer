@@ -1,17 +1,19 @@
 <template>
-    <div class="_fc_struct">
-        <ElButton @click="visible=true" style="width: 100%;">{{ title || t('struct.title') }}</ElButton>
-        <ElDialog :title="title || t('struct.title')" v-model="visible" :close-on-click-modal="false" append-to-body>
+    <div class="_fd-struct">
+        <el-badge type="warning" is-dot :hidden="!configured">
+            <el-button @click="visible=true" size="small">{{ title || t('struct.title') }}</el-button>
+        </el-badge>
+        <el-dialog class="_fd-struct-con" :title="title || t('struct.title')" v-model="visible" destroy-on-close
+                  :close-on-click-modal="false"
+                  append-to-body>
             <div ref="editor" v-if="visible"></div>
             <template #footer>
-                <span class="dialog-footer">
-                    <span class="_fc_err" v-if="err">
-                        {{ t('struct.error') }}{{ err !== true ? err : '' }}</span>
-                    <ElButton @click="visible = false" size="small">{{ t('struct.cancel') }}</ElButton>
-                    <ElButton type="primary" @click="onOk" size="small">{{ t('struct.submit') }}</ElButton>
-                </span>
+                <div>
+                    <el-button @click="visible = false" size="default">{{ t('props.cancel') }}</el-button>
+                    <el-button type="primary" @click="onOk" size="default" color="#2f73ff">{{ t('props.ok') }}</el-button>
+                </div>
             </template>
-        </ElDialog>
+        </el-dialog>
     </div>
 </template>
 
@@ -21,10 +23,13 @@ import CodeMirror from 'codemirror/lib/codemirror';
 import 'codemirror/mode/javascript/javascript';
 import {deepParseFn, toJSON} from '../utils/index';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
-import {defineComponent} from 'vue';
+import {defineComponent, markRaw} from 'vue';
+import is from '@form-create/utils/lib/type';
+import errorMessage from '../utils/message';
 
 export default defineComponent({
     name: 'Struct',
+    emits: ['update:modelValue'],
     props: {
         modelValue: [Object, Array, Function],
         title: String,
@@ -34,13 +39,19 @@ export default defineComponent({
         validate: Function,
     },
     inject: ['designer'],
+    computed: {
+        t() {
+            return this.designer.setupState.t;
+        },
+        configured() {
+            return !is.empty(this.modelValue);
+        },
+    },
     data() {
         return {
             editor: null,
             visible: false,
-            err: false,
             oldVal: null,
-            t: this.designer.setupState.t,
         };
     },
     watch: {
@@ -50,26 +61,23 @@ export default defineComponent({
         visible(n) {
             if (n) {
                 this.load();
-            } else {
-                this.err = false;
             }
-        }
+        },
     },
     methods: {
         load() {
             const val = toJSON(deepParseFn(this.modelValue ? deepCopy(this.modelValue) : this.defaultValue));
             this.oldVal = val;
             this.$nextTick(() => {
-                this.editor = CodeMirror(this.$refs.editor, {
+                this.editor = markRaw(CodeMirror(this.$refs.editor, {
                     lineNumbers: true,
                     mode: 'javascript',
-                    gutters: ['CodeMirror-lint-markers'],
                     lint: true,
                     line: true,
                     tabSize: 2,
                     lineWrapping: true,
                     value: val || ''
-                });
+                }));
             });
         },
         onOk() {
@@ -78,48 +86,54 @@ export default defineComponent({
             try {
                 val = (new Function('return ' + str))();
             } catch (e) {
-                this.err = ` (${e})`;
-                return;
+                console.error(e);
+                errorMessage(this.t('struct.errorMsg'));
+                return false;
             }
             if (this.validate && false === this.validate(val)) {
-                this.err = true;
-                return;
+                errorMessage(this.t('struct.errorMsg'));
+                return false;
             }
             this.visible = false;
             if (toJSON(val, null, 2) !== this.oldVal) {
                 this.$emit('update:modelValue', val);
             }
+            return true;
         },
     }
 });
 </script>
 
 <style>
-._fc_struct {
+._fd-struct {
     width: 100%;
 }
 
-._fc_struct .CodeMirror {
+._fd-struct .el-badge {
+    width: 100%;
+}
+
+._fd-struct .el-button {
+    font-weight: 400;
+    width: 100%;
+    border-color: #2E73FF;
+    color: #2E73FF;
+}
+
+._fd-struct .CodeMirror {
     height: 450px;
 }
 
-._fc_struct .CodeMirror-line {
+._fd-struct .CodeMirror-line {
     line-height: 16px !important;
     font-size: 13px !important;
 }
 
-.CodeMirror-lint-tooltip {
+._fd-struct-con .CodeMirror-lint-tooltip {
     z-index: 2021 !important;
 }
 
-._fc_struct .el-dialog__body {
+._fd-struct-con .el-dialog__body {
     padding: 0px 20px;
-}
-
-._fc_err {
-    color: red;
-    float: left;
-    text-align: left;
-    width: 65%;
 }
 </style>

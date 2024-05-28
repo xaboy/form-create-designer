@@ -1,7 +1,7 @@
 <template>
-    <div class="_fc-required">
-        <ElSwitch v-model="required"></ElSwitch>
-        <ElInput v-model="requiredMsg" v-if="required" :placeholder="t('validate.requiredPlaceholder')"></ElInput>
+    <div class="_fd-required">
+        <el-switch v-model="required"></el-switch>
+        <el-input v-model="requiredMsg" v-if="required" :placeholder="t('validate.requiredPlaceholder')"></el-input>
     </div>
 </template>
 
@@ -11,6 +11,7 @@ import {defineComponent} from 'vue';
 
 export default defineComponent({
     name: 'Required',
+    emits: ['update:modelValue'],
     props: {
         modelValue: {}
     },
@@ -28,11 +29,14 @@ export default defineComponent({
             this.requiredMsg = flag ? n : '';
         },
     },
+    computed: {
+        t() {
+            return this.designer.setupState.t;
+        },
+    },
     data() {
         const flag = is.String(this.modelValue);
-        const t = this.designer.setupState.t;
         return {
-            t,
             required: this.modelValue === undefined ? false : (flag ? true : !!this.modelValue),
             requiredMsg: flag ? this.modelValue : ''
         };
@@ -52,16 +56,17 @@ export default defineComponent({
 </script>
 
 <style>
-._fc-required {
+._fd-required {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
-._fc-required .el-input {
+._fd-required .el-input {
     margin-left: 15px;
 }
 
-._fc-required .el-switch {
+._fd-required .el-switch {
     height: 28px;
 }
 </style>

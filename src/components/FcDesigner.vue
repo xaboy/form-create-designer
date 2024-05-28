@@ -1,245 +1,324 @@
-<style>
-._fc-designer {
-    height: 100%;
-    min-height: 500px;
-    overflow: hidden;
-    cursor: default;
-    position: relative;
-}
-
-._fc-designer > .el-main {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0px;
-}
-
-._fc-m .form-create ._fc-l-item {
-    background: #2E73FF;
-    width: 100%;
-    height: 10px;
-    overflow: hidden;
-    transition: all .3s ease;
-}
-
-._fc-l, ._fc-m, ._fc-r {
-    border-top: 1px solid #ECECEC;
-    box-sizing: border-box;
-}
-
-._fc-l-group {
-    padding: 0 12px;
-}
-
-._fc-l-title {
-    font-weight: 600;
-    font-size: 14px;
-    margin: 18px 0px 5px;
-}
-
-._fc-l-item {
-    display: inline-block;
-    background: #FFF;
-    color: #000;
-    min-width: 70px;
-    width: 33.33%;
-    height: 70px;
-    line-height: 1;
-    text-align: center;
-    transition: all .2s ease;
-    cursor: pointer;
-}
-
-._fc-l-item i {
-    font-size: 21px;
-    display: inline-block;
-}
-
-._fc-l-item ._fc-l-name {
-    font-size: 12px;
-}
-
-._fc-l-item ._fc-l-icon {
-    padding: 10px 5px 12px;
-}
-
-._fc-l-item:hover {
-    background: #2E73FF;
-    color: #fff;
-}
-
-._fc-m-tools {
-    height: 40px;
-    align-items: center;
-    display: flex;
-    justify-content: flex-end;
-    border: 1px solid #ECECEC;
-    border-top: 0 none;
-}
-
-._fc-m-tools button.el-button {
-    padding: 5px 14px;
-    display: flex;
-    align-items: center;
-}
-
-._fc-m-tools .fc-icon {
-    font-size: 14px;
-    margin-right: 2px;
-}
-
-._fc-r .el-tabs__nav-wrap::after {
-    height: 1px;
-    background-color: #ECECEC;
-}
-
-._fc-r ._fc-r-tabs {
-    display: flex;
-    padding: 0;
-    border-bottom: 1px solid #ECECEC;
-}
-
-._fc-r ._fc-r-tab {
-    height: 40px;
-    box-sizing: border-box;
-    line-height: 40px;
-    display: inline-block;
-    list-style: none;
-    font-size: 14px;
-    font-weight: 600;
-    color: #303133;
-    position: relative;
-    flex: 1;
-    text-align: center;
-}
-
-._fc-r ._fc-r-tab.active {
-    color: #409EFF;
-    border-bottom: 2px solid #409EFF;
-}
-
-.drag-box {
-    min-height: 60px;
-    width: 100%;
-}
-
-._fc-m-drag {
-    overflow: auto;
-    padding: 2px;
-    box-sizing: border-box;
-}
-
-._fc-m-drag, .draggable-drag {
-    background: #fff;
-    height: 100%;
-    position: relative;
-}
-
-._fc-m-drag > form, ._fc-m-drag > form > .el-row {
-    height: 100%;
-}
-</style>
-
 <template>
-    <ElContainer class="_fc-designer" :style="'height:'+dragHeight">
-        <ElMain>
-            <ElContainer style="height: 100%;">
+    <el-container class="_fc-designer" @dragenter="handleDragenter" @dragleave="handleDragleave" @drop="handleDrop">
+        <el-main>
+            <el-container style="height: 100%;" :key="locale && locale.name">
                 <el-aside class="_fc-l" width="266px">
-                    <template v-for="(item, index) in menuList" :key="index">
-                        <div class="_fc-l-group">
-                            <h4 class="_fc-l-title">{{ item.title }}</h4>
-                            <draggable :group="{name:'default', pull:'clone',put:false}" :sort="false"
-                                       itemKey="name"
-                                       :list="item.list">
-                                <template #item="{element}">
-                                    <div class="_fc-l-item">
-                                        <div class="_fc-l-icon">
-                                            <i class="fc-icon" :class="element.icon || 'icon-input'"></i>
-                                        </div>
-                                        <span class="_fc-l-name">{{
-                                                t('components.' + element.name + '.name') || element.label
-                                            }}</span>
-                                    </div>
-                                </template>
-                            </draggable>
-                        </div>
-                    </template>
-                </el-aside>
-                <ElContainer class="_fc-m">
-                    <el-header class="_fc-m-tools" height="45">
-                        <slot name="handle"></slot>
-                        <el-button type="primary" plain round size="small"
-                                   @click="previewFc"><i class="fc-icon icon-preview"></i> {{ t('designer.preview') }}
-                        </el-button>
-                        <el-popconfirm
-                            :title="t('designer.clearConfirmTitle')"
-                            width="200px"
-                            :confirm-button-text="t('designer.clearConfirm')"
-                            :cancel-button-text="t('designer.clearCancel')"
-                            @confirm="clearDragRule">
-                            <template #reference>
-                                <el-button type="danger" plain round size="small"><i
-                                    class="fc-icon icon-delete"></i>{{ t('designer.clear') }}
-                                </el-button>
-                            </template>
-                        </el-popconfirm>
-
-                    </el-header>
-                    <ElMain style="background: #F5F5F5;padding: 20px;">
-                        <div class="_fc-m-drag">
-                            <DragForm :rule="dragForm.rule" :option="form.value"
-                                      v-model:api="dragForm.api"></DragForm>
-                        </div>
-                    </ElMain>
-                </ElContainer>
-                <ElAside class="_fc-r" width="320px" v-if="!config || config.showConfig !== false">
-                    <ElContainer style="height: 100%;">
-                        <el-header height="40px" class="_fc-r-tabs">
-                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}"
-                                 v-if="!!activeRule || (config && config.showFormConfig === false)"
-                                 @click="activeTab='props'"> {{ t('designer.config.component') }}
+                    <el-container style="height: 100%;">
+                        <el-header height="40px" class="_fc-l-tabs">
+                            <div class="_fc-l-tab" :class="{active: activeMenuTab==='menu'}"
+                                 @click="activeMenuTab='menu'"> {{ t('menu.component') }}
                             </div>
-                            <div class="_fc-r-tab" v-if="!config || config.showFormConfig !== false"
-                                 :class="{active: activeTab==='form' && !!activeRule}"
-                                 @click="activeTab='form'">{{ t('designer.config.form') }}
+                            <div class="_fc-l-tab" :class="{active: activeMenuTab==='tree'}"
+                                 @click="activeMenuTab='tree'"> {{ t('menu.tree') }}
                             </div>
                         </el-header>
-                        <ElMain v-show="activeTab==='form'" v-if="!config || config.showFormConfig !== false">
+                        <el-main v-show="activeMenuTab === 'menu'">
+                            <template v-for="(item, index) in menuList">
+                                <div class="_fc-l-group" :key="index"
+                                     v-if="hiddenMenu.indexOf(item.name) === -1">
+                                    <h4 class="_fc-l-title" @click="item.hidden = !item.hidden">
+                                        {{ t('menu.' + item.name) || item.title }}
+                                        <i class="fc-icon icon-arrow" :class="{down: !item.hidden}"/>
+                                    </h4>
+                                    <draggable :group="{name:'default', pull:'clone', put:false}" :sort="false"
+                                               itemKey="name"
+                                               class="_fc-l-list"
+                                               :list="item.list" v-show="!item.hidden">
+                                        <template #item="{element}">
+                                            <div class="_fc-l-item" v-if="hiddenItem.indexOf(element.name) === -1"
+                                                 @click="clickMenu(element)">
+                                                <div class="_fc-l-icon">
+                                                    <i class="fc-icon" :class="element.icon || 'icon-input'"></i>
+                                                </div>
+                                                <span class="_fc-l-name">{{
+                                                        t('com.' + element.name + '.name') || element.label
+                                                    }}</span>
+                                            </div>
+                                        </template>
+                                    </draggable>
+                                </div>
+                            </template>
+                        </el-main>
+                        <el-main v-if="activeMenuTab === 'tree'">
+                            <el-tree
+                                ref="treeRef"
+                                :data="treeInfo"
+                                default-expand-all
+                                :expand-on-click-node="false"
+                                @currentChange="treeChange"
+                            >
+                                <template #default="{ node, data }">
+                                    <div class="_fc-tree-node" :class="{active: activeRule === data.rule}">
+                                        <div class="_fc-tree-label">
+                                            <i class="fc-icon"
+                                               :class="(data.rule._menu && data.rule._menu.icon) || 'icon-cell'"></i>
+                                            <span>{{
+                                                    (data.rule.title || '').trim() || (data.rule.props && data.rule.props.label) || t('com.' + (data.rule._menu && data.rule._menu.name) + '.name') || data.rule.type
+                                                }}</span>
+                                        </div>
+                                        <div class="_fc-tree-more" @click.stop v-if="!data.slot">
+                                            <el-dropdown trigger="click" size="default">
+                                                <i class="fc-icon icon-more"></i>
+                                                <template #dropdown>
+                                                    <el-dropdown-menu>
+                                                        <el-dropdown-item v-if="data.rule._fc_drag_tag !== '_'" key="1"
+                                                                          @click="toolHandle(data.rule ,'copy')">
+                                                            {{ t('props.copy') }}
+                                                        </el-dropdown-item>
+                                                        <el-dropdown-item
+                                                            v-if="data.rule._menu && data.rule._menu.children && data.rule._fc_drag_tag !== '_'"
+                                                            key="2"
+                                                            @click="toolHandle(data.rule, 'addChild')">
+                                                            {{ t('form.appendChild') }}
+                                                        </el-dropdown-item>
+                                                        <el-dropdown-item key="3"
+                                                                          @click="toolHandle(data.rule, 'delete')">
+                                                            {{ t('props.delete') }}
+                                                        </el-dropdown-item>
+                                                    </el-dropdown-menu>
+                                                </template>
+                                            </el-dropdown>
+                                        </div>
+                                    </div>
+                                </template>
+                            </el-tree>
+                        </el-main>
+                    </el-container>
+                </el-aside>
+                <el-container class="_fc-m">
+                    <el-header class="_fc-m-tools" height="45">
+                        <div class="_fc-m-tools-l">
+                            <template v-if="!inputForm.state">
+                                <template v-if="getConfig('showDevice') !== false">
+                                    <template v-if="device !== 'pc'">
+                                        <svg @click="device = 'pc'" class="icon" viewBox="0 0 1024 1024">
+                                            <path
+                                                d="M15.04 783.36h986.88v49.28H15.04zM163.2 191.36h690.88c27.2 0 49.28 22.08 49.28 49.28v542.72H113.92V240.64c0-27.2 22.08-49.28 49.28-49.28z"
+                                                fill="#7F7F7F"></path>
+                                            <path d="M163.2 240.64h690.88v493.44H163.2z" fill="#E5E5E5"></path>
+                                        </svg>
+                                    </template>
+                                    <template v-if="device === 'pc'">
+                                        <svg class="icon" viewBox="0 0 1024 1024">
+                                            <path
+                                                d="M15.04 783.36h986.88v49.28H15.04zM163.2 191.36h690.88c27.2 0 49.28 22.08 49.28 49.28v542.72H113.92V240.64c0-27.2 22.08-49.28 49.28-49.28z"
+                                                fill="#2E73FF"></path>
+                                            <path d="M163.2 240.64h690.88v493.44H163.2z" fill="#E0EAFF"></path>
+                                        </svg>
+                                    </template>
+                                    <template v-if="device !== 'pad'">
+                                        <svg @click="device = 'pad'" class="icon" viewBox="0 0 1024 1024">
+                                            <path
+                                                d="M217.28 29.76h589.44c29.44 0 53.44 24 53.44 53.44v857.28c0 29.44-24 53.44-53.44 53.44H217.28c-29.44 0-53.44-24-53.44-53.44V83.52c0-29.76 24-53.76 53.44-53.76z"
+                                                fill="#7F7F7F"></path>
+                                            <path d="M217.28 136.96h589.44v750.08H217.28z" fill="#E5E5E5"></path>
+                                        </svg>
+                                    </template>
+                                    <template v-if="device === 'pad'">
+                                        <svg class="icon" viewBox="0 0 1024 1024">
+                                            <path
+                                                d="M217.28 29.76h589.44c29.44 0 53.44 24 53.44 53.44v857.28c0 29.44-24 53.44-53.44 53.44H217.28c-29.44 0-53.44-24-53.44-53.44V83.52c0-29.76 24-53.76 53.44-53.76z"
+                                                fill="#2E73FF"></path>
+                                            <path d="M217.28 136.96h589.44v750.08H217.28z" fill="#E0EAFF"></path>
+                                        </svg>
+                                    </template>
+                                    <template v-if="device !== 'mobile'">
+                                        <svg @click="device = 'mobile'" class="icon" viewBox="0 0 1024 1024">
+                                            <path
+                                                d="M271.68 31.04h480.96c29.44 0 53.44 24 53.44 53.44v854.72c0 29.44-24 53.44-53.44 53.44H271.68c-29.44 0-53.44-24-53.44-53.44V84.48c0-29.44 23.68-53.44 53.44-53.44z"
+                                                fill="#7F7F7F"></path>
+                                            <path d="M271.68 137.92h480.96v747.84H271.68z" fill="#E5E5E5"></path>
+                                        </svg>
+                                    </template>
+                                    <template v-if="device === 'mobile'">
+                                        <svg class="icon" viewBox="0 0 1024 1024">
+                                            <path
+                                                d="M271.68 31.04h480.96c29.44 0 53.44 24 53.44 53.44v854.72c0 29.44-24 53.44-53.44 53.44H271.68c-29.44 0-53.44-24-53.44-53.44V84.48c0-29.44 23.68-53.44 53.44-53.44z"
+                                                fill="#2E73FF"></path>
+                                            <path d="M271.68 137.92h480.96v747.84H271.68z" fill="#E0EAFF"></path>
+                                        </svg>
+                                    </template>
+                                    <div class="line"></div>
+                                </template>
+                                <div>
+                                    <i class="fc-icon icon-pre-step"
+                                       :class="{disabled: !operation.list[operation.idx - 1]}"
+                                       @click="prevOperationRecord"></i>
+                                    <i class="fc-icon icon-next-step"
+                                       :class="{disabled: !operation.list[operation.idx + 1]}"
+                                       @click="nextOperationRecord"></i>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="_fc-m-tools-r">
+                            <template v-if="!inputForm.state">
+                                <slot name="handle"></slot>
+                                <el-button v-if="getConfig('showSaveBtn', false)" type="success" plain size="small"
+                                           @click="handleSave"><i class="fc-icon icon-save-online"></i> {{
+                                        t('props.save')
+                                    }}
+                                </el-button>
+                                <el-button type="primary" plain size="small"
+                                           @click="openPreview"><i class="fc-icon icon-preview"></i> {{
+                                        t('props.preview')
+                                    }}
+                                </el-button>
+                                <el-popconfirm
+                                    :title="t('designer.clearWarn')"
+                                    width="200px"
+                                    :confirm-button-text="t('props.clear')"
+                                    :cancel-button-text="t('props.cancel')"
+                                    @confirm="clearDragRule">
+                                    <template #reference>
+                                        <el-button type="danger" plain size="small"><i
+                                            class="fc-icon icon-delete"></i>{{ t('props.clear') }}
+                                        </el-button>
+                                    </template>
+                                </el-popconfirm>
+                                <el-dropdown trigger="click" size="default" v-if="handle && handle.length">
+                                    <el-button class="_fd-m-extend" plain size="small">
+                                        <i class="fc-icon icon-more"></i>
+                                    </el-button>
+                                    <template #dropdown>
+                                        <el-dropdown-menu>
+                                            <el-dropdown-item v-for="item in handle" @click.stop="triggerHandle(item)">
+                                                <div>{{ item.label }}</div>
+                                            </el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </template>
+                                </el-dropdown>
+
+                            </template>
+                            <div class="line"></div>
+                            <div class="_fd-input-btn">
+                                <i class="fc-icon icon-check" v-if="inputCheckStatus"></i><span>{{
+                                    t('props.inputData')
+                                }}：</span>
+                                <el-switch size="small" :model-value="inputForm.state" inline-prompt
+                                           @update:model-value="openInputData"/>
+                            </div>
+                        </div>
+                    </el-header>
+                    <el-main class="_fc-m-con">
+                        <div class="_fc-m-drag" :class="device"
+                             ref="dragCon"
+                             :style="{'--fc-drag-empty': `'${t('designer.dragEmpty')}'`,'--fc-child-empty': `'${t('designer.childEmpty')}'`, height: dragHeight}">
+                            <div class="_fc-m-input" v-if="inputForm.state">
+                                <ViewForm :key="inputForm.key" :rule="inputForm.rule" :option="inputForm.option"
+                                          v-model:api="inputForm.api" :disabled="false"></ViewForm>
+                            </div>
+                            <DragForm v-else :rule="dragForm.rule" :option="formOptions"
+                                      v-model:api="dragForm.api"></DragForm>
+                        </div>
+                        <div class="_fc-m-input-handle" v-if="inputForm.state">
+                            <el-button plain @click="inputClear()">{{ t('props.clear') }}</el-button>
+                            <el-button plain @click="inputReset()">{{ t('props.reset') }}</el-button>
+                            <el-button type="primary" plain @click="inputSave()">{{ t('props.save') }}</el-button>
+                        </div>
+                    </el-main>
+                </el-container>
+                <el-aside class="_fc-r" width="320px" v-if="!config || config.showConfig !== false">
+                    <el-container style="height: 100%;">
+                        <el-header height="40px" class="_fc-r-tabs">
+                            <div class="_fc-r-tab" :class="{active: activeTab==='props'}"
+                                 v-if="!!activeRule || customForm.isShow || (config && config.showFormConfig === false)"
+                                 @click="activeTab='props'"> {{ t('designer.component') }}
+                            </div>
+                            <div class="_fc-r-tab" v-if="!config || config.showFormConfig !== false"
+                                 :class="{active: activeTab==='form' && (!!activeRule || customForm.isShow)}"
+                                 @click="activeTab='form'">{{ t('designer.form') }}
+                            </div>
+                        </el-header>
+                        <el-main class="_fc-r-tab-form" v-show="activeTab==='form'"
+                                 v-if="!config || config.showFormConfig !== false">
                             <DragForm :rule="form.rule" :option="form.option"
-                                      v-model="form.value.form" v-model:api="form.api"></DragForm>
-                        </ElMain>
-                        <ElMain v-show="activeTab==='props'" style="padding: 0 20px;"
-                                :key="activeRule ? activeRule._id: ''">
-                            <div>
-                                <ElDivider v-if="showBaseRule">{{ t('designer.config.rule') }}</ElDivider>
-                                <DragForm v-show="showBaseRule" v-model:api="baseForm.api"
-                                          :rule="baseForm.rule"
-                                          :option="baseForm.options"
-                                          :modelValue="baseForm.value"
-                                          @change="baseChange"></DragForm>
-                                <ElDivider>{{ t('designer.config.props') }}</ElDivider>
-                                <DragForm v-model:api="propsForm.api" :rule="propsForm.rule"
-                                          :option="propsForm.options"
-                                          :modelValue="propsForm.value"
-                                          @change="propChange" @removeField="propRemoveField"></DragForm>
-                                <ElDivider v-if="showBaseRule">{{ t('designer.config.validate') }}</ElDivider>
-                                <DragForm v-show="showBaseRule" v-model:api="validateForm.api"
+                                      :modelValue="form.value" @change="formOptChange"
+                                      v-model:api="form.api"></DragForm>
+                        </el-main>
+                        <el-main class="_fc-r-tab-props" v-show="activeTab==='props'"
+                                 :key="activeRule ? activeRule._fc_id: (customForm.config ? customForm.key : '')">
+                            <template
+                                v-if="activeRule || (customForm.config && (customForm.config.name || customForm.config.label))">
+                                <p class="_fc-r-title">{{ t('designer.type') }}</p>
+                                <el-tag type="success" effect="plain" disable-transitions>
+                                    <template v-if="activeRule">
+                                        {{ t('com.' + (activeRule._menu.name) + '.name') || activeRule._menu.label }}
+                                    </template>
+                                    <template v-else>
+                                        {{
+                                            t('com.' + (customForm.config.name) + '.name') || customForm.config.label || customForm.config.name
+                                        }}
+                                    </template>
+                                </el-tag>
+                                <template
+                                    v-if="(activeRule && activeRule.name)">
+                                    <p class="_fc-r-title">{{ t('designer.name') }}</p>
+                                    <el-input size="small" class="_fc-r-name-input"
+                                              :model-value="activeRule.name"
+                                              readonly>
+                                        <template #append>
+                                            <i class="fc-icon icon-auto" @click="updateName"></i>
+                                        </template>
+                                    </el-input>
+                                </template>
+                            </template>
+                            <el-divider v-if="baseForm.isShow">{{ t('designer.rule') }}</el-divider>
+                            <DragForm v-show="baseForm.isShow" v-model:api="baseForm.api"
+                                      :rule="baseForm.rule"
+                                      :option="baseForm.options"
+                                      :modelValue="baseForm.value"
+                                      @change="baseChange"></DragForm>
+                            <el-divider v-if="propsForm.isShow">{{ t('designer.props') }}</el-divider>
+                            <DragForm v-show="propsForm.isShow" v-model:api="propsForm.api" :rule="propsForm.rule"
+                                      :option="propsForm.options"
+                                      :modelValue="propsForm.value"
+                                      @change="propChange" @removeField="propRemoveField"></DragForm>
+                            <el-divider v-if="customForm.isShow && customForm.propsShow">
+                                {{ t('designer.props') }}
+                            </el-divider>
+                            <DragForm v-if="customForm.isShow && customForm.propsShow" v-model:api="customForm.api"
+                                      :rule="customForm.rule"
+                                      :option="customForm.options" :key="customForm.key"
+                                      @change="customFormChange"></DragForm>
+                            <el-divider
+                                v-if="eventShow">
+                                {{ t('designer.event') }}
+                            </el-divider>
+                            <EventConfig
+                                v-if="eventShow"
+                                :event-name="(activeRule && activeRule._menu.event) || []"
+                                :component-name="(activeRule && activeRule._menu.name) || ''"
+                                :model-value="(activeRule && activeRule._on) || {}"
+                                @update:modelValue="changeEvent"></EventConfig>
+                            <template v-if="activeRule">
+                                <el-divider v-if="validateForm.isShow">{{
+                                        t('designer.validate')
+                                    }}
+                                </el-divider>
+                                <DragForm v-if="validateForm.isShow" v-model:api="validateForm.api"
                                           :rule="validateForm.rule"
                                           :option="validateForm.options"
                                           :modelValue="validateForm.value"
-                                          @update:modelValue="validateChange"></DragForm>
-                            </div>
-                        </ElMain>
-                    </ElContainer>
-                </ElAside>
-                <ElDialog v-model="preview.state" width="800px" append-to-body>
-                    <ViewForm :rule="preview.rule" :option="preview.option" v-if="preview.state"></ViewForm>
-                </ElDialog>
-            </ElContainer>
-        </ElMain>
-    </ElContainer>
+                                          @update:modelValue="validateChange"
+                                          :key="activeRule._fc_id"></DragForm>
+                            </template>
+                        </el-main>
+                    </el-container>
+                </el-aside>
+                <el-dialog v-model="preview.state" width="800px" class="_fd-preview-dialog" append-to-body>
+                    <el-tabs class="_fd-preview-tabs" v-model="previewStatus">
+                        <el-tab-pane :label="t('form.formMode')" name="form"></el-tab-pane>
+                        <el-tab-pane :label="t('form.componentMode')" name="component"></el-tab-pane>
+                    </el-tabs>
+                    <template v-if="previewStatus === 'form'">
+                        <ViewForm :rule="preview.rule" :option="preview.option" v-model:api="preview.api"
+                                  v-if="preview.state"></ViewForm>
+                    </template>
+                    <pre class="_fd-preview-code" v-else><code v-html="preview.html"></code></pre>
+                </el-dialog>
+            </el-container>
+        </el-main>
+    </el-container>
 </template>
 
 <style>
@@ -247,33 +326,50 @@
 </style>
 
 <script>
-
 import form from '../config/base/form';
 import field from '../config/base/field';
 import validate from '../config/base/validate';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
 import is, {hasProperty} from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
-import ruleList from '../config/rule';
+import Mitt from '@form-create/utils/lib/mitt';
+import ruleList, {defaultDrag} from '../config';
 import draggable from 'vuedraggable/src/vuedraggable';
 import createMenu from '../config/menu';
-import {upper, useLocale} from '../utils/index';
-import {designerForm} from '../utils/form';
-import viewForm from '../utils/form';
+import {
+    getRuleTree,
+    getRuleDescription,
+    getFormRuleDescription,
+    upper,
+    useLocale,
+    isNull,
+    formTemplate,
+} from '../utils/index';
+import viewForm, {designerForm} from '../utils/form';
 import {t as globalT} from '../utils/locale';
+import EventConfig from './EventConfig.vue';
 import {
     computed,
-    reactive,
-    toRefs,
-    toRef,
-    ref,
-    getCurrentInstance,
-    provide,
-    nextTick,
-    watch,
     defineComponent,
-    markRaw
+    getCurrentInstance,
+    markRaw,
+    nextTick,
+    provide,
+    reactive,
+    ref,
+    toRef,
+    toRefs,
+    watch
 } from 'vue';
+import uniqueId from '@form-create/utils/lib/unique';
+import debounce from '@form-create/utils/lib/debounce';
+import errorMessage from '../utils/message';
+import hljs from '../utils/highlight/highlight.min';
+import xml from '../utils/highlight/xml.min';
+import javascript from '../utils/highlight/javascript.min';
+
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('xml', xml);
 
 export default defineComponent({
     name: 'FcDesigner',
@@ -281,25 +377,55 @@ export default defineComponent({
         draggable,
         DragForm: designerForm.$form(),
         ViewForm: viewForm.$form(),
+        EventConfig,
     },
-    props: ['menu', 'height', 'config', 'mask', 'locale'],
+    props: {
+        menu: Array,
+        height: [String, Number],
+        config: {
+            type: Object,
+            default: () => ({})
+        },
+        mask: {
+            type: Boolean,
+            default: undefined,
+        },
+        locale: Object,
+        handle: Array
+    },
+    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save'],
     setup(props) {
-        const {menu, height, mask, locale} = toRefs(props);
+        const {menu, height, mask, locale, handle} = toRefs(props);
         const vm = getCurrentInstance();
         const fcx = reactive({active: null});
         provide('fcx', fcx);
         provide('designer', vm);
 
-        const config = toRef(props, 'config', {});
-        const baseRule = toRef(config.value, 'baseRule', null);
-        const componentRule = toRef(config.value, 'componentRule', {});
-        const validateRule = toRef(config.value, 'validateRule', null);
-        const formRule = toRef(config.value, 'formRule', null);
+        const configRef = toRef(props, 'config', {});
+        const baseRule = toRef(configRef.value, 'baseRule', null);
+        const componentRule = toRef(configRef.value, 'componentRule', {});
+        const validateRule = toRef(configRef.value, 'validateRule', null);
+        const formRule = toRef(configRef.value, 'formRule', null);
         const dragHeight = computed(() => {
             const h = height.value;
             if (!h) return '100%';
             return is.Number(h) ? `${h}px` : h;
         })
+        const fieldReadonly = computed(() => {
+            return configRef.value.fieldReadonly !== false;
+        })
+        const hiddenMenu = computed(() => {
+            return configRef.value.hiddenMenu || [];
+        });
+        const hiddenItem = computed(() => {
+            return configRef.value.hiddenItem || [];
+        });
+        const hiddenDragMenu = computed(() => {
+            return configRef.value.hiddenDragMenu === true;
+        });
+        const hiddenDragBtn = computed(() => {
+            return configRef.value.hiddenDragBtn === true;
+        });
         let _t = globalT;
         if (locale.value) {
             _t = useLocale(locale).t
@@ -324,27 +450,45 @@ export default defineComponent({
 
         const data = reactive({
             cacheProps: {},
+            operation: {
+                idx: -1,
+                list: []
+            },
             moveRule: null,
             addRule: null,
             added: null,
+            bus: Mitt(),
+            device: 'pc',
             activeTab: 'form',
+            activeMenuTab: 'menu',
             activeRule: null,
             children: ref([]),
+            treeInfo: [],
             menuList: menu.value || createMenu({t}),
-            showBaseRule: false,
-            visible: {
-                preview: false
-            },
+            dragRuleList: {},
+            eventShow: false,
+            previewStatus: 'form',
             t,
             preview: {
                 state: false,
                 rule: [],
-                option: {}
+                option: {},
+                api: {},
+            },
+            inputForm: {
+                state: false,
+                rule: [],
+                option: {},
+                api: {},
+                data: {},
+                key: '',
             },
             dragForm: ref({
                 rule: [],
                 api: {},
             }),
+            formOptions: {},
+            oldOptionsKeys: [],
             form: {
                 rule: tidyRuleConfig(form, formRule.value, {t}),
                 api: {},
@@ -356,23 +500,21 @@ export default defineComponent({
                     submitBtn: false
                 },
                 value: {
-                    form: {
-                        inline: false,
-                        hideRequiredAsterisk: false,
-                        labelPosition: 'right',
-                        size: 'small',
-                        labelWidth: '125px',
-                        formCreateSubmitBtn: true,
-                        formCreateResetBtn: false
-                    },
+                    form: {},
                     submitBtn: false
                 }
             },
             baseForm: {
+                isShow: false,
                 rule: tidyRuleConfig(field, baseRule.value, {t}),
                 api: {},
                 value: {},
                 options: {
+                    global: {
+                        input: {
+                            modelEmit: 'blur'
+                        }
+                    },
                     form: {
                         labelPosition: 'top',
                         size: 'small'
@@ -385,10 +527,16 @@ export default defineComponent({
                 }
             },
             validateForm: {
+                isShow: false,
                 rule: tidyRuleConfig(validate, validateRule.value, {t}),
                 api: {},
                 value: [],
                 options: {
+                    global: {
+                        input: {
+                            modelEmit: 'blur'
+                        }
+                    },
                     form: {
                         labelPosition: 'top',
                         size: 'small'
@@ -401,10 +549,21 @@ export default defineComponent({
                 }
             },
             propsForm: {
+                isShow: false,
                 rule: [],
                 api: {},
                 value: {},
                 options: {
+                    global: {
+                        input: {
+                            modelEmit: 'blur'
+                        },
+                        inputNumber: {
+                            props: {
+                                controlsPosition: 'right'
+                            }
+                        }
+                    },
                     form: {
                         labelPosition: 'top',
                         size: 'small'
@@ -415,18 +574,61 @@ export default defineComponent({
                         fapi.setValue(fapi.options.formData || {});
                     }
                 }
-            }
+            },
+            customForm: {
+                isShow: false,
+                config: null,
+                key: '',
+                rule: [],
+                api: {},
+                options: {
+                    global: {
+                        input: {
+                            modelEmit: 'blur'
+                        }
+                    },
+                    form: {
+                        labelPosition: 'top',
+                        size: 'small'
+                    },
+                    submitBtn: false,
+                }
+            },
         });
 
         watch(() => data.preview.state, function (n) {
             if (!n) {
                 nextTick(() => {
+                    data.previewStatus = 'form';
                     data.preview.rule = data.preview.option = null;
                 });
             }
         })
 
         let unWatchActiveRule = null;
+
+        const propFieldDeepFn = (field, call) => {
+            if (field[10] !== '>') {
+                field = field.replace('formCreate', '');
+                if (!field) return;
+                field = lower(field);
+            } else {
+                field = field.replace('formCreate>', '');
+            }
+            const split = field.split('>');
+            const lastField = split.pop();
+            let source = data.activeRule;
+            split.forEach((id, idx) => {
+                if (!idx) {
+                    id = lower(id);
+                }
+                if (!source[id]) {
+                    source[id] = {};
+                }
+                source = source[id];
+            });
+            call({source, field: lastField});
+        }
 
         watch(() => locale.value, (n) => {
             _t = n ? useLocale(locale).t : globalT;
@@ -441,8 +643,8 @@ export default defineComponent({
             let propsVal = null;
             if (rule) {
                 propsVal = data.propsForm.api.formData && data.propsForm.api.formData();
-                data.propsForm.rule = data.cacheProps[rule._id] =
-                    tidyRuleConfig(rule.config.config.props, componentRule.value && componentRule.value[rule.config.config.name], rule, {
+                data.propsForm.rule = data.cacheProps[rule._fc_id] =
+                    tidyRuleConfig(rule._menu.props, componentRule.value && componentRule.value[rule._menu.name], rule, {
                         t,
                         api: data.dragForm.api
                     });
@@ -482,13 +684,6 @@ export default defineComponent({
                     data.menuList.push(config);
                 }
             },
-            removeMenu(name) {
-                [...data.menuList].forEach((v, i) => {
-                    if (v.name === name) {
-                        data.menuList.splice(i, 1);
-                    }
-                });
-            },
             setMenuItem(name, list) {
                 data.menuList.forEach(v => {
                     if (v.name === name) {
@@ -522,22 +717,65 @@ export default defineComponent({
             addComponent(component) {
                 if (Array.isArray(component)) {
                     component.forEach(v => {
-                        ruleList[v.name] = v;
+                        data.dragRuleList[v.name] = v;
+                        v.menu && methods.appendMenuItem(v.menu, v);
                     });
                 } else {
-                    ruleList[component.name] = component;
+                    data.dragRuleList[component.name] = component;
+                    component.menu && methods.appendMenuItem(component.menu, component);
                 }
+            },
+            openInputData(state) {
+                data.inputForm.state = state === undefined ? !data.inputForm.state : !!state;
+                if (data.inputForm.state) {
+                    data.inputForm.rule = designerForm.parseJson(methods.getJson());
+                    data.inputForm.option = designerForm.parseJson(methods.getOptionsJson());
+                    data.inputForm.option.formData = deepCopy(data.inputForm.data);
+                    data.inputForm.option.submitBtn.show = false;
+                    data.inputForm.option.resetBtn.show = false;
+                    methods.clearActiveRule();
+                }
+            },
+            inputSave() {
+                const formData = data.inputForm.api.formData();
+                Object.keys(formData).forEach(k => {
+                    if (isNull(formData[k])) {
+                        delete formData[k];
+                    }
+                });
+                const flag = JSON.stringify(data.inputForm.data) !== JSON.stringify(formData);
+                data.inputForm.data = formData;
+                data.inputForm.state = false;
+                vm.emit('inputData', formData);
+                flag && methods.addOperationRecord();
+            },
+            inputClear() {
+                methods.inputReset({});
+            },
+            inputReset(formData) {
+                data.inputForm.rule = designerForm.parseJson(methods.getJson());
+                data.inputForm.option.formData = formData || deepCopy(data.inputForm.data);
+                data.inputForm.key = uniqueId();
+            },
+            setFormData(formData) {
+                data.inputForm.data = formData || {};
+            },
+            getFormData() {
+                return data.inputForm.data;
             },
             getParent(rule) {
                 let parent = rule.__fc__.parent.rule;
-                const config = parent.config;
-                if (config && config.config.inside) {
+                const config = parent._menu;
+                if (config && config.inside) {
                     rule = parent;
                     parent = parent.__fc__.parent.rule;
                 }
                 return {root: parent, parent: rule};
             },
-            makeDrag(group, tag, children, on) {
+            updateName() {
+                this.activeRule.name = 'ref_' + uniqueId();
+            },
+            makeDrag(group, tag, children, on, slot) {
                 return {
                     type: 'DragBox',
                     wrap: {
@@ -554,7 +792,7 @@ export default defineComponent({
                                 group: group === true ? 'default' : group,
                                 ghostClass: 'ghost',
                                 animation: 150,
-                                handle: '._fc-drag-btn',
+                                handle: '._fd-drag-btn',
                                 emptyInsertThreshold: 0,
                                 direction: 'vertical',
                                 itemKey: 'type',
@@ -563,11 +801,13 @@ export default defineComponent({
                         tag,
                     },
                     children,
+                    slot,
                     on
                 };
             },
             clearDragRule() {
                 methods.setRule([]);
+                methods.addOperationRecord();
             },
             makeDragRule(children) {
                 return methods.makeChildren([methods.makeDrag(true, 'draggable', children, {
@@ -577,45 +817,54 @@ export default defineComponent({
                     unchoose: (inject, evt) => methods.dragUnchoose(children, evt),
                 })]);
             },
-            previewFc() {
+            handleSave() {
+                vm.emit('save', {
+                    rule: methods.getJson(),
+                    options: methods.getOptionsJson(),
+                });
+            },
+            openPreview() {
                 data.preview.state = true;
-                data.preview.rule = methods.getRule();
-                data.preview.option = methods.getOption();
+                const rule = methods.getJson();
+                const options = methods.getOptionsJson();
+                data.preview.rule = designerForm.parseJson(rule);
+                data.preview.option = designerForm.parseJson(options);
+                data.preview.html = hljs.highlight(
+                    formTemplate(rule, options),
+                    {language: 'xml'}
+                ).value
             },
             getRule() {
-                return methods.parseRule(deepCopy(data.dragForm.api.rule[0].children));
+                return methods.parseRule(deepCopy(data.dragForm.rule[0].children));
             },
             getJson() {
                 return designerForm.toJson(methods.getRule());
             },
             getOption() {
-                const option = deepCopy(data.form.value);
-                option.submitBtn = option._submitBtn;
-                option.resetBtn = option._resetBtn;
-                if (typeof option.submitBtn === 'object') {
-                    option.submitBtn.show = option.form.formCreateSubmitBtn;
-                } else {
-                    option.submitBtn = {
-                        show: option.form.formCreateSubmitBtn,
-                        innerText: t('form.submit'),
-                    };
+                const options = deepCopy(data.formOptions);
+                Object.keys(options._event || {}).forEach(k => {
+                    if (options._event[k]) {
+                        options[k] = options._event[k];
+                    }
+                });
+                delete options._event;
+                options.submitBtn = options._submitBtn;
+                options.resetBtn = options._resetBtn;
+                options.resetBtn.innerText = t('props.reset');
+                options.submitBtn.innerText = t('props.submit');
+                const formData = deepCopy(data.inputForm.data);
+                if (Object.keys(formData).length > 0) {
+                    options.formData = formData;
                 }
-                if (typeof option.resetBtn === 'object') {
-                    option.resetBtn.show = option.form.formCreateResetBtn;
-                } else {
-                    option.resetBtn = {
-                        show: option.form.formCreateResetBtn,
-                        innerText: t('form.reset'),
-                    };
-                }
-                delete option.form.formCreateSubmitBtn;
-                delete option.form.formCreateResetBtn;
-                delete option._submitBtn;
-                delete option._resetBtn;
-                return option;
+                delete options._submitBtn;
+                delete options._resetBtn;
+                return options;
             },
             getOptions() {
                 methods.getOption();
+            },
+            getOptionsJson() {
+                return designerForm.toJson([this.getOption()]).slice(1).slice(0, -1);
             },
             setRule(rules) {
                 if (!rules) {
@@ -624,6 +873,7 @@ export default defineComponent({
                 data.children = ref(methods.loadRule(is.String(rules) ? designerForm.parseJson(rules) : deepCopy(rules)));
                 methods.clearActiveRule();
                 data.dragForm.rule = methods.makeDragRule(methods.makeChildren(data.children));
+                methods.updateTree();
             },
             setBaseRuleConfig(rule, append) {
                 baseRule.value = {rule, append};
@@ -635,8 +885,8 @@ export default defineComponent({
                 const activeRule = data.activeRule;
                 if (activeRule) {
                     const propsVal = data.propsForm.api.formData && data.propsForm.api.formData();
-                    data.propsForm.rule = data.cacheProps[activeRule._id] =
-                        tidyRuleConfig(activeRule.config.config.props, componentRule.value && componentRule.value[activeRule.config.config.name], activeRule, {
+                    data.propsForm.rule = data.cacheProps[activeRule._fc_id] =
+                        tidyRuleConfig(activeRule._menu.props, componentRule.value && componentRule.value[activeRule._menu.name], activeRule, {
                             t,
                             api: data.dragForm.api
                         });
@@ -655,185 +905,318 @@ export default defineComponent({
             },
             clearActiveRule() {
                 data.activeRule = null;
+                data.customForm.config = null;
                 data.activeTab = 'form';
+                fcx.active = '';
             },
             setOption(opt) {
-                let option = {...opt};
-                option.form.formCreateSubmitBtn = typeof option.submitBtn === 'object' ? (option.submitBtn.show === undefined ? true : !!option.submitBtn.show) : !!option.submitBtn;
-                option.form.formCreateResetBtn = typeof option.resetBtn === 'object' ? !!option.resetBtn.show : !!option.resetBtn;
-                option._resetBtn = option.resetBtn;
-                option.resetBtn = false;
-                option._submitBtn = option.submitBtn;
-                option.submitBtn = false;
-                data.form.value = option;
+                let options = is.String(opt) ? JSON.parse(opt) : deepCopy(opt || {});
+                options.form = {
+                    inline: false,
+                    hideRequiredAsterisk: false,
+                    labelPosition: 'right',
+                    size: 'default',
+                    labelWidth: '125px',
+                    ...options.form || {}
+                };
+                options._event = {
+                    onSubmit: options.onSubmit || '',
+                    onCreated: options.onCreated || '',
+                    onMounted: options.onMounted || '',
+                    onChange: options.onChange || '',
+                    beforeFetch: options.beforeFetch || '',
+                }
+                options._resetBtn = typeof options.resetBtn === 'object' ? options.resetBtn : {show: options.resetBtn === true};
+                options._submitBtn = typeof options.submitBtn === 'object' ? options.submitBtn : {show: options.submitBtn !== false};
+                options.submitBtn = options.resetBtn = false;
+                data.inputForm.data = options.formData || {};
+                data.oldOptionsKeys = Object.keys(data.form.value);
+                delete options.formData;
+                data.formOptions = options;
+                methods.updateOptionsValue();
             },
             setOptions(opt) {
                 methods.setOption(opt);
             },
-            loadRule(rules) {
+            updateOptionsValue() {
+                const old = {};
+                data.oldOptionsKeys.forEach(k => {
+                    old[k] = undefined;
+                });
+                const value = {...old, ...data.formOptions.form};
+                Object.keys(data.formOptions).forEach(key => {
+                    const item = data.formOptions[key];
+                    value['>' + key] = item;
+                    if (typeof item === 'object') {
+                        Object.keys(item).forEach(k => {
+                            value[key + '>' + k] = item[k];
+                        })
+                    }
+                });
+                data.form.value = value;
+            },
+            loadRule(rules, pConfig, template) {
                 const loadRule = [];
                 rules.forEach(rule => {
                     if (is.String(rule)) {
                         return loadRule.push(rule);
                     }
-                    const config = ruleList[rule._fc_drag_tag] || ruleList[rule.type];
+                    let config = data.dragRuleList[rule._fc_drag_tag] || data.dragRuleList[rule.type];
+                    if (!config) {
+                        config = defaultDrag(rule);
+                        rule._fc_drag_tag = '_';
+                    }
+                    if (template) {
+                        rule._fc_template = template;
+                    }
                     config && config.loadRule && config.loadRule(rule);
-                    const _children = rule.children;
-                    rule.children = [];
+                    rule.children = methods.loadRule(rule.children || [], config, template);
                     if (rule.control) {
                         rule._control = rule.control;
                         delete rule.control;
                     }
+                    if (rule.computed) {
+                        rule._computed = rule.computed;
+                        delete rule.computed;
+                    }
+                    if (rule.on) {
+                        rule._on = rule.on;
+                        delete rule.on;
+                    }
                     if (config) {
-                        rule = methods.makeRule(config, rule);
-                        if (_children) {
-                            let children = rule.children[0].children;
-
-                            if (config.drag) {
-                                children = children[0].children;
-                            }
-                            children.push(...methods.loadRule(_children));
+                        const slot = rule.slot;
+                        let _config;
+                        if (pConfig && pConfig.slot && slot && slot !== 'default') {
+                            _config = methods.getSlotConfig(pConfig, slot, config)
                         }
-                    } else if (_children) {
-                        rule.children = methods.loadRule(_children);
+                        delete rule.slot;
+                        rule = methods.makeRule(_config || config, rule);
+                        if (slot) {
+                            rule.slot = slot;
+                        }
                     }
                     loadRule.push(rule);
                 });
                 return loadRule;
             },
-            parseRule(children) {
+            parseRule(children, pSlot) {
                 return [...children].reduce((initial, rule) => {
+                    let slot = pSlot;
                     if (is.String(rule)) {
                         initial.push(rule);
                         return initial;
                     } else if (rule.type === 'DragBox') {
-                        initial.push(...methods.parseRule(rule.children));
+                        initial.push(...methods.parseRule(rule.children, slot || rule.slot));
                         return initial;
                     } else if (rule.type === 'DragTool') {
+                        slot = rule.slot || pSlot;
                         rule = rule.children[0];
+                        if (is.String(rule)) {
+                            initial.push(rule);
+                            return initial;
+                        }
                         if (rule.type === 'DragBox') {
-                            initial.push(...methods.parseRule(rule.children));
+                            initial.push(...methods.parseRule(rule.children, slot || rule.slot));
                             return initial;
                         }
                     }
                     if (!rule) return initial;
                     rule = {...rule};
-                    if (rule.children.length) {
+                    if (slot && slot !== 'default') {
+                        rule.slot = slot;
+                    }
+                    if (rule.children && rule.children.length) {
                         rule.children = methods.parseRule(rule.children);
                     }
 
-                    delete rule._id;
                     delete rule.key;
                     delete rule.component;
-                    if (rule.config) {
-                        rule.config.config && rule.config.config.parseRule && rule.config.config.parseRule(rule);
-                        delete rule.config.config;
+                    if (rule._menu) {
+                        rule._menu.parseRule && rule._menu.parseRule(rule);
+                        delete rule._menu;
                     }
-                    if (rule.effect) {
-                        delete rule.effect._fc;
-                        delete rule.effect._fc_tool;
+                    if (rule._fc_drag_tag === '_') {
+                        delete rule._fc_drag_tag;
                     }
                     if (rule._control) {
                         rule.control = rule._control;
                         delete rule._control;
                     }
-                    Object.keys(rule).filter(k => (Array.isArray(rule[k]) && rule[k].length === 0) || (is.Object(rule[k]) && Object.keys(rule[k]).length === 0)).forEach(k => {
+                    if (rule._computed) {
+                        rule.computed = rule._computed;
+                        delete rule._computed;
+                    }
+                    if (!rule.slot) {
+                        delete rule.slot;
+                    }
+                    if (rule._on) {
+                        rule.on = rule._on;
+                        delete rule._on;
+                    }
+                    rule.props && Object.keys(rule.props).forEach(k => {
+                        const v = rule.props[k];
+                        if (isNull(v)) {
+                            delete rule.props[k];
+                        }
+                    });
+                    Object.keys(rule).filter(k => k.indexOf('__') === 0 || (Array.isArray(rule[k]) && rule[k].length === 0) || (is.Object(rule[k]) && Object.keys(rule[k]).length === 0)).forEach(k => {
                         delete rule[k];
                     });
                     initial.push(rule);
                     return initial;
                 }, []);
             },
+            fields() {
+                return data.dragForm.api.all().map(rule => rule.field).filter(id => !!id);
+            },
             baseChange(field, value, _, fapi) {
-                if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
-                    methods.unWatchActiveRule();
-                    data.activeRule[field] = value;
-                    methods.watchActiveRule();
-                    data.activeRule.config.config?.watch?.['$' + field]?.({
-                        field,
-                        value,
-                        api: fapi,
-                        rule: data.activeRule
-                    });
+                methods.handleChange('', field, value, _, fapi);
+            },
+            formOptChange(field, value) {
+                data.form.value[field] = value;
+                if (field.indexOf('>') === -1) {
+                    field = 'form>' + field;
                 }
+                let source = data.formOptions;
+                const split = field.split('>');
+                const lastField = split.pop();
+                split.forEach(k => {
+                    if (k) {
+                        if (!source[k]) {
+                            source[k] = {};
+                        }
+                        source = source[k];
+                    }
+                });
+                source[lastField] = value;
             },
             propRemoveField(field, _, fapi) {
-                if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
+                if (data.activeRule && fapi[data.activeRule._fc_id] === data.activeRule) {
                     methods.unWatchActiveRule();
                     const org = field;
                     data.dragForm.api.sync(data.activeRule);
-                    if (field.indexOf('formCreate') === 0) {
-                        field = field.replace('formCreate', '');
-                        if (!field) return;
-                        field = lower(field);
-                        if (field.indexOf('effect') === 0 && field.indexOf('>') > -1) {
-                            delete data.activeRule.effect[field.split('>')[1]];
-                        } else if (field.indexOf('props') === 0 && field.indexOf('>') > -1) {
-                            delete data.activeRule.props[field.split('>')[1]];
-                        } else if (field.indexOf('attrs') === 0 && field.indexOf('>') > -1) {
-                            delete data.activeRule.attrs[field.split('>')[1]];
-                        } else if (field === 'child') {
+                    if (field.indexOf('__') !== 0) {
+                        if (field === 'formCreateChild') {
                             delete data.activeRule.children[0];
-                        } else if (field) {
-                            data.activeRule[field] = undefined;
+                        } else if (field.indexOf('formCreate') === 0 || field.indexOf('>') > 0) {
+                            if (field.indexOf('formCreate') < 0) {
+                                field = 'props>' + field;
+                            }
+                            propFieldDeepFn(field, ({source, field}) => {
+                                delete source[field];
+                            })
+                        } else {
+                            delete data.activeRule.props[field];
                         }
-                    } else {
-                        delete data.activeRule.props[field];
                     }
                     methods.watchActiveRule();
-                    data.activeRule.config.config?.watch?.[org]?.({
+                    data.activeRule._menu?.watch?.[org]?.({
                         field: org,
                         value: undefined,
                         api: fapi,
-                        rule: data.activeRule
+                        rule: data.activeRule,
+                        ctx: vm,
                     });
                 }
             },
             propChange(field, value, _, fapi) {
-                if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
+                methods.handleChange('props', field, value, _, fapi);
+            },
+            handleChange(key, field, value, _, fapi) {
+                if (data.activeRule && fapi[data.activeRule._fc_id] === data.activeRule) {
                     methods.unWatchActiveRule();
                     const org = field;
-                    if (field.indexOf('formCreate') === 0) {
-                        field = field.replace('formCreate', '');
-                        if (!field) return;
-                        field = lower(field);
-                        if (field.indexOf('effect') === 0 && field.indexOf('>') > -1) {
-                            data.activeRule.effect[field.split('>')[1]] = value;
-                        } else if (field.indexOf('props') === 0 && field.indexOf('>') > -1) {
-                            data.activeRule.props[field.split('>')[1]] = value;
-                        } else if (field.indexOf('attrs') === 0 && field.indexOf('>') > -1) {
-                            data.activeRule.attrs[field.split('>')[1]] = value;
-                        } else if (field === 'child') {
+                    if (field.indexOf('__') !== 0) {
+                        if (field === 'formCreateChild') {
                             data.activeRule.children[0] = value;
+                        } else if (field.indexOf('formCreate') === 0 || field.indexOf('>') > 0) {
+                            if (field.indexOf('formCreate') < 0) {
+                                field = (key ? key + '>' : '') + field;
+                            }
+                            propFieldDeepFn(field, ({source, field}) => {
+                                if (isNull(value)) {
+                                    delete source[field];
+                                } else {
+                                    source[field] = value;
+                                }
+                            })
                         } else {
-                            data.activeRule[field] = value;
+                            if (key && isNull(value)) {
+                                delete data.activeRule[key][field];
+                            } else {
+                                (key ? data.activeRule[key] : data.activeRule)[field] = value;
+                            }
                         }
-                    } else {
-                        data.activeRule.props[field] = value;
                     }
                     methods.watchActiveRule();
-                    data.activeRule.config.config?.watch?.[org]?.({
+                    data.activeRule._menu?.watch?.[org]?.({
                         field: org,
                         value,
                         api: fapi,
-                        rule: data.activeRule
+                        rule: data.activeRule,
+                        ctx: vm,
                     });
                 }
             },
             validateChange(formData) {
-                if (!data.activeRule || data.validateForm.api[data.activeRule._id] !== data.activeRule) return;
+                if (!data.activeRule || data.validateForm.api[data.activeRule._fc_id] !== data.activeRule) return;
                 data.activeRule.validate = formData.validate || [];
+                if (formData.required) {
+                    data.activeRule.$required = formData.required;
+                } else {
+                    delete data.activeRule.$required;
+                }
                 data.dragForm.api.refreshValidate();
                 data.dragForm.api.nextTick(() => {
                     data.dragForm.api.clearValidateState(data.activeRule.__fc__.id);
                 });
             },
+            triggerActive(rule) {
+                let dragTool;
+                if (rule._menu.inside) {
+                    dragTool = rule.children[0];
+                } else {
+                    dragTool = rule.__fc__.parent.rule;
+                }
+                if (dragTool && dragTool.type === 'DragTool') {
+                    const el = data.dragForm.api.el(dragTool.__fc__.id);
+                    if (el) {
+                        fcx.active = el.id;
+                        vm.emit('active', rule);
+                        methods.toolActive(rule);
+                    }
+                }
+            },
+            customFormChange(field, value) {
+                if (data.customForm.config) {
+                    data.customForm.config.change(field, value);
+                }
+            },
+            customActive(config) {
+                data.baseForm.isShow = false;
+                data.propsForm.isShow = false;
+                data.eventShow = false;
+                data.validateForm.isShow = false;
+                data.activeRule = null;
+
+                data.customForm.config = config;
+                data.customForm.isShow = true;
+                data.customForm.propsShow = config.props && methods.getConfig('showPropsForm') !== false;
+                data.customForm.key = uniqueId();
+                data.customForm.rule = data.customForm.propsShow ? config.props({t}) : [];
+                data.customForm.options.formData = config.formData;
+                nextTick(() => {
+                    data.activeTab = 'props';
+                });
+            },
             toolActive(rule) {
                 methods.unWatchActiveRule();
+                data.customForm.isShow = false;
+                data.customForm.config = null;
                 if (data.activeRule) {
-                    delete data.propsForm.api[data.activeRule._id];
-                    delete data.baseForm.api[data.activeRule._id];
-                    delete data.validateForm.api[data.activeRule._id];
+                    delete data.propsForm.api[data.activeRule._fc_id];
+                    delete data.baseForm.api[data.activeRule._fc_id];
+                    delete data.validateForm.api[data.activeRule._fc_id];
                     delete data.dragForm.api.activeRule;
                 }
                 data.activeRule = rule;
@@ -842,46 +1225,77 @@ export default defineComponent({
                 nextTick(() => {
                     data.activeTab = 'props';
                     nextTick(() => {
-                        data.propsForm.api[data.activeRule._id] = data.activeRule;
-                        data.baseForm.api[data.activeRule._id] = data.activeRule;
-                        data.validateForm.api[data.activeRule._id] = data.activeRule;
+                        data.propsForm.api[data.activeRule._fc_id] = data.activeRule;
+                        data.baseForm.api[data.activeRule._fc_id] = data.activeRule;
+                        data.validateForm.api[data.activeRule._fc_id] = data.activeRule;
                     });
                 });
-                if (!data.cacheProps[rule._id]) {
-                    data.cacheProps[rule._id] = tidyRuleConfig(rule.config.config.props, componentRule.value && componentRule.value[rule.config.config.name], rule, {
+                if (!data.cacheProps[rule._fc_id]) {
+                    data.cacheProps[rule._fc_id] = tidyRuleConfig(rule._menu.props, componentRule.value && componentRule.value[rule._menu.name], rule, {
                         t,
                         api: data.dragForm.api
                     });
                 }
-
-                data.propsForm.rule = data.cacheProps[rule._id];
+                const hiddenBaseField = rule._menu.hiddenBaseField || [];
+                data.baseForm.api.hidden(false);
+                hiddenBaseField.length && data.baseForm.api.hidden(true, hiddenBaseField);
+                if (!this.getConfig('showControl', true)) {
+                    data.baseForm.api.hidden(true, '_control');
+                }
+                const input = hasProperty(rule, 'field');
+                data.baseForm.isShow = input && rule.input !== false && methods.getConfig('showBaseForm') !== false;
+                data.propsForm.isShow = data.cacheProps[rule._fc_id].length > 0 && methods.getConfig('showPropsForm') !== false;
+                data.eventShow = rule._menu.event && rule._menu.event.length > 0 && methods.getConfig('showEventForm') !== false;
+                data.validateForm.isShow = data.baseForm.isShow && rule._menu.validate !== false && methods.getConfig('showValidateForm') !== false;
+                data.propsForm.rule = data.cacheProps[rule._fc_id];
                 methods.updateRuleFormData();
                 methods.watchActiveRule();
             },
+            getConfig(key, def) {
+                return configRef.value ? (hasProperty(configRef.value, key) ? configRef.value[key] : def) : def;
+            },
             updateRuleFormData() {
                 const rule = data.activeRule;
-                const formData = {...rule.props, formCreateChild: deepCopy(rule.children[0])};
+                const formData = {
+                    formCreateChild: '' + rule.children[0],
+                    'formCreateWrap>labelWidth': ''
+                };
                 Object.keys(rule).forEach(k => {
-                    if (['effect', 'config', 'payload', 'id', 'type'].indexOf(k) < 0)
+                    if (['effect', 'config', 'payload', 'id', 'type', '_menu'].indexOf(k) < 0)
                         formData['formCreate' + upper(k)] = deepCopy(rule[k]);
                 });
-                ['props', 'effect', 'attrs'].forEach(name => {
-                    rule[name] && Object.keys(rule[name]).forEach(k => {
+                Object.keys(rule.props).forEach(k => {
+                    const item = rule.props[k];
+                    formData[k] = deepCopy(item);
+                    if (is.Object(item)) {
+                        Object.keys(item).forEach(sub => {
+                            formData[k + '>' + sub] = deepCopy(item[sub]);
+                        });
+                    }
+                });
+                ['props', 'effect', 'attrs', 'style', 'wrap'].forEach(name => {
+                    rule[name] && (typeof rule[name] === 'object') && Object.keys(rule[name]).forEach(k => {
                         formData['formCreate' + upper(name) + '>' + k] = deepCopy(rule[name][k]);
                     });
                 });
+                const configAttrs = rule._menu.attrs || {};
+                Object.keys(configAttrs).forEach(k => {
+                    formData['__' + k] = configAttrs[k]({rule});
+                });
                 data.propsForm.value = formData;
 
-                data.showBaseRule = hasProperty(rule, 'field') && rule.input !== false && (!config.value || config.value.showBaseForm !== false);
-
-                if (data.showBaseRule) {
+                if (data.baseForm.isShow) {
                     data.baseForm.value = {
                         field: rule.field,
                         title: rule.title || '',
                         info: rule.info,
                         _control: rule._control,
+                        ...formData
                     };
-                    data.validateForm.value = {validate: rule.validate ? [...rule.validate] : []};
+                    data.validateForm.value = {
+                        validate: rule.validate ? [...rule.validate] : [],
+                        required: formData.formCreate$required
+                    };
                     data.dragForm.api.refreshValidate();
                     data.dragForm.api.nextTick(() => {
                         data.dragForm.api.clearValidateState(rule.__fc__.id);
@@ -889,54 +1303,157 @@ export default defineComponent({
                 }
             },
             dragStart(children) {
+                // console.log('top dragStart')
                 data.moveRule = children;
                 data.added = false;
             },
             dragUnchoose(children, evt) {
+                // console.log('top dragUnchoose')
                 data.addRule = {
                     children,
                     oldIndex: evt.oldIndex
                 };
             },
-            dragAdd(children, evt) {
+            clickMenu(menu) {
+                methods.dragMenu({menu, children: data.children, index: data.children.length});
+            },
+            checkOnly(menu) {
+                let flag = false;
+                data.dragForm.api.all().forEach(rule => {
+                    flag = flag || rule._fc_template === menu.name || (rule._menu && rule._menu.name === menu.name);
+                });
+                if (flag) {
+                    errorMessage(data.t('struct.only', {label: t('com.' + menu.name + '.name') || menu.label}));
+                }
+                return flag;
+            },
+            dragMenu({menu, children, index, slot}) {
+                if (data.inputForm.state) {
+                    return;
+                }
+                if (menu.only && methods.checkOnly(menu)) {
+                    return;
+                }
+                methods.handleAddBefore();
+                const dragRule = data.dragRuleList[menu.name];
+                vm.emit('drag', {
+                    item: menu, dragRule
+                });
+                const rule = methods.makeRule(data.dragRuleList[dragRule.name]);
+                if (slot) {
+                    rule.slot = slot;
+                }
+                children.splice(index, 0, rule);
+                methods.handleAddAfter({rule});
+            },
+            replaceField(rule) {
+                const flag = ['array', 'object'].indexOf(rule._menu.subForm) > -1;
+                let temp = methods.parseRule(deepCopy([rule]))[0];
+                if (flag) {
+                    temp.field = uniqueId();
+                }
+                temp = designerForm.toJson(temp);
+                if (flag) {
+                    temp = methods.batchReplaceUni(temp);
+                } else {
+                    temp = methods.batchReplaceField(temp);
+                }
+                return methods.loadRule([designerForm.parseJson(temp)])[0];
+            },
+            batchReplaceField(json) {
+                const regex = /"field"\s*:\s*"(\w[\w\d]+)"/g;
+                const matches = [];
+                json = json.replace(regex, (match, p1) => {
+                    const key = uniqueId();
+                    matches.push({old: p1, key: key});
+                    return `"field":"${key}"`;
+                });
+                return methods.batchReplaceUni(json);
+            },
+            batchReplaceUni(json) {
+                const regex = /"_fc_id"\s*:\s*"(\w[\w\d]+)"/g;
+                json = json.replace(regex, () => {
+                    return `"_fc_id":"id_${uniqueId()}"`;
+                });
+                return json;
+            },
+            dragAdd(children, evt, slot) {
+                // console.log('top dragAdd')
                 const newIndex = evt.newIndex;
                 const menu = evt.item._underlying_vm_;
-                if (!menu || menu.__fc__) {
+                if (menu && menu.__fc__) {
                     if (data.addRule) {
-                        const rule = data.addRule.children.splice(data.addRule.oldIndex, 1);
-                        children.splice(newIndex, 0, rule[0]);
+                        methods.handleSortBefore();
+                        const rule = data.addRule.children.splice(data.addRule.children.indexOf(menu), 1)[0];
+                        if (slot) {
+                            rule.slot = slot;
+                        } else {
+                            delete rule.slot;
+                        }
+                        children.splice(newIndex, 0, rule);
+                        methods.handleSortAfter({rule: rule});
                     }
                 } else {
-                    const rule = methods.makeRule(ruleList[menu.name]);
-                    children.splice(newIndex, 0, rule);
+                    methods.dragMenu({menu, children, index: newIndex, slot});
                 }
                 data.added = true;
                 // data.dragForm.api.refresh();
             },
-            dragEnd(children, {newIndex, oldIndex}) {
+            dragEnd(children, {newIndex, oldIndex}, slot) {
+                // console.log('top dragEnd')
                 if (!data.added && !(data.moveRule === children && newIndex === oldIndex)) {
+                    methods.handleSortBefore();
                     const rule = data.moveRule.splice(oldIndex, 1);
+                    if (slot) {
+                        rule.slot = slot;
+                    }
                     children.splice(newIndex, 0, rule[0]);
+                    methods.handleSortAfter({rule: rule[0]});
                 }
                 data.moveRule = null;
                 data.addRule = null;
                 data.added = false;
                 // data.dragForm.api.refresh();
             },
+            getSlotConfig(pConfig, slot, config) {
+                let slotConfig = {};
+                (pConfig.slot || []).forEach(item => {
+                    if (item.name === slot) {
+                        slotConfig = item.config || {};
+                    }
+                });
+                return {...config, dragBtn: false, handleBtn: config.children ? ['addChild'] : false, ...slotConfig}
+            },
             makeRule(config, _rule) {
                 const rule = _rule || config.rule({t});
-                rule.config = {config};
+                rule._menu = markRaw(config);
+                if (!rule._fc_id) {
+                    rule._fc_id = 'id_' + uniqueId();
+                }
+                if (!rule.name) {
+                    rule.name = 'ref_' + uniqueId();
+                }
                 if (config.component) {
                     rule.component = markRaw(config.component);
                 }
-                if (!rule.effect) rule.effect = {};
-                rule.effect._fc = true;
+                if (!rule._computed) {
+                    rule._computed = {};
+                }
+                if (!rule.effect) {
+                    rule.effect = {};
+                }
+                if (!hasProperty(rule, 'display')) {
+                    rule.display = true;
+                }
+                if (!hasProperty(rule, 'hidden')) {
+                    rule.hidden = false;
+                }
                 rule._fc_drag_tag = config.name;
-
+                let only = config.only === true;
                 let drag;
 
                 if (config.drag) {
-                    rule.children.push(drag = methods.makeDrag(config.drag, rule.type, methods.makeChildren([]), {
+                    rule.children.push(drag = methods.makeDrag(config.drag, rule._menu ? rule._menu.name : rule.type, methods.makeChildren([]), {
                         end: (inject, evt) => methods.dragEnd(inject.self.children, evt),
                         add: (inject, evt) => methods.dragAdd(inject.self.children, evt),
                         start: (inject, evt) => methods.dragStart(inject.self.children, evt),
@@ -946,13 +1463,14 @@ export default defineComponent({
 
                 if (config.children && !_rule) {
                     for (let i = 0; i < (config.childrenLen || 1); i++) {
-                        const child = methods.makeRule(ruleList[config.children]);
+                        const child = methods.makeRule(data.dragRuleList[config.children]);
                         (drag || rule).children.push(child);
                     }
                 }
-
                 const dragMask = mask.value !== undefined ? mask.value !== false : config.mask !== false;
-
+                if (config.tool === false) {
+                    return rule;
+                }
                 if (config.inside) {
                     rule.children = methods.makeChildren([{
                         type: 'DragTool',
@@ -960,39 +1478,57 @@ export default defineComponent({
                             dragBtn: config.dragBtn !== false,
                             children: config.children,
                             mask: dragMask,
-                        },
-                        effect: {
-                            _fc_tool: true
+                            handleBtn: config.handleBtn,
+                            only,
                         },
                         inject: true,
                         on: {
                             delete: ({self}) => {
                                 const parent = methods.getParent(self).parent;
-                                parent.__fc__.rm();
-                                vm.emit('delete', parent);
-                                methods.clearActiveRule();
+                                if (methods.handleRemoveBefore({parent, rule: parent}) !== false) {
+                                    parent.__fc__.rm();
+                                    vm.emit('delete', parent);
+                                    if (data.activeRule === parent) {
+                                        methods.clearActiveRule();
+                                    }
+                                    methods.handleRemoveAfter({rule: parent});
+                                }
                             },
                             create: ({self}) => {
+                                methods.handleAddBefore();
                                 const top = methods.getParent(self);
                                 vm.emit('create', top.parent);
-                                top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, methods.makeRule(top.parent.config.config));
+                                const rule = methods.makeRule(top.parent._menu);
+                                if (top.parent.slot) {
+                                    rule.slot = top.parent.slot;
+                                }
+                                top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, rule);
+                                methods.handleAddAfter({rule: top.parent});
                             },
                             addChild: ({self}) => {
+                                methods.handleAddBefore();
                                 const top = methods.getParent(self);
-                                const config = top.parent.config.config;
-                                const item = ruleList[config.children];
+                                const config = top.parent._menu;
+                                const item = data.dragRuleList[config.children];
                                 if (!item) return;
-                                (!config.drag ? top.parent : top.parent.children[0]).children[0].children.push(methods.makeRule(item));
+                                const rule = methods.makeRule(item);
+                                (!config.drag ? top.parent : top.parent.children[0]).children[0].children.push(rule);
+                                methods.handleAddAfter({rule});
                             },
                             copy: ({self}) => {
+                                methods.handleCopyBefore();
                                 const top = methods.getParent(self);
                                 vm.emit('copy', top.parent);
-                                top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, designerForm.copyRule(top.parent));
+                                const temp = methods.replaceField(top.parent);
+                                top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, temp);
+                                methods.handleCopyAfter({rule: top.parent});
                             },
                             active: ({self}) => {
                                 const top = methods.getParent(self);
                                 vm.emit('active', top.parent);
-                                methods.toolActive(top.parent);
+                                setTimeout(() => {
+                                    methods.toolActive(top.parent);
+                                }, 10);
                             }
                         },
                         children: rule.children
@@ -1005,46 +1541,215 @@ export default defineComponent({
                             dragBtn: config.dragBtn !== false,
                             children: config.children,
                             mask: dragMask,
-                        },
-                        effect: {
-                            _fc_tool: true
+                            handleBtn: config.handleBtn,
+                            only,
                         },
                         inject: true,
+                        display: !!rule.display,
                         on: {
                             delete: ({self}) => {
-                                vm.emit('delete', self.children[0]);
-                                self.__fc__.rm();
-                                methods.clearActiveRule();
+                                if (methods.handleRemoveBefore({parent: self, rule: self.children[0]}) !== false) {
+                                    vm.emit('delete', self.children[0]);
+                                    self.__fc__.rm();
+                                    if (data.activeRule === self.children[0]) {
+                                        methods.clearActiveRule();
+                                    }
+                                    methods.handleRemoveAfter({rule: self.children[0]});
+                                }
                             },
                             create: ({self}) => {
+                                methods.handleAddBefore();
                                 vm.emit('create', self.children[0]);
                                 const top = methods.getParent(self);
-                                top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, methods.makeRule(self.children[0].config.config));
+                                const rule = methods.makeRule(self.children[0]._menu);
+                                if (top.parent.slot) {
+                                    rule.slot = top.parent.slot;
+                                }
+                                top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, rule);
+                                methods.handleAddAfter({rule})
                             },
                             addChild: ({self}) => {
-                                const config = self.children[0].config.config;
-                                const item = ruleList[config.children];
+                                methods.handleAddBefore();
+                                const config = self.children[0]._menu;
+                                const item = data.dragRuleList[config.children];
                                 if (!item) return;
-                                (!config.drag ? self : self.children[0]).children[0].children.push(methods.makeRule(item));
+                                const rule = methods.makeRule(item);
+                                (!config.drag ? self : self.children[0]).children[0].children.push(rule);
+                                methods.handleAddAfter({rule})
                             },
                             copy: ({self}) => {
+                                methods.handleCopyBefore();
                                 vm.emit('copy', self.children[0]);
                                 const top = methods.getParent(self);
-                                top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, designerForm.copyRule(top.parent));
+                                const temp = methods.replaceField(self.children[0]);
+                                top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, temp);
+                                methods.handleCopyAfter({rule: self.children[0]});
                             },
                             active: ({self}) => {
                                 vm.emit('active', self.children[0]);
-                                methods.toolActive(self.children[0]);
+                                setTimeout(() => {
+                                    methods.toolActive(self.children[0]);
+                                }, 10);
                             }
                         },
                         children: methods.makeChildren([rule])
                     };
                 }
             },
+            toolHandle(rule, event) {
+                if (!rule._fc_drag_tag || rule._menu.tool === false) {
+                    rule.__fc__.rm();
+                    return;
+                }
+                let toolVm;
+                if (rule._menu.inside) {
+                    toolVm = rule.children[0].__fc__.exportEl;
+                } else {
+                    toolVm = rule.__fc__.parent.exportEl;
+                }
+                toolVm.$emit(event);
+            },
+            handleAddBefore() {
+            },
+            handleRemoveBefore() {
+            },
+            handleCopyBefore() {
+            },
+            handleSortBefore() {
+            },
+            addOperationRecord() {
+                const rule = methods.getJson();
+                const formData = deepCopy(data.inputForm.data);
+                const list = data.operation.list.slice(0, data.operation.idx + 1);
+                list.push({rule, formData});
+                data.operation.list = list;
+                data.operation.idx = list.length - 1;
+                window.onbeforeunload = (e) => {
+                    e.returnValue = t('designer.unload');
+                }
+            },
+            prevOperationRecord() {
+                if (!data.operation.list[data.operation.idx - 1]) {
+                    return;
+                }
+                const item = data.operation.list[--data.operation.idx];
+                methods.useOperationRecord(item);
+                methods.clearActiveRule();
+            },
+            nextOperationRecord() {
+                if (!data.operation.list[data.operation.idx + 1]) {
+                    return;
+                }
+                const item = data.operation.list[++data.operation.idx];
+                methods.useOperationRecord(item);
+                methods.clearActiveRule();
+            },
+            useOperationRecord(item) {
+                data.inputForm.data = item.formData;
+                methods.setRule(item.rule);
+            },
+            handleAddAfter() {
+                methods.addOperationRecord();
+                methods.updateTree();
+            },
+            handleRemoveAfter() {
+                methods.addOperationRecord();
+                methods.updateTree();
+            },
+            handleCopyAfter() {
+                methods.addOperationRecord();
+                methods.updateTree();
+            },
+            handleSortAfter() {
+                methods.addOperationRecord();
+                methods.updateTree();
+            },
+            treeChange(data) {
+                methods.triggerActive(data.rule);
+            },
+            getFormDescription() {
+                return getFormRuleDescription(methods.getDescription());
+            },
+            getDescription() {
+                return getRuleDescription(data.dragForm.rule[0].children);
+            },
+            getSubFormDescription(rule) {
+                let ctx = rule.__fc__ && rule.__fc__.parent;
+                while (ctx) {
+                    if (ctx.rule._menu && ['array', 'object'].indexOf(ctx.rule._menu.subForm) > -1) {
+                        return getFormRuleDescription(getRuleDescription(ctx.rule.children));
+                    } else {
+                        ctx = ctx.parent;
+                    }
+                }
+                return null;
+            },
+            getSubFormChildren(rule) {
+                let ctx = rule.__fc__ && rule.__fc__.parent;
+                while (ctx) {
+                    if (ctx.rule._menu && ['array', 'object'].indexOf(ctx.rule._menu.subForm) > -1) {
+                        return ctx.rule.children || [];
+                    } else {
+                        ctx = ctx.parent;
+                    }
+                }
+                return null;
+            },
+            updateTree: debounce(function () {
+                nextTick(() => {
+                    data.treeInfo = getRuleTree(data.dragForm.rule[0].children);
+                });
+            }, 300),
+            findTree(field) {
+                let tree = undefined;
+                const findTree = children => {
+                    children.forEach(item => {
+                        if (item.rule.field === field) {
+                            tree = item.children;
+                        } else if (item.children) {
+                            findTree(item.children);
+                        }
+                    })
+                }
+                findTree(data.treeInfo);
+                return tree || [];
+
+            },
+            handleDragenter(e) {
+                data.bus.$emit('dragenter', e);
+            },
+            handleDragleave(e) {
+                data.bus.$emit('dragleave', e);
+            },
+            handleDrop(e) {
+                data.bus.$emit('drop', e);
+            },
+            changeEvent(on) {
+                data.activeRule._on = on;
+            },
+            triggerHandle(item) {
+                item.handle();
+            },
         }
         data.dragForm.rule = methods.makeDragRule(methods.makeChildren(data.children));
+        methods.setOption({});
+        methods.addComponent(ruleList);
+
+        const inputCheckStatus = computed(() => {
+            return Object.keys(data.inputForm.data).length > 0;
+        })
+
         return {
-            ...toRefs(data), ...methods, dragHeight, t
+            ...toRefs(data), ...methods,
+            dragHeight,
+            t,
+            handle,
+            inputCheckStatus,
+            fieldReadonly,
+            hiddenMenu,
+            hiddenItem,
+            hiddenDragMenu,
+            hiddenDragBtn,
         }
     },
     created() {
