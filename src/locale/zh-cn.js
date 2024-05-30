@@ -348,7 +348,6 @@ const ZhCn = {
         elDivider: {
             name: '分割线',
             props: {
-                direction: '设置分割线方向',
                 formCreateChild: '设置分割线文案',
                 contentPosition: '设置分割线文案的位置'
             }
