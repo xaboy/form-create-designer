@@ -296,7 +296,6 @@
     display: flex;
     align-items: center;
     border-radius: 5px;
-    margin-right: 10px;
 }
 
 ._fc-m-tools .el-button > span {
@@ -401,7 +400,7 @@
 
 ._fc-m-input-handle {
     position: absolute;
-    bottom: 0;
+    bottom: 17px;
     left: 0;
     right: 0;
     padding: 12px;

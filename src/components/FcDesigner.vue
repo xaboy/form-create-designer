@@ -163,7 +163,7 @@
                                 </el-button>
                                 <el-popconfirm
                                     :title="t('designer.clearWarn')"
-                                    width="200px"
+                                    style="display: block;margin: 10px;"
                                     :confirm-button-text="t('props.clear')"
                                     :cancel-button-text="t('props.cancel')"
                                     @confirm="clearDragRule">

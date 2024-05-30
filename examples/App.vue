@@ -1,43 +1,86 @@
 <template>
     <div id="app">
-        <div class="_fc-t-header">
-            <img class="_fc-t-logo" src="http://form-create.com/logo.png">
-            <div class="_fc-t-name">form-create-designer</div>
-            <div class="_fc-t-menu">
-                <el-button size="mini" icon="fc-icon icon-import" @click="setJson"> 导入JSON</el-button>
-                <el-button size="mini" icon="fc-icon icon-import" @click="setOption"> 导入Options</el-button>
-                <el-button size="mini" type="primary" @click="showJson">生成JSON</el-button>
-                <el-button size="mini" type="success" @click="showOption">生成Options</el-button>
-                <el-button size="mini" type="danger" @click="showTemplate">生成组件</el-button>
+        <div class="_fc-top">
+            <div v-if="topImg" @click="goPro" class="js-top-img top_img"
+                 style="background: url('https://static.form-create.com/file/img/top2.jpg');height: 60px;background-repeat: no-repeat;background-size: cover;background-position: center;">
+                <div class="container pos">
+                    <div class="close" @click.stop="topImg = false">X</div>
+                </div>
+            </div>
+            <div class="_fc-top-nav">
+                <div class="_fc-top-copyright">
+                    <img class="_fc-t-logo" src="http://form-create.com/logo.png" alt="logo"/>
+                    <div class="_fc-t-name"><span>FcDesigner(Vue2)</span></div>
+                </div>
+                <div class="_fc-top-link">
+                    <a href="https://form-create.com/" target="_blank" class="item">官网</a>
+                    <a href="https://pro.form-create.com/view" class="item pro-version">高级版🔥</a>
+                    <a href="https://pro.form-create.com/doc/" target="_blank" class="item">文档</a>
+                    <a href="https://form-create.com/designer" target="_blank" class="item">Vue3版本</a>
+                    <a href="https://github.com/xaboy/form-create-designer" target="_blank" class="item">查看源码</a>
+                </div>
             </div>
         </div>
-        <fc-designer ref="designer"/>
+        <fc-designer ref="designer" :config="config" :handle="handle" :locale="locale">
+            <template #handle>
+                <div class="handle">
+                    <el-dropdown @command="e=>e()" style="margin-right: 10px;">
+                        <div class="el-dropdown-link">
+                            <span>导入</span>
+                            <i class="el-icon el-icon-arrow-down"></i>
+                        </div>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item :command="()=>setJson()">导入JSON</el-dropdown-item>
+                                <el-dropdown-item :command="()=>setOption()">导入Options</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
+                    <el-dropdown @command="e=>e()">
+                        <div class="el-dropdown-link">
+                            <span>导出</span>
+                            <i class="el-icon el-icon-arrow-down"></i>
+                        </div>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item :command="()=>showJson()">生成JSON</el-dropdown-item>
+                                <el-dropdown-item :command="()=>showOption()">生成Options</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
+                </div>
+            </template>
+        </fc-designer>
 
         <ElFooter class="_fc-copyright" height="30px">
-          <div class="_fc-b-item">
-            <el-popover
-                placement="top"
-                width="400"
-                trigger="hover">
-              <el-image src="http://form-create.com/img/donation.jpg"></el-image>
-              <span slot="reference">赞助</span>
-            </el-popover>
-          </div> <span style="margin: 0 5px;">|</span>
-          <div class="_fc-b-item">
-              <iframe src="https://ghbtns.com/github-btn.html?user=xaboy&amp;repo=form-create-designer&amp;type=star&amp;count=true&amp;size=mini" frameborder="0" scrolling="0" width="90" height="21" title="GitHub"></iframe>
-          </div> <span style="margin: 0 5px;">|</span>
-          <div class="_fc-b-item">
-            <a href='https://gitee.com/xaboy/form-create-designer/stargazers' style="display: inline-flex;"><img src='https://gitee.com/xaboy/form-create-designer/badge/star.svg?theme=dark' alt='gitee'/></a>
-          </div>
+            <div class="_fc-b-item">
+                <iframe
+                    src="https://ghbtns.com/github-btn.html?user=xaboy&repo=form-create-designer&type=star&count=true"
+                    frameborder="0" scrolling="0" width="120" height="21" title="GitHub"></iframe>
+            </div>
+            <span style="margin: 0 10px;">|</span>
+            <div class="_fc-b-item">
+                <a href='https://gitee.com/xaboy/form-create-designer' target="_blank"
+                   style="display: inline-flex;"><img
+                    src='https://gitee.com/xaboy/form-create-designer/badge/star.svg?theme=dark' alt='gitee'/></a>
+            </div>
+            <span style="margin: 0 10px;">|</span>
+            <div class="_fc-b-item">
+                <a href="https://github.com/xaboy/form-create-designer" target="_blank" style="display: inline-flex;">
+                    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="mit"/>
+                </a>
+            </div>
         </ElFooter>
 
         <el-dialog :title="title[type]" :visible.sync="state" class="_fc-t-dialog">
             <div ref="editor" v-if="state"></div>
             <span style="color: red;" v-if="err">输入内容格式有误!</span>
-            <span slot="footer" class="dialog-footer" v-if="type > 2">
+            <template #footer v-if="type > 2">
+                <span slot="footer" class="dialog-footer">
             <el-button @click="state = false" size="small">取 消</el-button>
             <el-button type="primary" @click="onOk" size="small">确 定</el-button>
           </span>
+            </template>
         </el-dialog>
     </div>
 </template>
@@ -62,11 +105,13 @@ import 'codemirror/mode/pug/pug';
 
 import is from '@form-create/utils/lib/type';
 import formCreate from '@form-create/element-ui';
-import {defineComponent} from 'vue';
+import ZhCn from '../src/locale/zh-cn';
+import En from '../src/locale/en';
 
+const CACHE_KEY = 'fc-config-$101';
 const TITLE = ['生成规则', '表单规则', '生成组件', '设置生成规则', '设置表单规则'];
 
-export default defineComponent({
+export default {
     name: 'app',
     data() {
         return {
@@ -76,6 +121,22 @@ export default defineComponent({
             editor: null,
             err: false,
             type: -1,
+            autoSaveId: null,
+            lang: 'cn',
+            locale: null,
+            topImg: true,
+            config: {
+                fieldReadonly: false,
+                showSaveBtn: true,
+            },
+            handle: [
+                {
+                    label: '中英切换',
+                    handle: () => {
+                        this.changeLocale();
+                    },
+                },
+            ],
         };
     },
     watch: {
@@ -90,13 +151,56 @@ export default defineComponent({
         }
     },
     methods: {
+        goPro() {
+            location.href = 'https://pro.form-create.com/view';
+        },
+        getCache() {
+            function def() {
+                return {opt: null, rule: null};
+            }
+
+            try {
+                let cache = localStorage.getItem(CACHE_KEY);
+                if (!cache) {
+                    return def();
+                }
+                cache = JSON.parse(cache);
+                cache.rule = formCreate.parseJson(cache.rule);
+                cache.opt.submitBtn = false;
+                return cache;
+            } catch (e) {
+                return def();
+            }
+        },
+        setCache({opt, rule}) {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+                opt,
+                rule: formCreate.toJson(rule)
+            }));
+        },
+        loadAutoSave() {
+            const s = this.autosave;
+            if (s === false) return;
+            this.autoSaveId = setInterval(() => {
+                this.setCache({opt: this.$refs.designer.getOption(), rule: this.$refs.designer.getRule()});
+            }, is.Number(s) ? s : 2000);
+        },
+        changeLocale() {
+            if (this.lang === 'cn') {
+                this.locale = En;
+                this.lang = 'en';
+            } else {
+                this.locale = ZhCn;
+                this.lang = 'cn';
+            }
+        },
         load() {
             let val;
-            if(this.type === 2){
+            if (this.type === 2) {
                 val = this.value;
-            }else if(this.type === 0){
+            } else if (this.type === 0) {
                 val = formCreate.toJson(this.value, 2);
-            }else{
+            } else {
                 val = JSON.stringify(this.value, null, 2);
             }
             this.$nextTick(() => {
@@ -181,7 +285,7 @@ export default {
   data () {
     return {
         fapi: null,
-        rule: formCreate.parseJson('${formCreate.toJson(rule).replaceAll('\\','\\\\')}'),
+        rule: formCreate.parseJson('${formCreate.toJson(rule).replaceAll('\\', '\\\\')}'),
         option: formCreate.parseJson('${JSON.stringify(opt)}')
     }
   },
@@ -194,86 +298,210 @@ export default {
 <\/script>`;
         }
     },
+    mounted() {
+        const cache = this.getCache();
+        if (cache.rule) {
+            this.$refs.designer.setRule(cache.rule);
+        }
+        if (cache.opt) {
+            this.$refs.designer.setOption(cache.opt);
+        }
+        this.$nextTick(() => {
+            this.loadAutoSave();
+        });
+    },
+    beforeDestroy() {
+        const id = this.autoSaveId;
+        id && clearInterval(id);
+    },
     beforeCreate() {
         window.jsonlint = jsonlint;
     }
-});
+};
+
+
 </script>
 
 <style>
-    ._fc-t-header {
-        height: 60px;
-        margin: 0 20px;
-        position: relative;
-        display: flex;
-        align-items: center;
-        cursor: default;
-    }
+._fc-top {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #282828;
+    position: relative;
+    cursor: default;
+}
 
-    ._fc-t-logo {
-        height: 26px;
-    }
+:focus-visible {
+    outline: 0 none;
+}
 
-    ._fc-t-name {
-        display: inline-block;
-        color: rgba(0, 0, 0, 0.8);
-        font-size: 20px;
-        font-weight: 600;
-        margin-left: 5px;
-    }
+.top_img {
+    cursor: pointer;
+}
 
-    ._fc-t-menu {
-        position: absolute;
-        right: 0;
-    }
+._fc-top .close {
+    position: absolute;
+    right: 15px;
+    top: 6px;
+    color: #FFFFFF;
+    background-color: #c6c6c652;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    cursor: pointer;
+}
 
-    ._fc-t-menu i {
-        font-size: 12px;
-    }
+._fc-top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 20px;
+}
 
-    body {
-        min-height: 100vh;
-        padding: 0;
-        margin: 0;
-        display: flex !important;
-        flex-direction: column !important;
-    }
+._fc-top-copyright {
+    display: flex;
+}
 
-    #app {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-    }
+._fc-top-link {
+}
 
-    ._fc-copyright {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 0 20px;
-        font-size: 16px;
-        border-top: 1px solid #ECECEC;
-        background-color: #fff;
-        cursor: pointer;
-    }
+._fc-top a {
+    height: 35px;
+    font-size: 14px;
+    line-height: 35px;
+    color: #aaa;
+    text-decoration: none;
+}
 
-    ._fc-t-dialog .CodeMirror {
-        height: 450px;
-    }
+._fc-top a + a {
+    margin-left: 20px;
+}
 
-    ._fc-t-dialog .CodeMirror-line {
-        line-height: 16px !important;
-        font-size: 13px !important;
-    }
+._fc-t-header {
+    height: 60px;
+    margin: 0 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: default;
+}
 
-    .CodeMirror-lint-tooltip {
-        z-index: 2021 !important;
-    }
+._fc-t-logo {
+    height: 26px;
+}
 
-    ._fc-t-dialog .el-dialog__body {
-        padding: 0px 20px;
-    }
-    ._fc-b-item{
-      display: flex;
-    }
+._fc-t-name {
+    display: inline-block;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 5px;
+}
 
+._fc-t-menu {
+    position: absolute;
+    right: 0;
+}
+
+._fc-t-menu i {
+    font-size: 12px;
+}
+
+.handle {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+._fc-t-menu .el-dropdown, .handle .el-dropdown {
+    cursor: pointer;
+}
+
+.handle .el-icon {
+    margin-left: 0;
+}
+
+body {
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+._fc-copyright {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 16px;
+    border-top: 1px solid #ECECEC;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+._fc-t-dialog .CodeMirror {
+    height: 450px;
+}
+
+._fc-t-dialog .CodeMirror-line {
+    line-height: 16px !important;
+    font-size: 13px !important;
+}
+
+.CodeMirror-lint-tooltip {
+    z-index: 2021 !important;
+}
+
+._fc-t-dialog .el-dialog__body {
+    padding: 0px 20px;
+}
+
+._fc-b-item {
+    display: flex;
+}
+
+._fc-zz {
+    background-image: -webkit-linear-gradient(left, #cd7f32, #d81159 10%, #ffbc42 20%, #75d701 30%, #30a9de 40%, #d81159 60%, #ffbc42 70%, #75d701 80%, #30a9de 90%, #cd7f32);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 100%;
+    -webkit-animation: flowlight 5s linear infinite;
+    animation: flowlight 5s linear infinite;
+    font-weight: 700;
+}
+
+@keyframes flowlight {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+@-webkit-keyframes flowlight {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+.pro-version {
+    color: #cd7f32 !important;
+    font-weight: 600;
+}
 </style>
