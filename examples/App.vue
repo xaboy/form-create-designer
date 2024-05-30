@@ -327,7 +327,7 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #282828;
+    background-color: #FFFFFF;
     position: relative;
     cursor: default;
 }
@@ -373,7 +373,7 @@ export default {
     height: 35px;
     font-size: 14px;
     line-height: 35px;
-    color: #aaa;
+    color: #333;
     text-decoration: none;
 }
 
@@ -396,7 +396,7 @@ export default {
 
 ._fc-t-name {
     display: inline-block;
-    color: #fff;
+    color: #282828;
     font-size: 18px;
     font-weight: 600;
     margin-left: 5px;
