@@ -348,7 +348,6 @@ const En = {
         elDivider: {
             name: 'Divider',
             props: {
-                direction: 'Set the direction of the dividing line',
                 formCreateChild: 'Set Content',
                 contentPosition: 'Set content position'
             }

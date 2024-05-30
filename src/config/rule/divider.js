@@ -17,10 +17,6 @@ export default {
     },
     props(_, {t}) {
         return localeProps(t, name + '.props', [{
-            type: 'select',
-            field: 'direction',
-            options: localeOptions(t, [{label: 'horizontal', value: 'horizontal'}, {label: 'vertical', value: 'vertical'}])
-        }, {
             type: 'input',
             field: 'formCreateChild',
         }, {
