@@ -1,37 +1,52 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeRequiredRule} from '../../utils';
+import {localeProps} from '../../utils';
 
 const label = '颜色选择器';
 const name = 'colorPicker';
 
 export default {
+    menu: 'main',
     icon: 'icon-color',
     label,
     name,
-    rule() {
+    event: ['change', 'activeChange'],
+    validate: ['string'],
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('com.colorPicker.name'),
             info: '',
             $required: false,
             props: {},
         };
     },
-    props() {
-        return [
-            makeRequiredRule(), {type: 'switch', field: 'disabled', title: '是否禁用'}, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [
+            {
                 type: 'switch',
-                field: 'showAlpha',
-                title: '是否支持透明度选择'
-            }, {
+                field: 'disabled'
+            },
+            {
+                type: 'switch',
+                field: 'showAlpha'
+            },
+            {
                 type: 'select',
                 field: 'colorFormat',
-                title: '颜色的格式',
                 options: [{label: 'hsl', value: 'hsl'}, {label: 'hsv', value: 'hsv'}, {
                     label: 'hex',
                     value: 'hex'
                 }, {label: 'rgb', value: 'rgb'}]
-            }];
+            },
+            {
+                type: 'tableOptions',
+                field: 'predefine',
+                props: {
+                    column: [{label: t('props.value'), key: 'value'}],
+                    valueType: 'string'
+                }
+            },
+        ]);
     }
 };

@@ -18,16 +18,17 @@ function getBanner(banner, pkg) {
     typeof banner.author === 'string'
         ? banner.author
         : typeof banner.author === 'object'
-            ? stringifyAuthor(banner.author)
+            ? ('' + banner.author)
             : '';
 
     const license = banner.license || '';
 
     return (
         '/*!\n' +
-    ' * form-create 可视化表单设计器\n' +
+    ' * FormCreate 可视化表单设计器\n' +
     ` * ${banner.name} v${banner.version}\n` +
     ` * (c) ${author || ''}\n` +
+    ' * Site https://form-create.com/\n' +
     (license && ` * Released under the ${license} License.\n`) +
     ' */'
     );

@@ -1,58 +1,61 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeRequiredRule} from '../../utils';
+import {localeOptions, localeProps} from '../../utils';
 
-const label = '时间选择器';
+const label = '时间';
 const name = 'timePicker';
 
 export default {
+    menu: 'main',
     icon: 'icon-time',
     label,
     name,
-    rule() {
+    event: ['change', 'blur', 'focus'],
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('com.timePicker.name'),
             info: '',
             $required: false,
             props: {},
         };
     },
-    props() {
-        return [makeRequiredRule(), {
-            type: 'Struct',
-            field: 'pickerOptions',
-            title: '当前时间日期选择器特有的选项',
-            props: {defaultValue: {}}
-        }, {type: 'switch', field: 'readonly', title: '完全只读'}, {
+    watch: {
+        isRange({rule}) {
+            rule.key = uniqueId();
+        }
+    },
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{type: 'switch', field: 'readonly'}, {
             type: 'switch',
-            field: 'disabled',
-            title: '禁用'
-        }, {type: 'switch', field: 'editable', title: '文本框可输入', value: true}, {
+            field: 'disabled'
+        }, {
+            type: 'switch',
+            field: 'isRange'
+        }, {
             type: 'switch',
             field: 'clearable',
-            title: '是否显示清除按钮',
             value: true
-        }, {type: 'input', field: 'placeholder', title: '非范围选择时的占位内容'}, {
+        }, {
+            type: 'Struct',
+            field: 'pickerOptions',
+            props: {defaultValue: {}}
+        }, {type: 'switch', field: 'editable', value: true}, {
             type: 'input',
-            field: 'startPlaceholder',
-            title: '范围选择时开始日期的占位内容'
-        }, {type: 'input', field: 'endPlaceholder', title: '范围选择时开始日期的占位内容'}, {
+            field: 'placeholder'
+        }, {
+            type: 'input',
+            field: 'startPlaceholder'
+        }, {type: 'input', field: 'endPlaceholder'}, {
             type: 'switch',
-            field: 'isRange',
-            title: '是否为时间范围选择'
-        }, {type: 'switch', field: 'arrowControl', title: '是否使用箭头进行时间选择'}, {
+            field: 'arrowControl'
+        }, {
             type: 'select',
             field: 'align',
-            title: '对齐方式',
-            options: [{label: 'left', value: 'left'}, {label: 'center', value: 'center'}, {
+            options: localeOptions(t, [{label: 'left', value: 'left'}, {label: 'center', value: 'center'}, {
                 label: 'right',
                 value: 'right'
-            }]
-        }, {type: 'input', field: 'prefixIcon', title: '自定义头部图标的类名'}, {
-            type: 'input',
-            field: 'clearIcon',
-            title: '自定义清空图标的类名'
-        }];
+            }])
+        }]);
     }
 };

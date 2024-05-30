@@ -3,19 +3,22 @@ import draggable from 'vuedraggable';
 
 export default {
     name: 'DragBox',
-    props: ['rule', 'subRule', 'tag'],
+    props: ['rule', 'subRule', 'tag', 'list'],
     components: {
         draggable
     },
-    functional: true,
-    render(h, context) {
-        const subRule = context.props.rule || {};
-        let _class = context.props.tag + '-drag drag-box';
-        if (!context.children.length) {
-            _class += ' ' + context.props.tag + '-holder';
+    render(h) {
+        const subRule = this.$props.rule || {};
+        let _class = '_fd-' + this.$props.tag + '-drag _fd-drag-box';
+        if (!this.$children.length) {
+            _class += ' ' + this.$props.tag + '-holder';
         }
         subRule.class = _class;
-        return h('draggable', {...context.props.rule, on: context.listeners}, context.children);
+        const props = {...this.$props.rule, on: this.$listeners};
+        if (this.$props.list) {
+            props.props.list = this.$props.list;
+        }
+        return h(draggable, props, this.$slots.default);
     }
 };
 </script>

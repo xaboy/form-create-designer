@@ -1,15 +1,19 @@
 <template>
-    <div class="_fc_struct">
-        <ElButton @click="visible=true" style="width: 100%;">{{ title }}</ElButton>
-        <ElDialog :title="title" :visible.sync="visible" :close-on-click-modal="false" append-to-body>
+    <div class="_fd-struct">
+        <el-badge type="warning" is-dot :hidden="!configured">
+            <el-button @click="visible=true" size="mini">{{ title || t('struct.title') }}</el-button>
+        </el-badge>
+        <el-dialog class="_fd-struct-con" :title="title || t('struct.title')" :visible.sync="visible" destroy-on-close
+                  :close-on-click-modal="false"
+                  append-to-body>
             <div ref="editor" v-if="visible"></div>
-            <span slot="footer" class="dialog-footer">
-                <span class="_fc_err" v-if="err">
-                    输入内容格式有误{{ err !== true ? err : '' }}</span>
-                <ElButton @click="visible = false" size="small">取 消</ElButton>
-                <ElButton type="primary" @click="onOk" size="small">确 定</ElButton>
-            </span>
-        </ElDialog>
+            <template #footer>
+                <div>
+                    <el-button @click="visible = false" size="small">{{ t('props.cancel') }}</el-button>
+                    <el-button type="primary" @click="onOk" size="small" color="#2f73ff">{{ t('props.ok') }}</el-button>
+                </div>
+            </template>
+        </el-dialog>
     </div>
 </template>
 
@@ -17,27 +21,35 @@
 import 'codemirror/lib/codemirror.css';
 import CodeMirror from 'codemirror/lib/codemirror';
 import 'codemirror/mode/javascript/javascript';
-import {deepParseFn, toJSON} from '../utils/index';
+import {deepParseFn, toJSON, empty} from '../utils/index';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
+import {defineComponent, markRaw} from 'vue';
+import errorMessage from '../utils/message';
 
-export default {
+export default defineComponent({
     name: 'Struct',
+    emits: ['input'],
     props: {
-        value: [Object, Array],
-        title: {
-            type: String,
-            default: '编辑数据'
-        },
+        value: [Object, Array, Function],
+        title: String,
         defaultValue: {
             require: false
         },
         validate: Function,
     },
+    inject: ['designer'],
+    computed: {
+        t() {
+            return this.designer.t;
+        },
+        configured() {
+            return !empty(this.value);
+        },
+    },
     data() {
         return {
             editor: null,
             visible: false,
-            err: false,
             oldVal: null,
         };
     },
@@ -48,72 +60,79 @@ export default {
         visible(n) {
             if (n) {
                 this.load();
-            } else {
-                this.err = false;
             }
-        }
+        },
     },
     methods: {
         load() {
-            const val = toJSON(this.value ? deepParseFn(deepCopy(this.value)) : this.defaultValue);
+            const val = toJSON(deepParseFn(this.value ? deepCopy(this.value) : this.defaultValue));
             this.oldVal = val;
             this.$nextTick(() => {
-                this.editor = CodeMirror(this.$refs.editor, {
+                this.editor = markRaw(CodeMirror(this.$refs.editor, {
                     lineNumbers: true,
                     mode: 'javascript',
-                    gutters: ['CodeMirror-lint-markers'],
                     lint: true,
                     line: true,
                     tabSize: 2,
                     lineWrapping: true,
                     value: val || ''
-                });
+                }));
             });
         },
         onOk() {
             const str = this.editor.getValue();
             let val;
             try {
-                val = eval('(function (){return ' + str + '}())');
+                val = (new Function('return ' + str))();
             } catch (e) {
-                this.err = ` (${e})`;
-                return;
+                console.error(e);
+                errorMessage(this.t('struct.errorMsg'));
+                return false;
             }
             if (this.validate && false === this.validate(val)) {
-                this.err = true;
-                return;
+                errorMessage(this.t('struct.errorMsg'));
+                return false;
             }
             this.visible = false;
             if (toJSON(val, null, 2) !== this.oldVal) {
                 this.$emit('input', val);
             }
+            return true;
         },
     }
-};
+});
 </script>
 
 <style>
-._fc_struct .CodeMirror {
+._fd-struct {
+    width: 100%;
+}
+
+._fd-struct .el-badge {
+    width: 100%;
+}
+
+._fd-struct .el-button {
+    font-weight: 400;
+    width: 100%;
+    border-color: #2E73FF;
+    color: #2E73FF;
+}
+
+._fd-struct .CodeMirror {
     height: 450px;
 }
 
-._fc_struct .CodeMirror-line {
+._fd-struct .CodeMirror-line {
     line-height: 16px !important;
     font-size: 13px !important;
 }
 
-.CodeMirror-lint-tooltip {
+._fd-struct-con .CodeMirror-lint-tooltip {
     z-index: 2021 !important;
 }
 
-._fc_struct .el-dialog__body {
+._fd-struct-con .el-dialog__body {
     padding: 0px 20px;
-}
-
-._fc_err {
-    color: red;
-    float: left;
-    text-align: left;
-    width: 65%;
 }
 </style>

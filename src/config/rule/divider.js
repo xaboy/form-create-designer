@@ -1,37 +1,31 @@
+import {localeOptions, localeProps} from '../../utils';
+
 const label = '分割线';
-const name = 'el-divider';
+const name = 'elDivider';
 
 export default {
+    menu: 'aide',
     icon: 'icon-divider',
     label,
     name,
-    rule() {
+    rule({t}) {
         return {
             type: name,
             props: {},
-            wrap: {show: false},
-            native: false,
-            children: [''],
+            children: [t('com.elDivider.name')],
         };
     },
-    props() {
-        return [{
-            type: 'select',
-            field: 'direction',
-            title: '设置分割线方向',
-            options: [{label: 'horizontal', value: 'horizontal'}, {label: 'vertical', value: 'vertical'}]
-        }, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{
             type: 'input',
             field: 'formCreateChild',
-            title: '设置分割线文案',
         }, {
             type: 'select',
             field: 'contentPosition',
-            title: '设置分割线文案的位置',
-            options: [{label: 'left', value: 'left'}, {label: 'right', value: 'right'}, {
+            options: localeOptions(t, [{label: 'left', value: 'left'}, {label: 'right', value: 'right'}, {
                 label: 'center',
                 value: 'center'
-            }]
-        }];
+            }])
+        }]);
     }
 };

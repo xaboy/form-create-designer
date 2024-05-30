@@ -1,43 +1,40 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {makeOptionsRule, makeRequiredRule} from '../../utils/index';
+import {localeProps, makeOptionsRule, makeTreeOptions} from '../../utils/index';
 
 const label = '单选框';
 const name = 'radio';
 
 export default {
+    menu: 'main',
     icon: 'icon-radio',
     label,
     name,
-    rule() {
+    event: ['change'],
+    validate: ['string', 'number'],
+    rule({t}) {
         return {
             type: name,
             field: uniqueId(),
-            title: label,
+            title: t('com.radio.name'),
             info: '',
             effect: {
                 fetch: ''
             },
             $required: false,
             props: {},
-            options: [
-                {value: '1', label: '选项1'},
-                {value: '2', label: '选项2'},
-            ]
+            options: makeTreeOptions(t('props.option'), {label: 'label', value: 'value'}, 1)
         };
     },
-    props() {
-        return [
-            makeRequiredRule(),
-            makeOptionsRule('options'),
-            {type: 'switch', field: 'disabled', title: '是否禁用'}, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [
+            makeOptionsRule(t, 'options'),
+            {type: 'switch', field: 'disabled'}, {
                 type: 'switch',
                 field: 'type',
-                title: '按钮形式',
                 props: {activeValue: 'button', inactiveValue: 'default'}
-            }, {type: 'input', field: 'textColor', title: '按钮形式的 Radio 激活时的文本颜色'}, {
-                type: 'input',
-                field: 'fill',
-                title: '按钮形式的 Radio 激活时的填充色和边框色'
-            }];
+            }, {type: 'ColorPicker', field: 'textColor'}, {
+                type: 'ColorPicker',
+                field: 'fill'
+            }]);
     }
 };

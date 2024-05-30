@@ -1,55 +1,111 @@
-export default function form() {
+import {localeOptions} from '../../utils';
+
+export default function form({t}) {
     return [
         {
+            type: 'input',
+            field: '>formName',
+            value: '',
+            title: t('form.formName'),
+        }, {
             type: 'radio',
             field: 'labelPosition',
             value: 'left',
-            title: '标签位置',
-            options: [
-                {value: 'right', label: 'right'},
+            title: t('form.labelPosition'),
+            options: localeOptions(t, [
                 {value: 'left', label: 'left'},
+                {value: 'right', label: 'right'},
                 {value: 'top', label: 'top'},
-            ]
+            ])
         }, {
             type: 'radio',
             field: 'size',
-            value: 'mini',
-            title: '表单尺寸',
-            options: [
-                {value: 'medium', label: 'medium'},
+            value: 'small',
+            title: t('form.size'),
+            options: localeOptions(t, [
+                {value: 'large', label: 'large'},
+                {value: 'default', label: 'default'},
                 {value: 'small', label: 'small'},
-                {value: 'mini', label: 'mini'},
-            ]
+            ])
         }, {
             type: 'input',
+            field: 'labelSuffix',
+            value: '',
+            title: t('form.labelSuffix'),
+            style: {
+                width: '150px'
+            }
+        }, {
+            type: 'SizeInput',
             field: 'labelWidth',
             value: '125px',
-            title: '标签宽度',
+            title: t('form.labelWidth'),
         }, {
             type: 'switch',
             field: 'hideRequiredAsterisk',
             value: false,
-            title: '隐藏必填字段的标签旁边的红色星号',
+            title: t('form.hideRequiredAsterisk'),
         }, {
             type: 'switch',
             field: 'showMessage',
             value: true,
-            title: '显示校验错误信息',
+            title: t('form.showMessage'),
         }, {
             type: 'switch',
             field: 'inlineMessage',
             value: false,
-            title: '以行内形式展示校验信息',
+            title: t('form.inlineMessage'),
         }, {
             type: 'switch',
-            field: 'formCreateSubmitBtn',
+            field: '_submitBtn>show',
             value: true,
-            title: '是否显示表单提交按钮',
+            title: t('form.submitBtn'),
         }, {
             type: 'switch',
-            field: 'formCreateResetBtn',
+            field: '_resetBtn>show',
             value: false,
-            title: '是否显示表单重置按钮',
+            title: t('form.resetBtn'),
+        }, {
+            type: 'FnConfig',
+            field: '>_event',
+            info: {
+                native: true,
+                effect: 'light',
+                align: 'left',
+                children: [{
+                    type:'div',
+                    domProps:{
+                        innerHTML:t('form.document') + '：<a target="_blank" href="https://form-create.com/v3/guide/global-event">https://form-create.com/v3/guide/global-event</a>'
+                    }
+                }],
+            },
+            value: {},
+            col: {show: true},
+            props: {
+                eventConfig: [
+                    {
+                        name: 'onSubmit',
+                        args: ['formData', 'api'],
+                    },
+                    {
+                        name: 'onCreated',
+                        args: ['api'],
+                    },
+                    {
+                        name: 'onMounted',
+                        args: ['api'],
+                    },
+                    {
+                        name: 'onChange',
+                        args: ['field', 'value', 'options'],
+                    },
+                    {
+                        name: 'beforeFetch',
+                        args: ['config', 'data'],
+                    },
+                ]
+            },
+            title: t('form.event'),
         },
     ];
 }

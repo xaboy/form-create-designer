@@ -1,5 +1,7 @@
-const label = '标签页';
-const name = 'tab-pane';
+import {localeProps} from '../../utils';
+
+const label = '选项卡';
+const name = 'elTabPane';
 
 export default {
     label,
@@ -8,22 +10,20 @@ export default {
     drag: true,
     dragBtn: false,
     mask: false,
-    rule() {
+    rule({t}) {
         return {
-            type: 'el-tab-pane',
-            props: {label: '新标签页'},
+            type: name,
+            props: {label: t('com.elTabPane.name')},
             children: []
         };
     },
-    props() {
-        return [{type: 'input', field: 'label', title: '选项卡标题'}, {
+    props(_, {t}) {
+        return localeProps(t, name + '.props', [{type: 'input', field: 'label'}, {
             type: 'switch',
-            field: 'disabled',
-            title: '是否禁用'
-        }, {type: 'input', field: 'name', title: '与选项卡绑定值 value 对应的标识符，表示选项卡别名'}, {
+            field: 'disabled'
+        }, {type: 'input', field: 'name'}, {
             type: 'switch',
-            field: 'lazy',
-            title: '标签是否延迟渲染'
-        }];
+            field: 'lazy'
+        }]);
     }
 };

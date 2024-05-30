@@ -1,25 +1,41 @@
-export default function field() {
+export default function field({t}) {
     return [
         {
-            type: 'input',
+            type: 'FieldInput',
             field: 'field',
             value: '',
-            title: '字段 ID',
+            title: t('form.field'),
         }, {
             type: 'input',
             field: 'title',
             value: '',
-            title: '字段名称',
+            title: t('form.title'),
         }, {
             type: 'input',
             field: 'info',
             value: '',
-            title: '提示信息',
+            title: t('form.info'),
+        }, {
+            type: 'SizeInput',
+            field: 'formCreateWrap>labelWidth',
+            value: '',
+            title: t('form.labelWidth'),
         }, {
             type: 'Struct',
             field: '_control',
             value: [],
-            title: '联动数据',
+            title: t('form.control'),
+            info: {
+                native: true,
+                effect: 'light',
+                align: 'left',
+                children: [{
+                    type:'div',
+                    domProps:{
+                        innerHTML:t('form.document') + '：<a target="_blank" href="https://form-create.com/v3/guide/control">https://form-create.com/v3/guide/control</a>'
+                    }
+                }],
+            },
             props: {
                 defaultValue: [],
                 validate(val) {
@@ -30,53 +46,6 @@ export default function field() {
                     });
                 }
             }
-        }, {
-            type: 'col',
-            props: {
-                span: 24
-            },
-            children: [
-                {
-                    type: 'el-button',
-                    props: {
-                        type: 'primary',
-                        size: 'mini',
-                        icon: 'el-icon-delete',
-                    },
-                    inject: true,
-                    on: {
-                        click({$f}) {
-                            const rule = $f.activeRule;
-                            if (rule) {
-                                rule.__fc__.updateKey();
-                                rule.value = undefined;
-                                rule.__fc__.$api.sync(rule);
-                            }
-                        },
-                    },
-                    native: true,
-                    children: ['清空值']
-                }, {
-                    type: 'el-button',
-                    props: {
-                        type: 'success',
-                        size: 'mini',
-                        icon: 'el-icon-refresh',
-                    },
-                    inject: true,
-                    on: {
-                        click({$f}) {
-                            const rule = $f.activeRule;
-                            if (rule) {
-                                rule.__fc__.updateKey(true);
-                                rule.__fc__.$api.sync(rule);
-                            }
-                        },
-                    },
-                    native: true,
-                    children: ['刷新']
-                },
-            ]
-        }
+        },
     ];
 }

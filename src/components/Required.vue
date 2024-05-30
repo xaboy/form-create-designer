@@ -1,18 +1,21 @@
 <template>
-    <div class="_fc-required">
-        <ElSwitch v-model="required"></ElSwitch>
-        <ElInput v-model="requiredMsg" v-if="required" placeholder="请输入提示语"></ElInput>
+    <div class="_fd-required">
+        <el-switch v-model="required"></el-switch>
+        <el-input v-model="requiredMsg" v-if="required" :placeholder="t('validate.requiredPlaceholder')"></el-input>
     </div>
 </template>
 
 <script>
 import is from '@form-create/utils/lib/type';
+import {defineComponent} from 'vue';
 
-export default {
+export default defineComponent({
     name: 'Required',
+    emits: ['input'],
     props: {
         value: {}
     },
+    inject: ['designer'],
     watch: {
         required() {
             this.update();
@@ -24,6 +27,11 @@ export default {
             const flag = is.String(n);
             this.required = n === undefined ? false : (flag ? true : !!n);
             this.requiredMsg = flag ? n : '';
+        },
+    },
+    computed: {
+        t() {
+            return this.designer.t;
         },
     },
     data() {
@@ -44,20 +52,21 @@ export default {
             this.$emit('input', val);
         },
     }
-};
+});
 </script>
 
 <style>
-._fc-required {
+._fd-required {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
-._fc-required .el-input {
+._fd-required .el-input {
     margin-left: 15px;
 }
 
-._fc-required .el-switch {
+._fd-required .el-switch {
     height: 28px;
 }
 </style>

@@ -35,7 +35,14 @@ module.exports = {
         ],
         'block-spacing': 'error',
         'no-unused-vars': 'warn',
+        'no-irregular-whitespace': 'warn',
+        'no-useless-escape': 'warn',
+        'no-empty': 'warn',
         'object-curly-spacing': 'error',
         'no-console': 'warn',
+        'vue/valid-v-model': 'warn',
+        'vue/no-template-key': 'warn',
+        'vue/valid-v-for': 'warn',
+        'vue/require-v-for-key': 'warn',
     }
 };

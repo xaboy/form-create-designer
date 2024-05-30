@@ -1,5 +1,8 @@
 import is, {hasProperty} from '@form-create/utils/lib/type';
 import {parseFn} from '@form-create/utils/lib/json';
+import toCase from '@form-create/utils/lib/tocase';
+import {computed, isRef, unref, ref} from 'vue';
+import ZhCn from '../locale/zh-cn';
 
 export function makeRequiredRule() {
     return {
@@ -7,56 +10,151 @@ export function makeRequiredRule() {
     };
 }
 
-export function makeOptionsRule(to, flag) {
+export function empty(value) {
+    if (value === undefined || value === null) {
+        return true;
+    }
+
+    if (Array.isArray(value) && Array.isArray(value) && !value.length) {
+        return true;
+    }
+
+    return typeof value === 'string' && !value;
+}
+
+export function addAutoKeyMap(cm) {
+    cm.addKeyMap({
+        name: 'autoParentheses',
+        '\'(\'': (cm) => {
+            const cur = cm.getCursor();
+            cm.replaceRange('()', cur, cur, '+insert');
+            cm.doc.setCursor({line: cur.line, ch: cur.ch + 1});
+        }
+    });
+    cm.addKeyMap({
+        name: 'autoBraces',
+        '\'{\'': (cm) => {
+            const cur = cm.getCursor();
+            cm.replaceRange('{}', cur, cur, '+insert');
+            cm.doc.setCursor({line: cur.line, ch: cur.ch + 1});
+        }
+    });
+    cm.addKeyMap({
+        name: 'autoBrackets',
+        '\'[\'': (cm) => {
+            const cur = cm.getCursor();
+            cm.replaceRange('[]', cur, cur, '+insert');
+            cm.doc.setCursor({line: cur.line, ch: cur.ch + 1});
+        }
+    });
+}
+
+export function makeTreeOptions(pre, config, level, data = []) {
+    if (!config.id) {
+        config.id = 1;
+    }
+    level && level--;
+    for (let i = 0; i < 3; i++) {
+        const item = {
+            [config.label]: pre + level * 10 + i,
+            [config.value]: ++config.id,
+        };
+        if (level) {
+            makeTreeOptions(pre, config, level, item.children = []);
+        }
+        data.push(item);
+    }
+    return data;
+}
+
+export function makeOptionsRule(t, to) {
     const options = [
-        {'label': 'JSON数据', 'value': 0},
-        {'label': '接口数据', 'value': 1},
+        {'label': t('fetch.optionsType.struct'), 'value': 2},
+        {'label': t('fetch.optionsType.fetch'), 'value': 1},
     ];
 
     const control = [
         {
-            value: 0,
-            rule: [
-                {
-                    type: 'Struct',
-                    field: 'formCreate' + upper(to).replace('.', '>'),
-                    props: {defaultValue: []}
-                },
-            ],
-        },
-        {
             value: 1,
             rule: [
                 {
-                    type: 'Fetch',
+                    type: 'FetchConfig',
                     field: 'formCreateEffect>fetch',
                     props: {
                         to
                     }
                 }
             ]
-        }
-    ];
-
-    if (flag !== false) {
-        options.splice(0, 0, {'label': '静态数据', 'value': 2});
-        control.push({
+        },
+        {
             value: 2,
             rule: [
                 {
                     type: 'TableOptions',
                     field: 'formCreate' + upper(to).replace('.', '>'),
-                    props: {defaultValue: []}
+                    props: {
+                        keyValue: 'label'
+                    }
                 },
             ],
-        });
-    }
+        }
+    ];
 
     return {
         type: 'radio',
-        title: '选项数据',
+        title: t('props.options'),
         field: '_optionType',
-        value: flag !== false ? 2 : 0,
+        value: 2,
+        options,
+        props: {
+            type: 'button'
+        },
+        control
+    };
+}
+
+export function makeTreeOptionsRule({t, to, label, value}) {
+    const options = [
+        {'label': t('fetch.optionsType.struct'), 'value': 2},
+        {'label': t('fetch.optionsType.fetch'), 'value': 1},
+    ];
+
+    const control = [
+        {
+            value: 1,
+            rule: [
+                {
+                    type: 'FetchConfig',
+                    field: 'formCreateEffect>fetch',
+                    props: {
+                        to
+                    }
+                }
+            ]
+        },
+        {
+            value: 2,
+            rule: [
+                {
+                    type: 'TreeOptions',
+                    field: 'formCreate' + upper(to).replace('.', '>'),
+                    props: {
+                        columns: {
+                            label,
+                            value
+                        },
+                        keyValue: label,
+                    }
+                },
+            ],
+        }
+    ];
+
+    return {
+        type: 'radio',
+        title: t('props.options'),
+        field: '_optionType',
+        value: 2,
         options,
         props: {
             type: 'button'
@@ -68,7 +166,6 @@ export function makeOptionsRule(to, flag) {
 export function upper(str) {
     return str.replace(str[0], str[0].toLocaleUpperCase());
 }
-
 
 export const toJSON = function (val) {
     const type = /object ([a-zA-Z]*)/.exec(Object.prototype.toString.call(val));
@@ -92,6 +189,7 @@ const _toJSON = {
         return '{\n ' + json.join(',\n ') + '\n}';
     },
     function: function (val) {
+        val = '' + val;
         var exec = (/^ *([\w]+) *\(/).exec(val);
         if (exec && exec[1] !== 'function') {
             return 'function ' + val;
@@ -124,16 +222,225 @@ const _toJSON = {
 };
 
 export const deepParseFn = function (target) {
-    for (let key in target) {
-        if (Object.prototype.hasOwnProperty.call(target, key)) {
-            let data = target[key];
-            if (Array.isArray(data) || is.Object(data)) {
-                deepParseFn(data);
-            }
-            if (is.String(data)) {
-                target[key] = parseFn(data);
+    if (target && typeof target === 'object') {
+        for (let key in target) {
+            if (Object.prototype.hasOwnProperty.call(target, key)) {
+                let data = target[key];
+                if (Array.isArray(data) || is.Object(data)) {
+                    deepParseFn(data);
+                }
+                if (is.String(data)) {
+                    target[key] = parseFn(data);
+                }
             }
         }
     }
     return target;
 };
+
+
+export function deepGet(object, path, defaultValue) {
+    path = (path || '').split('.');
+
+    let index = 0,
+        length = path.length;
+
+    while (object != null && index < length) {
+        object = object[path[index++]];
+    }
+    return (index && index === length) ? (object !== undefined ? object : defaultValue) : defaultValue;
+}
+
+export const buildTranslator = (locale) => (path, option) => translate(path, option, unref(locale));
+
+export const translate = (path, option, locale) =>
+    deepGet(locale, path, '').replace(
+        /\{(\w+)\}/g,
+        (_, key) => `${option?.[key] ?? `{${key}}`}`
+    );
+
+export const buildLocaleContext = (locale) => {
+    const lang = computed(() => unref(locale).name);
+    const name = computed(() => upper(toCase(lang.value || '')));
+    const localeRef = isRef(locale) ? locale : ref(locale);
+    return {
+        lang,
+        name,
+        locale: localeRef,
+        t: buildTranslator(locale),
+    };
+};
+
+export const useLocale = (locale) => {
+    return buildLocaleContext(computed(() => locale.value || ZhCn));
+};
+
+export const localeOptions = (t, options, prefix) => {
+    return options.map(opt => {
+        opt.label = t((prefix || 'props') + '.' + opt.value) || opt.label;
+        return opt;
+    });
+};
+
+export const localeProps = (t, prefix, rules) => {
+    return rules.map(rule => {
+        if (rule.field === 'formCreate$required') {
+            rule.title = t('validate.required') || rule.title;
+        } else if (rule.field && rule.field !== '_optionType') {
+            rule.title = t('com.' + prefix + '.' + rule.field) || rule.title;
+        }
+        if (rule.type === 'template' && is.trueArray(rule.children)) {
+            rule.children = localeProps(t, prefix, rule.children);
+        }
+        return rule;
+    });
+};
+
+export const getRuleTree = (children) => {
+    const tree = [];
+    children && children.forEach(rule => {
+        if (rule._fc_drag_tag) {
+            const item = {
+                id: rule.__fc__.id,
+                rule,
+                children: getRuleTree(rule.children),
+            };
+            if (!item.children.length) {
+                delete item.children;
+            }
+            tree.push(item);
+        } else {
+            tree.push(...getRuleTree(rule.children));
+        }
+    });
+    return tree;
+};
+
+
+export const getFormRuleDescription = (tree) => {
+    const getTree = (children) => {
+        const tree = [];
+        children && children.forEach(rule => {
+            if (rule.field) {
+                rule.children = getTree(rule.children || []);
+                if (!rule.children.length) {
+                    delete rule.children;
+                }
+                tree.push(rule);
+            } else {
+                tree.push(...getTree(rule.children || []));
+            }
+        });
+        return tree;
+    };
+    return getTree(tree);
+};
+
+export const getRuleDescription = (children) => {
+    const getTree = (children) => {
+        const tree = [];
+        children && children.forEach(rule => {
+            if (typeof rule !== 'object') {
+                return;
+            }
+            if (rule._fc_drag_tag) {
+                const item = {
+                    _fc_id: rule._fc_id,
+                    type: rule.type,
+                    field: rule.field,
+                    title: rule.title,
+                    slot: rule.slot,
+                    props: {...rule.props || {}},
+                    children: getTree(rule.children || [])
+                };
+                if (!item.children.length) {
+                    delete item.children;
+                }
+                tree.push(item);
+            } else {
+                tree.push(...getTree(rule.children));
+            }
+        });
+        return tree;
+    };
+    return getTree(children);
+};
+
+export function getInjectArg(t) {
+    return {
+        name: '$inject',
+        columns: [
+            {label: '$inject.api', info: t('event.inject.api'), type: 'Api'},
+            {label: '$inject.rule', info: t('event.inject.rule'), type: 'Rule[]'},
+            {label: '$inject.self', info: t('event.inject.self'), type: 'Rule'},
+            {label: '$inject.option', info: t('event.inject.option'), type: 'Object'},
+            {label: '$inject.args', info: t('event.inject.args'), type: 'Array'},
+        ]
+    };
+}
+
+export function isElementInside(x, y, element) {
+    const rect = element.getBoundingClientRect();
+    return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+}
+
+export function isNull(v) {
+    return ['', null, undefined].indexOf(v) !== -1;
+}
+
+export function formTemplate(json, options) {
+    return `<template>
+  <form-create
+    :value.sync="formData"
+    v-model="fapi"
+    :rule="rule"
+    :option="option"
+    @submit="onSubmit"
+  ></form-create>
+</template>
+
+<script>
+import formCreate from "@form-create/element-ui";
+
+export default {
+  component: {
+    formCreate: formCreate.$form()
+  },
+  data () {
+    const option = formCreate.parseJson('${options.replaceAll('\\', '\\\\').replaceAll('\'', '\\')}');
+    return {
+      formData: {},
+      fapi: null,
+      rule: formCreate.parseJson('${json.replaceAll('\\', '\\\\').replaceAll('\'', '\\')}'),
+      option: option
+    }
+  },
+  methods: {
+    onSubmit (formData) {
+      //todo 提交表单
+    }
+  }
+}
+<\/script>`;
+}
+
+export function escapeRegExp(str) {
+    return str.replace(/[\ .*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+export function compareVersion(v1, v2) {
+    const a1 = v1.split('.');
+    const a2 = v2.split('.');
+    const minLength = Math.min(a1.length, a2.length);
+
+    for (var i = 0; i < minLength; i++) {
+        var diff = parseInt(a1[i], 10) - parseInt(a2[i], 10);
+        if (diff > 0) {
+            return 1;
+        } else if (diff < 0) {
+            return -1;
+        }
+    }
+
+    return a1.length === a2.length ? 0 : (a1.length < a2.length ? -1 : 1);
+}
