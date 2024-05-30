@@ -173,13 +173,13 @@
                                         </el-button>
                                     </template>
                                 </el-popconfirm>
-                                <el-dropdown trigger="click" size="default" v-if="handle && handle.length">
+                                <el-dropdown trigger="click" size="default" v-if="handle && handle.length" @command="triggerHandle">
                                     <el-button class="_fd-m-extend" plain size="mini">
                                         <i class="fc-icon icon-more"></i>
                                     </el-button>
                                     <template #dropdown>
                                         <el-dropdown-menu>
-                                            <el-dropdown-item v-for="item in handle" @click.stop="triggerHandle(item)">
+                                            <el-dropdown-item v-for="item in handle" :command="item">
                                                 <div>{{ item.label }}</div>
                                             </el-dropdown-item>
                                         </el-dropdown-menu>

@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <fc-designer ref="designer" :config="config" :handle="handle" :locale="locale">
+        <fc-designer ref="designer" :key="lang" :config="config" :handle="handle" :locale="locale">
             <template #handle>
                 <div class="handle">
                     <el-dropdown @command="e=>e()" style="margin-right: 10px;">
