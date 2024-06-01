@@ -409,26 +409,6 @@ const ZhCn = {
                 props: '数据源的字段别名'
             }
         },
-        elTreeSelect: {
-            name: '树形选择',
-            event: {
-                removeTag: '多选模式下移除tag时触发'
-            },
-            props: {
-                multiple: '是否多选',
-                disabled: '是否禁用',
-                clearable: '是否可以清空选项',
-                collapseTags: '多选时是否将选中值按文字的形式展示',
-                multipleLimit: '多选时用户最多可以选择的项目数，为 0 则不限制',
-                placeholder: '占位符',
-                props: '配置选项',
-                renderAfterExpand: '是否在第一次展开某个树节点后才渲染其子节点',
-                defaultExpandAll: '是否默认展开所有节点',
-                expandOnClickNode: '是否在点击节点的时候展开或者收缩节点',
-                checkOnClickNode: '是否在点击节点的时候选中节点',
-                nodeKey: '每个树节点用来作为唯一标识的属性，整棵树应该是唯一的'
-            }
-        },
         fcEditor: {
             name: '富文本框',
             props: {

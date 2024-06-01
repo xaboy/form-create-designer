@@ -32,14 +32,13 @@ import subForm from './rule/subForm';
 import card from './rule/card';
 import collapse from './rule/collapse';
 import collapseItem from './rule/collapseItem';
-import treeSelect from './rule/treeSelect';
 import tag from './rule/tag';
 import html from './rule/html';
 import table from './rule/table';
 
 
 const ruleList = [
-    input, textarea, password, number, radio, checkbox, select, _switch, rate, time, timeRange, slider, date, dateRange, color, cascader, upload, transfer, tree, treeSelect, editor,
+    input, textarea, password, number, radio, checkbox, select, _switch, rate, time, timeRange, slider, date, dateRange, color, cascader, upload, transfer, tree, editor,
     group, subForm,
     alert, button, text, html, divider, tag,
     row, table, space, card, collapse,

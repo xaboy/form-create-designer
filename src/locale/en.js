@@ -409,26 +409,6 @@ const En = {
                 props: 'Field alias of data source'
             }
         },
-        elTreeSelect: {
-            name: 'TreeSelect',
-            event: {
-                removeTag: 'Triggered when tag is removed in multi-select mode'
-            },
-            props: {
-                multiple: 'Whether there are multiple selections',
-                disabled: 'Disabled',
-                clearable: 'Whether the option can be cleared',
-                collapseTags: 'Whether to display the selected value as text during multi-selection',
-                multipleLimit: 'The maximum number of items that the user can select during multiple selection, if it is 0, there is no limit',
-                placeholder: 'Placeholder',
-                props: 'Options',
-                renderAfterExpand: 'Whether to render its child nodes after expanding a tree node for the first time',
-                defaultExpandAll: 'Whether to expand all nodes by default',
-                expandOnClickNode: 'Whether to expand or shrink nodes when clicking on them',
-                checkOnClickNode: 'Whether to select the node when clicking the node',
-                nodeKey: 'Each tree node is used as an attribute for unique identification, and the entire tree should be unique'
-            }
-        },
         fcEditor: {
             name: 'Editor',
             props: {

@@ -1444,6 +1444,9 @@ export default defineComponent({
                 if (!rule._computed) {
                     rule._computed = {};
                 }
+                if (!rule.wrap) {
+                    rule.wrap = {};
+                }
                 if (!rule.effect) {
                     rule.effect = {};
                 }

@@ -44,7 +44,7 @@
     "bugs": {
         "url": "https://github.com/xaboy/form-create-designer/issues"
     },
-    "homepage": "https://www.form-create.com",
+    "homepage": "https://form-create.com",
     "publishConfig": {
         "access": "public"
     },
