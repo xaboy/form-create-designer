@@ -48,17 +48,6 @@
     "publishConfig": {
         "access": "public"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.{js,jsx,vue}": [
-            "eslint --fix",
-            "git add"
-        ]
-    },
     "peerDependencies": {
         "vue": "^2.7"
     },

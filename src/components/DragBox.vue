@@ -10,7 +10,7 @@ export default {
     render(h) {
         const subRule = this.$props.rule || {};
         let _class = '_fd-' + this.$props.tag + '-drag _fd-drag-box';
-        if (!this.$children.length) {
+        if (!this.$slots.default || !this.$slots.default.length) {
             _class += ' drag-holder';
         }
         subRule.class = _class;
