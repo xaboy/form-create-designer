@@ -43,7 +43,6 @@
         "README.md",
         "package.json",
         "LICENSE",
-        "CHANGELOG.md",
         "src",
         "types",
         "dist",
