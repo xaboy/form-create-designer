@@ -66,82 +66,9 @@ Vue.use(FcDesigner)
 <fc-designer ref="designer"/>
 ```
 
-## 组件`props`
-
-- **menu**`MenuList` 重新配置拖拽的组件
-  
-- **height**`int|string` 设计器组件高度, 默认`100%`
-
-## 组件方法
-
-- 获取当前生成表单的生成规则
-
-    ```ts
-    type getRule = () => Rule[]
-    ```
-  **示例: `this.$refs.designer.getRule()`**
-
-- 获取当前表单的全局配置
-
-    ```ts
-    type getOption = () => Object
-    ```
-
-- 设置当前生成表单的规则
-
-    ```ts
-    type setRule = (rules: Rule[]) => void;
-    ```
-
-- 设置当前表单的全局配置
-
-    ```ts
-    type setOption = (option: Object) => void;
-    ```
-
-- 增加一组拖拽组件
-
-    ```ts
-    type addMenu = (menu: Menu) => void;
-    ```
-- 删除一组拖拽组件
-
-    ```ts
-    type removeMenu = (name: string) => void;
-    ```
-
-- 批量覆盖插入拖拽组件
-
-    ```ts
-    type setMenuItem = (name: string, items: MenuItem[]) => void;
-    ```
-
-- 插入一个拖拽组件到分组
-
-    ```ts
-    type appendMenuItem = (name:string, item: MenuItem) => void;
-    ```
-
-- 删除一个拖拽组件
-
-    ```ts
-    type removeMenuItem = (item: string | MenuItem) => void;
-    ```
-
-- 新增一个拖拽组件的生成规则
-
-    ```ts
-    type addComponent = (item: DragRule) => void;
-    ```
-> **提示! 内置的三个组件分组`name`分别为: `main`,`aide`,`layout`**
-
-## 捐赠
-
-![donation.jpg](http://form-create.com/img/donation.jpg)
-
 ## 联系
 
-##### email : xaboy2005@qq.com
+![http://static.form-create.com/file/img/support.jpg](http://static.form-create.com/file/img/support.jpg)
 
 ## License
 
