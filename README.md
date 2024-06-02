@@ -1,17 +1,21 @@
 <p align="center">
-    <a href="http://www.form-create.com">
-        <img width="200" src="http://file.lotkk.com/form-create.png">
+    <a href="https://www.form-create.com">
+        <img width="300" alt="FormCreate" src="https://static.form-create.com/file/img/info-logo2.png">
     </a>
 </p>
 
-# form-create-designer
+**[文档](https://view.form-create.com/) | [在线演示](https://form-create.com/designer?fr=github) | [form-create 文档](https://form-create.com/v2/guide/) | [🌈Vue3版本](https://github.com/xaboy/form-create-designer/tree/next)**
 
-[![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/xaboy/form-create-designer)
-[![github](https://img.shields.io/badge/Author-xaboy-blue.svg)](https://github.com/xaboy)
+**FcDesigner 是基于 [@form-create/element-ui](https://github.com/xaboy/form-create) 实现的表单设计器组件。可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率，节省开发者的时间。**
 
-**form-create-designer 是基于 [@form-create/element-ui](https://github.com/xaboy/form-create) 实现的表单设计器组件。可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率，节省开发者的时间。**
 
-**[文档](http://designer.form-create.com/guide/) | [在线演示](http://form-create.com/designer?fr=github) | [form-create 文档](http://form-create.com/v2/guide/) | [🌈Vue3版本](https://github.com/xaboy/form-create-designer/tree/next)**
+## 特点
+- 使用JSON数据生成表单
+- 支持扩展自定义组件
+- 内置22个常用的表单组件和布局组件
+- 提供丰富的表单操作API
+- 支持子表单和分组
+- 支持表单验证
 
 > 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！本项目还在不断开发完善中,如有任何建议或问题[请在这里提出](https://github.com/xaboy/form-create-designer/issues/new)
 

@@ -32,7 +32,6 @@
     ],
     "files": [
         "README.md",
-        "CHANGELOG.md",
         "package.json",
         "LICENSE",
         "src",
