@@ -7,7 +7,7 @@
 <p align="center">
     <a href="https://www.form-create.com/" target="_blank">官网</a>
     <span>&nbsp;|&nbsp;</span>
-    <a href="https://designer.form-create.com/guide/" target="_blank">帮助文档</a>
+    <a href="https://view.form-create.com/guide/" target="_blank">帮助文档</a>
     <span>&nbsp;|&nbsp;</span>
     <a href="https://pro.form-create.com/view/" target="_blank">可视化表单设计器</a>
 </p>
