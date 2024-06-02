@@ -7,7 +7,7 @@
 <p align="center">
     <a href="https://www.form-create.com/" target="_blank">官网</a>
     <span>&nbsp;|&nbsp;</span>
-    <a href="https://view.form-create.com/guide/" target="_blank">帮助文档</a>
+    <a href="https://view.form-create.com/" target="_blank">帮助文档</a>
     <span>&nbsp;|&nbsp;</span>
     <a href="https://pro.form-create.com/view/" target="_blank">可视化表单设计器</a>
 </p>
@@ -36,9 +36,7 @@
 
 > 本项目QQ讨论群[629709230](https://jq.qq.com/?_wv=1027&k=F1FlEFIV)
 
-
-
-![demo1](https://form-create.com/img/designer-review.png)
+![demo1](https://static.form-create.com/file/img/open-designer.jpg)
 
 ## 引入
 
@@ -72,101 +70,6 @@ app.use(FcDesigner)
 
 ```html
 <fc-designer ref="designer"/>
-```
-
-### 组件`props`
-
-- **menu**`MenuList` 重新配置拖拽的组件
-
-- **height**`int|string` 设计器组件高度, 默认`100%`
-
-- **locale**`object` 设置多语言
-
-- **config**`Config` 设置多语言
-
-- **mask** `boolean` 设置拖拽表单中的组件是否可以操作
-
-### 组件方法
-
-- 获取当前生成表单的生成规则
-
-    ```ts
-    type getRule = () => Rule[]
-    ```
-  **示例: `this.$refs.designer.getRule()`**
-
-- 获取当前表单的全局配置
-
-    ```ts
-    type getOption = () => Object
-    ```
-
-- 设置当前生成表单的规则
-
-    ```ts
-    type setRule = (rules: Rule[]) => void;
-    ```
-
-- 设置当前表单的全局配置
-
-    ```ts
-    type setOption = (option: Object) => void;
-    ```
-
-- 增加一组拖拽组件
-
-    ```ts
-    type addMenu = (menu: Menu) => void;
-    ```
-- 删除一组拖拽组件
-
-    ```ts
-    type removeMenu = (name: string) => void;
-    ```
-
-- 批量覆盖插入拖拽组件
-
-    ```ts
-    type setMenuItem = (name: string, items: MenuItem[]) => void;
-    ```
-
-- 插入一个拖拽组件到分组
-
-    ```ts
-    type appendMenuItem = (name:string, item: MenuItem) => void;
-    ```
-
-- 删除一个拖拽组件
-
-    ```ts
-    type removeMenuItem = (item: string | MenuItem) => void;
-    ```
-
-- 新增一个拖拽组件的生成规则
-
-    ```ts
-    type addComponent = (item: DragRule) => void;
-    ```
-> **提示! 内置的三个组件分组`name`分别为: `main`,`aide`,`layout`**
-
-### 设置多语言
-通过 locale 配置项设置语言
-
-```vue
-<template>
-  <fc-designer :locale="locale"></fc-designer>
-</template>
-
-<script>
-import En from "@form-create/designer/locale/en.js";
-export default {
-  data(){
-    return {
-        locale: En,
-    }
-  }
-}
-</script>
 ```
 
 ## 联系
