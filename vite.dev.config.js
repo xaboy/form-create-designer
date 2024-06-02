@@ -8,4 +8,5 @@ const rootPath = path.join(process.cwd(), "examples");
 export default defineConfig({
   root: rootPath,
   plugins: [vue()],
+  base: '/designer/',
 });

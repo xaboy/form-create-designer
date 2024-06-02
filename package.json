@@ -11,7 +11,7 @@
     "scripts": {
         "dev": "vite --config vite.dev.config.js",
         "build": "vite build",
-        "preview": "vite preview"
+        "preview": "vite build --config vite.dev.config.js"
     },
     "repository": {
         "type": "git",
