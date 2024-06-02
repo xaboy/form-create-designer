@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: '/v3/designer/',
     build: {
         cssCodeSplit: true,
         rollupOptions: {
