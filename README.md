@@ -9,7 +9,7 @@
     <span>&nbsp;|&nbsp;</span>
     <a href="https://view.form-create.com/" target="_blank">帮助文档</a>
     <span>&nbsp;|&nbsp;</span>
-    <a href="https://pro.form-create.com/view/" target="_blank">可视化表单设计器</a>
+    <a href="https://form-create.com/v3/designer/" target="_blank">在线演示</a>
 </p>
 
 <p align="center">
