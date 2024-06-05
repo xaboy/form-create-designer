@@ -444,8 +444,10 @@ export default defineComponent({
                 }
                 if (configRule.rule) {
                     let rule = configRule.rule(...args);
-                    if (configRule.append) {
+                    if (configRule.prepend) {
                         rule = [...rule, ...orgRule(...args)];
+                    } else if (configRule.append) {
+                        rule = [...orgRule(...args), ...rule];
                     }
                     return rule;
                 }

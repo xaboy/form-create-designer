@@ -57,7 +57,7 @@ export function makeTreeOptions(pre, config, level, data = []) {
     for (let i = 0; i < 3; i++) {
         const item = {
             [config.label]: pre + level * 10 + i,
-            [config.value]: ++config.id,
+            [config.value]: config.id++,
         };
         if (level) {
             makeTreeOptions(pre, config, level, item.children = []);
