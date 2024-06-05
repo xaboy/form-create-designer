@@ -31,7 +31,14 @@ export interface Menu {
 type MenuList = Menu[];
 
 //定义函数返回规则或者通过rule字段返回规则
-type extendRule = ((arg: { t: t }) => Rule[]) | { rule: (arg: { t: t }) => Rule[], append?: boolean };
+type extendRule = ((arg: { t: t }) => Rule[]) | {
+    //生成规则
+    rule: (arg: { t: t }) => Rule[];
+    //追加
+    append?: boolean;
+    //前置
+    prepend?: boolean;
+};
 
 //设计器组件的props.config配置
 export interface Config {
@@ -63,6 +70,8 @@ export interface Config {
     showFormConfig?: boolean;
     //是否显示多端适配选项
     showDevice?: boolean;
+    //定义渲染规则所需的formData
+    appendConfigData: (rule: Rule) => Object;
     //基础配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面
     baseRule?: extendRule;
     //验证配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面
