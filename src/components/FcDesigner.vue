@@ -440,8 +440,10 @@ export default defineComponent({
                 }
                 if (configRule.rule) {
                     let rule = configRule.rule(...args);
-                    if (configRule.append) {
+                    if (configRule.prepend) {
                         rule = [...rule, ...orgRule(...args)];
+                    } else if (configRule.append) {
+                        rule = [...orgRule(...args), ...rule];
                     }
                     return rule;
                 }
@@ -1257,7 +1259,7 @@ export default defineComponent({
             },
             updateRuleFormData() {
                 const rule = data.activeRule;
-                const formData = {
+                let formData = {
                     formCreateChild: '' + rule.children[0],
                     'formCreateWrap>labelWidth': ''
                 };
@@ -1279,6 +1281,9 @@ export default defineComponent({
                         formData['formCreate' + upper(name) + '>' + k] = deepCopy(rule[name][k]);
                     });
                 });
+                if(is.Function(configRef.value.appendConfigData)){
+                    formData = {...formData, ...configRef.value.appendConfigData(rule)};
+                }
                 const configAttrs = rule._menu.attrs || {};
                 Object.keys(configAttrs).forEach(k => {
                     formData['__' + k] = configAttrs[k]({rule});
