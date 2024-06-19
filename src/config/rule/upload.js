@@ -51,6 +51,7 @@ export default {
             props: {
                 args: ['res', 'file'],
                 name: 'onSuccess',
+                button: true,
             }
         }, {
             type: 'TableOptions',
