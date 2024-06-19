@@ -101,6 +101,7 @@ export default defineComponent({
     emits: ['input'],
     props: {
         value: [Object, String],
+        to: String,
     },
     components: {
         DragForm: designerForm.$form(),
@@ -166,6 +167,7 @@ export default defineComponent({
                 formData.onError = this.form.onError;
                 formData.label = this.form.label;
                 formData.type = this.form.type;
+                formData.to = this.to || 'options';
                 this.$emit('input', formData);
                 this.visible = false;
             }).catch(err => {
