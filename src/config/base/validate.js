@@ -2,7 +2,7 @@ export default function validate({t}) {
     return [
         {
             type: 'Required',
-            field: 'required',
+            field: '$required',
             title: t('validate.required')
         },
         {
