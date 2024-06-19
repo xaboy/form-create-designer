@@ -142,7 +142,7 @@ const ZhCn = {
         layout: '布局组件',
         component: '组件',
         subform: '子表单组件',
-        tree: '结构'
+        tree: '大纲'
     },
     props: {
         title: '标题',
