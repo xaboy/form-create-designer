@@ -1,6 +1,6 @@
 <template>
     <DragForm class="_fd-validate" :rule="rule" :option="option" :value="formValue"
-              @update:value="onInput"></DragForm>
+              @change="onInput"></DragForm>
 </template>
 
 <script>
@@ -207,9 +207,24 @@ export default defineComponent({
         };
     },
     methods: {
-        onInput: function (formData) {
-            const {validate} = deepCopy(formData);
-            this.$emit('input', (validate || []).filter(v => Object.keys(v).length > 1));
+        onInput: function (field, value) {
+            const validate = deepCopy(value);
+            const modelValue = [];
+            (validate || []).forEach(v => {
+                if (!v || !Object.keys(v).length) {
+                    return false;
+                }
+                if (v.type === 'validator' && !v.validator) {
+                    return;
+                }
+                const tmp = {...v};
+                delete tmp.mode;
+                if (!v.validator) {
+                    delete tmp.validator;
+                }
+                modelValue.push(tmp);
+            })
+            this.$emit('input', modelValue);
         },
         parseValue(n) {
             let val = {

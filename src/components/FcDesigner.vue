@@ -299,7 +299,7 @@
                                           :rule="validateForm.rule"
                                           :option="validateForm.options"
                                           :value="validateForm.value"
-                                          @update:value="validateChange"
+                                          @change="validateChange"
                                           :key="activeRule._fc_id"></DragForm>
                             </template>
                         </el-main>
@@ -1165,14 +1165,9 @@ export default defineComponent({
                     });
                 }
             },
-            validateChange(formData) {
+            validateChange(field, value, _, fapi) {
                 if (!data.activeRule || data.validateForm.api[data.activeRule._fc_id] !== data.activeRule) return;
-                set(data.activeRule, 'validate', formData.validate || []);
-                if (formData.required) {
-                    set(data.activeRule, '$required', formData.required);
-                } else {
-                    set(data.activeRule, '$required', false);
-                }
+                methods.handleChange('', field, value, _, fapi);
                 data.dragForm.api.refreshValidate();
                 data.dragForm.api.nextTick(() => {
                     data.dragForm.api.clearValidateState(data.activeRule.__fc__.id);
@@ -1304,7 +1299,7 @@ export default defineComponent({
                     };
                     data.validateForm.value = {
                         validate: rule.validate ? [...rule.validate] : [],
-                        required: formData.formCreate$required
+                        $required: formData.formCreate$required
                     };
                     data.dragForm.api.refreshValidate();
                     data.dragForm.api.nextTick(() => {
