@@ -1,6 +1,6 @@
 import {Api, Options, Rule} from "@form-create/element-ui";
 import FormCreate from "@form-create/element-ui";
-import {Component, Plugin, Ref, FunctionPlugin} from "@vue/runtime-core";
+import {Component, Plugin, Ref, App} from "@vue/runtime-core";
 
 //多语言读取函数
 type t = (name, ...args) => string;
@@ -219,7 +219,7 @@ interface FcDesignerProtoType {
     makeOptionsRule(t: t, to: string): Rule;
 
     //挂载组件
-    install: FunctionPlugin<[]>;
+    install: (app: App, ...options: any[]) => any;
 }
 
 //设计器组件
