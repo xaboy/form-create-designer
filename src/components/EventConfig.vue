@@ -222,12 +222,12 @@ export default defineComponent({
         parseFN(e) {
             const on = {};
             Object.keys(e).forEach(k => {
-                on[k] = [];
+                const lst = [];
                 e[k].forEach((v, i) => {
-                    on[k][i] = v.indexOf('$GLOBAL:') !== 0 ? ($T + v) : v;
+                    lst[i] = v.indexOf('$GLOBAL:') !== 0 ? ($T + v) : v;
                 });
-                if (on[k].length === 1) {
-                    on[k] = on[k][0];
+                if (lst.length > 0) {
+                    on[k] = lst.length === 1 ? lst[0] : lst;
                 }
             });
             return on;
