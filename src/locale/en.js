@@ -557,7 +557,9 @@ const En = {
                 noMatchText: 'Text displayed when no search conditions match',
                 noDataText: 'Text displayed when option is empty',
                 reserveKeyword: 'When multiple selections are searchable, whether to retain the current search keyword after selecting an option',
-                defaultFirstOption: 'Press Enter in the input box and select the first matching item'
+                defaultFirstOption: 'Press Enter in the input box and select the first matching item',
+                remote: 'Whether the options are loaded remotely from the server',
+                remoteMethod: 'Custom remote search methods',
             }
         },
         slider: {

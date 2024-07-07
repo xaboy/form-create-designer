@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {localeProps, makeOptionsRule, makeTreeOptions} from '../../utils/index';
+import {getInjectArg, localeProps, makeOptionsRule, makeTreeOptions} from '../../utils/index';
 
 const label = '选择器';
 const name = 'select';
@@ -46,6 +46,19 @@ export default {
             }, {type: 'input', field: 'placeholder'}, {
                 type: 'switch',
                 field: 'filterable'
+            }, {
+                type: 'switch',
+                field: 'remote',
+            }, {
+                type: 'FnEditor',
+                field: 'remoteMethod',
+                props: {
+                    body: true,
+                    button: true,
+                    fnx: true,
+                    name: 'remoteMethod',
+                    args: [getInjectArg(t)],
+                },
             }, {type: 'switch', field: 'allowCreate'}, {
                 type: 'input',
                 field: 'noMatchText'
