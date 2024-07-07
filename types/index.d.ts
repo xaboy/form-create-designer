@@ -71,7 +71,7 @@ export interface Config {
     //是否显示多端适配选项
     showDevice?: boolean;
     //定义渲染规则所需的formData
-    appendConfigData: (rule: Rule) => Object;
+    appendConfigData: string[] | ((rule: Rule) => Object);
     //基础配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面
     baseRule?: extendRule;
     //验证配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面
