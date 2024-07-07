@@ -19,7 +19,7 @@
 
 **FcDesigner 是基于 [@form-create/element-ui](https://github.com/xaboy/form-create) 实现的表单设计器组件。可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率，节省开发者的时间。**
 
-[![FcDesigner](https://static.form-create.com/file/img/146171715603824_.pic.jpg)](https://pro.form-create.com/view)
+[![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg)](https://pro.form-create.com/view)
 
 ## 特点
 - 使用JSON数据生成表单
