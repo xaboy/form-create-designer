@@ -56,7 +56,7 @@ const makeRule = (t) => {
             value: '',
             $required: true,
             props: {size: 'default'},
-            validate: [{type: 'url', required: true, message: t('fetch.actionRequired'), trigger: 'blur'}]
+            validate: [{required: true, message: t('fetch.actionRequired'), trigger: 'blur'}]
         },
         {
             type: 'radio',

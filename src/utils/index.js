@@ -349,10 +349,14 @@ export const getRuleDescription = (children) => {
                     type: rule.type,
                     field: rule.field,
                     title: rule.title,
+                    name: rule.name,
                     slot: rule.slot,
                     props: {...rule.props || {}},
                     children: getTree(rule.children || [])
                 };
+                if (rule.children && typeof rule.children[0] === 'string') {
+                    item.content = rule.children[0];
+                }
                 if (!item.children.length) {
                     delete item.children;
                 }
