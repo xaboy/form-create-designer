@@ -1584,6 +1584,9 @@ export default defineComponent({
                                 vm.emit('copy', self.children[0]);
                                 const top = methods.getParent(self);
                                 const temp = methods.replaceField(self.children[0]);
+                                if(self.slot) {
+                                    temp.slot = self.slot;
+                                }
                                 top.root.children.splice(top.root.children.indexOf(top.parent) + 1, 0, temp);
                                 methods.handleCopyAfter({rule: self.children[0]});
                             },
