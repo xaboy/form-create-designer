@@ -1258,6 +1258,14 @@ export default defineComponent({
                     formCreateChild: '' + rule.children[0],
                     'formCreateWrap>labelWidth': ''
                 };
+                const appendConfigData = configRef.value.appendConfigData;
+                if (is.Function(appendConfigData)) {
+                    formData = {...formData, ...appendConfigData(rule)};
+                } else if (Array.isArray(appendConfigData)) {
+                    appendConfigData.forEach(v => {
+                        formData[v] = undefined;
+                    });
+                }
                 Object.keys(rule).forEach(k => {
                     if (['effect', 'config', 'payload', 'id', 'type', '_menu'].indexOf(k) < 0)
                         formData['formCreate' + upper(k)] = deepCopy(rule[k]);
@@ -1276,9 +1284,6 @@ export default defineComponent({
                         formData['formCreate' + upper(name) + '>' + k] = deepCopy(rule[name][k]);
                     });
                 });
-                if(is.Function(configRef.value.appendConfigData)){
-                    formData = {...formData, ...configRef.value.appendConfigData(rule)};
-                }
                 const configAttrs = rule._menu.attrs || {};
                 Object.keys(configAttrs).forEach(k => {
                     formData['__' + k] = configAttrs[k]({rule});
