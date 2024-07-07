@@ -53,6 +53,7 @@ export default defineComponent({
         args: Array,
         body: Boolean,
         button: Boolean,
+        fnx: Boolean,
     },
     inject: ['designer'],
     data() {
@@ -65,7 +66,7 @@ export default defineComponent({
     },
     watch: {
         value(n) {
-            if (n != this.formValue) {
+            if (n != this.formValue && (!n || (n.__json && n.__json != this.formValue))) {
                 this.editor && this.editor.setValue(this.tidyValue());
             }
         },
@@ -114,7 +115,7 @@ export default defineComponent({
                     return false;
                 }
                 if (this.body) {
-                    this.fn = str;
+                    this.fn = (this.fnx ? '$FNX:' : '') + str;
                 } else {
                     this.fn = PREFIX + fn + SUFFIX;
                 }
@@ -132,6 +133,9 @@ export default defineComponent({
             let value = this.value || '';
             if (value.__json) {
                 value = value.__json;
+            }
+            if (this.fnx && value.indexOf('$FNX:') === 0) {
+                value = value.slice(5);
             }
             if (typeof value === 'function') {
                 value = toJSON(value);
@@ -189,6 +193,7 @@ export default defineComponent({
     display: flex;
     flex: 1;
     width: 100%;
+    overflow: scroll;
 }
 
 ._fd-fn-editor .CodeMirror {

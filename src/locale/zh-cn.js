@@ -537,7 +537,9 @@ const ZhCn = {
                 noMatchText: '搜索条件无匹配时显示的文字',
                 noDataText: '选项为空时显示的文字',
                 reserveKeyword: '多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词',
-                defaultFirstOption: '在输入框按下回车，选择第一个匹配项'
+                defaultFirstOption: '在输入框按下回车，选择第一个匹配项',
+                remote: '其中的选项是否从服务器远程加载',
+                remoteMethod: '自定义远程搜索方法',
             }
         },
         slider: {
