@@ -41,8 +41,11 @@ export default {
         disabled: Boolean,
     },
     watch: {
-        modelValue() {
-            this.updateTable()
+        modelValue: {
+            handler() {
+                this.updateTable()
+            },
+            deep: true,
         }
     },
     data() {
@@ -238,7 +241,7 @@ export default {
 <style>
 ._fc-table-form {
     overflow: auto;
-    color:#666666;
+    color: #666666;
 }
 
 ._fc-table-form .form-create .el-form-item {
