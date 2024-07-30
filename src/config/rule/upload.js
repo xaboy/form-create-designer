@@ -20,9 +20,7 @@ export default {
             $required: false,
             props: {
                 action: '/',
-                onSuccess(res, file) {
-                    file.url = res.data.url;
-                }
+                onSuccess(res, file){ file.url = res.data.url; }
             }
         };
     },
