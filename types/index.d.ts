@@ -80,11 +80,17 @@ export interface Config {
     formRule?: extendRule;
     //组件配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面
     componentRule?: {
+        default: (rule: Rule, arg: { t: t }) => Rule[] | {
+            rule: (rule: Rule, arg: { t: t }) => Rule[];
+            append?: boolean;
+            prepend?: boolean;
+        };
         //id组件拖拽组件规则的id,rule为当前组件的生成规则
         [id: string]: (rule: Rule, arg: { t: t }) => Rule[] | {
-            rule: (rule: Rule, arg: { t: t }) => Rule[],
-            append?: boolean
-        }
+            rule: (rule: Rule, arg: { t: t }) => Rule[];
+            append?: boolean;
+            prepend?: boolean;
+        };
     };
 }
 
