@@ -473,6 +473,7 @@ export default defineComponent({
             menuList: menu.value || createMenu({t}),
             dragRuleList: {},
             eventShow: false,
+            unloadStatus: false,
             previewStatus: 'form',
             t,
             preview: {
@@ -811,6 +812,7 @@ export default defineComponent({
             clearDragRule() {
                 methods.setRule([]);
                 methods.addOperationRecord();
+                data.unloadStatus = false;
             },
             makeDragRule(children) {
                 return methods.makeChildren([methods.makeDrag(true, 'draggable', children, {
@@ -1650,9 +1652,7 @@ export default defineComponent({
                 list.push({rule, formData});
                 data.operation.list = list;
                 data.operation.idx = list.length - 1;
-                window.onbeforeunload = (e) => {
-                    e.returnValue = t('designer.unload');
-                };
+                data.unloadStatus = list.length !== 1;
             },
             prevOperationRecord() {
                 if (!data.operation.list[data.operation.idx - 1]) {
@@ -1783,6 +1783,11 @@ export default defineComponent({
             e.preventDefault();
             e.stopPropagation();
         };
+        window.onbeforeunload = (e) => {
+            if(this.unloadStatus){
+                e.returnValue = this.t('designer.unload');
+            }
+        }
     }
 });
 </script>
