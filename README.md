@@ -29,6 +29,7 @@
 
 ```shell
 npm install @form-create/designer
+npm install @form-create/element-ui
 ```
 
 ## 引入
