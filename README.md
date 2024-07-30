@@ -54,11 +54,14 @@
 
 ```shell
 npm install @form-create/designer@next
+npm install @form-create/element-ui@next
 ```
 
 请自行导入`ElementPlus`并挂载
 
 ```js
+import FcDesigner from '@form-create/designer'
+
 app.use(FcDesigner)
 app.use(FcDesigner.formCreate)
 ```
