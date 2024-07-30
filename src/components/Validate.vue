@@ -103,9 +103,9 @@ export default defineComponent({
                                 field: 'trigger',
                                 value: 'change',
                                 options: localeOptions(t, [
+                                    {label: 'blur', value: 'blur'},
                                     {label: 'change', value: 'change'},
                                     {label: 'submit', value: 'submit'},
-                                    {label: 'blur', value: 'blur'},
                                 ])
                             },
                             {
@@ -218,7 +218,6 @@ export default defineComponent({
                     return;
                 }
                 const tmp = {...v};
-                delete tmp.mode;
                 if (!v.validator) {
                     delete tmp.validator;
                 }
