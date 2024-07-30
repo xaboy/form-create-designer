@@ -139,7 +139,7 @@ export default defineComponent({
             }
             if (typeof value === 'function') {
                 value = toJSON(value);
-                value = /(?:function\s+\w+\s*\(.*?\)|\(\s*.*?\s*\)\s*=>)\s*{([\s\S]*)}/g.exec(value)[1].trim();
+                value = /(?:function\s*\w*\s*\(.*?\)|\(\s*.*?\s*\)\s*=>)\s*{([\s\S]*)}/g.exec(value)[1].trim();
             } else if (!this.body) {
                 value = value.replace(PREFIX + 'function ' + this.name + '(' + this.argStr + '){', '').replace('}' + SUFFIX, '');
             }
