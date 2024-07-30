@@ -43,9 +43,9 @@
 **CDN:**
 
 ```html
-<link href="https://unpkg.com/element-plus@2.0.1/dist/index.css"></link>
-<script src="https://unpkg.com/vue@next"></script>
-<script src="https://unpkg.com/element-plus@2.0.1/dist/index.full.js"></script>
+<link href="https://unpkg.com/element-plus/dist/index.css"></link>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
 <script src="https://unpkg.com/@form-create/element-ui@next/dist/form-create.min.js"></script>
 <script src="https://unpkg.com/@form-create/designer@next/dist/index.umd.js"></script>
 ```
@@ -59,11 +59,8 @@ npm install @form-create/designer@next
 请自行导入`ElementPlus`并挂载
 
 ```js
-import formCreate from '@form-create/element-ui'
-import FcDesigner from '@form-create/designer'
-
-app.use(formCreate)
 app.use(FcDesigner)
+app.use(FcDesigner.formCreate)
 ```
 
 ## 使用
