@@ -54,7 +54,6 @@ const makeRule = (t) => {
             field: 'action',
             title: t('fetch.action'),
             value: '',
-            $required: true,
             props: {size: 'default'},
             validate: [{required: true, message: t('fetch.actionRequired'), trigger: 'blur'}]
         },
