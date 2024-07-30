@@ -37,15 +37,15 @@ npm install @form-create/designer
 
 ```html
 <!-- import Vue.js -->
-<script src="//vuejs.org/js/vue.min.js"></script>
+<script src="https://unpkg.com/vue@2.7.16/dist/vue.js"></script>
 <!-- import stylesheet -->
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 <!-- import element -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!-- import form-create/element -->
-<script src="//unpkg.com/@form-create/element-ui/dist/form-create.min.js"></script>
+<script src="https://unpkg.com/@form-create/element-ui/dist/form-create.min.js"></script>
 <!-- import form-create/designer -->
-<script src="//unpkg.com/@form-create/designer/dist/index.min.js"></script>
+<script src="https://unpkg.com/@form-create/designer/dist/index.umd.js"></script>
 ```
 
 **NodeJs:**
@@ -53,11 +53,9 @@ npm install @form-create/designer
 请自行导入`ElementUI`并挂载
 
 ```js
-import formCreate from '@form-create/element-ui'
 import FcDesigner from '@form-create/designer'
-
-Vue.use(formCreate)
 Vue.use(FcDesigner)
+Vue.use(FcDesigner.formCreate)
 ```
 
 ## 使用
