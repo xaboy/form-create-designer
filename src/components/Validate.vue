@@ -215,7 +215,7 @@ export default defineComponent({
                     return false;
                 }
                 if (v.type === 'validator' && !v.validator) {
-                    return;
+                    v.validator = function(){}
                 }
                 const tmp = {...v};
                 if (!v.validator) {
@@ -253,5 +253,9 @@ export default defineComponent({
 
 ._fd-validate .el-input-group__append {
     padding: 0 10px;
+}
+
+._fd-validate .el-select {
+    width: 100%;
 }
 </style>

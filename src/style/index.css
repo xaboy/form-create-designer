@@ -568,6 +568,7 @@
 ._fc-message-error {
     top: 16px;
     z-index: 2116;
+    min-width: auto;
     border-radius: 8px;
     padding: 9px 13px;
     background-color: #fff;

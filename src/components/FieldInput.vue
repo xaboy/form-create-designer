@@ -126,5 +126,6 @@ export default defineComponent({
     margin: 0;
     color: #606266;
     cursor: pointer;
+    text-align: center;
 }
 </style>
