@@ -202,6 +202,8 @@ const En = {
         inputData: 'Input data',
         options: 'Options',
         option: 'Option',
+        file: 'File',
+        image: 'Image',
         _self: 'Current Window',
         _blank: 'New Window',
         _parent: 'Parent Window',
@@ -678,6 +680,7 @@ const En = {
             },
             props: {
                 listType: 'Upload type',
+                uploadType: 'Upload type',
                 multiple: 'Whether multiple selection of files is supported',
                 action: 'Upload address (required)',
                 onSuccess: 'Upload success callback',

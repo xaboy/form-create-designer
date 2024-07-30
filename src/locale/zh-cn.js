@@ -202,6 +202,8 @@ const ZhCn = {
         inputData: '录入数据',
         options: '选项数据',
         option: '选项',
+        file: '文件',
+        image: '图片',
         _self: '当前窗口',
         _blank: '新的窗口',
         _parent: '父级窗口',
@@ -678,6 +680,7 @@ const ZhCn = {
             },
             props: {
                 listType: '上传类型',
+                uploadType: '上传类型',
                 multiple: '是否支持多选文件',
                 action: '上传的地址(必填)',
                 onSuccess: '上传成功回调',

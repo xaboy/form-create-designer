@@ -19,7 +19,8 @@ export default {
             info: '',
             $required: false,
             props: {
-                action: '',
+                action: '/',
+                uploadType: 'image',
                 onSuccess(res, file) {
                     file.url = res.data.url;
                 }
@@ -32,15 +33,12 @@ export default {
             field: 'disabled'
         }, {
             type: 'select',
-            field: 'listType',
-            value: 'text',
-            options: localeOptions(t, [{label: 'text', value: 'text'}, {
-                label: 'picture',
-                value: 'picture'
-            }, {
-                label: 'picture-card',
-                value: 'picture-card'
-            }]),
+            field: 'uploadType',
+            value: 'image',
+            options: [{label: t('props.image'), value: 'image'}, {
+                label: t('props.file'),
+                value: 'file'
+            }]
         }, {type: 'switch', field: 'multiple'}, {
             type: 'input',
             field: 'action'
