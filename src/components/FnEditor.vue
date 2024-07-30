@@ -66,7 +66,7 @@ export default defineComponent({
     },
     watch: {
         value(n) {
-            if (n != this.formValue && (!n || (n.__json && n.__json != this.formValue))) {
+            if (n != this.formValue && (!n || !n.__json || (n.__json && n.__json != this.formValue))) {
                 this.editor && this.editor.setValue(this.tidyValue());
             }
         },
@@ -143,6 +143,7 @@ export default defineComponent({
             } else if (!this.body) {
                 value = value.replace(PREFIX + 'function ' + this.name + '(' + this.argStr + '){', '').replace('}' + SUFFIX, '');
             }
+            this.formValue = value;
             return value;
         },
         load() {
