@@ -1144,6 +1144,7 @@ export default defineComponent({
                             propFieldDeepFn(field, ({source, field}) => {
                                 if (isNull(value)) {
                                     delete source[field];
+                                    data.dragForm.api.sync(data.activeRule);
                                 } else {
                                     set(source, field, value);
                                 }
@@ -1151,6 +1152,7 @@ export default defineComponent({
                         } else {
                             if (key && isNull(value)) {
                                 delete data.activeRule[key][field];
+                                data.dragForm.api.sync(data.activeRule);
                             } else {
                                 set((key ? data.activeRule[key] : data.activeRule), field, value);
                             }
