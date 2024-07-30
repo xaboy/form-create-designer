@@ -20,7 +20,7 @@
                                         {{ t('menu.' + item.name) || item.title }}
                                         <i class="fc-icon icon-arrow" :class="{down: !item.hidden}"/>
                                     </h4>
-                                    <draggable :group="{name:'default', pull:'clone', put:false}" :sort="false"
+                                    <fcDraggable :group="{name:'default', pull:'clone', put:false}" :sort="false"
                                                itemKey="name"
                                                class="_fc-l-list"
                                                :list="item.list" v-show="!item.hidden">
@@ -35,7 +35,7 @@
                                                     }}</span>
                                             </div>
                                         </template>
-                                    </draggable>
+                                    </fcDraggable>
                                 </div>
                             </template>
                         </el-main>
@@ -335,7 +335,7 @@ import is, {hasProperty} from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
 import Mitt from '@form-create/utils/lib/mitt';
 import ruleList, {defaultDrag} from '../config';
-import draggable from 'vuedraggable/src/vuedraggable';
+import fcDraggable from 'vuedraggable/src/vuedraggable';
 import createMenu from '../config/menu';
 import {
     getRuleTree,
@@ -375,7 +375,7 @@ hljs.registerLanguage('xml', xml);
 export default defineComponent({
     name: 'FcDesigner',
     components: {
-        draggable,
+        fcDraggable,
         DragForm: designerForm.$form(),
         ViewForm: viewForm.$form(),
         EventConfig,
