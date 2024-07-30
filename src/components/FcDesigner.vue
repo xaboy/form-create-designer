@@ -649,11 +649,7 @@ export default defineComponent({
             let propsVal = null;
             if (rule) {
                 propsVal = data.propsForm.api.formData && data.propsForm.api.formData();
-                data.propsForm.rule = data.cacheProps[rule._fc_id] =
-                    tidyRuleConfig(rule._menu.props, componentRule.value && componentRule.value[rule._menu.name], rule, {
-                        t,
-                        api: data.dragForm.api
-                    });
+                data.propsForm.rule = data.cacheProps[rule._fc_id] = methods.getPropsRule(rule);
             }
             nextTick(() => {
                 formVal && data.form.api.setValue(formVal);
@@ -892,11 +888,7 @@ export default defineComponent({
                 const activeRule = data.activeRule;
                 if (activeRule) {
                     const propsVal = data.propsForm.api.formData && data.propsForm.api.formData();
-                    data.propsForm.rule = data.cacheProps[activeRule._fc_id] =
-                        tidyRuleConfig(activeRule._menu.props, componentRule.value && componentRule.value[activeRule._menu.name], activeRule, {
-                            t,
-                            api: data.dragForm.api
-                        });
+                    data.propsForm.rule = data.cacheProps[activeRule._fc_id] = methods.getPropsRule(activeRule);
                     nextTick(() => {
                         propsVal && data.propsForm.api.setValue(propsVal);
                     });
@@ -1211,6 +1203,23 @@ export default defineComponent({
                     data.activeTab = 'props';
                 });
             },
+            getPropsRule(rule) {
+                let propsRule = tidyRuleConfig(rule._menu.props, componentRule.value && componentRule.value[rule._menu.name], rule, {
+                    t,
+                    api: data.dragForm.api
+                });
+                if (componentRule.value && componentRule.value.default) {
+                    const def = componentRule.value.default;
+                    propsRule = tidyRuleConfig(() => propsRule, is.Function(def) ? {
+                        rule: def,
+                        append: true
+                    } : def, rule, {
+                        t,
+                        api: data.dragForm.api
+                    });
+                }
+                return propsRule;
+            },
             toolActive(rule) {
                 methods.unWatchActiveRule();
                 data.customForm.isShow = false;
@@ -1233,10 +1242,7 @@ export default defineComponent({
                     });
                 });
                 if (!data.cacheProps[rule._fc_id]) {
-                    data.cacheProps[rule._fc_id] = tidyRuleConfig(rule._menu.props, componentRule.value && componentRule.value[rule._menu.name], rule, {
-                        t,
-                        api: data.dragForm.api
-                    });
+                    data.cacheProps[rule._fc_id] = methods.getPropsRule(rule);
                 }
                 const hiddenBaseField = rule._menu.hiddenBaseField || [];
                 data.baseForm.api.hidden(false);
