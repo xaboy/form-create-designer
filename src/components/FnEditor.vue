@@ -66,7 +66,7 @@ export default defineComponent({
     },
     watch: {
         modelValue(n) {
-            if (n != this.value && n.__json && n.__json != this.value) {
+            if (n != this.value && (!n || !n.__json || (n.__json && n.__json != this.value))) {
                 this.editor && this.editor.setValue(this.tidyValue());
             }
         },
@@ -143,6 +143,7 @@ export default defineComponent({
             } else if (!this.body) {
                 value = value.replace(PREFIX + 'function ' + this.name + '(' + this.argStr + '){', '').replace('}' + SUFFIX, '')
             }
+            this.value = value;
             return value;
         },
         load() {
