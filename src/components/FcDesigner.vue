@@ -687,6 +687,13 @@ export default defineComponent({
                     data.menuList.push(config);
                 }
             },
+            removeMenu(name) {
+                [...data.menuList].forEach((v, i) => {
+                    if (v.name === name) {
+                        data.menuList.splice(i, 1);
+                    }
+                });
+            },
             setMenuItem(name, list) {
                 data.menuList.forEach(v => {
                     if (v.name === name) {
