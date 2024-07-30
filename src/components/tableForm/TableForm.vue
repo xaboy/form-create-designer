@@ -65,8 +65,11 @@ export default {
             }
         },
         updateValue() {
-            const value = this.trs.map(tr => {
-                return this.fapi.getChildrenFormData(tr);
+            const value = this.trs.map((tr, idx) => {
+                return {
+                    ...(this.modelValue[idx] || {}),
+                    ...this.fapi.getChildrenFormData(tr)
+                }
             }).filter(v => {
                 if (v === undefined || v === null) {
                     return false;
