@@ -28,7 +28,9 @@ export default {
     props(_, {t}) {
         return localeProps(t, name + '.props', [
             makeOptionsRule(t, 'options'),
-            {type: 'switch', field: 'disabled'}, {
+            {type: 'switch', field: 'disabled'},
+            {type: 'switch', field: 'input'},
+            {
                 type: 'switch',
                 field: 'type',
                 props: {activeValue: 'button', inactiveValue: 'default'}
