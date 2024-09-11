@@ -4,6 +4,9 @@ import toCase from '@form-create/utils/lib/tocase';
 import {computed, isRef, unref, ref} from 'vue';
 import ZhCn from '../locale/zh-cn';
 
+export {formTemplate, formTemplateV3} from './template';
+
+
 export function makeRequiredRule() {
     return {
         type: 'Required', field: 'formCreate$required', title: '是否必填'
@@ -354,42 +357,6 @@ export function isElementInside(x, y, element) {
 
 export function isNull(v) {
     return ['', null, undefined].indexOf(v) !== -1;
-}
-
-export function formTemplate(json, options) {
-    return `<template>
-  <form-create
-    v-model="formData"
-    v-model:api="fapi"
-    :rule="rule"
-    :option="option"
-    @submit="onSubmit"
-  ></form-create>
-</template>
-
-<script>
-import formCreate from "@form-create/element-ui";
-
-export default {
-  components: {
-    formCreate: formCreate.$form()
-  },
-  data () {
-    const option = formCreate.parseJson('${options.replaceAll('\\', '\\\\').replaceAll('\'', '\\')}');
-    return {
-      formData: {},
-      fapi: null,
-      rule: formCreate.parseJson('${json.replaceAll('\\', '\\\\').replaceAll('\'', '\\')}'),
-      option: option
-    }
-  },
-  methods: {
-    onSubmit (formData) {
-      //todo 提交表单
-    }
-  }
-}
-<\/script>`
 }
 
 export function escapeRegExp(str) {
