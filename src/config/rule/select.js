@@ -50,11 +50,10 @@ export default {
                 type: 'switch',
                 field: 'remote',
             }, {
-                type: 'FnEditor',
+                type: 'FnInput',
                 field: 'remoteMethod',
                 props: {
                     body: true,
-                    button: true,
                     fnx: true,
                     name: 'remoteMethod',
                     args: [getInjectArg(t)],

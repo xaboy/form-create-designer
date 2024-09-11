@@ -20,7 +20,7 @@ export default {
             $required: false,
             props: {
                 action: '/',
-                onSuccess(res, file){ file.url = res.data.url; }
+                onSuccess: new Function('res', 'file', 'file.url = res.data.url;')
             }
         };
     },
@@ -43,13 +43,12 @@ export default {
             type: 'input',
             field: 'action'
         }, {
-            type: 'FnEditor',
+            type: 'FnInput',
             field: 'onSuccess',
             info: t('com.upload.info'),
             props: {
                 args: ['res', 'file'],
                 name: 'onSuccess',
-                button: true,
             }
         }, {
             type: 'TableOptions',
