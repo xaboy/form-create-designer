@@ -379,3 +379,7 @@ export function compareVersion(v1, v2) {
 
     return a1.length === a2.length ? 0 : (a1.length < a2.length ? -1 : 1);
 }
+
+export function uniqueArray(arr) {
+    return arr.filter((item, index) => arr.indexOf(item) === index);
+}
