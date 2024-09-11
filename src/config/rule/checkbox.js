@@ -33,6 +33,7 @@ export default {
                     type: 'switch',
                     field: 'disabled'
                 },
+                {type: 'switch', field: 'input'},
                 {
                     type: 'switch',
                     field: 'type',
