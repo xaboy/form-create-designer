@@ -494,6 +494,16 @@ export default defineComponent({
                 rule: tidyRuleConfig(form, formRule.value, {t}),
                 api: {},
                 option: {
+                    global: {
+                        input: {
+                            modelEmit: 'blur'
+                        },
+                        select: {
+                            props: {
+                                clearable: true,
+                            }
+                        }
+                    },
                     form: {
                         labelPosition: 'top',
                         size: 'small'

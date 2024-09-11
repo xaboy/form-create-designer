@@ -130,6 +130,10 @@ export default defineComponent({
     width: 110px;
 }
 
+._fd-tree-opt .el-table{
+    z-index: 1;
+}
+
 ._fd-tree-opt ._fd-tree-opt-danger {
     background-color: #ff2d2e;
     border-radius: 0 2px 2px 0;

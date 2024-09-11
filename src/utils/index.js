@@ -23,7 +23,7 @@ export function makeTreeOptions(pre, config, level, data = []) {
     level && level--;
     for (let i = 0; i < 3; i++) {
         const item = {
-            [config.label]: pre + level * 10 + i,
+            [config.label]: pre + level * 10 + (i + 1),
             [config.value]: '' + config.id++,
         };
         if (level) {

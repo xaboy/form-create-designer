@@ -28,6 +28,10 @@ export default {
         }, {
             type: 'inputNumber',
             field: 'max',
+        },  {
+            type: 'inputNumber',
+            title: 'precision',
+            field: 'precision',
         }, {type: 'inputNumber', field: 'step', props: {min: 0}}, {
             type: 'switch',
             field: 'stepStrictly'
