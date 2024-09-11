@@ -241,16 +241,7 @@
                             <template
                                 v-if="activeRule || (customForm.config && (customForm.config.name || customForm.config.label))">
                                 <p class="_fc-r-title">{{ t('designer.type') }}</p>
-                                <el-tag type="success" effect="plain" disable-transitions>
-                                    <template v-if="activeRule">
-                                        {{ t('com.' + (activeRule._menu.name) + '.name') || activeRule._menu.label }}
-                                    </template>
-                                    <template v-else>
-                                        {{
-                                            t('com.' + (customForm.config.name) + '.name') || customForm.config.label || customForm.config.name
-                                        }}
-                                    </template>
-                                </el-tag>
+                                <TypeSelect></TypeSelect>
                                 <template
                                     v-if="(activeRule && activeRule.name)">
                                     <p class="_fc-r-title">{{ t('designer.name') }}</p>
@@ -368,6 +359,7 @@ import errorMessage from '../utils/message';
 import hljs from '../utils/highlight/highlight.min';
 import xml from '../utils/highlight/xml.min';
 import javascript from '../utils/highlight/javascript.min';
+import TypeSelect from './TypeSelect.vue';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
@@ -375,6 +367,7 @@ hljs.registerLanguage('xml', xml);
 export default defineComponent({
     name: 'FcDesigner',
     components: {
+        TypeSelect,
         fcDraggable,
         DragForm: designerForm.$form(),
         ViewForm: viewForm.$form(),
