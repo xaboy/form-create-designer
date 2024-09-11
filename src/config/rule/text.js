@@ -13,6 +13,10 @@ export default {
             type: 'div',
             title: '',
             native: true,
+            style: {
+                whiteSpace: 'pre-line',
+                width: '100%',
+            },
             children: [t('com.text.name')],
         };
     },

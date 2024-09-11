@@ -31,7 +31,6 @@ export default {
         }, {
             type: 'select',
             field: 'listType',
-            value: 'text',
             options: localeOptions(t, [{label: 'text', value: 'text'}, {
                 label: 'picture',
                 value: 'picture'

@@ -39,11 +39,6 @@ export default {
                 props: {min: 0}
             },
             {
-                type: 'inputNumber',
-                field: 'minlength',
-                props: {min: 0}
-            },
-            {
                 type: 'input',
                 field: 'placeholder'
             },

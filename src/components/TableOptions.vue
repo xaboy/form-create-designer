@@ -138,6 +138,10 @@ export default defineComponent({
     width: 100%;
 }
 
+._td-table-opt .el-table{
+    z-index: 1;
+}
+
 ._td-table-opt-handle {
     display: flex;
     justify-content: space-between;
