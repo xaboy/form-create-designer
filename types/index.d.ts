@@ -44,6 +44,8 @@ type extendRule = ((arg: { t: t }) => Rule[]) | {
 export interface Config {
     //是否可以切换组件类型,或者可以相互切换的字段
     switchType?: false | Array<string[]>;
+    //是否自动选中拖入的组件
+    autoActive: boolean;
     //配置field是否可以编辑
     fieldReadonly?: boolean;
     //隐藏拖拽操作按钮
