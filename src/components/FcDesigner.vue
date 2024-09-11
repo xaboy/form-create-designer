@@ -1364,7 +1364,13 @@ export default defineComponent({
                     rule.slot = slot;
                 }
                 children.splice(index, 0, rule);
+                const firstRule = (rule.type === 'DragTool') ? rule.children[0] : rule;
                 methods.handleAddAfter({rule});
+                if (firstRule && methods.getConfig('autoActive', true)) {
+                    nextTick(() => {
+                        methods.triggerActive(firstRule);
+                    });
+                }
             },
             replaceField(rule) {
                 const flag = ['array', 'object'].indexOf(rule._menu.subForm) > -1;
