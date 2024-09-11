@@ -44,6 +44,13 @@ export default {
             field: 'action'
         }, {
             type: 'FnInput',
+            field: 'beforeUpload',
+            props: {
+                args: ['file'],
+                name: 'beforeUpload',
+            }
+        }, {
+            type: 'FnInput',
             field: 'onSuccess',
             info: t('com.upload.info'),
             props: {
