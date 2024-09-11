@@ -11,6 +11,105 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-slot:before {
+    content: "\e620";
+}
+
+.icon-link2:before {
+    content: "\e616";
+}
+
+.icon-delete2:before {
+    content: "\e61a";
+}
+
+.icon-pad2:before {
+    content: "\e615";
+}
+
+.icon-mobile2:before {
+    content: "\e612";
+}
+
+.icon-pc2:before {
+    content: "\e614";
+}
+
+.icon-page-max:before {
+    content: "\e658";
+}
+
+.icon-page-min:before {
+    content: "\e65a";
+}
+
+.icon-edit2:before {
+    content: "\e617";
+}
+
+.icon-variable:before {
+    content: "\e73c";
+}
+
+.icon-config-props:before {
+    content: "\e646";
+}
+
+.icon-config-validate:before {
+    content: "\e656";
+}
+
+.icon-config-event:before {
+    content: "\e7de";
+}
+
+.icon-config-base:before {
+    content: "\e613";
+}
+
+.icon-config-advanced:before {
+    content: "\e6f4";
+}
+
+.icon-config-style:before {
+    content: "\e694";
+}
+
+.icon-drag:before {
+    content: "\e6ff";
+}
+
+.icon-calendar:before {
+    content: "\e610";
+}
+
+.icon-icon:before {
+    content: "\e611";
+}
+
+.icon-add2:before {
+    content: "\e60d";
+}
+
+.icon-minus:before {
+    content: "\e60f";
+}
+.icon-dialog:before {
+    content: "\e60c";
+}
+
+.icon-down:before {
+    content: "\e609";
+}
+
+.icon-page:before {
+    content: "\e608";
+}
+
+.icon-yes:before {
+    content: "\e605";
+}
+
 .icon-data-table:before {
     content: "\e7be";
 }
@@ -438,7 +537,7 @@
 }
 
 .icon-delete:before {
-    content: "\e770";
+    content: "\e61b";
 }
 
 .icon-copy:before {

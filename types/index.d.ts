@@ -42,6 +42,8 @@ type extendRule = ((arg: { t: t }) => Rule[]) | {
 
 //设计器组件的props.config配置
 export interface Config {
+    //是否可以切换组件类型,或者可以相互切换的字段
+    switchType?: false | Array<string[]>;
     //配置field是否可以编辑
     fieldReadonly?: boolean;
     //隐藏拖拽操作按钮
