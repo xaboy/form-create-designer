@@ -2,8 +2,8 @@
     <div class="_fd-field-input">
         <el-input
             v-model="value"
-            :readonly="fieldReadonly"
-            :disabled="fieldReadonly"
+            :readonly="fieldReadonly || disabled"
+            :disabled="fieldReadonly || disabled"
             @focus="onFocus"
             @blur="onInput"
         >
@@ -26,6 +26,7 @@ export default defineComponent({
     emits: ['update:modelValue'],
     props: {
         modelValue: String,
+        disabled: Boolean,
     },
     computed: {
         fieldReadonly() {
