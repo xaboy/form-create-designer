@@ -189,14 +189,16 @@
                                 </el-dropdown>
 
                             </template>
-                            <div class="line"></div>
-                            <div class="_fd-input-btn">
-                                <i class="fc-icon icon-check" v-if="inputCheckStatus"></i><span>{{
-                                    t('props.inputData')
-                                }}：</span>
-                                <el-switch size="small" :model-value="inputForm.state" inline-prompt
-                                           @update:model-value="openInputData"/>
-                            </div>
+                            <template v-if="getConfig('showInputData', true)">
+                                <div class="line"></div>
+                                <div class="_fd-input-btn">
+                                    <i class="fc-icon icon-check" v-if="inputCheckStatus"></i><span>{{
+                                        t('props.inputData')
+                                    }}：</span>
+                                    <el-switch size="small" :model-value="inputForm.state" inline-prompt
+                                               @update:model-value="openInputData"/>
+                                </div>
+                            </template>
                         </div>
                     </el-header>
                     <el-main class="_fc-m-con">
