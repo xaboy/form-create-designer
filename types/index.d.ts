@@ -70,6 +70,8 @@ export interface Config {
     showValidateForm?: boolean;
     //是否显示表单配置
     showFormConfig?: boolean;
+    //是否显示录入按钮
+    showInputData?: boolean;
     //是否显示多端适配选项
     showDevice?: boolean;
     //定义渲染规则所需的formData
