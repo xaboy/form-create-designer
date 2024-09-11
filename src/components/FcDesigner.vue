@@ -926,13 +926,17 @@ export default defineComponent({
                 fcx.active = '';
             },
             setOption(opt) {
-                let options = is.String(opt) ? JSON.parse(opt) : deepCopy(opt || {});
+                const defOptions = deepCopy(methods.getConfig('formOptions', {}));
+                const defForm = defOptions.form || {};
+                delete defOptions.form;
+                let options = {...defOptions, ...is.String(opt) ? JSON.parse(opt) : deepCopy(opt || {})};
                 options.form = {
                     inline: false,
                     hideRequiredAsterisk: false,
                     labelPosition: 'right',
                     size: 'default',
                     labelWidth: '125px',
+                    ...defForm,
                     ...options.form || {}
                 };
                 options._event = {

@@ -48,6 +48,8 @@ export interface Config {
     autoActive: boolean;
     //是否生成vue2语法的模板组件
     useTemplate: boolean;
+    //定义表单配置默认值
+    formOptions: Object;
     //配置field是否可以编辑
     fieldReadonly?: boolean;
     //隐藏拖拽操作按钮
