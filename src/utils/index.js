@@ -380,6 +380,29 @@ export function compareVersion(v1, v2) {
     return a1.length === a2.length ? 0 : (a1.length < a2.length ? -1 : 1);
 }
 
+export function copyTextToClipboard(text) {
+    const textArea = document.createElement('textarea');
+
+    textArea.style.position = 'fixed';
+    textArea.style.top = 0;
+    textArea.style.left = '-9999px';
+
+    textArea.value = text;
+
+    document.body.appendChild(textArea);
+
+    textArea.focus();
+    textArea.select();
+
+    try {
+        document.execCommand('copy');
+    } catch (err) {
+        console.log('Oops, unable to copy');
+    }
+
+    document.body.removeChild(textArea);
+}
+
 export function uniqueArray(arr) {
     return arr.filter((item, index) => arr.indexOf(item) === index);
 }

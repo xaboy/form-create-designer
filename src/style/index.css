@@ -101,6 +101,14 @@
     cursor: pointer;
 }
 
+._fc-r-name-input .icon-group {
+    cursor: pointer
+}
+
+._fc-r-name-input .icon-group:hover {
+    color: #2E73FF;
+}
+
 ._fc-r .el-main {
     padding-bottom: 100px;
 }
