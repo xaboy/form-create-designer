@@ -88,8 +88,8 @@ export default defineComponent({
 ._fd-fn-input .el-button {
     font-weight: 400;
     width: 100%;
-    border-color: var(--fc-style-color-1);
-    color: var(--fc-style-color-1);
+    border-color: #2E73FF;
+    color: #2E73FF;
 }
 
 ._fd-fn-input-dialog .CodeMirror-lint-tooltip {
