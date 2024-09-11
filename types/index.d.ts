@@ -46,6 +46,8 @@ export interface Config {
     switchType?: false | Array<string[]>;
     //是否自动选中拖入的组件
     autoActive: boolean;
+    //是否生成vue2语法的模板组件
+    useTemplate: boolean;
     //配置field是否可以编辑
     fieldReadonly?: boolean;
     //隐藏拖拽操作按钮

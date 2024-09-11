@@ -338,6 +338,7 @@ import {
     useLocale,
     isNull,
     formTemplate,
+    formTemplateV3,
 } from '../utils/index';
 import viewForm, {designerForm} from '../utils/form';
 import {t as globalT} from '../utils/locale';
@@ -832,8 +833,9 @@ export default defineComponent({
                 const options = methods.getOptionsJson();
                 data.preview.rule = designerForm.parseJson(rule);
                 data.preview.option = designerForm.parseJson(options);
+                const useV2 = methods.getConfig('useTemplate', false);
                 data.preview.html = hljs.highlight(
-                    formTemplate(rule, options),
+                    useV2 ? formTemplate(rule, options) : formTemplateV3(rule, options),
                     {language: 'xml'}
                 ).value
             },
