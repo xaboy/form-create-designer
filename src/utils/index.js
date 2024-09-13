@@ -3,6 +3,7 @@ import {parseFn} from '@form-create/utils/lib/json';
 import toCase from '@form-create/utils/lib/tocase';
 import {computed, isRef, unref, ref} from 'vue';
 import ZhCn from '../locale/zh-cn';
+import {message} from './message';
 
 export function makeRequiredRule() {
     return {
@@ -444,6 +445,8 @@ export function copyTextToClipboard(text) {
     } catch (err) {
         console.log('Oops, unable to copy');
     }
+
+    message('已复制!', 'success');
 
     document.body.removeChild(textArea);
 }

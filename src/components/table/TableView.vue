@@ -266,34 +266,16 @@ export default defineComponent({
         },
         active(item) {
             const key = `${item.pid}:${item.idx}`;
-            const style = this.rule.style[key] || {};
             this.designer.customActive({
                 name: 'fcTableGrid',
-                props:() => {
-                    return [{
-                        type: 'input',
-                        field: 'width',
-                        title: this.t('props.width'),
-                    }, {
-                        type: 'input',
-                        field: 'height',
-                        title: this.t('props.height'),
-                    }, {
-                        type: 'input',
-                        field: 'class',
-                        title: this.t('props.class'),
-                    }];
-                },
-                change: (field, value) => {
-                    if (!this.rule.style[key]) {
-                        this.rule.style[key] = {};
-                    }
-                    this.rule.style[key][field] = value;
-                },
-                formData: {
-                    height: style.height || '',
-                    width: style.width || '',
-                    'class': style.class || '',
+                style: {
+                    formData: {
+                        style: this.rule.style[key] || {},
+                        class: this.rule.class[key] || '',
+                    },
+                    change: (field, value) => {
+                        this.$set(this.rule[field], key , value);
+                    },
                 }
             });
         },
