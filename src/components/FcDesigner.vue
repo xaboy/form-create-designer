@@ -249,6 +249,9 @@
                                     <el-input size="mini" class="_fc-r-name-input"
                                               :value="activeRule.name"
                                               readonly>
+                                        <template #suffix>
+                                            <i class="fc-icon icon-group" @click="copyName"></i>
+                                        </template>
                                         <template #append>
                                             <i class="fc-icon icon-auto" @click="updateName"></i>
                                         </template>
@@ -337,6 +340,7 @@ import {
     isNull,
     formTemplate,
     uniqueArray,
+    copyTextToClipboard,
 } from '../utils/index';
 import viewForm, {designerForm} from '../utils/form';
 import {t as globalT} from '../utils/locale';
@@ -777,6 +781,9 @@ export default defineComponent({
                     parent = parent.__fc__.parent.rule;
                 }
                 return {root: parent, parent: rule};
+            },
+            copyName() {
+                copyTextToClipboard(data.activeRule.name);
             },
             updateName() {
                 data.activeRule.name = 'ref_' + uniqueId();

@@ -1,5 +1,6 @@
 <template>
     <div class="_fd-field-input">
+        <i class="fc-icon icon-group" @click.stop="copy"></i>
         <el-input
             v-model="formValue"
             :readonly="fieldReadonly || disabled"
@@ -18,6 +19,7 @@
 import {defineComponent} from 'vue';
 import uniqueId from '@form-create/utils/lib/unique';
 import errorMessage from '../utils/message';
+import {copyTextToClipboard} from '../utils/index';
 import is from '@form-create/utils/lib/type';
 
 export default defineComponent({
@@ -51,6 +53,9 @@ export default defineComponent({
         }
     },
     methods: {
+        copy() {
+            copyTextToClipboard(this.value);
+        },
         getSubChildren() {
             let subChildren = this.designer.getSubFormChildren(this.activeRule) || [];
             subChildren = is.trueArray(subChildren) ? subChildren : this.designer.children;
@@ -119,6 +124,22 @@ export default defineComponent({
 <style>
 ._fd-field-input {
     width: 100%;
+}
+
+._fd-field-input > .fc-icon {
+    position: absolute;
+    right: 28px;
+    top: 1px;
+    z-index: 3;
+    color: #a8abb2;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+}
+
+._fd-field-input > .fc-icon:hover {
+    color: #2E73FF;
 }
 
 ._fd-field-input .el-input-group__append {
