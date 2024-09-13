@@ -12,6 +12,9 @@ export default {
         return {
             type: name,
             props: {},
+            style: {
+               display: 'flex'
+            },
             children: [t('com.elDivider.name')],
         };
     },

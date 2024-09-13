@@ -1459,7 +1459,7 @@ export default defineComponent({
             dragAdd(children, evt, slot) {
                 // console.log('top dragAdd')
                 const newIndex = evt.newIndex;
-                const menu = evt.item._underlying_vm_;
+                const menu = evt.item._underlying_vm_ || evt.item.__rule__;
                 if (menu && menu.__fc__) {
                     if (data.addRule) {
                         methods.handleSortBefore();
