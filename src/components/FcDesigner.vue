@@ -90,54 +90,14 @@
                         <div class="_fc-m-tools-l">
                             <template v-if="!inputForm.state">
                                 <template v-if="getConfig('showDevice') !== false">
-                                    <template v-if="device !== 'pc'">
-                                        <svg @click="device = 'pc'" class="icon" viewBox="0 0 1024 1024">
-                                            <path
-                                                d="M15.04 783.36h986.88v49.28H15.04zM163.2 191.36h690.88c27.2 0 49.28 22.08 49.28 49.28v542.72H113.92V240.64c0-27.2 22.08-49.28 49.28-49.28z"
-                                                fill="#7F7F7F"></path>
-                                            <path d="M163.2 240.64h690.88v493.44H163.2z" fill="#E5E5E5"></path>
-                                        </svg>
-                                    </template>
-                                    <template v-if="device === 'pc'">
-                                        <svg class="icon" viewBox="0 0 1024 1024">
-                                            <path
-                                                d="M15.04 783.36h986.88v49.28H15.04zM163.2 191.36h690.88c27.2 0 49.28 22.08 49.28 49.28v542.72H113.92V240.64c0-27.2 22.08-49.28 49.28-49.28z"
-                                                fill="#2E73FF"></path>
-                                            <path d="M163.2 240.64h690.88v493.44H163.2z" fill="#E0EAFF"></path>
-                                        </svg>
-                                    </template>
-                                    <template v-if="device !== 'pad'">
-                                        <svg @click="device = 'pad'" class="icon" viewBox="0 0 1024 1024">
-                                            <path
-                                                d="M217.28 29.76h589.44c29.44 0 53.44 24 53.44 53.44v857.28c0 29.44-24 53.44-53.44 53.44H217.28c-29.44 0-53.44-24-53.44-53.44V83.52c0-29.76 24-53.76 53.44-53.76z"
-                                                fill="#7F7F7F"></path>
-                                            <path d="M217.28 136.96h589.44v750.08H217.28z" fill="#E5E5E5"></path>
-                                        </svg>
-                                    </template>
-                                    <template v-if="device === 'pad'">
-                                        <svg class="icon" viewBox="0 0 1024 1024">
-                                            <path
-                                                d="M217.28 29.76h589.44c29.44 0 53.44 24 53.44 53.44v857.28c0 29.44-24 53.44-53.44 53.44H217.28c-29.44 0-53.44-24-53.44-53.44V83.52c0-29.76 24-53.76 53.44-53.76z"
-                                                fill="#2E73FF"></path>
-                                            <path d="M217.28 136.96h589.44v750.08H217.28z" fill="#E0EAFF"></path>
-                                        </svg>
-                                    </template>
-                                    <template v-if="device !== 'mobile'">
-                                        <svg @click="device = 'mobile'" class="icon" viewBox="0 0 1024 1024">
-                                            <path
-                                                d="M271.68 31.04h480.96c29.44 0 53.44 24 53.44 53.44v854.72c0 29.44-24 53.44-53.44 53.44H271.68c-29.44 0-53.44-24-53.44-53.44V84.48c0-29.44 23.68-53.44 53.44-53.44z"
-                                                fill="#7F7F7F"></path>
-                                            <path d="M271.68 137.92h480.96v747.84H271.68z" fill="#E5E5E5"></path>
-                                        </svg>
-                                    </template>
-                                    <template v-if="device === 'mobile'">
-                                        <svg class="icon" viewBox="0 0 1024 1024">
-                                            <path
-                                                d="M271.68 31.04h480.96c29.44 0 53.44 24 53.44 53.44v854.72c0 29.44-24 53.44-53.44 53.44H271.68c-29.44 0-53.44-24-53.44-53.44V84.48c0-29.44 23.68-53.44 53.44-53.44z"
-                                                fill="#2E73FF"></path>
-                                            <path d="M271.68 137.92h480.96v747.84H271.68z" fill="#E0EAFF"></path>
-                                        </svg>
-                                    </template>
+                                    <div class="devices">
+                                        <i class="fc-icon icon-pc2" :class="{active: device === 'pc'}"
+                                           @click="device = 'pc'"></i>
+                                        <i class="fc-icon icon-pad2" :class="{active: device === 'pad'}"
+                                           @click="device = 'pad'"></i>
+                                        <i class="fc-icon icon-mobile2" :class="{active: device === 'mobile'}"
+                                           @click="device = 'mobile'"></i>
+                                    </div>
                                     <div class="line"></div>
                                 </template>
                                 <div>
@@ -277,6 +237,13 @@
                                       :rule="customForm.rule"
                                       :option="customForm.options" :key="customForm.key"
                                       @change="customFormChange"></DragForm>
+                            <el-divider v-if="styleForm.isShow" id="_fd-config-style">{{
+                                    t('designer.style')
+                                }}
+                            </el-divider>
+                            <DragForm v-show="styleForm.isShow" :rule="styleForm.rule" :option="styleForm.options"
+                                      :modelValue="styleForm.value"
+                                      @change="styleChange" v-model:api="styleForm.api"></DragForm>
                             <el-divider
                                 v-if="eventShow">
                                 {{ t('designer.event') }}
@@ -325,6 +292,7 @@
 <script>
 import form from '../config/base/form';
 import field from '../config/base/field';
+import style from '../config/base/style';
 import validate from '../config/base/validate';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
 import is, {hasProperty} from '@form-create/utils/lib/type';
@@ -533,6 +501,23 @@ export default defineComponent({
                     form: {
                         labelPosition: 'top',
                         size: 'small'
+                    },
+                    submitBtn: false,
+                    mounted: (fapi) => {
+                        fapi.activeRule = data.activeRule;
+                        fapi.setValue(fapi.options.formData || {});
+                    }
+                }
+            },
+            styleForm: {
+                isShow: false,
+                rule: style({t}),
+                api: {},
+                value: {},
+                options: {
+                    form: {
+                        labelPosition: 'left',
+                        size: 'small',
                     },
                     submitBtn: false,
                     mounted: (fapi) => {
@@ -1150,6 +1135,12 @@ export default defineComponent({
             propChange(field, value, _, fapi) {
                 methods.handleChange('props', field, value, _, fapi);
             },
+            styleChange(field, value, _, fapi) {
+                if (data.customForm.config) {
+                    return data.customForm.config.style.change(field, value);
+                }
+                methods.handleChange('', field, value, _, fapi);
+            },
             handleChange(key, field, value, _, fapi) {
                 if (data.activeRule && fapi[data.activeRule._fc_id] === data.activeRule) {
                     methods.unWatchActiveRule();
@@ -1226,6 +1217,7 @@ export default defineComponent({
                 data.propsForm.isShow = false;
                 data.eventShow = false;
                 data.validateForm.isShow = false;
+                data.styleForm.isShow = !!config.style && methods.getConfig('showStyleForm') !== false;
                 data.activeRule = null;
 
                 data.customForm.config = config;
@@ -1234,6 +1226,9 @@ export default defineComponent({
                 data.customForm.key = uniqueId();
                 data.customForm.rule = data.customForm.propsShow ? config.props({t}) : [];
                 data.customForm.options.formData = config.formData;
+                if (config.style) {
+                    data.styleForm.value = config.style.formData || {};
+                }
                 nextTick(() => {
                     data.activeTab = 'props';
                 });
@@ -1277,6 +1272,7 @@ export default defineComponent({
                     delete data.propsForm.api[data.activeRule._fc_id];
                     delete data.baseForm.api[data.activeRule._fc_id];
                     delete data.validateForm.api[data.activeRule._fc_id];
+                    delete data.styleForm.api[data.activeRule._fc_id];
                     delete data.dragForm.api.activeRule;
                 }
                 data.activeRule = rule;
@@ -1288,6 +1284,7 @@ export default defineComponent({
                         data.propsForm.api[data.activeRule._fc_id] = data.activeRule;
                         data.baseForm.api[data.activeRule._fc_id] = data.activeRule;
                         data.validateForm.api[data.activeRule._fc_id] = data.activeRule;
+                        data.styleForm.api[data.activeRule._fc_id] = data.activeRule;
                     });
                 });
                 if (!data.cacheProps[rule._fc_id]) {
@@ -1318,6 +1315,7 @@ export default defineComponent({
                 data.baseForm.isShow = input && rule.input !== false && methods.getConfig('showBaseForm') !== false;
                 data.propsForm.isShow = data.cacheProps[rule._fc_id].length > 0 && methods.getConfig('showPropsForm') !== false;
                 data.eventShow = rule._menu.event && rule._menu.event.length > 0 && methods.getConfig('showEventForm') !== false;
+                data.styleForm.isShow = rule._menu.style !== false && methods.getConfig('showStyleForm') !== false;
                 data.validateForm.isShow = data.baseForm.isShow && rule._menu.validate !== false && methods.getConfig('showValidateForm') !== false;
                 data.propsForm.rule = data.cacheProps[rule._fc_id];
                 methods.updateRuleFormData();
@@ -1363,6 +1361,10 @@ export default defineComponent({
                     formData['__' + k] = configAttrs[k]({rule});
                 });
                 data.propsForm.value = formData;
+                data.styleForm.value = {
+                    style: rule.style,
+                    class: rule.class
+                };
 
                 if (data.baseForm.isShow) {
                     data.baseForm.value = {
