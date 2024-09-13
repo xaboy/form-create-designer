@@ -1178,6 +1178,12 @@ export default defineComponent({
             },
             triggerActive(rule) {
                 let dragTool;
+                if (is.String(rule)) {
+                    rule = methods.findRule(rule);
+                }
+                if (!rule) {
+                    return;
+                }
                 if (rule._menu.inside) {
                     dragTool = rule.children[0];
                 } else {
@@ -1230,6 +1236,20 @@ export default defineComponent({
                     });
                 }
                 return propsRule;
+            },
+            findRule(id) {
+                let rule = undefined;
+                const findTree = children => {
+                    children.forEach(item => {
+                        if ([item.rule.field, item.rule.name, item.rule._fc_id].indexOf(id) > -1) {
+                            rule = item.rule;
+                        } else if (item.children) {
+                            findTree(item.children);
+                        }
+                    })
+                }
+                findTree(data.treeInfo);
+                return rule;
             },
             toolActive(rule) {
                 methods.unWatchActiveRule();
