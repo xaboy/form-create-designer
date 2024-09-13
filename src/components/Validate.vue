@@ -74,6 +74,7 @@ import {deepCopy} from '@form-create/utils/lib/deepextend';
 export default defineComponent({
     name: 'Validate',
     inject: ['designer'],
+    emits: ['update:modelValue'],
     props: {
         modelValue: Array,
     },

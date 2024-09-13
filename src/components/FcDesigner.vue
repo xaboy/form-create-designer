@@ -1363,7 +1363,8 @@ export default defineComponent({
                 data.propsForm.value = formData;
                 data.styleForm.value = {
                     style: rule.style,
-                    class: rule.class
+                    class: rule.class,
+                    id: rule.id,
                 };
 
                 if (data.baseForm.isShow) {
