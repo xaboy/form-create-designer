@@ -1823,7 +1823,9 @@ export default defineComponent({
         }
         data.dragForm.rule = methods.makeDragRule(methods.makeChildren(data.children));
         methods.setOption({});
-        methods.addComponent(ruleList);
+        if(!menu.value) {
+            methods.addComponent(ruleList);
+        }
 
         const inputCheckStatus = computed(() => {
             return Object.keys(data.inputForm.data).length > 0;
