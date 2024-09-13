@@ -5,7 +5,7 @@
         </el-badge>
         <el-dialog class="_fd-struct-con" :title="title || t('struct.title')" v-model="visible" destroy-on-close
                   :close-on-click-modal="false"
-                  append-to-body>
+                   append-to-body width="800px">
             <div ref="editor" v-if="visible"></div>
             <template #footer>
                 <div>
@@ -120,20 +120,11 @@ export default defineComponent({
     color: #2E73FF;
 }
 
-._fd-struct .CodeMirror {
-    height: 450px;
-}
-
-._fd-struct .CodeMirror-line {
-    line-height: 16px !important;
-    font-size: 13px !important;
-}
-
-._fd-struct-con .CodeMirror-lint-tooltip {
-    z-index: 2021 !important;
+._fd-struct-con .CodeMirror {
+    height: 500px;
 }
 
 ._fd-struct-con .el-dialog__body {
-    padding: 0px 20px;
+    padding: 0px;
 }
 </style>
