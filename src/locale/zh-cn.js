@@ -199,7 +199,7 @@ const ZhCn = {
         key: '键名',
         name: '名称',
         value: '值',
-        inputData: '录入数据',
+        inputData: '默认值',
         options: '选项数据',
         option: '选项',
         file: '文件',

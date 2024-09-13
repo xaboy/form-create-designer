@@ -16,6 +16,10 @@ export default {
             attrs: {
                 innerHTML: ''
             },
+            style: {
+                display: 'block',
+                width: '100%',
+            },
             children: ['<div style="color:blue;">\n' +
             ' html html html html html html html html html\n' +
             '  </div>'],

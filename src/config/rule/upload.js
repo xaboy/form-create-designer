@@ -32,7 +32,6 @@ export default {
         }, {
             type: 'select',
             field: 'uploadType',
-            value: 'image',
             options: [{label: t('props.image'), value: 'image'}, {
                 label: t('props.file'),
                 value: 'file'
