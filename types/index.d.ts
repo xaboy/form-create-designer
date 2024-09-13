@@ -56,6 +56,18 @@ export interface Config {
     hiddenMenu: MenuName[]
     //隐藏部分组件
     hiddenItem: string[]
+    //隐藏组件的部分配置项
+    hiddenItemConfig?: {
+        default?: string[];
+        //拖拽规则name: 隐藏的字段名
+        [id: string]: string[];
+    };
+    //禁用组件的部分配置项
+    disabledItemConfig?: {
+        default?: string[];
+        //拖拽规则name: 禁用的字段名
+        [id: string]: string[];
+    };
     //是否显示保存按钮
     showSaveBtn?: boolean;
     //是否显示右侧的配置界面

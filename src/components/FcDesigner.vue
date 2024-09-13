@@ -336,6 +336,7 @@ import {
     useLocale,
     isNull,
     formTemplate,
+    uniqueArray,
 } from '../utils/index';
 import viewForm, {designerForm} from '../utils/form';
 import {t as globalT} from '../utils/locale';
@@ -1250,9 +1251,24 @@ export default defineComponent({
                 if (!data.cacheProps[rule._fc_id]) {
                     data.cacheProps[rule._fc_id] = methods.getPropsRule(rule);
                 }
-                const hiddenBaseField = rule._menu.hiddenBaseField || [];
+                const hiddenItemConfig = methods.getConfig('hiddenItemConfig', {});
+                const disabledItemConfig = methods.getConfig('disabledItemConfig', {});
+                const hiddenField = uniqueArray([...hiddenItemConfig?.default || [], ...hiddenItemConfig?.[rule._menu.name] || [], ...rule._menu.hiddenBaseField || []]);
+                const disabledField = uniqueArray([...disabledItemConfig?.default || [], ...disabledItemConfig?.[rule._menu.name] || []]);
                 data.baseForm.api.hidden(false);
-                hiddenBaseField.length && data.baseForm.api.hidden(true, hiddenBaseField);
+                data.baseForm.api.disabled(false);
+                if (hiddenField.length) {
+                    data.baseForm.api.hidden(true, hiddenField);
+                    nextTick(() => {
+                        data.propsForm.api.hidden(true, hiddenField);
+                    });
+                }
+                if (disabledField.length) {
+                    data.baseForm.api.disabled(true, disabledField);
+                    nextTick(() => {
+                        data.propsForm.api.disabled(true, disabledField);
+                    });
+                }
                 if (!methods.getConfig('showControl', true)) {
                     data.baseForm.api.hidden(true, '_control');
                 }
