@@ -23,30 +23,6 @@ export function empty(value) {
 }
 
 export function addAutoKeyMap(cm) {
-    cm.addKeyMap({
-        name: 'autoParentheses',
-        '\'(\'': (cm) => {
-            const cur = cm.getCursor();
-            cm.replaceRange('()', cur, cur, '+insert');
-            cm.doc.setCursor({line: cur.line, ch: cur.ch + 1});
-        }
-    });
-    cm.addKeyMap({
-        name: 'autoBraces',
-        '\'{\'': (cm) => {
-            const cur = cm.getCursor();
-            cm.replaceRange('{}', cur, cur, '+insert');
-            cm.doc.setCursor({line: cur.line, ch: cur.ch + 1});
-        }
-    });
-    cm.addKeyMap({
-        name: 'autoBrackets',
-        '\'[\'': (cm) => {
-            const cur = cm.getCursor();
-            cm.replaceRange('[]', cur, cur, '+insert');
-            cm.doc.setCursor({line: cur.line, ch: cur.ch + 1});
-        }
-    });
 }
 
 export function makeTreeOptions(pre, config, level, data = []) {
