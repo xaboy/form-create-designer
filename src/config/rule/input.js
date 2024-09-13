@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {localeProps} from '../../utils';
+import {localeOptions, localeProps} from '../../utils';
 
 const label = '输入框';
 const name = 'input';
@@ -32,13 +32,21 @@ export default {
                 field: 'readonly'
             },
             {
-                type: 'inputNumber',
-                field: 'maxlength',
-                props: {min: 0}
+                type: 'select',
+                field: 'type',
+                options: localeOptions(t, [
+                    {label: 'text', value: 'text'},
+                    {label: 'number', value: 'number'},
+                    {label: 'time', value: 'time'},
+                    {label: 'date', value: 'date'},
+                    {label: 'month', value: 'month'},
+                    {label: 'datetime-local', value: 'datetime-local'},
+                ])
+
             },
             {
                 type: 'inputNumber',
-                field: 'minlength',
+                field: 'maxlength',
                 props: {min: 0}
             },
             {
