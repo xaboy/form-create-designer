@@ -56,7 +56,7 @@
             <el-button class="_fd-validate-btn" size="mini">{{ t('validate.rule') }} +</el-button>
             <template #dropdown>
                 <el-dropdown-menu>
-                    <el-dropdown-item :command="value" v-for="(label, value) in modes" :key="value">
+                    <el-dropdown-item :command="value" v-for="(label, value) in modes" :key="value" style="width: 240px;">
                         <div>{{ label }}</div>
                     </el-dropdown-item>
                 </el-dropdown-menu>
