@@ -21,9 +21,7 @@ export default {
             props: {
                 action: '/',
                 uploadType: 'image',
-                onSuccess(res, file) {
-                    file.url = res.data.url;
-                }
+                onSuccess: new Function('res', 'file', 'file.url = res.data.url;')
             }
         };
     },
@@ -43,7 +41,7 @@ export default {
             type: 'input',
             field: 'action'
         }, {
-            type: 'FnEditor',
+            type: 'FnInput',
             field: 'onSuccess',
             info: t('com.upload.info'),
             props: {

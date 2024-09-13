@@ -1,13 +1,13 @@
 <template>
     <div class="_fd-fn-input">
         <el-badge type="warning" is-dot :hidden="!configured">
-            <el-button @click="visible=true" size="small">
+            <el-button @click="visible=true" size="mini">
                 <slot>
                     {{t('event.title')}}
                 </slot>
             </el-button>
         </el-badge>
-        <el-dialog class="_fd-fn-input-dialog _fd-config-dialog" :title="title || t('struct.title')" v-model="visible"
+        <el-dialog class="_fd-fn-input-dialog _fd-config-dialog" :title="title || t('struct.title')" :visible.sync="visible"
                    destroy-on-close
                    :close-on-click-modal="false"
                    append-to-body width="800px">

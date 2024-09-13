@@ -50,7 +50,7 @@ export default {
                 type: 'switch',
                 field: 'remote',
             }, {
-                type: 'FnEditor',
+                type: 'FnInput',
                 field: 'remoteMethod',
                 props: {
                     body: true,

@@ -129,6 +129,14 @@ export default defineComponent({
             this.formValue = this.fn;
             this.visible = false;
         },
+        trimString(input) {
+            const firstIndex = input.indexOf('{');
+            const lastIndex = input.lastIndexOf('}');
+            if (firstIndex === -1 || lastIndex === -1 || firstIndex >= lastIndex) {
+                return input;
+            }
+            return input.slice(firstIndex + 1, lastIndex).replace(/^\n+|\n+$/g, '');
+        },
         tidyValue() {
             let value = this.value || '';
             if (value.__json) {
@@ -138,10 +146,9 @@ export default defineComponent({
                 value = value.slice(5);
             }
             if (typeof value === 'function') {
-                value = toJSON(value);
-                value = /(?:function\s*\w*\s*\(.*?\)|\(\s*.*?\s*\)\s*=>)\s*{([\s\S]*)}/g.exec(value)[1].trim();
+                value = this.trimString(toJSON(value)).trim();
             } else if (!this.body) {
-                value = value.replace(PREFIX + 'function ' + this.name + '(' + this.argStr + '){', '').replace('}' + SUFFIX, '');
+                value = this.trimString(value).trim();
             }
             this.formValue = value;
             return value;

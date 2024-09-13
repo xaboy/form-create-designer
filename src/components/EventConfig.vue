@@ -81,7 +81,7 @@
                 <el-main>
                     <el-container class="_fd-event-r">
                         <el-header class="_fd-event-head" height="40px" v-if="activeData">
-                            <div><a target="_blank" href="https://form-create.com/v3/instance">{{t('form.document')}}</a></div>
+                            <div><a target="_blank" href="https://form-create.com/v3/instance/">{{t('form.document')}}</a></div>
                             <div>
                                 <el-button size="mini" @click="close">{{ t('props.cancel') }}</el-button>
                                 <el-button size="mini" type="primary" @click="save" color="#2f73ff">{{

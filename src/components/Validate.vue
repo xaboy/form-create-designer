@@ -53,7 +53,7 @@
         </template>
 
         <el-dropdown trigger="click" size="default" popper-class="_fd-validate-pop" @command="handleCommand">
-            <el-button class="_fd-validate-btn" size="small">{{ t('validate.rule') }} +</el-button>
+            <el-button class="_fd-validate-btn" size="mini">{{ t('validate.rule') }} +</el-button>
             <template #dropdown>
                 <el-dropdown-menu>
                     <el-dropdown-item :command="value" v-for="(label, value) in modes" :key="value">
