@@ -21,7 +21,7 @@
 
 <script>
 import {defineComponent} from 'vue';
-import {isNull} from '../utils/index';
+import {isNull} from '../../utils/index';
 
 export default defineComponent({
     name: 'SizeInput',
