@@ -394,7 +394,7 @@ export default defineComponent({
             designer: this
         };
     },
-    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save'],
+    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear'],
     setup(props, {emit}) {
         const {menu, height, mask, locale, handle} = toRefs(props);
         const vm = getCurrentInstance();
@@ -816,6 +816,7 @@ export default defineComponent({
                 methods.setRule([]);
                 methods.addOperationRecord();
                 data.unloadStatus = false;
+                emit('clear');
             },
             makeDragRule(children) {
                 return methods.makeChildren([methods.makeDrag(true, 'draggable', children, {
