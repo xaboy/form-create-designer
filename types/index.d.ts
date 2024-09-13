@@ -46,6 +46,8 @@ export interface Config {
     switchType?: false | Array<string[]>;
     //是否自动选中拖入的组件
     autoActive: boolean;
+    //定义表单配置默认值
+    formOptions: Object;
     //配置field是否可以编辑
     fieldReadonly?: boolean;
     //隐藏拖拽操作按钮
