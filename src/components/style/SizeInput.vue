@@ -4,7 +4,7 @@
             <el-button :size="size" style="width: 150px;" @click="changeType()">{{ unit[idx] }}</el-button>
         </template>
         <template v-else>
-            <el-inputNumber :size="size" v-model="num" @change="submit" controls-position="right"/>
+            <el-inputNumber :size="size || 'mini'" v-model="num" @change="submit" controls-position="right"/>
             <el-dropdown trigger="click" size="mini" @command="changeType">
                 <el-button :size="size">{{ unit[idx] }}</el-button>
                 <template #dropdown>
@@ -21,7 +21,7 @@
 
 <script>
 import {defineComponent} from 'vue';
-import {isNull} from '../utils/index';
+import {isNull} from '../../utils/index';
 
 export default defineComponent({
     name: 'SizeInput',
@@ -105,8 +105,13 @@ export default defineComponent({
     align-items: center;
 }
 
-._fd-size-input .el-input-number--mini {
-    width: 122px;
+._fd-size-input .el-input-number {
+    width: 75px;
+}
+
+._fd-size-input .el-input-number.is-controls-right .el-input__inner {
+    padding-left: 5px;
+    padding-right: 35px;
 }
 
 ._fd-size-input .el-button {

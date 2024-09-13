@@ -293,13 +293,17 @@
     overflow: auto;
 }
 
-._fc-m-tools-l svg {
+._fc-m-tools-l .devices .fc-icon {
     width: 18px;
     cursor: pointer;
 }
 
-._fc-m-tools-l svg + svg {
-    margin-left: 10px;
+._fc-m-tools-l .devices .fc-icon.active {
+    color: #2E73FF;
+}
+
+._fc-m-tools-l .devices .fc-icon + .fc-icon {
+    margin-left: 5px;
 }
 
 ._fc-m-tools .line {
@@ -485,6 +489,10 @@
 
 ._fc-r .el-form-item {
     margin-bottom: 10px !important;
+}
+
+._fc-r .el-input__inner {
+    padding: 0 5px;
 }
 
 ._fc-r .el-form-item__label {
