@@ -48,6 +48,7 @@
                             <el-dropdown-menu>
                                 <el-dropdown-item @click="showJson">生成JSON</el-dropdown-item>
                                 <el-dropdown-item @click="showOption">生成Options</el-dropdown-item>
+                                <el-dropdown-item @click="copyUrl">生成预览链接</el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
@@ -110,6 +111,7 @@ import formCreate from '@form-create/element-ui';
 import ZhCn from "../src/locale/zh-cn";
 import En from "../src/locale/en";
 import arrowDown from "@element-plus/icons-vue/dist/es/arrow-down.mjs";
+import {copyTextToClipboard} from "../src/utils";
 
 const CACHE_KEY = 'fc-config-$101';
 const TITLE = ['生成规则', '表单规则', '生成组件', '设置生成规则', '设置表单规则'];
@@ -120,6 +122,14 @@ export default {
         arrowDown,
     },
     data() {
+        let data = window.location.hash.substring(1);
+        let hashData = null;
+        if (data) {
+            try {
+                hashData = JSON.parse(decodeURIComponent(escape(atob(data))));
+            } catch (e) {
+            }
+        }
         return {
             state: false,
             value: null,
@@ -130,8 +140,10 @@ export default {
             autoSaveId: null,
             lang:'cn',
             locale: null,
+            hashData,
             topImg: true,
             config: {
+                autoActive: true,
                 fieldReadonly: false,
                 showSaveBtn: true,
             },
@@ -253,6 +265,12 @@ export default {
             this.type = 4;
             this.value = {form: {}};
         },
+        copyUrl() {
+            const rule = this.$refs.designer.getJson();
+            const options = this.$refs.designer.getOptionsJson();
+            const str = btoa(unescape(encodeURIComponent(JSON.stringify({rule, options}))));
+            copyTextToClipboard('https://form-create.com/v3/designer#' + str);
+        },
         onOk() {
             if (this.err) return;
             const json = this.editor.getValue();
@@ -305,13 +323,21 @@ export default {
         }
     },
     mounted() {
-        const cache = this.getCache();
-        if (cache.rule) {
-            this.$refs.designer.setRule(cache.rule);
+        if (this.hashData && this.hashData.rule) {
+            this.$refs.designer.setRule(this.hashData.rule);
+            if (this.hashData.options) {
+                this.$refs.designer.setOptions(this.hashData.options);
+            }
+        } else {
+            const cache = this.getCache();
+            if (cache.rule) {
+                this.$refs.designer.setRule(cache.rule);
+            }
+            if (cache.opt) {
+                this.$refs.designer.setOption(cache.opt);
+            }
         }
-        if (cache.opt) {
-            this.$refs.designer.setOption(cache.opt);
-        }
+
         this.$nextTick(() => {
             this.loadAutoSave();
         });
