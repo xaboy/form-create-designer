@@ -1,7 +1,7 @@
 {
     "name": "@form-create/designer",
     "version": "3.2.5",
-    "description": "好用的Vue可视化表单设计器，可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率。",
+    "description": "好用的Vue低代码可视化表单设计器，可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率。",
     "unpkg": "./dist/index.umd.js",
     "jsdelivr": "./dist/index.umd.js",
     "typings": "./types/index.d.ts",
