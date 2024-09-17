@@ -28,11 +28,12 @@
 - 提供丰富的表单操作API
 - 支持子表单和分组
 - 支持事件配置
+- 支持样式配置
 - 支持表格布局
 - 支持表单验证
 - 支持多语言
 
-> 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！本项目还在不断开发完善中,如有任何建议或问题[请在这里提出](https://github.com/xaboy/form-create-designer/issues/new)
+> 如果对您有帮助，您可以点右上角 **"Star"** 支持一下 谢谢！本项目还在不断开发完善中,如有任何建议或问题[请在这里提出](https://github.com/xaboy/form-create-designer/issues/new)
 
 > 本项目QQ讨论群[629709230](https://jq.qq.com/?_wv=1027&k=F1FlEFIV)
 
