@@ -11,6 +11,7 @@
     "scripts": {
         "dev": "vite --config vite.dev.config.js",
         "build": "vite build",
+        "build:locale": "gulp -f gulpfile.js",
         "preview": "vite build --config vite.dev.config.js"
     },
     "repository": {
@@ -62,7 +63,10 @@
     },
     "devDependencies": {
         "@vitejs/plugin-vue2": "^2.3.1",
+        "execa": "^9.4.0",
+        "gulp": "^5.0.0",
         "jsonlint-mod": "^1.7.6",
+        "rimraf": "^6.0.1",
         "vite": "^5.2.0",
         "vite-plugin-banner": "^0.7.1",
         "vite-plugin-css-injected-by-js": "^3.5.1"
