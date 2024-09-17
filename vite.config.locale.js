@@ -12,14 +12,19 @@ function getBanner(banner, pkg) {
     const author = banner.author
 
     const license = banner.license || '';
-    return (
-        '/*!\n' +
-        ' * form-create 可视化表单设计器\n' +
-        ` * ${banner.name} v${banner.version}\n` +
-        ` * (c) ${author || ''}\n` +
-        (license && ` * Released under the ${license} License.\n`) +
-        ' */'
-    );
+
+
+    return {
+        content: (
+            '/*!\n' +
+            ' * FormCreate 可视化表单设计器\n' +
+            ` * ${banner.name} v${banner.version}\n` +
+            ` * (c) ${author || ''}\n` +
+            (license && ` * Released under the ${license} License.\n`) +
+            ' */'
+        ),
+        outDir: 'locale',
+    };
 }
 
 function toCase(str) {
@@ -33,7 +38,7 @@ function upper(str) {
 }
 
 const __banner__ = {
-    author: `2021-${new Date().getFullYear()} ${author}\n * Github https://github.com/xaboy/form-create-designer\n * Site https://form-create.com/`,
+    author: `2021-${new Date().getFullYear()} ${author}\n * Github https://github.com/xaboy/form-create-designer`,
     license,
     name,
     version
@@ -48,9 +53,20 @@ export default defineConfig((env) => {
             lib: {
                 entry: `src/locale/${name}.js`,
                 name: 'FcDesigner' + upper(toCase(name)),
-                fileName: name,
+                fileName: format => {
+                    if(format === 'umd') {
+                        return `${name}.js`
+                    } else {
+                        return `${name}.${format}.js`
+                    }
+                },
             },
             emptyOutDir: false,
+        },
+        rollupOptions: {
+            output: {
+                exports: 'named',
+            }
         },
 
         plugins: [banner(getBanner(__banner__))]
