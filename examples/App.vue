@@ -45,7 +45,7 @@
                             <el-dropdown-menu>
                                 <el-dropdown-item :command="()=>showJson()">生成JSON</el-dropdown-item>
                                 <el-dropdown-item :command="()=>showOption()">生成Options</el-dropdown-item>
-                                <el-dropdown-item @click="copyUrl">生成预览链接</el-dropdown-item>
+                                <el-dropdown-item :command="()=>copyUrl()">生成预览链接</el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
