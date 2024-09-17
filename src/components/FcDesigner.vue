@@ -1050,6 +1050,12 @@ export default defineComponent({
                     if (!rule.slot) {
                         delete rule.slot;
                     }
+                    if (!rule.class) {
+                        delete rule.class;
+                    }
+                    if(!rule.style || !Object.keys(rule.style).length) {
+                        delete rule.style;
+                    }
                     if (rule._on) {
                         rule.on = rule._on;
                         delete rule._on;
@@ -1520,6 +1526,12 @@ export default defineComponent({
                 }
                 if (!rule.wrap) {
                     rule.wrap = {};
+                }
+                if (!rule.style) {
+                    rule.style = {};
+                }
+                if (!rule.class) {
+                    rule.class = '';
                 }
                 if (!rule.effect) {
                     rule.effect = {};
