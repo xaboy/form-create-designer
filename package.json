@@ -1,7 +1,7 @@
 {
     "name": "form-create-designer",
     "private": true,
-    "description": "好用的Vue低代码可视化表单设计器，可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率。",
+    "description": "FormCreate低代码可视化表单设计器",
     "scripts": {
         "dev:ele": "lerna run dev --scope=@form-create/designer",
         "dev:vant": "lerna run dev --scope=@form-create/vant-designer",
