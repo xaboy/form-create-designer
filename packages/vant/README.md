@@ -19,7 +19,7 @@
   <a href="https://github.com/xaboy/form-create" target="_blank"><img src="https://img.shields.io/npm/dt/@form-create/designer.svg" alt="dt" /></a>
 </p>
 
-**FcDesigner Mobile 是基于 [@form-create/vant](https://github.com/xaboy/form-create) 实现的移动端表单设计器组件。可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率，节省开发者的时间。**
+**FcDesigner 移动端是基于 [@form-create/vant](https://github.com/xaboy/form-create) 实现的移动端低代码表单设计器组件。可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率，节省开发者的时间。支持Vue3**
 
 [![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg)](https://pro.form-create.com/view)
 
@@ -40,32 +40,42 @@
 
 > 本项目QQ讨论群[629709230](https://jq.qq.com/?_wv=1027&k=F1FlEFIV)
 
-![demo1](https://static.form-create.com/file/img/open-designer.jpg)
+![demo1](https://static.form-create.com/file/img/vant-designer.jpg)
 
 ## 引入
 
 **CDN:**
 
 ```html
-<link href="https://unpkg.com/element-plus/dist/index.css"></link>
+<link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css"></link>
+<link rel="stylesheet" href="https://unpkg.com/vant@4/lib/index.css"/>
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
+<script src="https://unpkg.com/vant@4/lib/vant.min.js"></script>
 <script src="https://unpkg.com/@form-create/element-ui@next/dist/form-create.min.js"></script>
-<script src="https://unpkg.com/@form-create/designer@next/dist/index.umd.js"></script>
+<script src="https://unpkg.com/@form-create/vant@next/dist/form-create.min.js"></script>
+<script src="https://unpkg.com/@form-create/vant-designer@next/dist/index.umd.js"></script>
 ```
 
 **NodeJs:**
 
 ```shell
 npm install @form-create/vant-designer@next
+npm install @form-create/element-ui@next
 npm install @form-create/vant@next
+npm install element-plus
+npm install vant
 ```
-
-请自行导入`ElementPlus`并挂载
 
 ```js
 import FcDesignerMobile from '@form-create/vant-designer'
+import ELEMENT from 'element-plus';
+import vant from 'vant';
+import 'vant/lib/index.css';
+import 'element-plus/dist/index.css';
 
+app.use(ELEMENT)
+app.use(vant)
 app.use(FcDesignerMobile)
 app.use(FcDesignerMobile.formCreate)
 ```

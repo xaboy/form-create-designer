@@ -19,7 +19,7 @@
   <a href="https://github.com/xaboy/form-create" target="_blank"><img src="https://img.shields.io/npm/dt/@form-create/designer.svg" alt="dt" /></a>
 </p>
 
-**FcDesigner 是基于 [@form-create/element-ui](https://github.com/xaboy/form-create) 实现的表单设计器组件。可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率，节省开发者的时间。**
+**FcDesigner 是基于 [@form-create/element-ui](https://github.com/xaboy/form-create) 实现的低代码表单设计器组件。可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率，节省开发者的时间。**
 
 [![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg)](https://pro.form-create.com/view)
 
@@ -46,7 +46,7 @@
 **CDN:**
 
 ```html
-<link href="https://unpkg.com/element-plus/dist/index.css"></link>
+<link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css"></link>
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
 <script src="https://unpkg.com/@form-create/element-ui@next/dist/form-create.min.js"></script>
@@ -58,13 +58,15 @@
 ```shell
 npm install @form-create/designer@next
 npm install @form-create/element-ui@next
+npm install element-plus
 ```
-
-请自行导入`ElementPlus`并挂载
 
 ```js
 import FcDesigner from '@form-create/designer'
+import ELEMENT from 'element-plus';
+import 'element-plus/dist/index.css';
 
+app.use(ELEMENT);
 app.use(FcDesigner)
 app.use(FcDesigner.formCreate)
 ```
