@@ -336,6 +336,7 @@ import hljs from '../utils/highlight/highlight.min';
 import xml from '../utils/highlight/xml.min';
 import javascript from '../utils/highlight/javascript.min';
 import TypeSelect from './TypeSelect.vue';
+import mergeProps from '@form-create/utils/lib/mergeprops';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
@@ -377,6 +378,8 @@ export default defineComponent({
         const componentRule = toRef(configRef.value, 'componentRule', {});
         const validateRule = toRef(configRef.value, 'validateRule', null);
         const formRule = toRef(configRef.value, 'formRule', null);
+        const updateDefaultRule = toRef(configRef.value, 'updateDefaultRule', {});
+
         const dragHeight = computed(() => {
             const h = height.value;
             if (!h) return '100%';
@@ -1513,6 +1516,17 @@ export default defineComponent({
             },
             makeRule(config, _rule) {
                 const rule = _rule || config.rule({t});
+                const updateRule = updateDefaultRule.value && updateDefaultRule.value[config.name];
+                if (!_rule && updateRule) {
+                    if (typeof updateRule === 'function') {
+                        updateRule(rule);
+                    } else {
+                        let _rule = deepCopy(updateRule);
+                        delete _rule.children;
+                        delete _rule.component;
+                        rule = mergeProps([rule, _rule]);
+                    }
+                }
                 rule._menu = markRaw(config);
                 if (!rule._fc_id) {
                     rule._fc_id = 'id_' + uniqueId();
