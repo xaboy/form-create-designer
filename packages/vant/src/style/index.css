@@ -621,6 +621,21 @@
     font-size: 14px;
 }
 
+._fd-preview-copy{
+    display: flex;
+    position: absolute;
+    right: 35px;
+    top: 65px;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #2E73FF33;
+    border-radius: 10px;
+    color: #2E73FF;
+    cursor: pointer;
+}
+
 ._fd-preview-dialog {
     border-radius: 6px;
     padding-top: 0;
