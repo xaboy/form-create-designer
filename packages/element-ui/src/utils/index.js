@@ -5,7 +5,7 @@ import {computed, isRef, unref, ref} from 'vue';
 import ZhCn from '../locale/zh-cn';
 import {message} from './message';
 
-export {formTemplate, formTemplateV3} from './template';
+export {formTemplate, formTemplateV3, htmlTemplate} from './template';
 
 
 export function makeRequiredRule() {
