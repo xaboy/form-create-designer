@@ -1,6 +1,6 @@
 {
     "name": "@form-create/designer",
-    "version": "3.2.6",
+    "version": "3.2.7",
     "description": "好用的Vue低代码可视化表单设计器，可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率。",
     "unpkg": "./dist/index.umd.js",
     "jsdelivr": "./dist/index.umd.js",
@@ -88,8 +88,8 @@
         "@form-create/component-wangeditor": "^3.1",
         "@form-create/element-ui": "^3.1.27",
         "@form-create/utils": "^3.2.0",
-        "element-plus": "^2.8.4",
         "codemirror": "^6.65.7",
+        "element-plus": "^2.8.4",
         "vuedraggable": "4.1.0"
     }
 }
