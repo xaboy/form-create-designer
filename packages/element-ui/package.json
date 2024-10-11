@@ -12,7 +12,8 @@
             "import": "./dist/index.es.js",
             "types": "./types/index.d.ts",
             "require": "./dist/index.umd.js"
-        }
+        },
+        "./*": "./*"
     },
     "scripts": {
         "clean": "rimraf dist/",
