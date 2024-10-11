@@ -1,17 +1,53 @@
 {
-    "name": "form-create-designer",
-    "private": true,
+    "name": "@form-create/designer",
+    "version": "3.2.6",
     "description": "好用的Vue低代码可视化表单设计器，可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率。",
+    "unpkg": "./dist/index.umd.js",
+    "jsdelivr": "./dist/index.umd.js",
+    "typings": "./types/index.d.ts",
+    "main": "./dist/index.umd.js",
+    "module": "./dist/index.es.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.es.js",
+            "types": "./types/index.d.ts",
+            "require": "./dist/index.umd.js"
+        }
+    },
     "scripts": {
-        "dev:ele": "lerna run dev --scope=@form-create/designer",
-        "dev:vant": "lerna run dev --scope=@form-create/vant-designer",
-        "build": "lerna run build",
-        "build:locale": "lerna run build:locale"
+        "clean": "rimraf dist/",
+        "dev": "vue-cli-service serve",
+        "rollup": "rollup -c ./rollup.config.ts",
+        "build": "vite build --config ./vite.config.build.js",
+        "build:locale": "gulp -f gulpfile.js",
+        "build:preview": "vite build --config ./vite.config.preview.js"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/xaboy/form-create-designer.git"
     },
+    "keywords": [
+        "可视化表单设计器",
+        "@form-create",
+        "form-builder",
+        "form-designer",
+        "draggable",
+        "form",
+        "components",
+        "vue3",
+        "element-ui",
+        "json-form",
+        "dynamic-form"
+    ],
+    "files": [
+        "README.md",
+        "package.json",
+        "LICENSE",
+        "src",
+        "types",
+        "dist",
+        "locale"
+    ],
     "author": "xaboy",
     "license": "MIT",
     "bugs": {
@@ -19,6 +55,7 @@
     },
     "homepage": "https://form-create.com",
     "devDependencies": {
+        "@element-plus/icons-vue": "^0.2.6",
         "@sixian/css-url": "^1.0.3",
         "@types/chalk": "^2.2.0",
         "@types/shelljs": "^0.8.9",
@@ -32,6 +69,7 @@
         "chalk": "^4.1.2",
         "codemirror": "^6.65.7",
         "commander": "^6.0.0",
+        "commitizen": "^4.1.2",
         "cross-env": "^7.0.2",
         "css-loader": "^4.2.1",
         "cssnano": "^5.1.13",
@@ -76,5 +114,8 @@
             "eslint --fix",
             "git add"
         ]
+    },
+    "dependencies": {
+        "@form-create/element-ui": "^3.1.27"
     }
 }
