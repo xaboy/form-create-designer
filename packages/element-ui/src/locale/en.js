@@ -21,6 +21,12 @@ const En = {
         formName: 'Form name',
         componentMode: 'Component',
         document: 'Document',
+        controlDocument: 'Need more detailed configuration methods? Please view {doc}',
+        onSubmit: 'Triggered when form is submitted',
+        onCreated: 'Triggered after the form component is initialized',
+        onMounted: 'Triggered after the form component is mounted',
+        onChange: 'Triggered when the component value changes',
+        beforeFetch: 'Triggered before remote data request is sent',
     },
     computed: {
         fieldUsed: '[{label}] Is used in the calculation formula, please modify the corresponding formula first',
