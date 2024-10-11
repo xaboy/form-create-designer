@@ -21,6 +21,7 @@ const ZhCn = {
         formMode: '表单模式',
         formName: '表单名称',
         componentMode: '生成组件',
+        htmlMode: '生成HTML',
         document: '帮助文档',
         controlDocument: '需要更详细的配置方法？请查看{doc}',
         onSubmit: '表单提交时触发',

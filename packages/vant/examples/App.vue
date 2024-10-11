@@ -1,7 +1,8 @@
 <template>
     <div id="app">
         <div class="_fc-top">
-            <div v-if="topImg" @click="goPro" class="js-top-img top_img" style="background: url('https://static.form-create.com/file/img/top2.jpg');height: 60px;background-repeat: no-repeat;background-size: cover;background-position: center;">
+            <div v-if="topImg" @click="goPro" class="js-top-img top_img"
+                 style="background: url('https://static.form-create.com/file/img/top2.jpg');height: 60px;background-repeat: no-repeat;background-size: cover;background-position: center;">
                 <div class="container pos">
                     <div class="close" @click.stop="topImg = false">X</div>
                 </div>
@@ -64,7 +65,8 @@
             </div>
             <span style="margin: 0 10px;">|</span>
             <div class="_fc-b-item">
-                <a href='https://gitee.com/xaboy/form-create-designer' target="_blank" style="display: inline-flex;"><img
+                <a href='https://gitee.com/xaboy/form-create-designer' target="_blank"
+                   style="display: inline-flex;"><img
                     src='https://gitee.com/xaboy/form-create-designer/badge/star.svg?theme=dark' alt='gitee'/></a>
             </div>
             <span style="margin: 0 10px;">|</span>
@@ -113,7 +115,7 @@ import En from "../src/locale/en";
 import arrowDown from "@element-plus/icons-vue/dist/es/arrow-down.mjs";
 import {copyTextToClipboard} from "../src/utils";
 
-const CACHE_KEY = 'fc-config-$101';
+const CACHE_KEY = 'fcm-config-$101';
 const TITLE = ['生成规则', '表单规则', '生成组件', '设置生成规则', '设置表单规则'];
 
 export default {
@@ -138,7 +140,7 @@ export default {
             err: false,
             type: -1,
             autoSaveId: null,
-            lang:'cn',
+            lang: 'cn',
             locale: null,
             hashData,
             topImg: true,
@@ -169,7 +171,7 @@ export default {
         }
     },
     methods: {
-        goPro(){
+        goPro() {
             location.href = 'https://pro.form-create.com/view';
         },
         getCache() {
@@ -184,7 +186,6 @@ export default {
                 }
                 cache = JSON.parse(cache);
                 cache.rule = formCreate.parseJson(cache.rule);
-                cache.opt.submitBtn = false;
                 return cache;
             } catch (e) {
                 return def();
@@ -200,7 +201,12 @@ export default {
             const s = this.autosave;
             if (s === false) return;
             this.autoSaveId = setInterval(() => {
-                this.setCache({opt: this.$refs.designer.getOption(), rule: this.$refs.designer.getRule()});
+                if (this.$refs.designer) {
+                    this.setCache({opt: this.$refs.designer.getOption(), rule: this.$refs.designer.getRule()});
+                } else {
+                    this.autoSaveId && clearInterval(this.autoSaveId);
+                    this.autoSaveId = null;
+                }
             }, is.Number(s) ? s : 2000);
         },
         changeLocale() {
@@ -216,9 +222,9 @@ export default {
             let val;
             if (this.type === 2) {
                 val = this.value;
-            }else if(this.type === 0){
+            } else if (this.type === 0) {
                 val = formCreate.toJson(this.value, 2);
-            }else{
+            } else {
                 val = JSON.stringify(this.value, null, 2);
             }
             this.$nextTick(() => {
@@ -532,8 +538,8 @@ body {
     }
 }
 
-.pro-version{
-    color: #cd7f32!important;
+.pro-version {
+    color: #cd7f32 !important;
     font-weight: 600;
 }
 </style>

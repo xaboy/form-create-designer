@@ -273,11 +273,13 @@
                     <el-tabs class="_fd-preview-tabs" v-model="previewStatus">
                         <el-tab-pane :label="t('form.formMode')" name="form"></el-tab-pane>
                         <el-tab-pane :label="t('form.componentMode')" name="component"></el-tab-pane>
+                        <el-tab-pane :label="t('form.htmlMode')" name="html"></el-tab-pane>
                     </el-tabs>
                     <template v-if="previewStatus === 'form'">
                         <ViewForm :rule="preview.rule" :option="preview.option" v-model:api="preview.api"
                                   v-if="preview.state"></ViewForm>
                     </template>
+                    <pre class="_fd-preview-code" v-else-if="previewStatus === 'component'"><code v-html="preview.component"></code></pre>
                     <pre class="_fd-preview-code" v-else><code v-html="preview.html"></code></pre>
                 </el-dialog>
             </el-container>
@@ -310,6 +312,7 @@ import {
     isNull,
     formTemplate,
     formTemplateV3,
+    htmlTemplate,
     uniqueArray,
     copyTextToClipboard,
 } from '../utils/index';
@@ -841,8 +844,12 @@ export default defineComponent({
                 data.preview.rule = designerForm.parseJson(rule);
                 data.preview.option = designerForm.parseJson(options);
                 const useV2 = methods.getConfig('useTemplate', false);
-                data.preview.html = hljs.highlight(
+                data.preview.component = hljs.highlight(
                     useV2 ? formTemplate(rule, options) : formTemplateV3(rule, options),
+                    {language: 'xml'}
+                ).value
+                data.preview.html = hljs.highlight(
+                    htmlTemplate(rule, options),
                     {language: 'xml'}
                 ).value
             },

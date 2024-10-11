@@ -60,3 +60,45 @@ const onSubmit =  (formData) => {
 }
 <\/script>`
 }
+
+
+export function htmlTemplate(json, options) {
+    return `<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <!-- Import style -->
+        <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css"/>
+        <!-- Import Vue 3 -->
+        <script src="//unpkg.com/vue@3"></script>
+        <!-- Import element-plus -->
+        <script src="//unpkg.com/element-plus"></script>
+        <!-- Import formCreate -->
+        <script src="//unpkg.com/@form-create/element-ui@3"><\/script>
+    </head>
+    <body>
+        <div id="app">
+            <form-create :rule="rule" :option="options" v-model="formData" v-model:api="api" @submit="onSubmit"></form-create>
+        </div>
+        <script>
+            const App = {
+                data() {
+                    return {
+                        rule: formCreate.parseJson('${json.replaceAll('\\', '\\\\').replaceAll('\'', '\\\'')}'),
+                        options: formCreate.parseJson('${options.replaceAll('\\', '\\\\').replaceAll('\'', '\\\'')}'),
+                        formData: {},
+                        api: null,
+                    };
+                },
+                methods: {
+                    onSubmit(formData){
+                        console.log('submit', formData);
+                    }
+                }
+            };
+            const app = Vue.createApp(App);
+            app.use(ElementPlus).use(formCreate);
+            app.mount("#app");
+        </script>
+    </body>
+</html>`
+}
