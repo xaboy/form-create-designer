@@ -23,6 +23,7 @@
                                     <el-menu-item :index="name">
                                         <div class="_fd-fn-list-method" @click.stop="edit(item)">
                                             <span>function<span>{{ name }}</span></span>
+                                            <span class="_fd-label" v-if="eventInfo[name]">{{ eventInfo[name] }}</span>
                                         </div>
                                     </el-menu-item>
                                 </template>
@@ -94,6 +95,13 @@ export default defineComponent({
         };
     },
     computed: {
+        eventInfo() {
+            const info = {};
+            this.eventConfig.forEach(v => {
+                info[v.name] = v.info;
+            });
+            return info;
+        },
         t() {
             return this.designer.setupState.t;
         },
@@ -265,6 +273,13 @@ export default defineComponent({
     width: 100%;
     overflow: hidden;
     white-space: pre-wrap;
+}
+
+
+._fd-fn-list-method ._fd-label {
+    margin-top: 4px;
+    color: #AAAAAA;
+    font-size: 12px;
 }
 
 ._fd-fn-list-method-info > span:first-child, ._fd-fn-list-method > span:first-child {

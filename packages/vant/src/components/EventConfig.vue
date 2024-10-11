@@ -23,6 +23,9 @@
                                         <el-dropdown-item v-for="name in eventName" :key="name" @click="add(name)">
                                             <div class="_fd-event-item">
                                                 <span>{{ name }}</span>
+                                                <span class="_fd-label" v-if="eventInfo[name]">
+                                                    {{ eventInfo[name] }}
+                                                </span>
                                             </div>
                                         </el-dropdown-item>
                                         <el-dropdown-item :divided="eventName.length > 0" @click="cusEvent">
@@ -46,6 +49,8 @@
                                                         <span>function<span>{{
                                                                 name
                                                             }}</span></span>
+                                                        <span class="_fd-label"
+                                                              v-if="eventInfo[name]">{{ eventInfo[name] }}</span>
                                                     </div>
                                                     <i class="fc-icon icon-delete"
                                                        @click.stop="rm({name, item, index})"></i>
@@ -59,6 +64,8 @@
                                                         <span>function<span>{{
                                                                 name
                                                             }}</span></span>
+                                                <span class="_fd-label"
+                                                      v-if="eventInfo[name]">{{ eventInfo[name] }}</span>
                                             </div>
                                             <i class="fc-icon icon-delete" @click.stop="rm({name})"></i>
                                         </div>
@@ -158,6 +165,13 @@ export default defineComponent({
     computed: {
         t() {
             return this.designer.setupState.t;
+        },
+        eventInfo() {
+            const info = {};
+            this.eventName.forEach(v => {
+                info[v] = this.t('com.' + this.componentName + '.event.' + v) || this.t('eventInfo.' + v) || '';
+            })
+            return info;
         },
         eventNum() {
             let num = 0;
@@ -405,6 +419,11 @@ export default defineComponent({
     white-space: pre-wrap;
 }
 
+._fd-event-item ._fd-label {
+    font-size: 12px;
+    color: #AAAAAA;
+}
+
 ._fd-event-l .el-menu {
     padding: 0 10px 5px;
     border-right: 0 none;
@@ -437,6 +456,12 @@ export default defineComponent({
     color: #9D238C;
     overflow: hidden;
     white-space: pre-wrap;
+}
+
+._fd-event-method ._fd-label {
+    margin-top: 4px;
+    color: #AAAAAA;
+    font-size: 12px;
 }
 
 ._fd-event-method > span:first-child, ._fd-fn-list-method > span:first-child {
