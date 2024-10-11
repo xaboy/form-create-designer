@@ -82,22 +82,27 @@ export default function form({t}) {
                 eventConfig: [
                     {
                         name: 'onSubmit',
+                        info: t('form.onSubmit'),
                         args: ['formData', 'api'],
                     },
                     {
                         name: 'onCreated',
+                        info: t('form.onCreated'),
                         args: ['api'],
                     },
                     {
                         name: 'onMounted',
+                        info: t('form.onMounted'),
                         args: ['api'],
                     },
                     {
                         name: 'onChange',
+                        info: t('form.onChange'),
                         args: ['field', 'value', 'options'],
                     },
                     {
                         name: 'beforeFetch',
+                        info: t('form.beforeFetch'),
                         args: ['config', 'data'],
                     },
                 ]
