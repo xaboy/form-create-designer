@@ -275,7 +275,7 @@ export default {
             const rule = this.$refs.designer.getJson();
             const options = this.$refs.designer.getOptionsJson();
             const str = btoa(unescape(encodeURIComponent(JSON.stringify({rule, options}))));
-            copyTextToClipboard('https://form-create.com/v3/designer#' + str);
+            copyTextToClipboard('https://form-create.com/v3/mobile#' + str);
         },
         onOk() {
             if (this.err) return;

@@ -275,12 +275,16 @@
                         <el-tab-pane :label="t('form.componentMode')" name="component"></el-tab-pane>
                         <el-tab-pane :label="t('form.htmlMode')" name="html"></el-tab-pane>
                     </el-tabs>
+                    <div class="_fd-preview-copy" v-if="['component', 'html'].indexOf(previewStatus) > -1"
+                         @click="copyCode">
+                        <i class="fc-icon icon-copy"></i>
+                    </div>
                     <template v-if="previewStatus === 'form'">
                         <ViewForm :rule="preview.rule" :option="preview.option" v-model:api="preview.api"
                                   v-if="preview.state"></ViewForm>
                     </template>
-                    <pre class="_fd-preview-code" v-else-if="previewStatus === 'component'"><code v-html="preview.component"></code></pre>
-                    <pre class="_fd-preview-code" v-else><code v-html="preview.html"></code></pre>
+                    <pre class="_fd-preview-code" ref="previewCode" v-else-if="previewStatus === 'component'"><code v-html="preview.component"></code></pre>
+                    <pre class="_fd-preview-code" ref="previewCode" v-else><code v-html="preview.html"></code></pre>
                 </el-dialog>
             </el-container>
         </el-main>
@@ -853,6 +857,9 @@ export default defineComponent({
                     htmlTemplate(rule, options),
                     {language: 'xml'}
                 ).value
+            },
+            copyCode() {
+                copyTextToClipboard(this.$refs.previewCode.innerText);
             },
             getRule() {
                 return methods.parseRule(deepCopy(data.dragForm.rule[0].children));
