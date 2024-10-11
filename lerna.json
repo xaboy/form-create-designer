@@ -1,0 +1,8 @@
+{
+  "npmClient": "pnpm",
+  "packages": [
+    "packages/element-ui",
+    "packages/vant"
+  ],
+  "version": "3.2.6"
+}

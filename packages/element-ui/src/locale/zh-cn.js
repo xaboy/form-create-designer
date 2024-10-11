@@ -21,6 +21,11 @@ const ZhCn = {
         formName: '表单名称',
         componentMode: '生成组件',
         document: '帮助文档',
+        onSubmit: '表单提交时触发',
+        onCreated: '表单组件初始化完毕后触发',
+        onMounted: '表单组件渲染完毕后触发',
+        onChange: '表单组件的值发生变化时触发',
+        beforeFetch: '远程数据请求发送前触发',
     },
     computed: {
         fieldUsed: '【{label}】在计算公式中被使用，请先修改对应公式',
