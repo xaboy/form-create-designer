@@ -37,36 +37,38 @@ const __banner__ = {
 }
 
 // 打包生产环境才引入的插件
-if (process.env.NODE_ENV === 'production') {
-    // 打包依赖展示
-    extnedsPlugins.push(
-        visualizer({
-            open: true,
-            gzipSize: true,
-            brotliSize: true,
-        })
-    );
-}
+// if (process.env.NODE_ENV === 'production') {
+//     // 打包依赖展示
+//     extnedsPlugins.push(
+//         visualizer({
+//             open: true,
+//             gzipSize: true,
+//             brotliSize: true,
+//         })
+//     );
+// }
 
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {
         lib: {
             entry: 'src/index.js',
-            name: 'FcDesigner',
+            name: 'FcDesignerMobile',
             fileName: format => `index.${format}.js`,
         },
         rollupOptions: {
             output: {
                 exports: 'named',
                 globals: {
-                    vue: 'Vue'
+                    vue: 'Vue',
+                    'element-plus': 'ElementPlus'
                 }
             },
             external: [
                 'vue',
                 'element-plus',
-                '@form-create/element-ui'
+                '@form-create/element-ui',
+                '@form-create/vant'
             ],
 
         },

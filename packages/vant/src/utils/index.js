@@ -35,6 +35,22 @@ export function makeTreeOptions(pre, config, level, data = []) {
     return data;
 }
 
+export const makeTitleRule = ()=>{
+    return [
+        {
+            type: 'switch', field: 'formCreateNative', props: {
+                activeValue: false,
+                inactiveValue: true,
+            },
+            control: [{value: false, rule: ['formCreateTitle']}]
+        },
+        {
+            type: 'input',
+            field: 'formCreateTitle',
+        },
+    ]
+}
+
 export function makeOptionsRule(t, to) {
     const options = [
         {'label': t('fetch.optionsType.struct'), 'value': 2},

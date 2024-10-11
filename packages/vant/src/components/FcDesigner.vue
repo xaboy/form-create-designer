@@ -341,7 +341,7 @@ hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
 
 export default defineComponent({
-    name: 'FcDesigner',
+    name: 'FcDesignerMobile',
     components: {
         TypeSelect,
         fcDraggable,
