@@ -262,7 +262,7 @@ export const useLocale = (locale) => {
 
 export const localeOptions = (t, options, prefix) => {
     return options.map(opt => {
-        opt.label = t((prefix || 'props') + '.' + opt.value) || opt.label;
+        opt.label = t((prefix || 'props') + '.' + opt.label || opt.value) || opt.label;
         return opt;
     })
 }

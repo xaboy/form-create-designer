@@ -1838,8 +1838,12 @@ export default defineComponent({
         }
         data.dragForm.rule = methods.makeDragRule(methods.makeChildren(data.children));
         methods.setOption({});
-        if(!menu.value) {
+        if (!menu.value) {
             methods.addComponent(ruleList);
+        } else {
+            ruleList.forEach(v => {
+                data.dragRuleList[v.name] = v;
+            });
         }
 
         const inputCheckStatus = computed(() => {
