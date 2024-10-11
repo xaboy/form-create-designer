@@ -14,6 +14,7 @@
                 </div>
                 <div class="_fc-top-link">
                     <a href="https://form-create.com/" target="_blank" class="item">官网</a>
+                    <a href="https://form-create.com/v3/mobile" class="item">移动端设计器</a>
                     <a href="https://pro.form-create.com/view" class="item pro-version">高级版🔥</a>
                     <a href="https://view.form-create.com/" target="_blank" class="item">文档</a>
                     <a href="https://form-create.com/designer" target="_blank" class="item">Vue2版本</a>

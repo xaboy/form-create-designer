@@ -10,13 +10,13 @@
             <div class="_fc-top-nav">
                 <div class="_fc-top-copyright">
                     <img class="_fc-t-logo" src="http://form-create.com/logo.png" alt="logo"/>
-                    <div class="_fc-t-name"><span>FcDesigner Mobile</span></div>
+                    <div class="_fc-t-name"><span>FcDesigner 移动端</span></div>
                 </div>
                 <div class="_fc-top-link">
                     <a href="https://form-create.com/" target="_blank" class="item">官网</a>
+                    <a href="https://form-create.com/v3/designer" class="item">PC端设计器</a>
                     <a href="https://pro.form-create.com/mobile" class="item pro-version">高级版🔥</a>
                     <a href="https://view.form-create.com/" target="_blank" class="item">文档</a>
-                    <a href="https://form-create.com/designer" target="_blank" class="item">Vue2版本</a>
                     <a href="https://github.com/xaboy/form-create-designer" target="_blank" class="item">查看源码</a>
                 </div>
             </div>
