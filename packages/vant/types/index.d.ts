@@ -1,6 +1,6 @@
 import {Api, Options, Rule} from "@form-create/element-ui";
 import FormCreate from "@form-create/element-ui";
-import {Component, Plugin, Ref, App} from "@vue/runtime-core";
+import {Component, Plugin, Ref, App} from "vue";
 
 //多语言读取函数
 type t = (name, ...args) => string;
@@ -107,13 +107,18 @@ export interface Config {
             append?: boolean;
             prepend?: boolean;
         };
-        //id组件拖拽组件规则的id,rule为当前组件的生成规则
+        //组件拖拽组件规则的id,rule为当前组件的生成规则
         [id: string]: (rule: Rule, arg: { t: t }) => Rule[] | {
             rule: (rule: Rule, arg: { t: t }) => Rule[];
             append?: boolean;
             prepend?: boolean;
         };
     };
+    //组件初始化时默认规则
+    updateDefaultRule?: {
+        //组件拖拽组件规则的id, 设置组件的初始化规则
+        [id: string]: Partial<Omit<Rule, "field" | "children" | "component">> | ((Rule) => void);
+    }
 }
 
 //拖拽组件描述规则
@@ -218,10 +223,10 @@ export type DescriptionData = Array<{
 }>
 
 //用于预览的渲染器
-export type formCreate = FormCreate;
+export type formCreate = typeof FormCreate;
 
 //用于设计的渲染器
-export type designerForm = FormCreate;
+export type designerForm = typeof FormCreate;
 
 //原型方法
 interface FcDesignerProtoType {
