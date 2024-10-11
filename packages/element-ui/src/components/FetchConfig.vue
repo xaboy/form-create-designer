@@ -139,6 +139,7 @@ export default defineComponent({
         visible(v) {
             if (v) {
                 this.value = deepCopy(this.modelValue || {});
+                this.active();
             }
         },
     },
