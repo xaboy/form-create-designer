@@ -76,9 +76,10 @@ export default function field({t}) {
             info: {
                 type: 'tooltip',
                 native: true,
-                effect: 'light',
+                effect: 'dark',
+                placement: 'top-end',
                 align: 'left',
-                content: t('form.document') + '：<a target="_blank" href="https://form-create.com/v3/guide/control">https://form-create.com/v3/guide/control</a>',
+                content: t('form.controlDocument', {doc: '<a target="_blank" href="https://form-create.com/v3/guide/control" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'}),
                 rawContent: true,
             },
             props: {

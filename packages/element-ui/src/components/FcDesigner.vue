@@ -873,7 +873,7 @@ export default defineComponent({
                 return options;
             },
             getOptions() {
-                methods.getOption();
+                return methods.getOption();
             },
             getOptionsJson() {
                 return designerForm.toJson([this.getOption()]).slice(1).slice(0, -1);
