@@ -88,6 +88,11 @@ export default function form({t}) {
                         args: ['formData', 'api'],
                     },
                     {
+                        name: 'onReset',
+                        info: t('form.onReset'),
+                        args: ['api'],
+                    },
+                    {
                         name: 'onCreated',
                         info: t('form.onCreated'),
                         args: ['api'],

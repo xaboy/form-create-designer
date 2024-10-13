@@ -25,6 +25,7 @@ const ZhCn = {
         document: '帮助文档',
         controlDocument: '需要更详细的配置方法？请查看{doc}',
         onSubmit: '表单提交时触发',
+        onReset: '表单重置后触发',
         onCreated: '表单组件初始化完毕后触发',
         onMounted: '表单组件渲染完毕后触发',
         onChange: '表单组件的值发生变化时触发',

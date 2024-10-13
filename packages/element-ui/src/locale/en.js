@@ -24,6 +24,7 @@ const En = {
         document: 'Document',
         controlDocument: 'Need more detailed configuration methods? Please view {doc}',
         onSubmit: 'Triggered when form is submitted',
+        onReset: 'Triggered after form is reset',
         onCreated: 'Triggered after the form component is initialized',
         onMounted: 'Triggered after the form component is mounted',
         onChange: 'Triggered when the component value changes',
