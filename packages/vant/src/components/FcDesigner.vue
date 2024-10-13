@@ -1529,7 +1529,7 @@ export default defineComponent({
                 return {...config, dragBtn: false, handleBtn: config.children ? ['addChild'] : false, ...slotConfig}
             },
             makeRule(config, _rule) {
-                const rule = _rule || config.rule({t});
+                let rule = _rule || config.rule({t});
                 const updateRule = updateDefaultRule.value && updateDefaultRule.value[config.name];
                 if (!_rule && updateRule) {
                     if (typeof updateRule === 'function') {
