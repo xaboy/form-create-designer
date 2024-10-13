@@ -948,6 +948,7 @@ export default defineComponent({
                     ...options.form || {}
                 };
                 options._event = {
+                    onReset: options.onReset || '',
                     onSubmit: options.onSubmit || '',
                     onCreated: options.onCreated || '',
                     onMounted: options.onMounted || '',
