@@ -95,6 +95,7 @@
         "@form-create/vant": "^3.2.11",
         "codemirror": "^6.65.7",
         "element-plus": "^2.8.4",
+        "js-beautify": "^1.15.1",
         "vant": "^4.9.7",
         "vuedraggable": "4.1.0"
     }

@@ -231,7 +231,7 @@
                                       :option="baseForm.options"
                                       :modelValue="baseForm.value"
                                       @change="baseChange"></DragForm>
-                            <el-divider v-if="propsForm.isShow">{{ t('designer.props') }}</el-divider>
+                            <el-divider v-if="propsForm.isShow">{{ t('designer.props') }} <PropsInput v-if="activeRule && getConfig('showCustomProps', true)"></PropsInput></el-divider>
                             <DragForm v-show="propsForm.isShow" v-model:api="propsForm.api" :rule="propsForm.rule"
                                       :option="propsForm.options"
                                       :modelValue="propsForm.value"
@@ -349,6 +349,7 @@ import hljs from '../utils/highlight/highlight.min';
 import xml from '../utils/highlight/xml.min';
 import javascript from '../utils/highlight/javascript.min';
 import TypeSelect from './TypeSelect.vue';
+import PropsInput from './PropsInput.vue';
 import mergeProps from '@form-create/utils/lib/mergeprops';
 
 hljs.registerLanguage('javascript', javascript);
@@ -357,6 +358,7 @@ hljs.registerLanguage('xml', xml);
 export default defineComponent({
     name: 'FcDesignerMobile',
     components: {
+        PropsInput,
         TypeSelect,
         fcDraggable,
         DragForm: elmFormCreate.$form(),
