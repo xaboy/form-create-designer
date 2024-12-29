@@ -27,6 +27,7 @@ const ZhCn = {
         onReset: '表单重置后触发',
         onCreated: '表单组件初始化完毕后触发',
         onMounted: '表单组件渲染完毕后触发',
+        onReload: '表单渲染规则重载后触发',
         onChange: '表单组件的值发生变化时触发',
         beforeFetch: '远程数据请求发送前触发',
     },
