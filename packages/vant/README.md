@@ -26,7 +26,7 @@
 ## 特点
 - 使用JSON数据生成表单
 - 支持扩展自定义组件
-- 内置32个常用的表单组件和布局组件
+- 内置30+常用的表单组件和布局组件
 - 提供丰富的表单操作API
 - 支持子表单和分组
 - 支持事件配置
@@ -35,10 +35,17 @@
 - 支持表单验证
 - 支持多语言
 - 支持移动端
+- 支持表单多语言
+
+## 支持的UI框架
+
+[![FcDesigner](https://static.form-create.com/file/img/products.jpg)](https://form-create.com/)
 
 > 如果对您有帮助，您可以点右上角 **"Star"** 支持一下 谢谢！本项目还在不断开发完善中,如有任何建议或问题[请在这里提出](https://github.com/xaboy/form-create-designer/issues/new)
 
-> 本项目QQ讨论群[629709230](https://jq.qq.com/?_wv=1027&k=F1FlEFIV)
+> 开发者讨论群[629709230](https://jq.qq.com/?_wv=1027&k=F1FlEFIV)
+
+- **预览**
 
 ![demo1](https://static.form-create.com/file/img/vant-designer.jpg)
 
