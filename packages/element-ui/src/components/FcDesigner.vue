@@ -2,8 +2,47 @@
     <el-container class="_fc-designer" :style="height ? `height:${dragHeight};flex:0;` : ''" @dragenter="handleDragenter" @dragleave="handleDragleave" @drop="handleDrop">
         <el-main>
             <el-container style="height: 100%;" :key="locale && locale.name">
-                <el-aside class="_fc-l" width="266px">
-                    <el-container style="height: 100%;">
+                <el-aside class="_fc-l-menu" width="40px">
+                    <el-tooltip
+                        effect="dark"
+                        :content="t('designer.comList')"
+                        placement="right"
+                        :hide-after="0"
+                    >
+                        <div class="_fc-l-menu-item" :class="{active: activeModule === 'base'}"
+                             @click="activeModule = 'base'">
+                            <i class="fc-icon icon-menu"></i>
+                        </div>
+                    </el-tooltip>
+                    <el-tooltip
+                        v-if="getConfig('showLanguage', true)"
+                        effect="dark"
+                        :content="t('language.name')"
+                        placement="right"
+                        :hide-after="0"
+                    >
+                        <div class="_fc-l-menu-item" :class="{active: activeModule === 'language'}"
+                             @click="activeModule = 'language'">
+                            <i class="fc-icon icon-language"></i>
+                        </div>
+                    </el-tooltip>
+                    <el-tooltip
+                        v-if="getConfig('showJsonPreview', true)"
+                        effect="dark"
+                        content="JSON"
+                        placement="right"
+                        :hide-after="0"
+                    >
+                        <div class="_fc-l-menu-item" :class="{active: activeModule === 'json'}"
+                             @click="activeModule = 'json'">
+                            <i class="fc-icon icon-script"></i>
+                        </div>
+                    </el-tooltip>
+                </el-aside>
+                <el-aside class="_fc-l" :width="activeModule === 'language' ? '450px' : '266px'">
+                    <LanguageConfig v-if="activeModule === 'language'"></LanguageConfig>
+                    <JsonPreview v-if="activeModule === 'json'"></JsonPreview>
+                    <el-container style="height: 100%;" v-if="activeModule === 'base'">
                         <el-header height="40px" class="_fc-l-tabs">
                             <div class="_fc-l-tab" :class="{active: activeMenuTab==='menu'}"
                                  @click="activeMenuTab='menu'"> {{ t('menu.component') }}
@@ -53,7 +92,7 @@
                                             <i class="fc-icon"
                                                :class="(data.rule._menu && data.rule._menu.icon) || 'icon-cell'"></i>
                                             <span>{{
-                                                    (data.rule.title || '').trim() || (data.rule.props && data.rule.props.label) || t('com.' + (data.rule._menu && data.rule._menu.name) + '.name') || data.rule.type
+                                                    (data.rule?.__fc__?.refRule?.__$title?.value || data.rule.title || '').trim() || (data.rule.props && data.rule.props.label) || t('com.' + (data.rule._menu && data.rule._menu.name) + '.name') || data.rule.type
                                                 }}</span>
                                         </div>
                                         <div class="_fc-tree-more" @click.stop v-if="!data.slot">
@@ -350,6 +389,8 @@ import xml from '../utils/highlight/xml.min';
 import javascript from '../utils/highlight/javascript.min';
 import TypeSelect from './TypeSelect.vue';
 import PropsInput from './PropsInput.vue';
+import LanguageConfig from './language/LanguageConfig.vue';
+import JsonPreview from './JsonPreview.vue';
 import mergeProps from '@form-create/utils/lib/mergeprops';
 
 hljs.registerLanguage('javascript', javascript);
@@ -358,6 +399,8 @@ hljs.registerLanguage('xml', xml);
 export default defineComponent({
     name: 'FcDesigner',
     components: {
+        JsonPreview,
+        LanguageConfig,
         PropsInput,
         TypeSelect,
         fcDraggable,
@@ -449,6 +492,7 @@ export default defineComponent({
             added: null,
             bus: Mitt(),
             device: 'pc',
+            activeModule: 'base',
             activeTab: 'form',
             activeMenuTab: 'menu',
             activeRule: null,
@@ -967,6 +1011,9 @@ export default defineComponent({
                     onChange: options.onChange || '',
                     beforeFetch: options.beforeFetch || '',
                 }
+                if (!hasProperty(options, 'language')) {
+                    options.language = {};
+                }
                 options._resetBtn = typeof options.resetBtn === 'object' ? options.resetBtn : {show: options.resetBtn === true};
                 options._submitBtn = typeof options.submitBtn === 'object' ? options.submitBtn : {show: options.submitBtn !== false};
                 options.submitBtn = options.resetBtn = false;
@@ -1325,8 +1372,8 @@ export default defineComponent({
                 data.baseForm.api.hidden(false);
                 data.baseForm.api.disabled(false);
                 if (hiddenField.length) {
-                    data.baseForm.api.hidden(true, hiddenField);
                     nextTick(() => {
+                        data.baseForm.api.hidden(true, hiddenField);
                         data.propsForm.api.hidden(true, hiddenField);
                     });
                 }

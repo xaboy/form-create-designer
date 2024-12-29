@@ -23,6 +23,7 @@ import TableFormColumnView from './components/tableForm/TableFormColumnView.vue'
 import SizeInput from './components/style/SizeInput.vue';
 import ColorInput from './components/style/ColorInput.vue';
 import StyleConfig from './components/style/StyleConfig.vue';
+import LanguageInput from './components/language/LanguageInput.vue';
 import {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor';
 import draggable from 'vuedraggable/src/vuedraggable';
@@ -66,6 +67,7 @@ designerForm.component('EventConfig', EventConfig);
 designerForm.component('ColorInput', ColorInput);
 designerForm.component('SizeInput', SizeInput);
 designerForm.component('StyleConfig', StyleConfig);
+designerForm.component('LanguageInput', LanguageInput);
 designerForm.component('ConfigItem', ConfigItem);
 designerForm.component('FieldInput', FieldInput);
 designerForm.component('FnConfig', FnConfig);

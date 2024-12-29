@@ -23,6 +23,7 @@ import TableFormColumnView from './components/tableForm/TableFormColumnView.vue'
 import SizeInput from './components/style/SizeInput.vue';
 import ColorInput from './components/style/ColorInput.vue';
 import StyleConfig from './components/style/StyleConfig.vue';
+import LanguageInput from './components/language/LanguageInput.vue';
 import FcEditor from '@form-create/component-wangeditor';
 import draggable from 'vuedraggable/src/vuedraggable';
 import {
@@ -67,6 +68,7 @@ elmFormCreate.component('EventConfig', EventConfig);
 elmFormCreate.component('ColorInput', ColorInput);
 elmFormCreate.component('SizeInput', SizeInput);
 elmFormCreate.component('StyleConfig', StyleConfig);
+elmFormCreate.component('LanguageInput', LanguageInput);
 elmFormCreate.component('ConfigItem', ConfigItem);
 elmFormCreate.component('FieldInput', FieldInput);
 elmFormCreate.component('FnConfig', FnConfig);
