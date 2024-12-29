@@ -152,11 +152,14 @@
                             <template v-if="getConfig('showInputData', true)">
                                 <div class="line"></div>
                                 <div class="_fd-input-btn">
-                                    <i class="fc-icon icon-check" v-if="inputCheckStatus"></i><span>{{
-                                        t('props.inputData')
-                                    }}：</span>
-                                    <el-switch size="small" :model-value="inputForm.state" inline-prompt
-                                               @update:model-value="openInputData"/>
+                                    <el-switch size="default" :model-value="inputForm.state" inline-prompt @update:model-value="openInputData">
+                                        <template #active-action>
+                                            <i class="fc-icon icon-edit2" style="font-size: 12px;color:#fff;"></i>
+                                        </template>
+                                        <template #inactive-action>
+                                            <i class="fc-icon icon-edit2" style="font-size: 12px;color:#333;"></i>
+                                        </template>
+                                    </el-switch>
                                 </div>
                             </template>
                         </div>
