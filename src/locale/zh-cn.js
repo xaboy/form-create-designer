@@ -226,6 +226,7 @@ const ZhCn = {
         name: '编号',
         type: '组件类型',
         form: '表单配置',
+        json: '渲染规则',
         style: '组件样式配置',
         rule: '基础配置',
         advanced: '高级配置',
@@ -237,6 +238,12 @@ const ZhCn = {
         childEmpty: '点击右下角 \\e789  按钮添加一列',
         dragEmpty: '拖拽左侧列表中的组件到此处',
         unload: '确定离开当前页面吗?',
+        comList: '组件列表',
+    },
+    language: {
+        name: '国际化配置',
+        add: '新增词条',
+        batchRemove: '批量删除',
     },
     menu: {
         main: '基础组件',

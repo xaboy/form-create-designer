@@ -226,6 +226,7 @@ const En = {
         name: 'Serial number',
         type: 'Type',
         form: 'Form',
+        json: 'Rule',
         style: 'Style',
         rule: 'Basis',
         advanced: 'Advanced',
@@ -237,6 +238,12 @@ const En = {
         childEmpty: 'Click the \\e789  button in the lower right corner to add a column',
         dragEmpty: 'Drag the components from the list on the left here',
         unload: 'Are you sure you want to leave the current page?',
+        comList: 'Component',
+    },
+    language: {
+        name: 'Language',
+        add: 'Add',
+        batchRemove: 'Batch Deletion',
     },
     menu: {
         main: 'Basic',
