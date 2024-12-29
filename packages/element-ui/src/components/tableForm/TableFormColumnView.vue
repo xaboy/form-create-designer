@@ -1,7 +1,7 @@
 <template>
     <div class="_fd-tf-col" :style="colStyle">
         <div class="_fd-tf-title">
-            {{ label || '' }}
+            <span v-if="required" class="_fd-tf-required">*</span>{{ label || '' }}
         </div>
         <div class="_fd-tf-con">
             <slot></slot>
@@ -19,6 +19,7 @@ export default defineComponent({
         label: String,
         width: [Number, String],
         color: String,
+        required: Boolean,
     },
     computed: {
         colStyle() {
@@ -39,7 +40,7 @@ export default defineComponent({
 <style>
 
 ._fd-tf-col ._fd-tf-con .el-form-item {
-    margin-bottom: 1px;
+    margin-bottom: 1px !important;
 }
 
 ._fd-tf-col {
@@ -75,6 +76,11 @@ export default defineComponent({
     align-items: center;
     margin-bottom: 0px;
     padding-left: 5px;
+}
+
+._fd-tf-required {
+    color: #f56c6c;
+    margin-right: 4px;
 }
 
 ._fd-tf-con ._fc-l-item {

@@ -737,6 +737,7 @@ const En = {
             name: 'TableForm',
             props: {
                 disabled: 'Disabled',
+                filterEmptyColumn: 'Whether to filter empty rows',
                 max: 'Maximum number of rows to add, if 0, there is no limit',
             }
         },
@@ -746,7 +747,8 @@ const En = {
             props: {
                 label: 'Title',
                 width: 'Width',
-                color: 'Color'
+                color: 'Color',
+                required: 'Whether to display required asterisks',
             }
         },
         text: {
