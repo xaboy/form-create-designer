@@ -9,20 +9,23 @@ importers:
   .:
     dependencies:
       '@form-create/component-wangeditor':
-        specifier: ^2.5.15
-        version: 2.5.15
+        specifier: ^2.7.0
+        version: 2.7.0
       '@form-create/element-ui':
-        specifier: ^2.5.36
-        version: 2.5.37
+        specifier: ^2.7.0
+        version: 2.7.0
       '@form-create/utils':
-        specifier: ^2.5.35
-        version: 2.5.36
+        specifier: ^2.7.0
+        version: 2.7.0
       codemirror:
         specifier: 5.60.0
         version: 5.60.0
       element-ui:
         specifier: ^2.15.2
         version: 2.15.14(vue@2.7.16)
+      js-beautify:
+        specifier: ^1.15.1
+        version: 1.15.1
       vue:
         specifier: ^2.7.14
         version: 2.7.16
@@ -70,12 +73,12 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  '@babel/runtime-corejs3@7.25.6':
-    resolution: {integrity: sha512-Gz0Nrobx8szge6kQQ5Z5MX9L3ObqNwCQY1PSwSNzreFL7aHGxv8Fp2j3ETV6/wWdbiV+mW6OSm8oQhg3Tcsniw==}
+  '@babel/runtime-corejs3@7.26.0':
+    resolution: {integrity: sha512-YXHu5lN8kJCb1LOb9PgV6pvak43X2h4HvRApcN5SdWeaItQOzfn1hgP6jasD6KWQyJDBxrVmA9o9OivlnNJK/w==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/runtime@7.25.6':
-    resolution: {integrity: sha512-VBj9MYyDb9tuLq7yzqjgzt6Q+IBQLrGZfdjOekyEirZPHxXWoTSGUTMrpsfi58Up73d13NfYLv8HT9vmznjzhQ==}
+  '@babel/runtime@7.26.0':
+    resolution: {integrity: sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/types@7.25.6':
@@ -220,41 +223,41 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@form-create/component-elm-checkbox@2.5.36':
-    resolution: {integrity: sha512-pugQEELs4ivxsSR3HSBJxM/lYPCfUDh0L0NU+ATeb7Pezk3R++e1v/NhQcROliEveZ6xj4qHbncrvbuOuARRDw==}
+  '@form-create/component-elm-checkbox@2.7.0':
+    resolution: {integrity: sha512-3q5ihG2ipJqg4Qf0PY4LOp2i1yHQV5phetzMYY4P0g4gfPSsU/1SNhxNT/CoN0BcqeQ5ldl1Fp350l3+n/4mHg==}
 
-  '@form-create/component-elm-frame@2.5.36':
-    resolution: {integrity: sha512-MrFr3ZV7HGl/wexaqr1YFHYMs9pxYdXPCQ9RAsdqlrMOlTjY6ms35G1S8RUL0OnEqpGgapOcNG6yNnHdjJ9TsQ==}
+  '@form-create/component-elm-frame@2.7.0':
+    resolution: {integrity: sha512-efKi0NqOpQzXGOUqr1mN95vWAJ7bpJCwJhtwISQB8nCV527+bxgN+MLQkPSOY7pIa6gyKQd4WJHCWWuS5+zhLw==}
 
-  '@form-create/component-elm-group@2.5.37':
-    resolution: {integrity: sha512-VOkw0SbEAnZg6IvI7FzOq9Qa7zaIcx/KYeLL6+8qKAOE79/D1zN5zIlNqFR9DJQouRJ39n4CHHtY30TKiUzb4A==}
+  '@form-create/component-elm-group@2.7.0':
+    resolution: {integrity: sha512-ylmswoaRHod37ydvfng1uRb1bwN4fIyKVV4T+krgfbLB7vu5x+PZjv1DIgZtRIDGqzm+h8CPSfExXwNkbBgJNw==}
 
-  '@form-create/component-elm-radio@2.5.36':
-    resolution: {integrity: sha512-0QQ7oi/zCFsPCfdhmbF0WH2aqm4yFLp7wvLlfuvxhhbEpsi2zzHJR+2pEyLZe3G3Cp8EW7zEj+z1hqvrd7+AGA==}
+  '@form-create/component-elm-radio@2.7.0':
+    resolution: {integrity: sha512-oeLATP//Ge6y6MvVOwRgZxXZ5YkzTOBagjuFNzTlaKfQzHw4OsR2tUdLIsTJ9D9pOyuBgglbKIttj9yYjcE1Zw==}
 
-  '@form-create/component-elm-select@2.5.36':
-    resolution: {integrity: sha512-VXFLmzQ4gTIj6mWvMNPoFT8hwCh64tmT7BsX7e+BLxK19qVFQ2Nna8nYfcxGcVLYIA+BA2U1g+dYqaiOBb+DIw==}
+  '@form-create/component-elm-select@2.7.0':
+    resolution: {integrity: sha512-JMUjY+iZoYhwhEaJ3YsWM/O6/fbumqzpAUX2esnG6wl9u4oeuojNtv+UWTxX1X3eOGGswJrePZ25bv2itzBb+w==}
 
-  '@form-create/component-elm-tree@2.5.36':
-    resolution: {integrity: sha512-O6b2uNz0gqoQ+etn/85WHVm5A0+8rZUhS2e6dWPtcusujTuIXCYiAkTbJanAUYv6NtF4RLjSaY5T5h5E1ZQ1QA==}
+  '@form-create/component-elm-tree@2.7.0':
+    resolution: {integrity: sha512-4n2GX8wM6omkS9bvleEykMveaqUm88TxolPExULWfy+LTkRSHFs1Pt5DAlipMbUNmn3Zn5u5yVqLCo53f8xJTg==}
 
-  '@form-create/component-elm-upload@2.5.36':
-    resolution: {integrity: sha512-fK+JfLzG+sS9Y9vM7EXGkjlCjyvHmsFjjUShkt1RXpF4/qrW/xiDYcMd1oFf0UmoFx9cULbXQYFfX5F3fj8T6A==}
+  '@form-create/component-elm-upload@2.7.0':
+    resolution: {integrity: sha512-TQvwijCTBdN5Lp+Kxtk2Q8uDDaoWhstlsM0TOfFjjd5xL2Q4RqSM/dY2kold9qnO23XiqGbxFbkzdQRK1q79DA==}
 
-  '@form-create/component-subform@2.5.37':
-    resolution: {integrity: sha512-/g2RvXmckWuLJIxH2LYmjLF0ksmNGrGa3EuK+vPCwY896GtqIy835ndX0OpKPvsvKTur/+TVCkaiF0Q1lmkPuA==}
+  '@form-create/component-subform@2.7.0':
+    resolution: {integrity: sha512-xXvVgtOu1fOUqChd+icIStaAYZsTlVGJ8y0Msah4dFPNm/2lMHqeSMpBMn2g2vYFxUpw2QXJ2EkuS4chWUHnhw==}
 
-  '@form-create/component-wangeditor@2.5.15':
-    resolution: {integrity: sha512-U4MUcvaBNEcNbIBeODxYuMlLYR+lZ1zCaZvLP3I+3SOd0KQVjvfRozZku64ukIVxC8Stev/ZNWqpAVsdvFLGaA==}
+  '@form-create/component-wangeditor@2.7.0':
+    resolution: {integrity: sha512-nAhWUIb6m3sFztkeCLmtIYUEsaDyCGFv9gJZD+R8kxtEt1yUb+E5yR5bKwwFl/IyxSzF/7FwDRn5KnabtiHVlA==}
 
-  '@form-create/core@2.5.37':
-    resolution: {integrity: sha512-mCpSXDvhbKcrgqzMlkpNRWq/8ES+7ITVvnTcFuPbVI5mjtrawmRUc/OWjVrQDvO5QcMO36w96QBUV5kx9XSSQg==}
+  '@form-create/core@2.7.0':
+    resolution: {integrity: sha512-zDipKv54QWLHeFVdHD1p3gQtc1tzNqgk//4F3IFVRMVix8+3JDFuc8MU6E3fHc6FeQ0MQC/l4XJtVRrhDXZx/g==}
 
-  '@form-create/element-ui@2.5.37':
-    resolution: {integrity: sha512-UTk1BrjAg3ze+3ctTtJYc067jiqvaYRNzUXCjW6JitCls9FQWVKRDjvkZLhJXxmc0J0Con70o+vFFWBl2yzNTA==}
+  '@form-create/element-ui@2.7.0':
+    resolution: {integrity: sha512-lbMfGVCSjFU9hwMKeabXtzdApCi/6CtDZYWRok0e1+LJxl1+TFYx61Y2IBusPDnQ4FTckke6xakJsEqj3nMwgg==}
 
-  '@form-create/utils@2.5.36':
-    resolution: {integrity: sha512-xvj5xtzk1mK+VsndA94hRoZb+fcGcaI8IRIYzBjLcUBjwmK4hrWUDu1ZLBiQOY5DrpxHG371NScQ7rahdeqSKQ==}
+  '@form-create/utils@2.7.0':
+    resolution: {integrity: sha512-A6hoUEcn7kPiA7A4V+R808xmlJopGW1Odnim7nXhVG/tQ8iCuWJrvmBqTpbTYz/1wa94MsEj3ghoxKcEkWlyEA==}
 
   '@gulpjs/messages@1.1.0':
     resolution: {integrity: sha512-Ys9sazDatyTgZVb4xPlDufLweJ/Os2uHWOv+Caxvy2O85JcnT4M3vc73bi8pdLWlv3fdWQz3pdI9tVwo8rQQSg==}
@@ -267,6 +270,9 @@ packages:
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
+
+  '@one-ini/wasm@0.1.1':
+    resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -374,6 +380,10 @@ packages:
 
   JSV@4.0.2:
     resolution: {integrity: sha512-ZJ6wx9xaKJ3yFUhq5/sk82PJMuUyLk277I8mQeyDgCTjGdjWJIvPfaU5LIXaMuaN2UO1X3kZH4+lgphublZUHw==}
+
+  abbrev@2.0.0:
+    resolution: {integrity: sha512-6/mh1E2u2YgEsCHdY0Yx5oW+61gZU+1vXaoiHHrpKeuRNNgFvS+/jrwHiQhB5apAf5oB7UB7E19ol2R2LKH8hQ==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -495,6 +505,13 @@ packages:
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
 
+  commander@10.0.1:
+    resolution: {integrity: sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==}
+    engines: {node: '>=14'}
+
+  config-chain@1.1.13:
+    resolution: {integrity: sha512-qj+f8APARXHrM0hraqXYb2/bOVSV4PvJQlNZ/DVj0QrmNM2q2euizkeuVckQ57J+W0mRH6Hvi+k50M4Jul2VRQ==}
+
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
@@ -502,8 +519,8 @@ packages:
     resolution: {integrity: sha512-bVWtw1wQLzzKiYROtvNlbJgxgBYt2bMJpkCbKmXM3xyijvcjjWXEk5nyrrT3bgJ7ODb19ZohE2T0Y3FgNPyoTw==}
     engines: {node: '>= 10.13.0'}
 
-  core-js-pure@3.38.1:
-    resolution: {integrity: sha512-BY8Etc1FZqdw1glX0XNOq2FDwfrg/VGqoZOZCdaL+UmdaqDwQwYXkMJT4t6In+zfEfOJDcM9T0KdbBeJg8KKCQ==}
+  core-js-pure@3.39.0:
+    resolution: {integrity: sha512-7fEcWwKI4rJinnK+wLTezeg2smbFFdSBP6E2kQZNbnzM2s1rpKQ6aaRteZSSg7FLU3P0HGGVo/gbpfanU36urg==}
 
   core-js@2.6.12:
     resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
@@ -530,6 +547,11 @@ packages:
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+
+  editorconfig@1.0.4:
+    resolution: {integrity: sha512-L9Qe08KWTlqYMVvMcTIvMAdl1cDUubzRNYL+WfA4bLDMHe4nemKkpmYzkznE1FwLKu0EEmy6obgQKzMJrg4x9Q==}
+    engines: {node: '>=14'}
+    hasBin: true
 
   element-ui@2.15.14:
     resolution: {integrity: sha512-2v9fHL0ZGINotOlRIAJD5YuVB8V7WKxrE9Qy7dXhRipa035+kF7WuU/z+tEmLVPBcJ0zt8mOu1DKpWcVzBK8IA==}
@@ -649,6 +671,10 @@ packages:
   glob-watcher@6.0.0:
     resolution: {integrity: sha512-wGM28Ehmcnk2NqRORXFOTOR064L4imSw3EeOqU5bIwUf62eXGwg89WivH6VMahL8zlQHeodzvHpXplrqzrz3Nw==}
     engines: {node: '>= 10.13.0'}
+
+  glob@10.4.5:
+    resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    hasBin: true
 
   glob@11.0.0:
     resolution: {integrity: sha512-9UiX/Bl6J2yaBbxKoEBRm4Cipxgok8kQYcOPEhScPwebu2I0HoQOuYdIO6S3hLuWoZgpDpwQZMzTFxgpkyT76g==}
@@ -792,9 +818,21 @@ packages:
     resolution: {integrity: sha512-WhB9zCku7EGTj/HQQRz5aUQEUeoQZH2bWcltRErOpymJ4boYE6wL9Tbr23krRPSZ+C5zqNSrSw+Cc7sZZ4b7vg==}
     engines: {node: '>=0.10.0'}
 
+  jackspeak@3.4.3:
+    resolution: {integrity: sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw==}
+
   jackspeak@4.0.1:
     resolution: {integrity: sha512-cub8rahkh0Q/bw1+GxP7aeSe29hHHn2V4m29nnDlvCdlgU+3UGxkZp7Z53jLUdpX3jdTO0nJZUDl3xvbWc2Xog==}
     engines: {node: 20 || >=22}
+
+  js-beautify@1.15.1:
+    resolution: {integrity: sha512-ESjNzSlt/sWE8sciZH8kBF8BPlwXPwhR6pWKAw8bw4Bwj+iZcnKW6ONWUutJ7eObuBZQpiIb8S7OYspWrKt7rA==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  js-cookie@3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
+    engines: {node: '>=14'}
 
   jsonlint-mod@1.7.6:
     resolution: {integrity: sha512-oGuk6E1ehmIpw0w9ttgb2KsDQQgGXBzZczREW8OfxEm9eCQYL9/LCexSnh++0z3AiYGcXpBgqDSx9AAgzl/Bvg==}
@@ -813,6 +851,9 @@ packages:
     resolution: {integrity: sha512-a5BQjbCHnB+cy+gsro8lXJ4kZluzOijzJ1UVVfyJYZC+IP2pLv1h4+aysQeKuTmyO8NAqfyQAk4HWaP/HjcKTg==}
     engines: {node: '>=10.13.0'}
 
+  lru-cache@10.4.3:
+    resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
+
   lru-cache@11.0.1:
     resolution: {integrity: sha512-CgeuL5uom6j/ZVrg7G/+1IXqRY8JXX4Hghfy5YE0EhoYQWvndP1kufu58cmZLNIDKnRhZrXfdS9urVWx98AipQ==}
     engines: {node: 20 || >=22}
@@ -829,6 +870,14 @@ packages:
     resolution: {integrity: sha512-ethXTt3SGGR+95gudmqJ1eNhRO7eGEGIgYA9vnPatK4/etz2MEVDno5GMCibdMTuBMyElzIlgxMna3K94XDIDQ==}
     engines: {node: 20 || >=22}
 
+  minimatch@9.0.1:
+    resolution: {integrity: sha512-0jWhJpD/MdhPXwPuiRkCbfYfSKp2qnn2eOc279qI7f+osl/l+prKSrvhg157zSYvx/1nmgn2NqdT6k2Z7zSH9w==}
+    engines: {node: '>=16 || 14 >=14.17'}
+
+  minimatch@9.0.5:
+    resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
+    engines: {node: '>=16 || 14 >=14.17'}
+
   minipass@7.1.2:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -840,6 +889,11 @@ packages:
   nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
+  nopt@7.2.1:
+    resolution: {integrity: sha512-taM24ViiimT/XntxbPyJQzCG+p4EKOpgD3mxFwW38mGjVUrfERQOeY4EDHjdnptttfHuHQXFx+lTP08Q+mLa/w==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     hasBin: true
 
   normalize-path@3.0.0:
@@ -902,6 +956,10 @@ packages:
     resolution: {integrity: sha512-QLcPegTHF11axjfojBIoDygmS2E3Lf+8+jI6wOVmNVenrKSo3mFdSGiIgdSHenczw3wPtlVMQaFVwGmM7BJdtg==}
     engines: {node: '>=0.10.0'}
 
+  path-scurry@1.11.1:
+    resolution: {integrity: sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==}
+    engines: {node: '>=16 || 14 >=14.18'}
+
   path-scurry@2.0.0:
     resolution: {integrity: sha512-ypGJsmGtdXUOeM5u93TyeIEfEhM6s+ljAhrk5vAvSx8uyY/02OvrZnA0YNGUrPXfpJMgI1ODd3nwz8Npx4O4cg==}
     engines: {node: 20 || >=22}
@@ -925,6 +983,9 @@ packages:
   pretty-ms@9.1.0:
     resolution: {integrity: sha512-o1piW0n3tgKIKCwk2vpM/vOV13zjJzvP37Ioze54YlTHE06m4tjEbzg9WsKkvTuyYln2DHjo5pY4qrZGI0otpw==}
     engines: {node: '>=18'}
+
+  proto-list@1.2.4:
+    resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
 
   queue-tick@1.0.1:
     resolution: {integrity: sha512-kJt5qhMxoszgU/62PLP1CJytzd2NKetjSRnyuj31fDd3Rlcz3fzlFdFLD1SItunPwyqEOkca6GbV612BWfaBag==}
@@ -1003,6 +1064,11 @@ packages:
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
+    hasBin: true
+
+  semver@7.6.3:
+    resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
+    engines: {node: '>=10'}
     hasBin: true
 
   shebang-command@2.0.0:
@@ -1101,8 +1167,8 @@ packages:
     resolution: {integrity: sha512-y8MN937s/HVhEoBU1SxfHC+wxCHkV1a9gW8eAdTadYh/bGyesZIVcbjI+mSpFbSVwQici/XjBjuUyri1dnXwBw==}
     engines: {node: '>=10.13.0'}
 
-  tslib@2.7.0:
-    resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   unc-path-regex@0.1.2:
     resolution: {integrity: sha512-eXL4nmJT7oCpkZsHZUOJo8hcX3GbsiDOa0Qu9F646fi8dT3XuSVopVqAcEiVzSKKH7UoDti23wNX3qGFxcW5Qg==}
@@ -1245,12 +1311,12 @@ snapshots:
     dependencies:
       '@babel/types': 7.25.6
 
-  '@babel/runtime-corejs3@7.25.6':
+  '@babel/runtime-corejs3@7.26.0':
     dependencies:
-      core-js-pure: 3.38.1
+      core-js-pure: 3.39.0
       regenerator-runtime: 0.14.1
 
-  '@babel/runtime@7.25.6':
+  '@babel/runtime@7.26.0':
     dependencies:
       regenerator-runtime: 0.14.1
 
@@ -1329,58 +1395,58 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@form-create/component-elm-checkbox@2.5.36':
+  '@form-create/component-elm-checkbox@2.7.0':
     dependencies:
-      '@form-create/utils': 2.5.36
+      '@form-create/utils': 2.7.0
 
-  '@form-create/component-elm-frame@2.5.36':
+  '@form-create/component-elm-frame@2.7.0':
     dependencies:
-      '@form-create/utils': 2.5.36
+      '@form-create/utils': 2.7.0
 
-  '@form-create/component-elm-group@2.5.37':
+  '@form-create/component-elm-group@2.7.0':
     dependencies:
-      '@form-create/utils': 2.5.36
+      '@form-create/utils': 2.7.0
 
-  '@form-create/component-elm-radio@2.5.36':
+  '@form-create/component-elm-radio@2.7.0':
     dependencies:
-      '@form-create/utils': 2.5.36
+      '@form-create/utils': 2.7.0
 
-  '@form-create/component-elm-select@2.5.36':
+  '@form-create/component-elm-select@2.7.0':
     dependencies:
-      '@form-create/utils': 2.5.36
+      '@form-create/utils': 2.7.0
 
-  '@form-create/component-elm-tree@2.5.36':
+  '@form-create/component-elm-tree@2.7.0':
     dependencies:
-      '@form-create/utils': 2.5.36
+      '@form-create/utils': 2.7.0
 
-  '@form-create/component-elm-upload@2.5.36':
+  '@form-create/component-elm-upload@2.7.0':
     dependencies:
-      '@form-create/utils': 2.5.36
+      '@form-create/utils': 2.7.0
 
-  '@form-create/component-subform@2.5.37': {}
+  '@form-create/component-subform@2.7.0': {}
 
-  '@form-create/component-wangeditor@2.5.15':
+  '@form-create/component-wangeditor@2.7.0':
     dependencies:
       wangeditor: 4.7.15
 
-  '@form-create/core@2.5.37':
+  '@form-create/core@2.7.0':
     dependencies:
-      '@form-create/utils': 2.5.36
+      '@form-create/utils': 2.7.0
 
-  '@form-create/element-ui@2.5.37':
+  '@form-create/element-ui@2.7.0':
     dependencies:
-      '@form-create/component-elm-checkbox': 2.5.36
-      '@form-create/component-elm-frame': 2.5.36
-      '@form-create/component-elm-group': 2.5.37
-      '@form-create/component-elm-radio': 2.5.36
-      '@form-create/component-elm-select': 2.5.36
-      '@form-create/component-elm-tree': 2.5.36
-      '@form-create/component-elm-upload': 2.5.36
-      '@form-create/component-subform': 2.5.37
-      '@form-create/core': 2.5.37
-      '@form-create/utils': 2.5.36
+      '@form-create/component-elm-checkbox': 2.7.0
+      '@form-create/component-elm-frame': 2.7.0
+      '@form-create/component-elm-group': 2.7.0
+      '@form-create/component-elm-radio': 2.7.0
+      '@form-create/component-elm-select': 2.7.0
+      '@form-create/component-elm-tree': 2.7.0
+      '@form-create/component-elm-upload': 2.7.0
+      '@form-create/component-subform': 2.7.0
+      '@form-create/core': 2.7.0
+      '@form-create/utils': 2.7.0
 
-  '@form-create/utils@2.5.36': {}
+  '@form-create/utils@2.7.0': {}
 
   '@gulpjs/messages@1.1.0': {}
 
@@ -1396,6 +1462,8 @@ snapshots:
       strip-ansi-cjs: strip-ansi@6.0.1
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
+
+  '@one-ini/wasm@0.1.1': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -1468,6 +1536,8 @@ snapshots:
       prettier: 2.8.8
 
   JSV@4.0.2: {}
+
+  abbrev@2.0.0: {}
 
   ansi-regex@5.0.1: {}
 
@@ -1596,6 +1666,13 @@ snapshots:
 
   color-name@1.1.4: {}
 
+  commander@10.0.1: {}
+
+  config-chain@1.1.13:
+    dependencies:
+      ini: 1.3.8
+      proto-list: 1.2.4
+
   convert-source-map@2.0.0: {}
 
   copy-props@4.0.0:
@@ -1603,7 +1680,7 @@ snapshots:
       each-props: 3.0.0
       is-plain-object: 5.0.0
 
-  core-js-pure@3.38.1: {}
+  core-js-pure@3.39.0: {}
 
   core-js@2.6.12: {}
 
@@ -1625,6 +1702,13 @@ snapshots:
       object.defaults: 1.1.0
 
   eastasianwidth@0.2.0: {}
+
+  editorconfig@1.0.4:
+    dependencies:
+      '@one-ini/wasm': 0.1.1
+      commander: 10.0.1
+      minimatch: 9.0.1
+      semver: 7.6.3
 
   element-ui@2.15.14(vue@2.7.16):
     dependencies:
@@ -1784,6 +1868,15 @@ snapshots:
       async-done: 2.0.0
       chokidar: 3.6.0
 
+  glob@10.4.5:
+    dependencies:
+      foreground-child: 3.3.0
+      jackspeak: 3.4.3
+      minimatch: 9.0.5
+      minipass: 7.1.2
+      package-json-from-dist: 1.0.0
+      path-scurry: 1.11.1
+
   glob@11.0.0:
     dependencies:
       foreground-child: 3.3.0
@@ -1914,11 +2007,27 @@ snapshots:
 
   isobject@3.0.1: {}
 
+  jackspeak@3.4.3:
+    dependencies:
+      '@isaacs/cliui': 8.0.2
+    optionalDependencies:
+      '@pkgjs/parseargs': 0.11.0
+
   jackspeak@4.0.1:
     dependencies:
       '@isaacs/cliui': 8.0.2
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
+
+  js-beautify@1.15.1:
+    dependencies:
+      config-chain: 1.1.13
+      editorconfig: 1.0.4
+      glob: 10.4.5
+      js-cookie: 3.0.5
+      nopt: 7.2.1
+
+  js-cookie@3.0.5: {}
 
   jsonlint-mod@1.7.6:
     dependencies:
@@ -1940,6 +2049,8 @@ snapshots:
       rechoir: 0.8.0
       resolve: 1.22.8
 
+  lru-cache@10.4.3: {}
+
   lru-cache@11.0.1: {}
 
   map-cache@0.2.2: {}
@@ -1953,11 +2064,23 @@ snapshots:
     dependencies:
       brace-expansion: 2.0.1
 
+  minimatch@9.0.1:
+    dependencies:
+      brace-expansion: 2.0.1
+
+  minimatch@9.0.5:
+    dependencies:
+      brace-expansion: 2.0.1
+
   minipass@7.1.2: {}
 
   mute-stdout@2.0.0: {}
 
   nanoid@3.3.7: {}
+
+  nopt@7.2.1:
+    dependencies:
+      abbrev: 2.0.0
 
   normalize-path@3.0.0: {}
 
@@ -2011,6 +2134,11 @@ snapshots:
     dependencies:
       path-root-regex: 0.1.2
 
+  path-scurry@1.11.1:
+    dependencies:
+      lru-cache: 10.4.3
+      minipass: 7.1.2
+
   path-scurry@2.0.0:
     dependencies:
       lru-cache: 11.0.1
@@ -2032,6 +2160,8 @@ snapshots:
   pretty-ms@9.1.0:
     dependencies:
       parse-ms: 4.0.0
+
+  proto-list@1.2.4: {}
 
   queue-tick@1.0.1: {}
 
@@ -2117,6 +2247,8 @@ snapshots:
 
   semver@6.3.1:
     optional: true
+
+  semver@7.6.3: {}
 
   shebang-command@2.0.0:
     dependencies:
@@ -2208,7 +2340,7 @@ snapshots:
     dependencies:
       streamx: 2.20.1
 
-  tslib@2.7.0: {}
+  tslib@2.8.1: {}
 
   unc-path-regex@0.1.2: {}
 
@@ -2295,9 +2427,9 @@ snapshots:
 
   wangeditor@4.7.15:
     dependencies:
-      '@babel/runtime': 7.25.6
-      '@babel/runtime-corejs3': 7.25.6
-      tslib: 2.7.0
+      '@babel/runtime': 7.26.0
+      '@babel/runtime-corejs3': 7.26.0
+      tslib: 2.8.1
 
   which@1.3.1:
     dependencies:

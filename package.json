@@ -53,9 +53,9 @@
         "vue": "^2.7"
     },
     "dependencies": {
-        "@form-create/component-wangeditor": "^2.5.15",
-        "@form-create/element-ui": "^2.5.36",
-        "@form-create/utils": "^2.5.35",
+        "@form-create/component-wangeditor": "^2.7.0",
+        "@form-create/element-ui": "^2.7.0",
+        "@form-create/utils": "^2.7.0",
         "codemirror": "5.60.0",
         "element-ui": "^2.15.2",
         "js-beautify": "^1.15.1",

@@ -110,9 +110,12 @@ FcDesigner.utils = {
     toJSON
 }
 
-if (compareVersion('2.5.36', formCreate.version) === 1) {
-    console.warn('Please use FormCreate version 2.5.36 or greater, see https://github.com/xaboy/form-create.');
+const minVersion = '2.7.0';
+
+if (compareVersion(minVersion, formCreate.version) === 1) {
+    console.warn('Please use FormCreate version ' + minVersion + ' or greater, see https://github.com/xaboy/form-create.');
 }
+
 
 export default FcDesigner;
 
