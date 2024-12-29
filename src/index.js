@@ -21,7 +21,7 @@ import ColorInput from './components/style/ColorInput.vue';
 import StyleConfig from './components/style/StyleConfig.vue';
 import ConfigItem from './components/style/ConfigItem.vue';
 import {designerForm} from './utils/form';
-import FcEditor from '@form-create/component-wangeditor';
+import FcEditor from '@form-create/component-wangeditor/dist/index.es.js';
 import './style/index.css';
 import './style/icon.css';
 import draggable from 'vuedraggable';

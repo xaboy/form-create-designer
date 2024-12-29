@@ -32,7 +32,7 @@ export default function field({t}) {
                 children: [{
                     type:'div',
                     domProps:{
-                        innerHTML:t('form.document') + '：<a target="_blank" href="https://form-create.com/v3/guide/control">https://form-create.com/v3/guide/control</a>'
+                        innerHTML: t('form.controlDocument', {doc: '<a target="_blank" href="https://form-create.com/v3/guide/control" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'})
                     }
                 }],
             },

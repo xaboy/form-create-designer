@@ -69,13 +69,15 @@ export default function form({t}) {
             type: 'FnConfig',
             field: '>_event',
             info: {
-                type: 'tooltip',
                 native: true,
-                effect: 'dark',
-                placement: 'top-end',
+                effect: 'light',
                 align: 'left',
-                content: t('form.controlDocument', {doc: '<a target="_blank" href="https://form-create.com/v3/guide/global-event" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'}),
-                rawContent: true,
+                children: [{
+                    type:'div',
+                    domProps:{
+                        innerHTML: t('form.controlDocument', {doc: '<a target="_blank" href="https://form-create.com/v3/guide/global-event" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'})
+                    }
+                }],
             },
             value: {},
             col: {show: true},
