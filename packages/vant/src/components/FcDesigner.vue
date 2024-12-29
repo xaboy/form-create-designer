@@ -264,53 +264,69 @@
                                     </el-input>
                                 </template>
                             </template>
-                            <el-divider v-if="baseForm.isShow">{{ t('designer.rule') }}</el-divider>
-                            <DragForm v-show="baseForm.isShow" v-model:api="baseForm.api"
-                                      :rule="baseForm.rule"
-                                      :option="baseForm.options"
-                                      :modelValue="baseForm.value"
-                                      @change="baseChange"></DragForm>
-                            <el-divider v-if="propsForm.isShow">{{ t('designer.props') }} <PropsInput v-if="activeRule && getConfig('showCustomProps', true)"></PropsInput></el-divider>
-                            <DragForm v-show="propsForm.isShow" v-model:api="propsForm.api" :rule="propsForm.rule"
-                                      :option="propsForm.options"
-                                      :modelValue="propsForm.value"
-                                      @change="propChange" @removeField="propRemoveField"></DragForm>
-                            <el-divider v-if="customForm.isShow && customForm.propsShow">
-                                {{ t('designer.props') }}
-                            </el-divider>
-                            <DragForm v-if="customForm.isShow && customForm.propsShow" v-model:api="customForm.api"
-                                      :rule="customForm.rule"
-                                      :option="customForm.options" :key="customForm.key"
-                                      @change="customFormChange"></DragForm>
-                            <el-divider v-if="styleForm.isShow" id="_fd-config-style">{{
-                                    t('designer.style')
-                                }}
-                            </el-divider>
-                            <DragForm v-show="styleForm.isShow" :rule="styleForm.rule" :option="styleForm.options"
-                                      :modelValue="styleForm.value"
-                                      @change="styleChange" v-model:api="styleForm.api"></DragForm>
-                            <el-divider
-                                v-if="eventShow">
-                                {{ t('designer.event') }}
-                            </el-divider>
-                            <EventConfig
-                                v-if="eventShow"
-                                :event-name="(activeRule && activeRule._menu.event) || []"
-                                :component-name="(activeRule && activeRule._menu.name) || ''"
-                                :model-value="(activeRule && activeRule._on) || {}"
-                                @update:modelValue="changeEvent"></EventConfig>
-                            <template v-if="activeRule">
-                                <el-divider v-if="validateForm.isShow">{{
-                                        t('designer.validate')
-                                    }}
-                                </el-divider>
-                                <DragForm v-if="validateForm.isShow" v-model:api="validateForm.api"
-                                          :rule="validateForm.rule"
-                                          :option="validateForm.options"
-                                          :modelValue="validateForm.value"
-                                          @change="validateChange"
-                                          :key="activeRule._fc_id"></DragForm>
-                            </template>
+                            <div class="_fc-r-config" :style="{'grid-template-areas': configFormOrderStyle}">
+                                <div style="grid-area: base;">
+                                    <el-divider v-if="baseForm.isShow">{{ t('designer.rule') }}</el-divider>
+                                    <DragForm v-show="baseForm.isShow" v-model:api="baseForm.api"
+                                              :rule="baseForm.rule"
+                                              :option="baseForm.options"
+                                              :modelValue="baseForm.value"
+                                              @change="baseChange"></DragForm>
+                                </div>
+                                <div style="grid-area: props;">
+                                    <el-divider v-if="propsForm.isShow">{{ t('designer.props') }}
+                                        <PropsInput
+                                            v-if="activeRule && getConfig('showCustomProps', true)"></PropsInput>
+                                    </el-divider>
+                                    <DragForm v-show="propsForm.isShow" v-model:api="propsForm.api"
+                                              :rule="propsForm.rule"
+                                              :option="propsForm.options"
+                                              :modelValue="propsForm.value"
+                                              @change="propChange" @removeField="propRemoveField"></DragForm>
+                                    <el-divider v-if="customForm.isShow && customForm.propsShow">
+                                        {{ t('designer.props') }}
+                                    </el-divider>
+                                    <DragForm v-if="customForm.isShow && customForm.propsShow"
+                                              v-model:api="customForm.api"
+                                              :rule="customForm.rule"
+                                              :option="customForm.options" :key="customForm.key"
+                                              @change="customFormChange"></DragForm>
+                                </div>
+                                <div style="grid-area: style;">
+                                    <el-divider v-if="styleForm.isShow" id="_fd-config-style">{{
+                                            t('designer.style')
+                                        }}
+                                    </el-divider>
+                                    <DragForm v-show="styleForm.isShow" :rule="styleForm.rule"
+                                              :option="styleForm.options"
+                                              :modelValue="styleForm.value"
+                                              @change="styleChange" v-model:api="styleForm.api"></DragForm>
+                                </div>
+                                <div style="grid-area: event;">
+                                    <el-divider
+                                        v-if="eventShow">
+                                        {{ t('designer.event') }}
+                                    </el-divider>
+                                    <EventConfig
+                                        v-if="eventShow"
+                                        :event-name="(activeRule && activeRule._menu.event) || []"
+                                        :component-name="(activeRule && activeRule._menu.name) || ''"
+                                        :model-value="(activeRule && activeRule._on) || {}"
+                                        @update:modelValue="changeEvent"></EventConfig>
+                                </div>
+                                <div v-if="activeRule" style="grid-area: validate;">
+                                    <el-divider v-if="validateForm.isShow">{{
+                                            t('designer.validate')
+                                        }}
+                                    </el-divider>
+                                    <DragForm v-if="validateForm.isShow" v-model:api="validateForm.api"
+                                              :rule="validateForm.rule"
+                                              :option="validateForm.options"
+                                              :modelValue="validateForm.value"
+                                              @change="validateChange"
+                                              :key="activeRule._fc_id"></DragForm>
+                                </div>
+                            </div>
                         </el-main>
                     </el-container>
                 </el-aside>
@@ -457,6 +473,23 @@ export default defineComponent({
         });
         const hiddenDragBtn = computed(() => {
             return configRef.value.hiddenDragBtn === true;
+        });
+        const configFormOrderStyle = computed(() => {
+            const def = ['base', 'props', 'style', 'event', 'validate'];
+            let sort = configRef.value.configFormOrder ? [...configRef.value.configFormOrder] : [];
+            let value = [];
+            if (!sort.length) {
+                value = def;
+            } else {
+                [...sort, ...def].forEach(v => {
+                    if (value.indexOf(v) === -1 && def.indexOf(v) > -1) {
+                        value.push(v);
+                    }
+                });
+            }
+            return value.map(v => {
+                return `"${v}"`;
+            }).join(' ');
         });
         let _t = globalT;
         if (locale.value) {
@@ -1949,6 +1982,7 @@ export default defineComponent({
             hiddenItem,
             hiddenDragMenu,
             hiddenDragBtn,
+            configFormOrderStyle,
         }
     },
     created() {
