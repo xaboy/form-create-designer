@@ -45,19 +45,27 @@ export interface Config {
     //是否可以切换组件类型,或者可以相互切换的字段
     switchType?: false | Array<string[]>;
     //是否自动选中拖入的组件
-    autoActive: boolean;
+    autoActive?: boolean;
+    //是否在复制时自动重置组件的name,默认开启
+    autoResetName?: boolean;
+    //设置右侧配置项的顺序
+    configFormOrder?: Array<"base" | "props" | "validate" | "style" | "event">
+    //右侧配置更新方式
+    updateConfigOnBlur?: boolean;
+    //是否生成vue2语法的模板组件
+    useTemplate?: boolean;
     //定义表单配置默认值
-    formOptions: Object;
+    formOptions?: Object;
     //配置field是否可以编辑
     fieldReadonly?: boolean;
     //隐藏拖拽操作按钮
-    hiddenDragMenu: boolean;
+    hiddenDragMenu?: boolean;
     //隐藏拖拽按钮
-    hiddenDragBtn: boolean;
+    hiddenDragBtn?: boolean;
     //隐藏部分菜单
-    hiddenMenu: MenuName[]
+    hiddenMenu?: MenuName[]
     //隐藏部分组件
-    hiddenItem: string[]
+    hiddenItem?: string[]
     //隐藏组件的部分配置项
     hiddenItemConfig?: {
         default?: string[];
@@ -78,20 +86,28 @@ export interface Config {
     showBaseForm?: boolean;
     //是否显示组件联动
     showControl?: boolean;
+    //是否显示json预览按钮
+    showJsonPreview?: boolean;
+    //是否显示自定义props按钮
+    showCustomProps?: boolean;
     //是否显示组件的属性配置表单
     showPropsForm?: boolean;
     //是否显示组件的事件配置表单
     showEventForm?: boolean;
     //是否显示组件的验证配置表单
     showValidateForm?: boolean;
+    //是否显示组件的样式配置表单
+    showStyleForm?: boolean;
     //是否显示表单配置
     showFormConfig?: boolean;
     //是否显示录入按钮
     showInputData?: boolean;
     //是否显示多端适配选项
     showDevice?: boolean;
+    //是否显示国际化配置
+    showLanguage?: boolean;
     //定义渲染规则所需的formData
-    appendConfigData: string[] | ((rule: Rule) => Object);
+    appendConfigData?: string[] | ((rule: Rule) => Object);
     //基础配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面
     baseRule?: extendRule;
     //验证配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面
@@ -100,11 +116,21 @@ export interface Config {
     formRule?: extendRule;
     //组件配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面
     componentRule?: {
+        default: (rule: Rule, arg: { t: t }) => Rule[] | {
+            rule: (rule: Rule, arg: { t: t }) => Rule[];
+            append?: boolean;
+            prepend?: boolean;
+        };
         //id组件拖拽组件规则的id,rule为当前组件的生成规则
         [id: string]: (rule: Rule, arg: { t: t }) => Rule[] | {
-            rule: (rule: Rule, arg: { t: t }) => Rule[],
-            append?: boolean
-        }
+            rule: (rule: Rule, arg: { t: t }) => Rule[];
+            append?: boolean;
+            prepend?: boolean;
+        };
+    };
+    updateDefaultRule?: {
+        //组件拖拽组件规则的id, 设置组件的初始化规则
+        [id: string]: Partial<Omit<Rule, "field" | "children" | "component">> | ((Rule) => void);
     };
 }
 
@@ -214,15 +240,99 @@ export type formCreate = typeof FormCreate;
 
 //用于设计的渲染器
 export type designerForm = typeof FormCreate;
+//复制内容
+export type copyTextToClipboard = (text: string) => void;
+
+//生成$inject参数的提示
+export type getInjectArg = (t: t) => Object;
+
+//加载选项的多语言
+export type localeOptions = (t: t, options: Object[], prefix: String) => Object[];
+
+//加载配置项的多语言
+export type localeProps = (t: t, prefix: String, rule: Rule[]) => Rule[];
+
+//生成options配置项的规则
+export type makeOptionsRule = (t: t, to?: String, label?: string, value?: string) => Rule;
+
+//生成递归类型options配置项的规则
+export type makeTreeOptionsRule = (t: t, to?: String, label?: string, value?: string) => Rule;
+
+//生成表单项规则
+export type makeTitleRule = (t: t) => Rule[];
+
+//生成必填的规则
+export type makeRequiredRule = () => Rule;
+
+//转JSON字符串
+export type toJSON = (obj: Object) => string;
+
+type Utils = {
+
+    //复制内容
+    copyTextToClipboard: copyTextToClipboard;
+
+    //生成$inject参数的提示
+    getInjectArg: getInjectArg;
+
+    //加载选项的多语言
+    localeOptions: localeOptions;
+
+    //加载配置项的多语言
+    localeProps: localeProps;
+
+    //生成options配置项的规则
+    makeOptionsRule: makeOptionsRule;
+
+    //生成递归类型options配置项的规则
+    makeTreeOptionsRule: makeTreeOptionsRule;
+
+    //生成递归类型options配置项的规则
+    makeTitleRule: makeTitleRule;
+
+    //生成必填的规则
+    makeRequiredRule: makeRequiredRule;
+
+    //转JSON字符串
+    toJSON: toJSON;
+}
 
 //原型方法
 interface FcDesignerProtoType {
     //多语言读取函数
     t: t;
+    utils: Utils;
     //用于预览的渲染器
     formCreate: formCreate;
     //用于设计的渲染器
     designerForm: designerForm;
+
+    //复制内容
+    copyTextToClipboard: copyTextToClipboard;
+
+    //生成$inject参数的提示
+    getInjectArg: getInjectArg;
+
+    //加载选项的多语言
+    localeOptions: localeOptions;
+
+    //加载配置项的多语言
+    localeProps: localeProps;
+
+    //生成options配置项的规则
+    makeOptionsRule: makeOptionsRule;
+
+    //生成递归类型options配置项的规则
+    makeTreeOptionsRule: makeTreeOptionsRule;
+
+    //生成递归类型options配置项的规则
+    makeTitleRule: makeTitleRule;
+
+    //生成必填的规则
+    makeRequiredRule: makeRequiredRule;
+
+    //转JSON字符串
+    toJSON: toJSON;
 
     //往渲染器中挂载组件
     component(name: string, component: Component, previewComponent?: Component): void;
@@ -234,9 +344,6 @@ interface FcDesignerProtoType {
         locale: Ref<Object>;
         t(key: string): string | undefined;
     }
-
-    //获取组件配置中选项配置规则
-    makeOptionsRule(t: t, to: string): Rule;
 
     //挂载组件
     install: (app: VueConstructor, ...options: any[]) => any;
@@ -288,7 +395,7 @@ export declare const FcDesigner: import("vue").DefineComponent<{
     //清空设计器的表单
     clearDragRule: () => void;
     //选中设计器中指定组件
-    toolActive: (rule: Rule) => void;
+    triggerActive: (rule: Rule | string) => void;
     //清空设计器中组件的选中状态
     clearActiveRule: () => void;
     //设置表单配置的表单规则，于 config.formRule 相同
