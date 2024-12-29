@@ -43,7 +43,6 @@ import globalUseLocale, {t} from './utils/locale';
 import './style/index.css';
 import './style/icon.css';
 import './utils/highlight/style.css';
-import FcDesignerMobile from "@form-create/vant-designer/src";
 
 const addComponent = (id, component, previewComponent) => {
     designerForm.component(id, previewComponent || component);
@@ -95,7 +94,7 @@ FcDesigner.component = addComponent;
 FcDesigner.useLocale = globalUseLocale;
 FcDesigner.t = t;
 
-FcDesignerMobile.utils = {
+FcDesigner.utils = {
     copyTextToClipboard,
     getInjectArg,
     localeOptions,

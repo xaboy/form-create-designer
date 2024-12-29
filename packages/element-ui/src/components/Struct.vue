@@ -1,10 +1,16 @@
 <template>
     <div class="_fd-struct">
         <el-badge type="warning" is-dot :hidden="!configured">
-            <el-button @click="visible=true" size="small">{{ title || t('struct.title') }}</el-button>
+            <div @click="visible=true">
+                <slot>
+                    <el-button class="_fd-plain-button" plain size="small">
+                        {{ title || t('struct.title') }}
+                    </el-button>
+                </slot>
+            </div>
         </el-badge>
         <el-dialog class="_fd-struct-con" :title="title || t('struct.title')" v-model="visible" destroy-on-close
-                  :close-on-click-modal="false"
+                   :close-on-click-modal="false"
                    append-to-body width="800px">
             <div ref="editor" v-if="visible"></div>
             <template #footer>
@@ -26,6 +32,7 @@ import {deepCopy} from '@form-create/utils/lib/deepextend';
 import {defineComponent, markRaw} from 'vue';
 import is from '@form-create/utils/lib/type';
 import errorMessage from '../utils/message';
+import beautify from 'js-beautify';
 
 export default defineComponent({
     name: 'Struct',
@@ -44,7 +51,7 @@ export default defineComponent({
             return this.designer.setupState.t;
         },
         configured() {
-            return !is.empty(this.modelValue);
+            return !is.empty(this.modelValue) && Object.keys(this.modelValue).length > 0;
         },
     },
     data() {
@@ -76,12 +83,17 @@ export default defineComponent({
                     line: true,
                     tabSize: 2,
                     lineWrapping: true,
-                    value: val || ''
+                    value: val ? beautify.js(val, {
+                        indent_size: '2',
+                        indent_char: ' ',
+                        max_preserve_newlines: '5',
+                        indent_scripts: 'separate',
+                    }) : '',
                 }));
             });
         },
         onOk() {
-            const str = this.editor.getValue();
+            const str = (this.editor.getValue() || '').trim();
             let val;
             try {
                 val = (new Function('return ' + str))();

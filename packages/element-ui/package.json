@@ -93,6 +93,7 @@
         "@form-create/utils": "^3.2.0",
         "codemirror": "^6.65.7",
         "element-plus": "^2.8.4",
+        "js-beautify": "^1.15.1",
         "vuedraggable": "4.1.0"
     }
 }
