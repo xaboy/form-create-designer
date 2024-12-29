@@ -69,15 +69,13 @@ export default function form({t}) {
             type: 'FnConfig',
             field: '>_event',
             info: {
+                type: 'tooltip',
                 native: true,
-                effect: 'light',
+                effect: 'dark',
+                placement: 'top-end',
                 align: 'left',
-                children: [{
-                    type:'div',
-                    domProps:{
-                        innerHTML:t('form.document') + '：<a target="_blank" href="https://form-create.com/v3/guide/global-event">https://form-create.com/v3/guide/global-event</a>'
-                    }
-                }],
+                content: t('form.controlDocument', {doc: '<a target="_blank" href="https://form-create.com/v3/guide/global-event" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'}),
+                rawContent: true,
             },
             value: {},
             col: {show: true},
@@ -85,22 +83,37 @@ export default function form({t}) {
                 eventConfig: [
                     {
                         name: 'onSubmit',
+                        info: t('form.onSubmit'),
                         args: ['formData', 'api'],
                     },
                     {
+                        name: 'onReset',
+                        info: t('form.onReset'),
+                        args: ['api'],
+                    },
+                    {
                         name: 'onCreated',
+                        info: t('form.onCreated'),
                         args: ['api'],
                     },
                     {
                         name: 'onMounted',
+                        info: t('form.onMounted'),
+                        args: ['api'],
+                    },
+                    {
+                        name: 'onReload',
+                        info: t('form.onReload'),
                         args: ['api'],
                     },
                     {
                         name: 'onChange',
+                        info: t('form.onChange'),
                         args: ['field', 'value', 'options'],
                     },
                     {
                         name: 'beforeFetch',
+                        info: t('form.beforeFetch'),
                         args: ['config', 'data'],
                     },
                 ]
