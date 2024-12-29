@@ -9,4 +9,10 @@ export default defineConfig({
   root: rootPath,
   plugins: [vue()],
   base: '/designer/',
+  resolve: {
+    alias: [{
+      find: "vue",
+      replacement: "vue/dist/vue.esm.js"
+    }]
+  },
 });
