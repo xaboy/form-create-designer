@@ -117,6 +117,12 @@
     position: relative;
 }
 
+._fc-r-config {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "base" "props" "style" "event" "validate";
+}
+
 ._fc-r-tools-close {
     position: absolute;
     right: 24px;
