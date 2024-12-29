@@ -132,6 +132,12 @@ const En = {
         cancel: 'Triggered when the cancel button is clicked',
         confirm: 'Triggered when clicking confirm',
         validateFail: 'Triggered when table verification fails',
+        hook_load: 'Triggered after component rules are loaded',
+        hook_mounted: 'Triggered after component is mounted',
+        hook_deleted: 'Triggered after component rules are removed',
+        hook_watch: 'Triggered after component rules change',
+        hook_value: 'Triggered after component value changes',
+        hook_hidden: 'Triggered after component display status changes',
     },
     fetch: {
         title: 'Set data',
@@ -400,6 +406,14 @@ const En = {
         },
         calendarRange: {
             name: 'dateRange',
+            event: {
+                select: '点击并选中任意日期时触发',
+                unselect: '当日历组件的 type 为 multiple 时，取消选中日期时触发',
+                monthShow: '当某个月份进入可视区域时触发',
+                overRange: '范围选择超过最多可选天数时触发',
+                clickSubtitle: '点击日历副标题时触发',
+                clickDisabledDate: '点击禁用日期时触发',
+            },
         },
         vanNoticeBar: {
             name: 'Notice',

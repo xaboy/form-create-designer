@@ -6,7 +6,7 @@ const name = 'calendarRange';
 
 export default {
     menu: 'main',
-    icon: 'icon-calendar',
+    icon: 'icon-date-range',
     label,
     name,
     event: ['select', 'confirm', 'open', 'close', 'opened', 'closed', 'unselect', 'monthShow', 'overRange', 'clickSubtitle', 'clickDisabledDate', 'panelChange'],

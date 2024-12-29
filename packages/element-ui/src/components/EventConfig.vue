@@ -20,7 +20,8 @@
                               </span>
                                 <template #dropdown>
                                     <el-dropdown-menu>
-                                        <el-dropdown-item v-for="name in eventName" :key="name" @click="add(name)">
+                                        <el-dropdown-item v-for="name in eventName" :key="name" @click="add(name)"
+                                                          :disabled="Object.keys(event).indexOf(name) > -1">
                                             <div class="_fd-event-item">
                                                 <span>{{ name }}</span>
                                                 <span class="_fd-label" v-if="eventInfo[name]">
@@ -28,6 +29,18 @@
                                                 </span>
                                             </div>
                                         </el-dropdown-item>
+                                        <template v-for="(hook, idx) in hookList">
+                                            <el-dropdown-item :divided="eventName.length > 0 && !idx"
+                                                              @click="add(hook)"
+                                                              :disabled="Object.keys(event).indexOf(hook) > -1">
+                                                <div class="_fd-event-item">
+                                                    <div> {{ hook }}</div>
+                                                    <span class="_fd-label">
+                                                    {{ eventInfo[hook] }}
+                                                </span>
+                                                </div>
+                                            </el-dropdown-item>
+                                        </template>
                                         <el-dropdown-item :divided="eventName.length > 0" @click="cusEvent">
                                             <div>{{ t('props.custom') }}</div>
                                         </el-dropdown-item>
@@ -61,9 +74,9 @@
                                     <el-menu-item v-else :index="name + 0">
                                         <div class="_fd-event-title" @click.stop="edit({name})">
                                             <div class="_fd-event-method">
-                                                        <span>function<span>{{
-                                                                name
-                                                            }}</span></span>
+                                                <span>function<span>{{
+                                                        name
+                                                    }}</span></span>
                                                 <span class="_fd-label"
                                                       v-if="eventInfo[name]">{{ eventInfo[name] }}</span>
                                             </div>
@@ -156,6 +169,7 @@ export default defineComponent({
             activeData: null,
             val: null,
             defActive: 'no',
+            hookList: ['hook_load', 'hook_mounted', 'hook_deleted', 'hook_watch', 'hook_value', 'hook_hidden'],
             event: {},
             cus: false,
             cusValue: '',
@@ -166,10 +180,16 @@ export default defineComponent({
         t() {
             return this.designer.setupState.t;
         },
+        activeRule() {
+            return this.designer.setupState.activeRule;
+        },
         eventInfo() {
             const info = {};
             this.eventName.forEach(v => {
                 info[v] = this.t('com.' + this.componentName + '.event.' + v) || this.t('eventInfo.' + v) || '';
+            })
+            this.hookList.forEach(v => {
+                info[v] = this.t('eventInfo.' + v) || '';
             })
             return info;
         },
@@ -177,6 +197,10 @@ export default defineComponent({
             let num = 0;
             Object.keys(this.modelValue || {}).forEach(k => {
                 num += Array.isArray(this.modelValue[k]) ? this.modelValue[k].length : 1;
+            });
+            const hooks = this.activeRule ? {...this.activeRule.hook || {}} : {};
+            Object.keys(hooks).forEach(k => {
+                num += Array.isArray(this.activeRule.hook[k]) ? this.activeRule.hook[k].length : 1;
             });
             return num;
         },
@@ -186,7 +210,7 @@ export default defineComponent({
     },
     watch: {
         visible(v) {
-            this.event = v ? this.loadFN(deepExtend({}, this.modelValue || {})) : {};
+            this.event = v ? this.loadFN() : {};
             if (!v) {
                 this.destroy();
                 this.closeCus();
@@ -208,7 +232,12 @@ export default defineComponent({
         cusEvent() {
             this.cus = true;
         },
-        loadFN(e) {
+        loadFN() {
+            const e = deepExtend({}, this.modelValue || {});
+            const hooks = this.activeRule ? {...this.activeRule.hook || {}} : {};
+            Object.keys(hooks).forEach(k => {
+                e['hook_' + k] = hooks[k];
+            })
             const val = {};
             Object.keys(e).forEach(k => {
                 if (Array.isArray(e[k])) {
@@ -235,16 +264,21 @@ export default defineComponent({
         },
         parseFN(e) {
             const on = {};
+            const hooks = {};
             Object.keys(e).forEach(k => {
                 const lst = [];
                 e[k].forEach((v, i) => {
                     lst[i] = v.indexOf('$GLOBAL:') !== 0 ? ($T + v) : v;
                 });
                 if (lst.length > 0) {
-                    on[k] = lst.length === 1 ? lst[0] : lst;
+                    if (k.indexOf('hook_') > -1) {
+                        hooks[k.replace('hook_', '')] = lst.length === 1 ? lst[0] : lst;
+                    } else {
+                        on[k] = lst.length === 1 ? lst[0] : lst;
+                    }
                 }
             });
-            return on;
+            return {hooks, on};
         },
         add(name) {
             let data = {};
@@ -322,7 +356,9 @@ export default defineComponent({
             if (this.activeData) {
                 return errorMessage(this.t('event.saveMsg'));
             }
-            this.$emit('update:modelValue', this.parseFN(this.event));
+            const {on, hooks} = this.parseFN(this.event);
+            this.$emit('update:modelValue', on);
+            this.activeRule.hook = hooks;
             this.visible = false;
             this.destroy();
             this.closeCus();
