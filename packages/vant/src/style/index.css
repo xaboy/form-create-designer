@@ -515,6 +515,10 @@
     font-weight: 400;
 }
 
+._fc-tabs .el-tabs__content {
+    overflow: auto;
+}
+
 ._fc-tabs .el-tabs__nav-scroll {
     padding: 0 15px;
 }
