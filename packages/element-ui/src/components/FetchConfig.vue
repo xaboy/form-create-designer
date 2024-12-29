@@ -15,7 +15,7 @@
                     </el-tab-pane>
                     <el-tab-pane lazy :label="t('fetch.parse')" name="second">
                         <FnEditor style="height: 415px;" v-model="form.parse" name="parse"
-                                  :args="[{name:'res', info: t('fetch.response')}]"
+                                  :args="[{name:'res', info: t('fetch.response')}, 'rule', 'api']"
                                   ref="parse"></FnEditor>
                     </el-tab-pane>
                     <el-tab-pane lazy :label="t('fetch.onError')" name="third">
