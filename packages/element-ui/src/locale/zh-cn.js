@@ -550,6 +550,12 @@ const ZhCn = {
                 nodeKey: '每个树节点用来作为唯一标识的属性，整棵树应该是唯一的'
             }
         },
+        elImage: {
+            name: '图片',
+            props: {
+                src: '图片链接'
+            }
+        },
         fcEditor: {
             name: '富文本框',
             props: {

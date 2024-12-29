@@ -519,6 +519,12 @@ const ZhCn = {
                 textColor: '文本颜色',
             }
         },
+        vanImage: {
+            name: '图片',
+            props: {
+                src: '图片链接'
+            }
+        },
         fcCell: {
             name: '格子'
         },

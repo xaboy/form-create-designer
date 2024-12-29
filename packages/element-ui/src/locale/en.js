@@ -550,6 +550,12 @@ const En = {
                 nodeKey: 'Each tree node is used as an attribute for unique identification, and the entire tree should be unique'
             }
         },
+        elImage: {
+            name: 'Image',
+            props: {
+                src: 'Image path'
+            }
+        },
         fcEditor: {
             name: 'Editor',
             props: {
