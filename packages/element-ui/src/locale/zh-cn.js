@@ -51,7 +51,8 @@ const ZhCn = {
             len: '长度',
         },
         types: {
-            string: '字符串',
+            string: '文本',
+            boolean: '布尔',
             array: '多选',
             number: '数字',
             integer: '整数',

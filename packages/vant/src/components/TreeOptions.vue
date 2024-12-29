@@ -8,7 +8,8 @@
                 <div class="_fd-tree-opt-node">
                     <el-input class="_fd-tree-opt-first" v-model="data[overColumns.label]"
                               @blur="change"/>
-                    <el-input class="_fd-tree-opt-last" v-model="data[overColumns.value]" @blur="change">
+                    <ValueInput class="_fd-tree-opt-last" v-model="data[overColumns.value]" @blur="change"
+                                @change-type="change">
                         <template #append>
                             <div class="_fd-tree-opt-btn" @click="add(node, data)">
                                 <i class="fc-icon icon-add"></i>
@@ -20,7 +21,7 @@
                                 <i class="fc-icon icon-delete"></i>
                             </div>
                         </template>
-                    </el-input>
+                    </ValueInput>
                 </div>
             </template>
         </el-tree>
@@ -32,10 +33,14 @@
 
 import {defineComponent} from 'vue';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
+import ValueInput from './ValueInput.vue';
 
 export default defineComponent({
     name: 'TreeOptions',
     emits: ['update:modelValue'],
+    components: {
+        ValueInput
+    },
     props: {
         modelValue: Array,
         columns: Object,
@@ -127,11 +132,15 @@ export default defineComponent({
 }
 
 ._fd-tree-opt-last {
-    width: 110px;
+    width: 165px;
 }
 
-._fd-tree-opt .el-table{
-    z-index: 1;
+._fd-tree-opt-last._label {
+    width: 175px;
+}
+
+._fd-tree-opt-last._label .el-input-group__append {
+    width: 65px;
 }
 
 ._fd-tree-opt ._fd-tree-opt-danger {
