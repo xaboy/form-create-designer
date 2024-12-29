@@ -372,7 +372,7 @@ export default defineComponent({
 
 ._fd-event-dropdown .el-dropdown-menu {
     max-height: 500px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 ._fd-event-head {

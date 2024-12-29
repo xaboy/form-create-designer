@@ -543,7 +543,7 @@
 }
 
 ._fc-designer ._fc-m-drag ._fd-draggable-drag {
-    overflow: scroll;
+    overflow: auto;
     padding: 2px 2px 100px;
 }
 
@@ -630,7 +630,7 @@
 ._fd-preview-code {
     margin-top: 0;
     max-height: 510px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 ._fd-preview-tabs .el-tabs__nav-wrap::after {
