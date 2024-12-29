@@ -23,8 +23,8 @@ import tree from './rule/tree';
 import alert from './rule/alert';
 import text from './rule/text';
 import space from './rule/space';
-// import tabs from './rule/tabs';
-// import tabPane from './rule/tabPane';
+import tabs from './rule/tabs';
+import tabPane from './rule/tabPane';
 import button from './rule/button';
 import editor from './rule/editor';
 import group from './rule/group';
@@ -35,13 +35,16 @@ import collapseItem from './rule/collapseItem';
 import tag from './rule/tag';
 import html from './rule/html';
 import table from './rule/table';
+import image from './rule/image';
+import tableForm from './rule/tableForm';
+import tableFormColumn from './rule/tableFormColumn';
 
 
 const ruleList = [
     input, textarea, password, number, radio, checkbox, select, _switch, rate, time, timeRange, slider, date, dateRange, color, cascader, upload, transfer, tree, editor,
-    group, subForm,
-    alert, button, text, html, divider, tag,
-    row, table, space, card, collapse,
+    group, subForm, tableForm, tableFormColumn,
+    alert, button, text, html, divider, tag, image,
+    row, table, space, tabs, tabPane, card, collapse,
     col, collapseItem,
 ];
 

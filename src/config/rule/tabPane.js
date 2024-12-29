@@ -13,7 +13,9 @@ export default {
     rule({t}) {
         return {
             type: name,
-            props: {label: t('com.elTabPane.name')},
+            props: {
+                label: t('com.elTabPane.name'),
+            },
             children: []
         };
     },

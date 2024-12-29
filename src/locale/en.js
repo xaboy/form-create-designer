@@ -528,6 +528,12 @@ const En = {
                 props: 'Field alias of data source'
             }
         },
+        elImage: {
+            name: 'Image',
+            props: {
+                src: 'Image path'
+            }
+        },
         fcEditor: {
             name: 'Editor',
             props: {
@@ -708,6 +714,7 @@ const En = {
             name: 'TableForm',
             props: {
                 disabled: 'Disabled',
+                filterEmptyColumn: 'Whether to filter empty rows',
                 max: 'Maximum number of rows to add, if 0, there is no limit',
             }
         },
@@ -717,7 +724,8 @@ const En = {
             props: {
                 label: 'Title',
                 width: 'Width',
-                color: 'Color'
+                color: 'Color',
+                required: 'Whether to display required asterisks',
             }
         },
         text: {

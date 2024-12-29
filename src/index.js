@@ -20,6 +20,9 @@ import SizeInput from './components/style/SizeInput.vue';
 import ColorInput from './components/style/ColorInput.vue';
 import StyleConfig from './components/style/StyleConfig.vue';
 import LanguageInput from './components/language/LanguageInput.vue';
+import TableFormView from './components/tableForm/TableFormView.vue';
+import TableForm from './components/tableForm/TableForm.vue';
+import TableFormColumnView from './components/tableForm/TableFormColumnView.vue';
 import ConfigItem from './components/style/ConfigItem.vue';
 import {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor/dist/index.es.js';
@@ -70,8 +73,10 @@ designerForm.component('ConfigItem', ConfigItem);
 designerForm.component('FieldInput', FieldInput);
 designerForm.component('FnConfig', FnConfig);
 designerForm.component('FcRow', Row);
+designerForm.component('TableFormColumn', TableFormColumnView);
 addComponent('FcEditor', FcEditor);
 addComponent('FcTable', Table, TableView);
+addComponent('TableForm', TableForm, TableFormView);
 
 const install = function (Vue) {
     Vue.component('FcDesigner', FcDesigner);
