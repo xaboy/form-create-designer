@@ -139,6 +139,7 @@ export default defineComponent({
         visible(v) {
             if (v) {
                 this.formValue = deepCopy(this.value || {});
+                this.active();
             }
         },
     },
