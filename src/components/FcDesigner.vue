@@ -352,15 +352,15 @@ import ruleList, {defaultDrag} from '../config';
 import fcDraggable from 'vuedraggable/src/vuedraggable';
 import createMenu from '../config/menu';
 import {
-    getRuleTree,
-    getRuleDescription,
+    copyTextToClipboard,
+    formTemplate,
     getFormRuleDescription,
+    getRuleDescription,
+    getRuleTree,
+    isNull,
+    uniqueArray,
     upper,
     useLocale,
-    isNull,
-    formTemplate,
-    uniqueArray,
-    copyTextToClipboard,
 } from '../utils/index';
 import viewForm, {designerForm} from '../utils/form';
 import {t as globalT} from '../utils/locale';
@@ -374,10 +374,10 @@ import {
     provide,
     reactive,
     ref,
+    set,
     toRef,
     toRefs,
     watch,
-    set,
 } from 'vue';
 import uniqueId from '@form-create/utils/lib/unique';
 import debounce from '@form-create/utils/lib/debounce';

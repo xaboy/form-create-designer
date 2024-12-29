@@ -24,7 +24,7 @@ import TableFormView from './components/tableForm/TableFormView.vue';
 import TableForm from './components/tableForm/TableForm.vue';
 import TableFormColumnView from './components/tableForm/TableFormColumnView.vue';
 import ConfigItem from './components/style/ConfigItem.vue';
-import {designerForm} from './utils/form';
+import formCreate, {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor/dist/index.es.js';
 import './style/index.css';
 import './style/icon.css';
@@ -41,10 +41,7 @@ import {
     makeTreeOptionsRule,
     toJSON
 } from './utils/index';
-import formCreate from './utils/form';
 import globalUseLocale, {t} from './utils/locale';
-import './style/index.css';
-import './style/icon.css';
 import './utils/highlight/style.css';
 
 const addComponent = (id, component, previewComponent) => {

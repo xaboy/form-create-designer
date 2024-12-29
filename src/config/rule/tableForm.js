@@ -1,6 +1,5 @@
 import unique from '@form-create/utils/lib/unique';
 import {localeProps} from '../../utils';
-import {$set} from '@form-create/utils';
 
 const label = '表格表单';
 const name = 'tableForm';

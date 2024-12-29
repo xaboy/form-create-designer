@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {localeProps, makeOptionsRule, makeTreeOptions, getInjectArg} from '../../utils/index';
+import {getInjectArg, localeProps, makeOptionsRule, makeTreeOptions} from '../../utils/index';
 
 const label = '选择器';
 const name = 'select';

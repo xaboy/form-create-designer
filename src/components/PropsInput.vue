@@ -8,7 +8,6 @@
 <script>
 import {defineComponent} from 'vue';
 import Struct from './Struct.vue';
-import extend from '@form-create/utils/lib/extend';
 
 export default defineComponent({
     name: 'PropsInput',

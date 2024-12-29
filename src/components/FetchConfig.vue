@@ -44,7 +44,6 @@ import FnEditor from './FnEditor.vue';
 import StructEditor from './StructEditor.vue';
 import {defineComponent} from 'vue';
 import {designerForm} from '../utils/form';
-import errorMessage from '../utils/message';
 import {empty} from '../utils';
 
 const makeRule = (t) => {
