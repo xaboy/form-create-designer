@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {localeOptions, localeProps, getInjectArg} from '../../utils';
+import {getInjectArg, localeOptions, localeProps} from '../../utils';
 
 const label = '上传';
 const name = 'upload';
