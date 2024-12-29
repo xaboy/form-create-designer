@@ -8,13 +8,20 @@
             <template v-for="(col,idx) in column" :key="col.label + idx">
                 <el-table-column :label="col.label">
                     <template #default="scope">
-                        <el-input :size="size || 'small'" :modelValue="scope.row[col.key] || ''"
-                                  @Update:modelValue="(n)=>(scope.row[col.key] = n)"
-                                  @blur="onInput(scope.row)"></el-input>
+                        <template v-if="col.value">
+                            <ValueInput :size="size || 'small'" :modelValue="scope.row[col.key]"
+                                        @update:modelValue="(n)=>(scope.row[col.key] = n)"
+                                        @blur="onInput(scope.row)" @change-type="onInput(scope.row)"></ValueInput>
+                        </template>
+                        <template v-else>
+                            <el-input :size="size || 'small'" :modelValue="scope.row[col.key] || ''"
+                                      @Update:modelValue="(n)=>(scope.row[col.key] = n)"
+                                      @blur="onInput(scope.row)"></el-input>
+                        </template>
                     </template>
                 </el-table-column>
             </template>
-            <el-table-column width="70" align="center" fixed="right" :label="t('tableOptions.handle')">
+            <el-table-column width="45" align="center" fixed="right">
                 <template #default="scope">
                     <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
                 </template>
@@ -32,10 +39,14 @@
 <script>
 import {defineComponent} from 'vue';
 import {copy} from '@form-create/utils/lib/extend';
+import ValueInput from './ValueInput.vue';
 
 export default defineComponent({
     name: 'TableOptions',
     emits: ['update:modelValue', 'change'],
+    components: {
+        ValueInput
+    },
     props: {
         modelValue: [Array, Object],
         column: {
@@ -138,7 +149,7 @@ export default defineComponent({
     width: 100%;
 }
 
-._td-table-opt .el-table{
+._td-table-opt .el-table {
     z-index: 1;
 }
 

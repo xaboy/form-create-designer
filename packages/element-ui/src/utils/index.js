@@ -61,6 +61,7 @@ export function makeOptionsRule(t, to) {
                     type: 'TableOptions',
                     field: 'formCreate' + upper(to).replace('.', '>'),
                     props: {
+                        column: [{label: t('props.key'), key: 'label'}, {value: true, label: t('props.value'), key: 'value'}],
                         keyValue: 'label'
                     }
                 },
