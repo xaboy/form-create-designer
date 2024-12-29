@@ -738,6 +738,7 @@ const ZhCn = {
             name: '表格表单',
             props: {
                 disabled: '是否禁用',
+                filterEmptyColumn: '是否过滤空行的数据',
                 max: '最多添加几行，为 0 则不限制',
             }
         },
@@ -747,7 +748,8 @@ const ZhCn = {
             props: {
                 label: '标题',
                 width: '宽度',
-                color: '颜色'
+                color: '颜色',
+                required: '是否显示必填星号',
             }
         },
         text: {
