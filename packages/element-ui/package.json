@@ -7,14 +7,6 @@
     "typings": "./types/index.d.ts",
     "main": "./dist/index.umd.js",
     "module": "./dist/index.es.js",
-    "exports": {
-        ".": {
-            "import": "./dist/index.es.js",
-            "types": "./types/index.d.ts",
-            "require": "./dist/index.umd.js"
-        },
-        "./*": "./*"
-    },
     "scripts": {
         "clean": "rimraf dist/",
         "dev": "vue-cli-service serve",
