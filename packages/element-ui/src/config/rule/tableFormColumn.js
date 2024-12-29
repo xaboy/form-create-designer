@@ -5,9 +5,11 @@ const name = 'tableFormColumn';
 export default {
     icon: 'icon-cell',
     name,
+    aide: true,
     drag: true,
     dragBtn: false,
     mask: false,
+    style: false,
     rule({t}) {
         return {
             type: name,
@@ -23,6 +25,10 @@ export default {
             {
                 type: 'input',
                 field: 'label',
+            },
+            {
+                type: 'switch',
+                field: 'required',
             },
             {
                 type: 'input',

@@ -14,7 +14,6 @@
 
 <script>
 import {markRaw, reactive} from 'vue';
-import formCreate from '@form-create/element-ui';
 
 export default {
     name: 'TableForm',
@@ -29,6 +28,10 @@ export default {
             type: Array,
             required: true,
             default: () => []
+        },
+        filterEmptyColumn: {
+            type: Boolean,
+            default: true,
         },
         options: {
             type: Object,
@@ -45,7 +48,7 @@ export default {
             handler() {
                 this.updateTable()
             },
-            deep: true,
+            deep: true
         }
     },
     data() {
@@ -71,6 +74,9 @@ export default {
                     ...this.fapi.getChildrenFormData(tr)
                 }
             }).filter(v => {
+                if (!this.filterEmptyColumn) {
+                    return true;
+                }
                 if (v === undefined || v === null) {
                     return false;
                 }
@@ -105,7 +111,7 @@ export default {
                 if (!this.trs[idx]) {
                     this.addRaw();
                 }
-                this.setRawData(idx, data);
+                this.setRawData(idx, data || {});
             });
             this.rule[0].children[1].children = this.trs;
         },
@@ -126,10 +132,13 @@ export default {
             if (flag && this.disabled) {
                 return;
             }
-            const tr = formCreate.parseJson(this.copyTrs)[0];
+            const tr = this.formCreateInject.form.parseJson(this.copyTrs)[0];
             this.trs.push(tr);
             this.updateRaw(tr);
-            flag && this.$emit('add', this.trs.length);
+            if (flag) {
+                this.$emit('add', this.trs.length);
+                this.updateValue();
+            }
         },
         updateRaw(tr) {
             const idx = this.trs.indexOf(tr);
@@ -160,6 +169,7 @@ export default {
                     type: 'th',
                     native: true,
                     style: column.style,
+                    class: column.required ? '_fc-tf-head-required' : '',
                     props: {
                         innerText: column.label || ''
                     }
@@ -191,7 +201,7 @@ export default {
                     }
                 ],
             });
-            this.copyTrs = formCreate.toJson([
+            this.copyTrs = this.formCreateInject.form.toJson([
                 {
                     type: 'tr',
                     native: true,
@@ -254,7 +264,7 @@ export default {
     margin-bottom: 22px;
 }
 
-._fc-table-form .el-form-item__label {
+._fc-table-form .el-form-item__label,._fc-table-form .van-field__label {
     display: none !important;
 }
 
@@ -333,5 +343,11 @@ export default {
 
 ._fc-tf-table .el-input-number, ._fc-tf-table .el-select, ._fc-tf-table .el-slider, ._fc-tf-table .el-cascader, ._fc-tf-table .el-date-editor {
     width: 100%;
+}
+
+._fc-tf-head-required:before{
+    content: '*';
+    color: #f56c6c;
+    margin-right: 4px;
 }
 </style>
