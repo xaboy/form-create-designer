@@ -51,6 +51,7 @@ const En = {
         },
         types: {
             string: 'String',
+            boolean: 'Boolean',
             array: 'Multiple',
             number: 'Number',
             integer: 'Integer',

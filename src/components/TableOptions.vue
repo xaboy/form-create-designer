@@ -8,13 +8,20 @@
             <template v-for="(col,idx) in column">
                 <el-table-column :label="col.label" :key="col.label + idx">
                     <template #default="scope">
-                        <el-input :size="size || 'mini'" :value="scope.row[col.key] || ''"
-                                  @input="(n)=>(scope.row[col.key] = n)"
-                                  @blur="onInput(scope.row)"></el-input>
+                        <template v-if="col.value">
+                            <ValueInput :size="size || 'small'" :value="scope.row[col.key]"
+                                        @input="(n)=>($set(scope.row, col.key, n))"
+                                        @blur="onInput(scope.row)" @change-type="onInput(scope.row)"></ValueInput>
+                        </template>
+                        <template v-else>
+                            <el-input :size="size || 'small'" :value="scope.row[col.key]"
+                                      @input="(n)=>($set(scope.row, col.key, n))"
+                                      @blur="onInput(scope.row)"></el-input>
+                        </template>
                     </template>
                 </el-table-column>
             </template>
-            <el-table-column width="70" align="center" fixed="right" :label="t('tableOptions.handle')">
+            <el-table-column width="45" align="center" fixed="right">
                 <template #default="scope">
                     <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
                 </template>
@@ -32,10 +39,14 @@
 <script>
 import {defineComponent} from 'vue';
 import {copy} from '@form-create/utils/lib/extend';
+import ValueInput from './ValueInput.vue';
 
 export default defineComponent({
     name: 'TableOptions',
     emits: ['input', 'change'],
+    components: {
+        ValueInput
+    },
     props: {
         value: [Array, Object],
         column: {
