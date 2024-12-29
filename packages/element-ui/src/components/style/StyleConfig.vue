@@ -1,6 +1,7 @@
 <template>
     <div class="_fd-style-config">
-        <BoxSizeInput v-model="size" @change="onInput" style="margin-bottom: 15px;"></BoxSizeInput>
+        <BoxSpaceInput v-model="space" @change="onInput" style="margin-bottom: 10px;"></BoxSpaceInput>
+        <BoxSizeInput v-model="size" @change="onInput"></BoxSizeInput>
         <ConfigItem :label="t('style.color')">
             <ColorInput v-model="color" @change="onInput"></ColorInput>
         </ConfigItem>
@@ -35,6 +36,7 @@
 <script>
 import {defineComponent} from 'vue';
 import BoxSizeInput from './BoxSizeInput.vue';
+import BoxSpaceInput from './BoxSpaceInput.vue';
 import BorderInput from './BorderInput.vue';
 import RadiusInput from './RadiusInput.vue';
 import FontInput from './FontInput.vue';
@@ -54,6 +56,16 @@ const fontKey = [
     'letterSpacing',
 ];
 
+const sizeKey = [
+    'height',
+    'width',
+    'minWidth',
+    'minHeight',
+    'maxWidth',
+    'maxHeight',
+    'overflow'
+];
+
 const styleKey = [
     'color',
     'backgroundColor',
@@ -71,8 +83,6 @@ const styleKey = [
     'margin',
     'padding',
     'opacity',
-    'height',
-    'width',
     'borderStyle',
     'borderColor',
     'borderWidth',
@@ -88,7 +98,8 @@ const styleKey = [
     'borderRightStyle',
     'borderRightColor',
     'borderRightWidth',
-    ...fontKey
+    ...fontKey,
+    ...sizeKey
 ];
 
 export default defineComponent({
@@ -101,6 +112,7 @@ export default defineComponent({
         ConfigItem,
         RadiusInput,
         BoxSizeInput,
+        BoxSpaceInput,
         BorderInput,
         ShadowInput,
         FontInput,
@@ -122,6 +134,7 @@ export default defineComponent({
             t,
             formData: {},
             size: {},
+            space: {},
             border: {},
             font: {},
             radius: '',
@@ -135,14 +148,24 @@ export default defineComponent({
     methods: {
         tidyStyle() {
             const style = {...this.modelValue || {}};
-            const size = {};
+            const space = {};
             Object.keys(style).forEach(k => {
-                if (['margin', 'padding', 'height', 'width'].indexOf(k) > -1) {
-                    size[k] = style[k];
+                if (['margin', 'padding'].indexOf(k) > -1) {
+                    space[k] = style[k];
                 } else if (k.indexOf('margin') > -1 || k.indexOf('padding') > -1) {
+                    space[k] = style[k];
+                }
+            });
+
+            const size = {};
+            sizeKey.forEach(k => {
+                if (style[k]) {
                     size[k] = style[k];
                 }
             });
+
+            this.radius = style.borderRadius || '';
+            delete style.borderRadius;
 
             const border = {};
             Object.keys(style).forEach(k => {
@@ -174,9 +197,9 @@ export default defineComponent({
             this.opacity = opacity;
             this.scale = scale;
             this.size = size;
+            this.space = space;
             this.border = border;
             this.font = font;
-            this.radius = style.borderRadius || '';
             this.boxShadow = style.boxShadow || '';
             this.color = style.color || '';
             this.backgroundColor = style.backgroundColor || '';
@@ -198,7 +221,7 @@ export default defineComponent({
                 borderRadius: this.radius || '',
                 boxShadow: this.boxShadow || '',
                 scale: (this.scale >= 0 && this.scale !== 100) ? (this.scale + '%') : '',
-                ...this.size, ...this.border, ...this.font
+                ...this.space, ...this.size, ...this.border, ...this.font
             }
             Object.keys(style).forEach(k => {
                 if (isNull(style[k])) {
