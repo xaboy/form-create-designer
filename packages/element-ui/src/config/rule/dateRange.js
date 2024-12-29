@@ -6,7 +6,7 @@ const name = 'dateRange';
 
 export default {
     menu: 'main',
-    icon: 'icon-date',
+    icon: 'icon-date-range',
     label,
     name,
     event: ['change', 'blur', 'focus', 'calendarChange', 'panelChange', 'visibleChange'],

@@ -91,11 +91,11 @@
                             <template v-if="!inputForm.state">
                                 <template v-if="getConfig('showDevice') !== false">
                                     <div class="devices">
-                                        <i class="fc-icon icon-pc2" :class="{active: device === 'pc'}"
+                                        <i class="fc-icon icon-pc" :class="{active: device === 'pc'}"
                                            @click="device = 'pc'"></i>
-                                        <i class="fc-icon icon-pad2" :class="{active: device === 'pad'}"
+                                        <i class="fc-icon icon-pad" :class="{active: device === 'pad'}"
                                            @click="device = 'pad'"></i>
-                                        <i class="fc-icon icon-mobile2" :class="{active: device === 'mobile'}"
+                                        <i class="fc-icon icon-mobile" :class="{active: device === 'mobile'}"
                                            @click="device = 'mobile'"></i>
                                     </div>
                                     <div class="line"></div>

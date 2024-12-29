@@ -6,7 +6,7 @@ const name = 'timeRange';
 
 export default {
     menu: 'main',
-    icon: 'icon-time',
+    icon: 'icon-time-range',
     label,
     name,
     event: ['change', 'blur', 'focus', 'visibleChange'],
