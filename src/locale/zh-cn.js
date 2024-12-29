@@ -173,6 +173,17 @@ const ZhCn = {
         double: '双实线',
         opacity: '透明度',
         scale: '缩放',
+        minWidth: '最小宽',
+        minHeight: '最小高',
+        maxWidth: '最大宽',
+        maxHeight: '最大高',
+        overflow: {
+            name: '溢出',
+            visible: '可见',
+            hidden: '隐藏',
+            scroll: '滚动',
+            auto: '溢出后自动滚动',
+        },
         shadow: {
             name: '阴影',
             x: 'x轴偏移量',
@@ -236,6 +247,7 @@ const ZhCn = {
     props: {
         disabled: '禁用',
         time: '时间',
+        size: '尺寸',
         email: '邮箱',
         number: '数字',
         globalData: '全局数据',

@@ -173,6 +173,17 @@ const En = {
         double: 'Double',
         opacity: 'Opacity',
         scale: 'Scale',
+        minWidth: 'Min Width',
+        minHeight: 'Min Height',
+        maxWidth: 'Max Width',
+        maxHeight: 'Max Height',
+        overflow: {
+            name: 'Overflow',
+            visible: 'Visible',
+            hidden: 'Hidden',
+            scroll: 'Scroll',
+            auto: 'Auto scroll after overflow',
+        },
         shadow: {
             name: 'Shadow',
             x: 'x-axis offset',
@@ -236,6 +247,7 @@ const En = {
     props: {
         disabled: 'disabled',
         time: 'time',
+        size: 'Size',
         email: 'email',
         number: 'number',
         globalData: 'Global data',
