@@ -786,16 +786,16 @@ const En = {
         upload: {
             name: 'Upload',
             info: 'Assign the url returned by the interface to file.url in the onSuccess method',
-            event: {
-                remove: 'Triggered when a file is removed from the file list',
-            },
             props: {
                 listType: 'Upload type',
                 uploadType: 'Upload type',
                 multiple: 'Whether multiple selection of files is supported',
                 action: 'Upload address (required)',
-                beforeUpload: 'Hook before uploading file',
-                onSuccess: 'Upload success callback',
+                beforeUpload: 'Triggered before uploading a file',
+                onSuccess: 'Triggered when the upload is successful',
+                beforeRemove: 'Triggered before deleting a file',
+                onRemove: 'Triggered when a file is removed from the file list',
+                onPreview: 'Triggered when clicking an uploaded file in the file list',
                 headers: 'Set upload request headers',
                 data: 'Extra parameters attached when uploading',
                 name: 'Uploaded file field name',

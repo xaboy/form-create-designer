@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {localeOptions, localeProps} from '../../utils';
+import {getInjectArg, localeOptions, localeProps} from '../../utils';
 
 const label = '上传';
 const name = 'upload';
@@ -9,7 +9,7 @@ export default {
     icon: 'icon-upload',
     label,
     name,
-    event: ['change', 'remove'],
+    event: [],
     validate: ['array'],
     rule({t}) {
         return {
@@ -46,6 +46,16 @@ export default {
                 args: ['file'],
                 name: 'beforeUpload',
             }
+        },  {
+            type: 'FnInput',
+            field: 'onRemove',
+            props: {
+                body: true,
+                button: true,
+                fnx: true,
+                args: [getInjectArg(t)],
+                name: 'onRemove',
+            }
         }, {
             type: 'FnInput',
             field: 'onSuccess',
@@ -54,6 +64,16 @@ export default {
                 args: ['res', 'file'],
                 name: 'onSuccess',
                 button: true,
+            }
+        },  {
+            type: 'FnInput',
+            field: 'onPreview',
+            props: {
+                body: true,
+                button: true,
+                fnx: true,
+                args: [getInjectArg(t)],
+                name: 'onPreview',
             }
         }, {
             type: 'TableOptions',
