@@ -352,14 +352,33 @@
     font-size: 12px;
 }
 
-._fc-m-tools ._fd-input-btn .icon-check {
-    color: #67c23a;
-    font-size: 18px;
+._fc-m-tools ._fd-input-btn .el-switch__action {
+    width: 18px;
+    height: 18px;
+    left: 2px;
+}
+
+._fc-m-tools ._fd-input-btn .is-checked .el-switch__action {
+    --el-color-white: #2E73FF;
+    left: calc(100% - 20px);
+}
+
+._fc-m-tools ._fd-input-btn .el-switch__core {
+    --el-switch-on-color: var(--el-switch-off-color);
+    border-radius: 16px;
+    height: 24px;
+    width: 46px;
+}
+
+._fc-m-tools ._fd-input-btn .is-checked .el-switch__core {
+    --el-switch-on-color: var(--el-switch-off-color);
+    border-radius: 16px;
+    height: 24px;
+    width: 46px;
 }
 
 ._fc-m-tools-r .fc-icon {
     font-size: 14px;
-    margin-right: 2px;
 }
 
 ._fc-m-tools-l .fc-icon {
