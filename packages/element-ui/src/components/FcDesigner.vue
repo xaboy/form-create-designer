@@ -529,9 +529,9 @@ export default defineComponent({
                 api: {},
                 option: {
                     global: {
-                        input: {
-                            modelEmit: 'blur'
-                        },
+                        input: configRef.value?.updateConfigOnBlur !== false ? {
+                            modelEmit:  'blur'
+                        } : {},
                         select: {
                             props: {
                                 clearable: true,
@@ -556,9 +556,9 @@ export default defineComponent({
                 value: {},
                 options: {
                     global: {
-                        input: {
-                            modelEmit: 'blur'
-                        }
+                        input: configRef.value?.updateConfigOnBlur !== false ? {
+                            modelEmit:  'blur'
+                        } : {},
                     },
                     form: {
                         labelPosition: 'top',
@@ -595,9 +595,9 @@ export default defineComponent({
                 value: [],
                 options: {
                     global: {
-                        input: {
-                            modelEmit: 'blur'
-                        }
+                        input: configRef.value?.updateConfigOnBlur !== false ? {
+                            modelEmit:  'blur'
+                        } : {},
                     },
                     form: {
                         labelPosition: 'top',
@@ -617,9 +617,9 @@ export default defineComponent({
                 value: {},
                 options: {
                     global: {
-                        input: {
-                            modelEmit: 'blur'
-                        },
+                        input: configRef.value?.updateConfigOnBlur !== false ? {
+                            modelEmit:  'blur'
+                        } : {},
                         inputNumber: {
                             props: {
                                 controlsPosition: 'right'
@@ -645,9 +645,9 @@ export default defineComponent({
                 api: {},
                 options: {
                     global: {
-                        input: {
-                            modelEmit: 'blur'
-                        }
+                        input: configRef.value?.updateConfigOnBlur !== false ? {
+                            modelEmit:  'blur'
+                        } : {},
                     },
                     form: {
                         labelPosition: 'top',
