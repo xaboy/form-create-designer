@@ -22,6 +22,7 @@ export default {
                 _fc_drag_tag: 'tableFormColumn',
                 props: {
                     label: column.label,
+                    required: column.required || false,
                     width: column.style.width || '',
                     color: column.style.color || '',
                 },
@@ -35,6 +36,7 @@ export default {
         rule.props.columns = children.map(column => {
             return {
                 label: column.props.label,
+                required: column.props.required,
                 style: {
                     width: column.props.width,
                     color: column.props.color,
@@ -59,6 +61,11 @@ export default {
             {
                 type: 'switch',
                 field: 'disabled'
+            },
+            {
+                type: 'switch',
+                field: 'filterEmptyColumn',
+                value: true,
             },
             {
                 type: 'inputNumber',
