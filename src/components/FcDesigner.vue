@@ -199,6 +199,9 @@
                         </el-main>
                         <el-main class="_fc-r-tab-props" v-show="activeTab==='props'"
                                  :key="activeRule ? activeRule._fc_id: (customForm.config ? customForm.key : '')">
+                            <div class="_fc-r-tools-close" @click="clearActiveRule">
+                                <i class="fc-icon icon-add2"></i>
+                            </div>
                             <template
                                 v-if="activeRule || (customForm.config && (customForm.config.name || customForm.config.label))">
                                 <p class="_fc-r-title">{{ t('designer.type') }}</p>

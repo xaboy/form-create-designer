@@ -56,6 +56,16 @@
 
 ._fc-r-tab-props {
     padding: 0 20px;
+    position: relative;
+}
+
+._fc-r-tools-close {
+    position: absolute;
+    right: 24px;
+    top: 12px;
+    transform: rotate(45deg);
+    color: #666666;
+    cursor: pointer;
 }
 
 ._fc-r-title {
