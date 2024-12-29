@@ -165,6 +165,12 @@
     left: 0;
 }
 
+._fc-r-config {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "base" "props" "style" "event" "validate";
+}
+
 ._fc-r-name-input .el-input-group__append {
     width: 25px;
     padding: 0;
