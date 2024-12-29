@@ -25,7 +25,7 @@ export default {
     },
     props(_, {t}) {
         return localeProps(t, name + '.props', [
-            makeTreeOptionsRule({t, to: 'props.data', label: 'label', value: 'key'}),
+            makeTreeOptionsRule(t, 'props.data', 'label', 'key'),
             {type: 'switch', field: 'filterable'}, {
                 type: 'input',
                 field: 'filterPlaceholder'

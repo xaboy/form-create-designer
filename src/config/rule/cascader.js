@@ -28,7 +28,7 @@ export default {
     },
     props(_, {t}) {
         return localeProps(t, name + '.props', [
-            makeTreeOptionsRule({t, to: 'props.options'}),
+            makeTreeOptionsRule(t, 'props.options'),
             ...[
 
                 {

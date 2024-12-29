@@ -90,7 +90,7 @@ export function makeOptionsRule(t, to) {
     };
 }
 
-export function makeTreeOptionsRule({t, to, label, value}) {
+export function makeTreeOptionsRule(t, to, label, value) {
     const options = [
         {'label': t('fetch.optionsType.struct'), 'value': 2},
         {'label': t('fetch.optionsType.fetch'), 'value': 1},
