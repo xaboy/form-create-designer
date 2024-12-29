@@ -519,6 +519,12 @@ const En = {
                 textColor: 'Text color',
             }
         },
+        vanImage: {
+            name: 'Image',
+            props: {
+                src: 'Image path'
+            }
+        },
         fcCell: {
             name: 'Cell'
         },
