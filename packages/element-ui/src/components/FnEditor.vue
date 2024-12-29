@@ -5,7 +5,7 @@
             <div class="cm-keyword"><span>function {{ name }}(<template
                 v-for="(item, idx) in argList">{{ idx > 0 ? ', ' : '' }}<template v-if="item.type === 'string'">
 <span>{{ item.name }}</span>
-</template><template v-else><el-popover placement="top-start" :width="400" trigger="click"
+</template><template v-else><el-popover placement="top-start" :width="400" :hide-after="0" trigger="click"
                                         :title="item.name"
                                         :content="item.info || ''"
             ><template #reference><span class="_fd-fn-arg">{{ item.name }}<i
@@ -142,7 +142,7 @@ export default defineComponent({
             if (value.__json) {
                 value = value.__json;
             }
-            if (this.fnx && value.indexOf('$FNX:') === 0) {
+            if (this.fnx && typeof value === 'string' && value.indexOf('$FNX:') === 0) {
                 value = value.slice(5);
             }
             if (typeof value === 'function') {

@@ -112,6 +112,7 @@ export default defineComponent({
         onInput() {
             if (this.value !== this.modelValue) {
                 this.value = this.checkValue();
+                this.oldValue = this.value;
                 if (this.value !== this.modelValue) {
                     this.$emit('update:modelValue', this.value);
                 }

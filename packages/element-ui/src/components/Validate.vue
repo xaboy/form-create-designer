@@ -122,7 +122,7 @@ export default defineComponent({
     methods: {
         handleCommand(mode) {
             this.validate.push({
-                transform: new Function('val', 'this.type = Array.isArray(val) ? \'array\' : (typeof val); return val;'),
+                transform: new Function('val', 'this.type = val == null ? \'string\' : (Array.isArray(val) ? \'array\' : (typeof val)); return val;'),
                 mode,
                 trigger: 'blur'
             });
