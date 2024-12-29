@@ -103,6 +103,11 @@ export default function form({t}) {
                         args: ['api'],
                     },
                     {
+                        name: 'onReload',
+                        info: t('form.onReload'),
+                        args: ['api'],
+                    },
+                    {
                         name: 'onChange',
                         info: t('form.onChange'),
                         args: ['field', 'value', 'options'],

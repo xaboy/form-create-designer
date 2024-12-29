@@ -28,6 +28,7 @@ const En = {
         onReset: 'Triggered after form is reset',
         onCreated: 'Triggered after the form component is initialized',
         onMounted: 'Triggered after the form component is mounted',
+        onReload: 'Triggered after the form rendering rule is reloaded',
         onChange: 'Triggered when the component value changes',
         beforeFetch: 'Triggered before remote data request is sent',
     },

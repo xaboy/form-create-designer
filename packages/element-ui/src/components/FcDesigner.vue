@@ -954,6 +954,7 @@ export default defineComponent({
                     onSubmit: options.onSubmit || '',
                     onCreated: options.onCreated || '',
                     onMounted: options.onMounted || '',
+                    onReload: options.onReload || '',
                     onChange: options.onChange || '',
                     beforeFetch: options.beforeFetch || '',
                 }
