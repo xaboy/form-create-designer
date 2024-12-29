@@ -11,15 +11,19 @@ import 'codemirror/mode/javascript/javascript';
 import {toJSON} from '../utils/index';
 import {defineComponent, markRaw} from 'vue';
 import errorMessage from '../utils/message';
+import {designerForm} from '../utils/form';
+import beautify from 'js-beautify';
 
 export default defineComponent({
     name: 'StructEditor',
     props: {
         modelValue: [Object, Array, Function],
+        format: Boolean,
         defaultValue: {
             require: false
         }
     },
+    emits: ['blur', 'focus', 'update:modelValue'],
     inject: ['designer'],
     data() {
         return {
@@ -34,14 +38,29 @@ export default defineComponent({
             return this.designer.setupState.t;
         },
     },
+    watch: {
+        modelValue(n) {
+            if (this.editor) {
+                const val = n ? this.toJson(n) : '';
+                this.oldVal = val;
+                const scrollInfo = this.editor.getScrollInfo();
+                const scrollTop = scrollInfo.top;
+                this.editor.setValue(val);
+                this.editor.scrollTo(0, scrollTop);
+            }
+        }
+    },
     mounted() {
         this.$nextTick(() => {
             this.load();
         });
     },
     methods: {
+        toJson(val) {
+            return this.format ? designerForm.toJson(val, 2) : toJSON(val);
+        },
         load() {
-            const val = this.modelValue ? toJSON(this.modelValue) : '';
+            const val = this.modelValue ? this.toJson(this.modelValue) : '';
             this.oldVal = val;
             this.$nextTick(() => {
                 this.editor = markRaw(CodeMirror(this.$refs.editor, {
@@ -51,12 +70,23 @@ export default defineComponent({
                     line: true,
                     tabSize: 2,
                     lineWrapping: true,
-                    value: val || ''
+                    value: val ? beautify.js(val, {
+                        indent_size: '2',
+                        indent_char: ' ',
+                        max_preserve_newlines: '5',
+                        indent_scripts: 'separate',
+                    }) : '',
                 }));
+                this.editor.on('blur', () => {
+                    this.$emit('blur');
+                });
+                this.editor.on('focus', () => {
+                    this.$emit('focus');
+                });
             });
         },
         save() {
-            const str = this.editor.getValue();
+            const str = (this.editor.getValue() || '').trim();
             let val;
             try {
                 val = (new Function('return ' + str))();
@@ -70,7 +100,7 @@ export default defineComponent({
                 return false;
             }
             this.visible = false;
-            if (toJSON(val, null, 2) !== this.oldVal) {
+            if (this.toJson(val) !== this.oldVal) {
                 this.$emit('update:modelValue', val);
             }
             return true;

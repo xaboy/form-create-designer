@@ -39,13 +39,9 @@
                     </el-col>
                     <el-col :span="24">
                         <el-form-item :label="t('validate.message')">
-                            <el-input v-model="item.message" :placeholder="t('validate.requiredPlaceholder')"
-                                      @blur="onInput">
-                                <template #append>
-                                    <span class="append-msg"
-                                          @click="autoMessage(item)"> {{ t('validate.auto') }} </span>
-                                </template>
-                            </el-input>
+                            <LanguageInput v-model="item.message" :placeholder="t('validate.requiredPlaceholder')"
+                                           @change="onInput">
+                            </LanguageInput>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -60,6 +56,7 @@ import {defineComponent} from 'vue';
 import {localeOptions} from '../utils';
 import FnInput from './FnInput.vue';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
+import LanguageInput from './language/LanguageInput.vue';
 
 export default defineComponent({
     name: 'Validate',
@@ -69,6 +66,7 @@ export default defineComponent({
         modelValue: Array,
     },
     components: {
+        LanguageInput,
         FnInput,
     },
     watch: {

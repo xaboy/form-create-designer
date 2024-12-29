@@ -8,12 +8,12 @@ export default function field({t}) {
             value: '',
             title: t('form.field'),
         }, {
-            type: 'input',
+            type: 'LanguageInput',
             field: 'title',
             value: '',
             title: t('form.title'),
         }, {
-            type: 'input',
+            type: 'LanguageInput',
             field: 'info',
             value: '',
             title: t('form.info'),
