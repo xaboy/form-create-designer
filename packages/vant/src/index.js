@@ -109,8 +109,10 @@ FcDesignerMobile.utils = {
     toJSON
 }
 
-if (compareVersion('3.1.27', formCreate.version) === 1) {
-    console.warn('Please use FormCreate version 3.1.27 or greater, see https://github.com/xaboy/form-create.');
+const minVersion = '3.2.14';
+
+if (compareVersion(minVersion, formCreate.version) === 1) {
+    console.warn('Please use FormCreate version ' + minVersion + ' or greater, see https://github.com/xaboy/form-create.');
 }
 
 export default FcDesignerMobile;
