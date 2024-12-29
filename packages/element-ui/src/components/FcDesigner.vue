@@ -369,17 +369,17 @@ import ruleList, {defaultDrag} from '../config';
 import fcDraggable from 'vuedraggable/src/vuedraggable';
 import createMenu from '../config/menu';
 import {
-    getRuleTree,
-    getRuleDescription,
-    getFormRuleDescription,
-    upper,
-    useLocale,
-    isNull,
+    copyTextToClipboard,
     formTemplate,
     formTemplateV3,
+    getFormRuleDescription,
+    getRuleDescription,
+    getRuleTree,
     htmlTemplate,
+    isNull,
     uniqueArray,
-    copyTextToClipboard,
+    upper,
+    useLocale,
 } from '../utils/index';
 import viewForm, {designerForm} from '../utils/form';
 import {t as globalT} from '../utils/locale';

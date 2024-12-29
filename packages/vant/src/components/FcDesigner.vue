@@ -369,17 +369,17 @@ import ruleList, {defaultDrag} from '../config';
 import fcDraggable from 'vuedraggable/src/vuedraggable';
 import createMenu from '../config/menu';
 import {
-    getRuleTree,
-    getRuleDescription,
+    copyTextToClipboard,
     getFormRuleDescription,
-    upper,
-    useLocale,
+    getRuleDescription,
+    getRuleTree,
+    htmlTemplate,
     isNull,
     mobileTemplate,
     mobileTemplateV3,
-    htmlTemplate,
     uniqueArray,
-    copyTextToClipboard,
+    upper,
+    useLocale,
 } from '../utils/index';
 import viewForm, {designerForm, elmFormCreate} from '../utils/form';
 import {t as globalT} from '../utils/locale';
