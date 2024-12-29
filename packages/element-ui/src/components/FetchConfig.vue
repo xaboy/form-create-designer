@@ -72,9 +72,34 @@ const makeRule = (t) => {
             $required: true,
         },
         {
+            type: 'radio',
+            field: 'dataType',
+            title: t('fetch.dataType'),
+            value: 'json',
+            props: {
+                size: 'default'
+            },
+            options: [
+                {label: 'JSON', value: 'json'},
+                {label: 'FormData', value: 'formData'},
+            ],
+            $required: true,
+        },
+        {
             type: 'TableOptions',
             field: 'headers',
             title: t('fetch.headers'),
+            value: {},
+            props: {
+                column: [{label: t('props.key'), key: 'label'}, {label: t('props.value'), key: 'value'}],
+                valueType: 'object',
+                size: 'default'
+            },
+        },
+        {
+            type: 'TableOptions',
+            field: 'query',
+            title: t('fetch.query'),
             value: {},
             props: {
                 column: [{label: t('props.key'), key: 'label'}, {label: t('props.value'), key: 'value'}],
@@ -154,6 +179,7 @@ export default defineComponent({
             this.form.label = formData.label;
             this.form.type = formData.type;
             this.form.data = formData.data;
+            this.form.dataType = formData.dataType;
             this.form.parse = formData.parse || '';
             this.form.onError = formData.onError || '';
         },
