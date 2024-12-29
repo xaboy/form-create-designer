@@ -1,27 +1,27 @@
 <template>
     <div class="_fd-drag-tool" @click.stop="active" :class="{active: fcx.active === id}">
         <div class="_fd-drag-mask" v-if="mask"></div>
-        <div class="_fd-drag-l" v-if="!hiddenBtn">
-            <div class="_fd-drag-btn" v-if="fcx.active === id && dragBtn !== false" style="cursor: move;">
+        <div class="_fd-drag-l" v-if="!hiddenBtn" @click.stop>
+            <div class="_fd-drag-btn" v-show="fcx.active === id && dragBtn !== false" style="cursor: move;">
                 <i class="fc-icon icon-move"></i>
             </div>
         </div>
         <div class="drag-r" v-if="btns !== false && !hiddenMenu">
             <slot name="handle">
                 <div class="_fd-drag-btn" v-if="isCreate && (btns === true || btns.indexOf('create') > -1)"
-                     @click="$emit('create')">
+                     @click.stop="$emit('create')">
                     <i class="fc-icon icon-add"></i>
                 </div>
                 <div class="_fd-drag-btn" v-if="!only && (btns === true || btns.indexOf('copy') > -1)"
-                     @click="$emit('copy')">
+                     @click.stop="$emit('copy')">
                     <i class="fc-icon icon-copy"></i>
                 </div>
                 <div class="_fd-drag-btn" v-if="children && (btns === true || btns.indexOf('addChild') > -1)"
-                     @click="$emit('addChild')">
+                     @click.stop="$emit('addChild')">
                     <i class="fc-icon icon-add-child"></i>
                 </div>
                 <div class="_fd-drag-btn _fd-drag-danger" v-if="btns === true || btns.indexOf('delete') > -1"
-                     @click="$emit('delete')">
+                     @click.stop="$emit('delete')">
                     <i class="fc-icon icon-delete"></i>
                 </div>
             </slot>
@@ -125,6 +125,11 @@ export default defineComponent({
     display: flex;
 }
 
+._fd-drag-tool:not(.active):hover > div > ._fd-drag-btn {
+    display: flex !important;
+    opacity: 0.7;
+}
+
 ._fd-drag-tool._fd-drop-hover ._fd-drag-box {
     padding-top: 15px !important;
     padding-bottom: 15px !important;
@@ -181,5 +186,9 @@ export default defineComponent({
     left: 0;
     right: 0;
     bottom: 0;;
+}
+
+._fd-drag-tool:has(._fd-drag-tool:not(.active):hover, ._fd-drag-tool.active:hover) > div > ._fd-drag-btn {
+    display: none !important;
 }
 </style>
