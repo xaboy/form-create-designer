@@ -28,7 +28,7 @@ export default {
     },
     props(_, {t}) {
         return localeProps(t, name + '.props', [
-            makeTreeOptionsRule({t, to: 'props.options', label: 'text'}),
+            makeTreeOptionsRule(t, 'props.options', 'text'),
             {
                 type: 'input',
                 field: 'title',
