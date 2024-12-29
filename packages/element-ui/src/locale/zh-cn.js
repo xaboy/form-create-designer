@@ -130,6 +130,12 @@ const ZhCn = {
         submit: '表单提交时触发',
         confirm: '点击确认按钮时触发',
         validateFail: '表单验证失败时触发',
+        hook_load: '组件规则加载后触发',
+        hook_mounted: '组件挂载后触发',
+        hook_deleted: '组件规则被移除后触发',
+        hook_watch: '组件规则发生变化后触发',
+        hook_value: '组件的值发生变化后触发',
+        hook_hidden: '组件显示状态发生变化后触发',
     },
     fetch: {
         title: '设置数据源',

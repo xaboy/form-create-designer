@@ -132,6 +132,12 @@ const ZhCn = {
         cancel: '点击取消按钮时触发',
         confirm: '点击确认按钮时触发',
         validateFail: '表单验证失败时触发',
+        hook_load: '组件规则加载后触发',
+        hook_mounted: '组件挂载后触发',
+        hook_deleted: '组件规则被移除后触发',
+        hook_watch: '组件规则发生变化后触发',
+        hook_value: '组件的值发生变化后触发',
+        hook_hidden: '组件显示状态发生变化后触发',
     },
     fetch: {
         title: '设置数据源',
@@ -400,6 +406,14 @@ const ZhCn = {
         },
         calendarRange: {
             name: '日期区间',
+            event: {
+                select: '点击并选中任意日期时触发',
+                unselect: '当日历组件的 type 为 multiple 时，取消选中日期时触发',
+                monthShow: '当某个月份进入可视区域时触发',
+                overRange: '范围选择超过最多可选天数时触发',
+                clickSubtitle: '点击日历副标题时触发',
+                clickDisabledDate: '点击禁用日期时触发',
+            },
         },
         vanNoticeBar: {
             name: '通知',

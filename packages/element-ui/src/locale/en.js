@@ -130,6 +130,12 @@ const En = {
         submit: 'Triggered when submitting table',
         confirm: 'Triggered when clicking confirm',
         validateFail: 'Triggered when table verification fails',
+        hook_load: 'Triggered after component rules are loaded',
+        hook_mounted: 'Triggered after component is mounted',
+        hook_deleted: 'Triggered after component rules are removed',
+        hook_watch: 'Triggered after component rules change',
+        hook_value: 'Triggered after component value changes',
+        hook_hidden: 'Triggered after component display status changes',
     },
     fetch: {
         title: 'Set data',
