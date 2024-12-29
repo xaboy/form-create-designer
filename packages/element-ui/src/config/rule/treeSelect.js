@@ -35,7 +35,7 @@ export default {
     },
     props(_, {t}) {
         return localeProps(t, name + '.props', [
-            makeTreeOptionsRule({t, to: 'props.data', label: 'label', value: 'value'}),
+            makeTreeOptionsRule(t, 'props.data', 'label', 'value'),
             {type: 'switch', field: 'multiple'}, {
                 type: 'switch',
                 field: 'disabled'

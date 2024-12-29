@@ -33,7 +33,7 @@ export default {
     },
     props(_, {t}) {
         return localeProps(t, name + '.props', [
-            makeTreeOptionsRule({t, to: 'props.data', label: 'label', value: 'id'}),
+            makeTreeOptionsRule(t, 'props.data', 'label', 'id'),
             {type: 'input', field: 'emptyText'}, {
                 type: 'TableOptions',
                 field: 'props',

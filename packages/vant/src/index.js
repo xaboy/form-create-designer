@@ -25,7 +25,18 @@ import ColorInput from './components/style/ColorInput.vue';
 import StyleConfig from './components/style/StyleConfig.vue';
 import FcEditor from '@form-create/component-wangeditor';
 import draggable from 'vuedraggable/src/vuedraggable';
-import {compareVersion, makeOptionsRule} from './utils/index';
+import {
+    compareVersion,
+    copyTextToClipboard,
+    getInjectArg,
+    localeOptions,
+    localeProps,
+    makeOptionsRule,
+    makeRequiredRule,
+    makeTreeOptions,
+    makeTreeOptionsRule,
+    toJSON
+} from './utils/index';
 import formCreate, {designerForm, elmFormCreate} from './utils/form';
 import globalUseLocale, {t} from './utils/locale';
 import './style/index.css';
@@ -70,11 +81,31 @@ const install = function (Vue) {
 
 FcDesignerMobile.install = install;
 FcDesignerMobile.makeOptionsRule = makeOptionsRule;
+FcDesignerMobile.copyTextToClipboard = copyTextToClipboard;
+FcDesignerMobile.getInjectArg = getInjectArg;
+FcDesignerMobile.localeOptions = localeOptions;
+FcDesignerMobile.localeProps = localeProps;
+FcDesignerMobile.makeRequiredRule = makeRequiredRule;
+FcDesignerMobile.makeTreeOptions = makeTreeOptions;
+FcDesignerMobile.makeTreeOptionsRule = makeTreeOptionsRule;
+FcDesignerMobile.toJSON = toJSON;
 FcDesignerMobile.formCreate = formCreate;
 FcDesignerMobile.designerForm = designerForm;
 FcDesignerMobile.component = addComponent;
 FcDesignerMobile.useLocale = globalUseLocale;
 FcDesignerMobile.t = t;
+
+FcDesignerMobile.utils = {
+    copyTextToClipboard,
+    getInjectArg,
+    localeOptions,
+    localeProps,
+    makeOptionsRule,
+    makeRequiredRule,
+    makeTreeOptions,
+    makeTreeOptionsRule,
+    toJSON
+}
 
 if (compareVersion('3.1.27', formCreate.version) === 1) {
     console.warn('Please use FormCreate version 3.1.27 or greater, see https://github.com/xaboy/form-create.');
@@ -82,4 +113,17 @@ if (compareVersion('3.1.27', formCreate.version) === 1) {
 
 export default FcDesignerMobile;
 
-export {formCreate, designerForm, install};
+export {
+    formCreate,
+    designerForm,
+    install,
+    copyTextToClipboard,
+    getInjectArg,
+    localeOptions,
+    localeProps,
+    makeOptionsRule,
+    makeRequiredRule,
+    makeTreeOptions,
+    makeTreeOptionsRule,
+    toJSON
+};
