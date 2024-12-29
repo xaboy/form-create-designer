@@ -112,6 +112,7 @@ export default defineComponent({
         onInput() {
             if (this.formValue !== this.value) {
                 this.formValue = this.checkValue();
+                this.oldValue = this.formValue;
                 if (this.formValue !== this.value) {
                     this.$emit('input', this.formValue);
                 }
