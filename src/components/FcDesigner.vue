@@ -1491,16 +1491,23 @@ export default defineComponent({
             replaceField(rule) {
                 const flag = ['array', 'object'].indexOf(rule._menu.subForm) > -1;
                 let temp = methods.parseRule(deepCopy([rule]))[0];
+                const autoResetName = false !== methods.getConfig('autoResetName');
                 if (flag) {
                     temp.field = uniqueId();
+                    if (autoResetName) {
+                        temp.name = 'ref_' + uniqueId();
+                    }
                 }
-                temp = designerForm.toJson([temp]);
+                temp = designerForm.toJson(temp);
                 if (flag) {
                     temp = methods.batchReplaceUni(temp);
                 } else {
                     temp = methods.batchReplaceField(temp);
+                    if (autoResetName) {
+                        temp = methods.batchReplaceName(temp);
+                    }
                 }
-                return methods.loadRule(designerForm.parseJson(temp))[0];
+                return methods.loadRule([designerForm.parseJson(temp)])[0];
             },
             batchReplaceField(json) {
                 const regex = /"field"\s*:\s*"(\w[\w\d]+)"/g;
@@ -1516,6 +1523,13 @@ export default defineComponent({
                 const regex = /"_fc_id"\s*:\s*"(\w[\w\d]+)"/g;
                 json = json.replace(regex, () => {
                     return `"_fc_id":"id_${uniqueId()}"`;
+                });
+                return json;
+            },
+            batchReplaceName(json) {
+                const regex = /"name"\s*:\s*"ref_(\w[\w\d]+)"/g;
+                json = json.replace(regex, () => {
+                    return `"name":"ref_${uniqueId()}"`;
                 });
                 return json;
             },
