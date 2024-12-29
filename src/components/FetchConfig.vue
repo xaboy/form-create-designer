@@ -201,7 +201,7 @@ export default defineComponent({
 }
 
 ._fd-gfc-dialog .form-create {
-    overflow: scroll;
+    overflow: auto;
     height: 410px;
     margin-top: 15px;
 }
