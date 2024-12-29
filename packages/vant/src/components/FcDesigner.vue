@@ -753,6 +753,7 @@ export default defineComponent({
                     data.inputForm.rule = designerForm.parseJson(methods.getJson());
                     data.inputForm.option = designerForm.parseJson(methods.getOptionsJson());
                     data.inputForm.option.formData = deepCopy(data.inputForm.data);
+                    data.inputForm.option.appendValue = false;
                     data.inputForm.option.submitBtn.show = false;
                     data.inputForm.option.resetBtn.show = false;
                     methods.clearActiveRule();

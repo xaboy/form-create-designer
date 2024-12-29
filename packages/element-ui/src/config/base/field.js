@@ -23,6 +23,7 @@ export default function field({t}) {
         }, {
             type: 'Struct',
             field: '_control',
+            name: 'control',
             value: [],
             title: t('form.control'),
             info: {

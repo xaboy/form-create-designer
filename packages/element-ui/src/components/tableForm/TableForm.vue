@@ -229,7 +229,6 @@ export default {
                     ]
                 }
             ]
-            this.addRaw();
         },
     },
     created() {
