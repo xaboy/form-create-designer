@@ -201,7 +201,7 @@ export default defineComponent({
     display: flex;
     flex: 1;
     width: 100%;
-    overflow: scroll;
+    overflow: auto;
 }
 
 ._fd-fn-editor .CodeMirror {
