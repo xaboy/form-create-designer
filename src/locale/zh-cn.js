@@ -229,6 +229,7 @@ const ZhCn = {
         rule: '基础配置',
         advanced: '高级配置',
         props: '属性配置',
+        customProps: '自定义属性配置',
         validate: '验证配置',
         event: '事件配置',
         clearWarn: '清空后将不能恢复，确定要清空吗？',

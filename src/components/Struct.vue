@@ -1,15 +1,23 @@
 <template>
     <div class="_fd-struct">
         <el-badge type="warning" is-dot :hidden="!configured">
-            <el-button @click="visible=true" size="mini">{{ title || t('struct.title') }}</el-button>
+            <div @click="visible=true">
+                <slot>
+                    <el-button class="_fd-plain-button" plain size="mini">
+                        {{ title || t('struct.title') }}
+                    </el-button>
+                </slot>
+            </div>
         </el-badge>
-        <el-dialog class="_fd-struct-con" :title="title || t('struct.title')" :visible.sync="visible" destroy-on-close
-                  :close-on-click-modal="false" append-to-body width="800px">
+        <el-dialog class="_fd-struct-con" :title="title || t('struct.title')" :visible.sync="visible"
+                   destroy-on-close
+                   :close-on-click-modal="false"
+                   append-to-body width="800px">
             <div ref="editor" v-if="visible"></div>
             <template #footer>
                 <div>
                     <el-button @click="visible = false" size="small">{{ t('props.cancel') }}</el-button>
-                    <el-button type="primary" @click="onOk" size="small" color="#2f73ff">{{ t('props.ok') }}</el-button>
+                    <el-button type="primary" @click="onOk" size="small">{{ t('props.ok') }}</el-button>
                 </div>
             </template>
         </el-dialog>
@@ -20,16 +28,22 @@
 import 'codemirror/lib/codemirror.css';
 import CodeMirror from 'codemirror/lib/codemirror';
 import 'codemirror/mode/javascript/javascript';
-import {deepParseFn, toJSON, empty} from '../utils/index';
+import {deepParseFn, toJSON} from '../utils/index';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
 import {defineComponent, markRaw} from 'vue';
+import is from '@form-create/utils/lib/type';
 import errorMessage from '../utils/message';
+import beautify from 'js-beautify';
 
 export default defineComponent({
     name: 'Struct',
-    emits: ['input'],
+    emits: ['update:modelValue'],
+    model: {
+        prop: 'modelValue',
+        event: 'update:modelValue',
+    },
     props: {
-        value: [Object, Array, Function],
+        modelValue: [Object, Array, Function],
         title: String,
         defaultValue: {
             require: false
@@ -42,7 +56,7 @@ export default defineComponent({
             return this.designer.t;
         },
         configured() {
-            return !empty(this.value);
+            return !is.empty(this.modelValue) && Object.keys(this.modelValue).length > 0;
         },
     },
     data() {
@@ -53,7 +67,7 @@ export default defineComponent({
         };
     },
     watch: {
-        value() {
+        modelValue() {
             this.load();
         },
         visible(n) {
@@ -64,7 +78,7 @@ export default defineComponent({
     },
     methods: {
         load() {
-            const val = toJSON(deepParseFn(this.value ? deepCopy(this.value) : this.defaultValue));
+            const val = toJSON(deepParseFn(this.modelValue ? deepCopy(this.modelValue) : this.defaultValue));
             this.oldVal = val;
             this.$nextTick(() => {
                 this.editor = markRaw(CodeMirror(this.$refs.editor, {
@@ -74,12 +88,17 @@ export default defineComponent({
                     line: true,
                     tabSize: 2,
                     lineWrapping: true,
-                    value: val || ''
+                    value: val ? beautify.js(val, {
+                        indent_size: '2',
+                        indent_char: ' ',
+                        max_preserve_newlines: '5',
+                        indent_scripts: 'separate',
+                    }) : '',
                 }));
             });
         },
         onOk() {
-            const str = this.editor.getValue();
+            const str = (this.editor.getValue() || '').trim();
             let val;
             try {
                 val = (new Function('return ' + str))();
@@ -94,7 +113,7 @@ export default defineComponent({
             }
             this.visible = false;
             if (toJSON(val, null, 2) !== this.oldVal) {
-                this.$emit('input', val);
+                this.$emit('update:modelValue', val);
             }
             return true;
         },
@@ -114,15 +133,13 @@ export default defineComponent({
 ._fd-struct .el-button {
     font-weight: 400;
     width: 100%;
-    border-color: #2E73FF;
-    color: #2E73FF;
 }
+
 ._fd-struct-con .CodeMirror {
     height: 500px;
 }
 
 ._fd-struct-con .el-dialog__body {
-    padding: 0px 20px;
-
+    padding: 0px;
 }
 </style>

@@ -229,6 +229,7 @@ const En = {
         rule: 'Basis',
         advanced: 'Advanced',
         props: 'Props',
+        customProps: 'Custom props',
         validate: 'Validate',
         event: 'Event',
         clearWarn: 'It cannot be restored after clearing it. Are you sure you want to clear it? ',
