@@ -177,7 +177,6 @@ export default {
                 }
                 cache = JSON.parse(cache);
                 cache.rule = formCreate.parseJson(cache.rule);
-                cache.opt.submitBtn = false;
                 return cache;
             } catch (e) {
                 return def();
