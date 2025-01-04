@@ -1,17 +1,20 @@
 <template>
     <div class="_fd-required">
         <el-switch v-model="required"></el-switch>
-        <el-input v-model="requiredMsg" v-if="required" :placeholder="t('validate.requiredPlaceholder')"></el-input>
+        <LanguageInput v-model="requiredMsg" v-if="required"
+                       :placeholder="t('validate.requiredPlaceholder')"></LanguageInput>
     </div>
 </template>
 
 <script>
 import is from '@form-create/utils/lib/type';
 import {defineComponent} from 'vue';
+import LanguageInput from './language/LanguageInput.vue';
 
 export default defineComponent({
     name: 'Required',
-    emits: ['input'],
+    components: {LanguageInput},
+    emits: ['update:modelValue'],
     props: {
         value: {}
     },
