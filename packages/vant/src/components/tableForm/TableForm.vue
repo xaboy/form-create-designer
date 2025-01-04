@@ -62,10 +62,8 @@ export default {
         };
     },
     methods: {
-        formChange(field, _, rule, api, flag) {
-            if (false === flag) {
-                this.updateValue();
-            }
+        formChange() {
+            this.updateValue();
         },
         updateValue() {
             const value = this.trs.map((tr, idx) => {
