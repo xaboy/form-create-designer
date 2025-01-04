@@ -76,7 +76,7 @@ export default defineComponent({
                     });
                 }
             }
-            return menus;
+            return menus.filter(menu => this.designer.setupState.hiddenItem.indexOf(menu.name) === -1);
         }
     },
     methods: {
