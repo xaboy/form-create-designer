@@ -92,7 +92,7 @@
                                             <i class="fc-icon"
                                                :class="(data.rule._menu && data.rule._menu.icon) || 'icon-cell'"></i>
                                             <span>{{
-                                                    (data.rule?.__fc__?.refRule?.__$title?.value || data.rule.title || '').trim() || (data.rule.props && data.rule.props.label) || t('com.' + (data.rule._menu && data.rule._menu.name) + '.name') || data.rule.type
+                                                    (data.rule?.__fc__?.refRule?.__$title?.value || data.rule.title || '').trim() || (data.rule.props && data.rule.props.label) || t('com.' + (data.rule._menu && data.rule._menu.name) + '.name') || (data.rule._menu && data.rule._menu.label) || data.rule.type
                                                 }}</span>
                                         </div>
                                         <div class="_fc-tree-more" @click.stop v-if="!data.slot">
