@@ -955,6 +955,9 @@ export default defineComponent({
             },
             getOption() {
                 const options = deepCopy(data.formOptions);
+                ['onReset', 'onSubmit', 'onCreated', 'onMounted', 'onReload', 'onChange', 'beforeFetch'].forEach(key => {
+                    delete options[key];
+                });
                 Object.keys(options._event || {}).forEach(k => {
                     if (options._event[k]) {
                         options[k] = options._event[k];
