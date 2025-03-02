@@ -7,7 +7,7 @@
                    @emit-event="$emit"></component>
         <el-button link type="primary" class="fc-clock" v-if="!max || max > this.trs.length"
                    @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
-            添加
+            {{formCreateInject.t('add') || '添加'}}
         </el-button>
     </div>
 </template>
@@ -183,7 +183,7 @@ export default {
                 native: true,
                 class: '_fc-tf-edit fc-clock',
                 props: {
-                    innerText: '操作'
+                    innerText: this.formCreateInject.t('operation') || '操作'
                 }
             });
             body.push({
