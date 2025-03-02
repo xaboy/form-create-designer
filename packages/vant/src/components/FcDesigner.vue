@@ -439,7 +439,7 @@ export default defineComponent({
         locale: Object,
         handle: Array
     },
-    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear'],
+    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown'],
     setup(props) {
         const {menu, height, mask, locale, handle} = toRefs(props);
         const vm = getCurrentInstance();
@@ -1956,6 +1956,59 @@ export default defineComponent({
             triggerHandle(item) {
                 item.handle();
             },
+            bindHotkey(event) {
+                const isCtrlOrCmd = event.ctrlKey || event.metaKey;
+                if (!getSelection().toString() && isCtrlOrCmd && event.target.tagName === 'BODY' && ['ArrowUp', 'ArrowDown', 'c'].indexOf(event.key) > -1 && data.activeRule) {
+                    event.preventDefault();
+                    let rule = data.activeRule;
+                    if (event.key === 'c') {
+                        copyTextToClipboard('FormCreate:' + designerForm.toJson(methods.parseRule([rule])[0]));
+                        vm.emit('copyRule', {event, rule});
+                        return;
+                    }
+                    if (data.inputForm.state) {
+                        return;
+                    }
+                    if (!rule._menu.inside) {
+                        rule = rule.__fc__.parent.rule;
+                    }
+                    const parentRule = rule.__fc__.parent.rule;
+                    const idx = parentRule.children.indexOf(rule);
+
+                    if (parentRule.children.length > 1 && idx >= 0) {
+                        const direction = event.key === 'ArrowUp' ? -1 : (event.key === 'ArrowDown' ? 1 : 0);
+
+                        if (direction && idx + direction >= 0 && idx + direction < parentRule.children.length) {
+                            parentRule.children.splice(idx, 1);
+                            parentRule.children.splice(idx + direction, 0, rule);
+                            vm.emit('sort' + (event.key === 'ArrowUp' ? 'Up' : 'Down'), {event, rule});
+                        }
+                    }
+                }
+            },
+            bindPaste(event) {
+                if (data.inputForm.state) {
+                    return;
+                }
+                let content = event.clipboardData.getData('text/plain');
+                if (content && content.indexOf('FormCreate:') === 0) {
+                    let children = data.children;
+                    content = content.slice(11, content.length);
+                    const copyRule = methods.loadRule([designerForm.parseJson(content)])[0];
+                    if (data.activeRule && data.activeRule._menu.drag) {
+                        if (data.activeRule._menu.inside) {
+                            children = data.activeRule.children[0].children[0].children;
+                        } else {
+                            children = data.activeRule.children[0].children;
+                        }
+                    } else if (data.customForm.config && data.customForm.config.onPaste) {
+                        data.customForm.config.onPaste(copyRule)
+                        return;
+                    }
+                    children.push(copyRule)
+                    vm.emit('pasteRule', {event, copyRule});
+                }
+            }
         }
         data.dragForm.rule = methods.makeDragRule(methods.makeChildren(data.children));
         methods.setOption({});
@@ -1995,6 +2048,16 @@ export default defineComponent({
                 e.returnValue = this.t('designer.unload');
             }
         }
+    },
+    mounted() {
+        if (this.config?.hotKey !== false) {
+            document.addEventListener('keydown', this.bindHotkey);
+            document.addEventListener('paste', this.bindPaste);
+        }
+    },
+    unmounted() {
+        document.removeEventListener('keydown', this.bindHotkey);
+        document.removeEventListener('paste', this.bindPaste);
     }
 });
 </script>
