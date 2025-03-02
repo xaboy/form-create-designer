@@ -9,6 +9,7 @@ export default {
     icon: 'icon-editor',
     label,
     name,
+    input: true,
     event: ['change'],
     validate: ['string'],
     rule({t}) {

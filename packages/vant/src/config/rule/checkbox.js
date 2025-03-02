@@ -9,6 +9,7 @@ export default {
     icon: 'icon-checkbox',
     label,
     name,
+    input: true,
     event: ['change'],
     validate: ['array'],
     rule({t}) {

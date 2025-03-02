@@ -9,6 +9,7 @@ export default {
     icon: 'icon-time',
     label,
     name,
+    input: true,
     event: ['change', 'blur', 'focus', 'visibleChange'],
     rule({t}) {
         return {

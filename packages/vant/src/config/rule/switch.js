@@ -9,6 +9,7 @@ export default {
     icon: 'icon-switch',
     label,
     name,
+    input: true,
     event: ['change', 'click'],
     rule({t}) {
         return {

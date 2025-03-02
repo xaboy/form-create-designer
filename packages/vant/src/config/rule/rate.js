@@ -9,6 +9,7 @@ export default {
     icon: 'icon-rate',
     label,
     name,
+    input: true,
     event: ['change'],
     validate: ['number'],
     rule({t}) {

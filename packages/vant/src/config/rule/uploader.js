@@ -9,6 +9,7 @@ export default {
     icon: 'icon-upload',
     label,
     name,
+    input: true,
     event: ['oversize', 'clickUpload', 'clickPreview', 'clickReupload', 'closePreview', 'delete'],
     validate: ['array', 'string'],
     rule({t}) {

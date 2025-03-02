@@ -9,6 +9,7 @@ export default {
     icon: 'icon-transfer',
     label,
     name,
+    input: true,
     event: ['change', 'leftCheckChange', 'rightCheckChange'],
     validate: ['string', 'number', 'array'],
     rule({t}) {

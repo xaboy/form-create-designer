@@ -13,6 +13,7 @@ export default {
     drag: true,
     dragBtn: true,
     mask: false,
+    input: true,
     subForm: 'object',
     event: ['change'],
     loadRule(rule) {

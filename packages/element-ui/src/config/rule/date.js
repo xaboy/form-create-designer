@@ -9,6 +9,7 @@ export default {
     icon: 'icon-date',
     label,
     name,
+    input: true,
     event: ['change', 'blur', 'focus', 'calendarChange', 'panelChange', 'visibleChange'],
     rule({t}) {
         return {
