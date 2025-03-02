@@ -1523,7 +1523,8 @@ export default defineComponent({
                 data.propsForm.isShow = data.cacheProps[rule._fc_id].length > 0 && methods.getConfig('showPropsForm') !== false;
                 data.eventShow = rule._menu.event && rule._menu.event.length > 0 && methods.getConfig('showEventForm') !== false;
                 data.styleForm.isShow = rule._menu.style !== false && methods.getConfig('showStyleForm') !== false;
-                data.validateForm.isShow = data.baseForm.isShow && rule._menu.validate !== false && methods.getConfig('showValidateForm') !== false;
+                const showValidateForm = methods.getConfig('showValidateForm');
+                data.validateForm.isShow = ((data.baseForm.isShow && showValidateForm !== false) || showValidateForm === true) && rule._menu.validate !== false;
                 data.propsForm.rule = data.cacheProps[rule._fc_id];
                 methods.updateRuleFormData();
                 methods.watchActiveRule();
