@@ -2,7 +2,7 @@
     <div class="_fd-drag-tool" @click.stop="active" :class="{active: fcx.active === id}">
         <div class="_fd-drag-mask" v-if="mask"></div>
         <div class="_fd-drag-l" v-if="!hiddenBtn" @click.stop>
-            <div class="_fd-drag-btn" v-show="fcx.active === id && dragBtn !== false" style="cursor: move;">
+            <div class="_fd-drag-btn"  v-if="dragBtn !== false" v-show="fcx.active === id" style="cursor: move;">
                 <i class="fc-icon icon-move"></i>
             </div>
         </div>
