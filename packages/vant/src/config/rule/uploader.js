@@ -50,7 +50,7 @@ export default {
             }, {
                 type: 'FnInput',
                 field: 'onSuccess',
-                info: t('com.upload.info'),
+                warning: t('com.upload.info'),
                 props: {
                     args: ['res', 'file'],
                     name: 'onSuccess',

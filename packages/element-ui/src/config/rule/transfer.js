@@ -33,7 +33,7 @@ export default {
             }, {
                 type: 'select',
                 field: 'targetOrder',
-                info: t('com.elTransfer.targetOrderInfo'),
+                warning: t('com.elTransfer.props.targetOrderInfo'),
                 options: [{label: 'original', value: 'original'}, {
                     label: 'push',
                     value: 'push'

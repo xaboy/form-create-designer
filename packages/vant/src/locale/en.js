@@ -32,6 +32,16 @@ const En = {
         onChange: 'Triggered when the component value changes',
         beforeFetch: 'Triggered before remote data request is sent',
     },
+    warning: {
+        name: 'Unique identifier for the component, used to access and modify its configuration rules.',
+        field: 'Field name for binding data to the component. Must start with a letter for proper recognition.',
+        fetch: 'Loads remote data through requests, updating the component based on the returned result.',
+        fetchQuery: 'Defines GET parameters for requests, passed via the URL.',
+        fetchData: 'Defines POST parameters for requests, passed in the request body.',
+        fetchDataType: 'Selects the data type for the request body to ensure correct format.',
+        fetchParse: 'Processes the response data after the request and converts it into the required structure.',
+        language: 'Manages multilingual data, allowing easy language switching for content display.',
+    },
     computed: {
         fieldUsed: '[{label}] Is used in the calculation formula, please modify the corresponding formula first',
         fieldExist: '[{label}] Field already exists',
@@ -718,7 +728,7 @@ const En = {
         },
         uploader: {
             name: 'Uploader',
-            info: 'Assign the url returned by the interface to file.url in the onSuccess method',
+            info: 'After a successful upload, assign the returned URL to file.url or the result to file.value for use in subsequent form submissions.',
             event: {
                 oversize: 'Trigger when the file size exceeds the limit',
                 clickUpload: 'Trigger when clicking the upload area',
