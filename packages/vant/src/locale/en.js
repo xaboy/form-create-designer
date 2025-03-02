@@ -247,6 +247,7 @@ const En = {
         name: 'Language',
         add: 'Add',
         batchRemove: 'Batch Deletion',
+        select: 'Select language',
     },
     menu: {
         main: 'Basic',
