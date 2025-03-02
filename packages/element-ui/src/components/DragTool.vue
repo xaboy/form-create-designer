@@ -6,7 +6,7 @@
                 <i class="fc-icon icon-move"></i>
             </div>
         </div>
-        <div class="drag-r" v-if="btns !== false && !hiddenMenu">
+        <div class="_fd-drag-r" v-if="btns !== false && !hiddenMenu">
             <slot name="handle">
                 <div class="_fd-drag-btn" v-if="isCreate && (btns === true || btns.indexOf('create') > -1)"
                      @click.stop="$emit('create')">
@@ -106,6 +106,7 @@ export default defineComponent({
     word-wrap: break-word;
     word-break: break-all;
     transition: outline-color 0.3s ease;
+    z-index: 0;
 }
 
 ._fd-drag-tool ._fd-drag-tool {
@@ -139,10 +140,10 @@ export default defineComponent({
     display: none;
 }
 
-.drag-r {
+._fd-drag-r {
     position: absolute;
     right: 2px;
-    bottom: 2px;
+    top: calc(100% - 20px);
     z-index: 1904;
 }
 

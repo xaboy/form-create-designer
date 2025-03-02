@@ -636,7 +636,7 @@ export default defineComponent({
 }
 
 ._fd-table-view td {
-    padding: 5px;
+    padding: 0;
     min-height: 50px;
     min-width: 80px;
     position: relative;
