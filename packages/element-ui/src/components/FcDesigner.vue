@@ -727,6 +727,7 @@ export default defineComponent({
 
         watch(() => locale.value, (n) => {
             _t = n ? useLocale(locale).t : globalT;
+            methods.clearActiveRule();
             const formVal = data.form.api.formData && data.form.api.formData();
             const baseFormVal = data.baseForm.api.formData && data.baseForm.api.formData();
             const validateFormVal = data.validateForm.api.formData && data.validateForm.api.formData();
@@ -896,6 +897,7 @@ export default defineComponent({
                             props: {
                                 tag: 'el-col',
                                 group: group === true ? 'default' : group,
+                                swapThreshold: 0.65,
                                 ghostClass: 'ghost',
                                 animation: 150,
                                 handle: '._fd-drag-btn',
