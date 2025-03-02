@@ -150,6 +150,8 @@ export interface DragRule {
     subForm?: 'object' | 'array';
     //组件,不建议使用
     component?: Component;
+    //多语言配置项
+    languageKey: string[];
 
     //组件的生成规则
     rule(arg: { t: t }): Rule;
@@ -377,6 +379,8 @@ export declare const FcDesigner: import("vue").DefineComponent<{
     setOption: (opt: Options) => void;
     //设置设计器表单的表单配置
     setOptions: (opt: Options) => void;
+    //合并更新设计器表单的表单配置
+    mergeOptions: (opt: Options) => void;
     //获取设计器表单的渲染规则(Array)
     getRule: () => Rule[];
     //获取设计器表单的json渲染规则(string)

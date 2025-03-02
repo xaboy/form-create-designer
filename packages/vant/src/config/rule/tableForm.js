@@ -12,6 +12,7 @@ export default {
     mask: false,
     subForm: 'array',
     event: ['change', 'add', 'delete'],
+    languageKey: ['add', 'operation', 'dataEmpty'],
     children: 'tableFormColumn',
     loadRule(rule) {
         if (!rule.props) rule.props = {};
