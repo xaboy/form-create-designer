@@ -645,14 +645,14 @@
     display: none;
 }
 
-._fd-draggable-drag.drag-holder, ._fd-tableFormColumn-drag.drag-holder, ._fd-elTabPane-drag.drag-holder, ._fd-group-drag.drag-holder, ._fd-subForm-drag.drag-holder, ._fd-elCard-drag.drag-holder, ._fd-elCollapseItem-drag.drag-holder {
+._fd-draggable-drag.drag-holder, ._fd-tableFormColumn-drag.drag-holder, ._fd-vanTab-drag.drag-holder, ._fd-group-drag.drag-holder, ._fd-subForm-drag.drag-holder, ._fd-elCard-drag.drag-holder, ._fd-vanCollapseItem-drag.drag-holder {
     position: relative;
     background: #f5f5f5;
     background-size: 0;
     min-height: 90px;
 }
 
-._fc-child-empty:after, ._fd-draggable-drag.drag-holder:after, ._fd-tableFormColumn-drag.drag-holder:after, ._fd-elTabPane-drag.drag-holder:after, ._fd-group-drag.drag-holder:after, ._fd-subForm-drag.drag-holder:after, ._fd-elCard-drag.drag-holder:after, ._fd-elCollapseItem-drag.drag-holder:after {
+._fc-child-empty:after, ._fd-draggable-drag.drag-holder:after, ._fd-tableFormColumn-drag.drag-holder:after, ._fd-vanTab-drag.drag-holder:after, ._fd-group-drag.drag-holder:after, ._fd-subForm-drag.drag-holder:after, ._fd-elCard-drag.drag-holder:after, ._fd-vanCollapseItem-drag.drag-holder:after {
     content: var(--fc-drag-empty);
     position: absolute;
     top: 0;
