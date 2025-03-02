@@ -21,11 +21,11 @@
                                     <template #handle>
                                         <div class="_fd-drag-btn _fd-table-view-btn"
                                              @click="addRow({pid,idx,data: lattice[pid][idx]}, 0)">
-                                            <i class="fc-icon icon-add-tr"></i>
+                                            <i class="fc-icon icon-add-col"></i>
                                         </div>
                                         <div class="_fd-drag-btn _fd-table-view-btn"
                                              @click="addCol({pid,idx,data: lattice[pid][idx]}, 0)">
-                                            <i class="fc-icon icon-add-tr"
+                                            <i class="fc-icon icon-add-col"
                                                style="transform: rotate(90deg);"></i>
                                         </div>
                                         <div class="_fd-drag-btn _fd-table-view-btn">
