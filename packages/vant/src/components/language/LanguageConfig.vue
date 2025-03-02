@@ -1,6 +1,9 @@
 <template>
     <div class="_fd-language-config">
         <div class="_fc-l-label">{{ t('language.name') }}</div>
+        <div class="_fc-l-info">
+            {{ t('warning.language') }}
+        </div>
         <div class="_fd-lc-header">
             <el-button size="small" @click="addColumn">{{ t('language.add') }}</el-button>
             <el-button size="small" type="danger" plain :disabled="!selected.length" @click="batchRmColumn">
