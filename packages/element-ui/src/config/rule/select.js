@@ -9,6 +9,7 @@ export default {
     icon: 'icon-select',
     label,
     name,
+    input: true,
     event: ['change', 'visibleChange', 'removeTag', 'clear', 'blur', 'focus'],
     validate: ['string', 'number', 'array'],
     rule({t}) {

@@ -9,6 +9,7 @@ export default {
     icon: 'icon-calendar',
     label,
     name,
+    input: true,
     event: ['select', 'confirm', 'open', 'close', 'opened', 'closed', 'unselect', 'monthShow', 'overRange', 'clickSubtitle', 'clickDisabledDate', 'panelChange'],
     rule({t}) {
         return {

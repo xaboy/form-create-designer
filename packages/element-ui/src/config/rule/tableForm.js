@@ -10,6 +10,7 @@ export default {
     label,
     name,
     mask: false,
+    input: true,
     subForm: 'array',
     event: ['change', 'add', 'delete'],
     languageKey: ['add', 'operation', 'dataEmpty'],

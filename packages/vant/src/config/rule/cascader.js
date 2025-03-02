@@ -9,6 +9,7 @@ export default {
     icon: 'icon-cascader',
     label,
     name,
+    input: true,
     event: ['change', 'finish', 'close', 'clickTab'],
     validate: ['string', 'number'],
     rule({t}) {

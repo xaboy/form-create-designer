@@ -9,6 +9,7 @@ export default {
     icon: 'icon-textarea',
     label,
     name,
+    input: true,
     event: ['blur', 'focus', 'change', 'input'],
     validate: ['string'],
     rule({t}) {

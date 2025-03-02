@@ -9,6 +9,7 @@ export default {
     icon: 'icon-upload',
     label,
     name,
+    input: true,
     event: ['change', 'remove', 'preview', 'error', 'progress', 'exceed'],
     languageKey: ['clickToUpload'],
     validate: ['array'],

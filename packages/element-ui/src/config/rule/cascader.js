@@ -9,6 +9,7 @@ export default {
     icon: 'icon-cascader',
     label,
     name,
+    input: true,
     event: ['change', 'expandChange', 'blur', 'focus', 'visibleChange', 'removeTag'],
     validate: ['string', 'number', 'array'],
     rule({t}) {

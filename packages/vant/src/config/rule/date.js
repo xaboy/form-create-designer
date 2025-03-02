@@ -9,6 +9,7 @@ export default {
     icon: 'icon-date',
     label,
     name,
+    input: true,
     event: ['confirm', 'cancel', 'change'],
     rule({t}) {
         return {

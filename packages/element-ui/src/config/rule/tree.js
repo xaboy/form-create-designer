@@ -9,6 +9,7 @@ export default {
     icon: 'icon-tree',
     label,
     name,
+    input: true,
     event: ['nodeClick', 'nodeContextmenu', 'checkChange', 'check', 'currentChange', 'nodeExpand', 'nodeCollapse', 'nodeDragStart', 'nodeDragEnter', 'nodeDragLeave', 'nodeDragOver', 'nodeDragEnd', 'nodeDrop'],
     validate: ['string', 'number', 'array'],
     rule({t}) {

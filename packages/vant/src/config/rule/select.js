@@ -9,6 +9,7 @@ export default {
     icon: 'icon-select',
     label,
     name,
+    input: true,
     event: ['confirm', 'cancel', 'change', 'clickOption', 'scrollInto'],
     validate: ['string', 'number'],
     rule({t}) {

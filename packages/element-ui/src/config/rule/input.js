@@ -9,6 +9,7 @@ export default {
     icon: 'icon-input',
     label,
     name,
+    input: true,
     event: ['blur', 'focus', 'change', 'input', 'clear'],
     validate: ['string', 'url', 'email'],
     rule({t}) {

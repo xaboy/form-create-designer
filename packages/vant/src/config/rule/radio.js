@@ -9,6 +9,7 @@ export default {
     icon: 'icon-radio',
     label,
     name,
+    input: true,
     event: ['change'],
     validate: ['string', 'number'],
     rule({t}) {

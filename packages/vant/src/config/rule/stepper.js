@@ -9,6 +9,7 @@ export default {
     icon: 'icon-number',
     label,
     name,
+    input: true,
     event: ['change', 'overlimit', 'plus', 'minus', 'focus', 'blur'],
     validate: ['number', 'integer', 'float'],
     rule({t}) {

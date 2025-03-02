@@ -9,6 +9,7 @@ export default {
     icon: 'icon-slider',
     label,
     name,
+    input: true,
     event: ['change', 'dragStart', 'dragEnd'],
     validate: ['number', 'array'],
     rule({t}) {
