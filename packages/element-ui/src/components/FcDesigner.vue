@@ -131,11 +131,11 @@
                                 <template v-if="getConfig('showDevice') !== false">
                                     <div class="devices">
                                         <i class="fc-icon icon-pc" :class="{active: device === 'pc'}"
-                                           @click="device = 'pc'"></i>
+                                           @click="setDevice('pc')"></i>
                                         <i class="fc-icon icon-pad" :class="{active: device === 'pad'}"
-                                           @click="device = 'pad'"></i>
+                                           @click="setDevice('pad')"></i>
                                         <i class="fc-icon icon-mobile" :class="{active: device === 'mobile'}"
-                                           @click="device = 'mobile'"></i>
+                                           @click="setDevice('mobile')"></i>
                                     </div>
                                     <div class="line"></div>
                                 </template>
@@ -438,7 +438,7 @@ export default defineComponent({
         locale: Object,
         handle: Array
     },
-    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown'],
+    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown', 'changeDevice'],
     setup(props) {
         const {menu, height, mask, locale, handle} = toRefs(props);
         const vm = getCurrentInstance();
@@ -524,7 +524,7 @@ export default defineComponent({
             addRule: null,
             added: null,
             bus: Mitt(),
-            device: 'pc',
+            device: configRef.value?.device || 'pc',
             activeModule: 'base',
             activeTab: 'form',
             activeMenuTab: 'menu',
@@ -749,6 +749,10 @@ export default defineComponent({
         });
 
         const methods = {
+            setDevice(device) {
+                data.device = device;
+                vm.emit('changeDevice', device);
+            },
             unWatchActiveRule() {
                 unWatchActiveRule && unWatchActiveRule();
                 unWatchActiveRule = null;
