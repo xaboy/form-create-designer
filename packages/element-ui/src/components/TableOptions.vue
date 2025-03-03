@@ -109,7 +109,7 @@ export default defineComponent({
             }
         },
         onInput(item) {
-            if (this.column.length === 1 && !item[this.column[0].key]) {
+            if (this.column.length === 1 && '' === item[this.column[0].key]) {
                 return;
             }
             const flag = this.column.every(v => {
