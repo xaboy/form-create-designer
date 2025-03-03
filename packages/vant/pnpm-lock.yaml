@@ -18,8 +18,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       '@form-create/vant':
-        specifier: ^3.2.11
-        version: 3.2.11(vue@3.5.11(typescript@4.9.5))
+        specifier: ^3.2.18
+        version: 3.2.18(vue@3.5.11(typescript@4.9.5))
       codemirror:
         specifier: ^6.65.7
         version: 6.65.7
@@ -779,6 +779,11 @@ packages:
     peerDependencies:
       vue: ^3.1.0
 
+  '@form-create/core@3.2.19':
+    resolution: {integrity: sha512-+raJEgulpAQWc+eXXBziCI4wtSRw5qV1TJ/gHFaA2P80wQCawevMw8rt8iisdNvHUipAUbDYbUsj4OfdpByUkQ==}
+    peerDependencies:
+      vue: ^3.1.0
+
   '@form-create/element-ui@3.2.11':
     resolution: {integrity: sha512-cJpKuu5zGNJK5TlsXTLqfc972aAVYk4q2ljn0ERfxM89oRl+2tkatOVr2vPYqGj/Z4Ufpr1R/ZP+RGGl2jVIHQ==}
     peerDependencies:
@@ -787,8 +792,11 @@ packages:
   '@form-create/utils@3.2.0':
     resolution: {integrity: sha512-fqc7/l+US76NhloxMF3xE7UafYgxA8jU+t5WrAhmjaIAJ0vUNp6ScL/kdwN4nfOvjByZ/Q8BFQT0wqrp4lcgtw==}
 
-  '@form-create/vant@3.2.11':
-    resolution: {integrity: sha512-U8g6wUEgg3VDfXqFbOe7+rYb4S4l2xhykx0nndUt+ZsFJNxbcjfBLzPz/izuksPQF0DZoIHIFxhVNB0u5VqFZA==}
+  '@form-create/utils@3.2.18':
+    resolution: {integrity: sha512-C98bFPdFVMltiHQvEZqv4rVdhcqthJgvxMbWDlniL03HS5oyusnUvxUE8jf0I9zk5dZRDGmxKOUtzE3JDWP9nQ==}
+
+  '@form-create/vant@3.2.18':
+    resolution: {integrity: sha512-fV2ej/ydUF86IfUw5a3JwLOEVXdg3eoDPLCIII6XTRzKDYUBG+Gt6ni9ukmqeoMhJIXRF/aIoecVV6mkTgJsUQ==}
     peerDependencies:
       vue: ^3.1.0
 
@@ -6911,6 +6919,11 @@ snapshots:
       '@form-create/utils': 3.2.0
       vue: 3.5.11(typescript@4.9.5)
 
+  '@form-create/core@3.2.19(vue@3.5.11(typescript@4.9.5))':
+    dependencies:
+      '@form-create/utils': 3.2.18
+      vue: 3.5.11(typescript@4.9.5)
+
   '@form-create/element-ui@3.2.11(vue@3.5.11(typescript@4.9.5))':
     dependencies:
       '@form-create/component-elm-checkbox': 3.2.8
@@ -6927,11 +6940,13 @@ snapshots:
 
   '@form-create/utils@3.2.0': {}
 
-  '@form-create/vant@3.2.11(vue@3.5.11(typescript@4.9.5))':
+  '@form-create/utils@3.2.18': {}
+
+  '@form-create/vant@3.2.18(vue@3.5.11(typescript@4.9.5))':
     dependencies:
       '@form-create/component-subform': 3.1.34
-      '@form-create/core': 3.2.11(vue@3.5.11(typescript@4.9.5))
-      '@form-create/utils': 3.2.0
+      '@form-create/core': 3.2.19(vue@3.5.11(typescript@4.9.5))
+      '@form-create/utils': 3.2.18
       dayjs: 1.11.13
       vue: 3.5.11(typescript@4.9.5)
 
