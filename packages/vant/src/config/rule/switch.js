@@ -18,7 +18,10 @@ export default {
             title: t('com.switch.name'),
             info: '',
             $required: false,
-            props: {},
+            props: {
+                activeValue: true,
+                inactiveValue: false,
+            },
         };
     },
     props(_, {t}) {
@@ -36,11 +39,11 @@ export default {
                 field: 'inactiveColor',
             },
             {
-                type: 'input',
+                type: 'ValueInput',
                 field: 'activeValue',
             },
             {
-                type: 'input',
+                type: 'ValueInput',
                 field: 'inactiveValue',
             }
         ]);
