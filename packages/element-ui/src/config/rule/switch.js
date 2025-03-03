@@ -18,7 +18,10 @@ export default {
             title: t('com.switch.name'),
             info: '',
             $required: false,
-            props: {},
+            props: {
+                activeValue: true,
+                inactiveValue: false,
+            },
         };
     },
     props(_, {t}) {
@@ -32,8 +35,8 @@ export default {
         }, {type: 'input', field: 'activeText'}, {
             type: 'input',
             field: 'inactiveText'
-        }, {type: 'input', field: 'activeValue'}, {
-            type: 'input',
+        }, {type: 'ValueInput', field: 'activeValue'}, {
+            type: 'ValueInput',
             field: 'inactiveValue'
         }, {type: 'ColorInput', field: 'activeColor'}, {
             type: 'ColorInput',

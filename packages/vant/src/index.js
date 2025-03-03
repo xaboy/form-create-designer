@@ -24,6 +24,7 @@ import SizeInput from './components/style/SizeInput.vue';
 import ColorInput from './components/style/ColorInput.vue';
 import StyleConfig from './components/style/StyleConfig.vue';
 import LanguageInput from './components/language/LanguageInput.vue';
+import ValueInput from './components/ValueInput.vue';
 import FcEditor from '@form-create/component-wangeditor';
 import draggable from 'vuedraggable/src/vuedraggable';
 import {
@@ -73,6 +74,7 @@ elmFormCreate.component('ConfigItem', ConfigItem);
 elmFormCreate.component('FieldInput', FieldInput);
 elmFormCreate.component('FnConfig', FnConfig);
 designerForm.component('FcRow', Row);
+designerForm.component('ValueInput', ValueInput);
 addComponent('FcEditor', FcEditor);
 addComponent('TableForm', TableForm, TableFormView);
 addComponent('FcTable', Table, TableView);
