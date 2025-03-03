@@ -27,6 +27,8 @@
 
 **[@form-create/vant-designer](https://github.com/xaboy/form-create-designer/tree/next/packages/vant)** 是基于 [@form-create/vant](https://github.com/xaboy/form-create) 和 Vant 实现的**移动端**低代码表单设计器组件。支持Vue3
 
+**[@form-create/antd-designer](https://github.com/xaboy/form-create-designer/tree/next/packages/ant-design-vue)** 是基于 [@form-create/ant-design-vue](https://github.com/xaboy/form-create) 和 AntDesignVue 实现的低代码表单设计器组件。支持Vue3
+
 [![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg)](https://pro.form-create.com/view)
 
 ## 特点
@@ -53,7 +55,7 @@
 
 ![demo1](https://static.form-create.com/file/img/open-designer.jpg)
 
-## PC端设计器
+## Element Plus 版设计器
 
 **CDN:**
 
@@ -88,6 +90,43 @@ app.use(FcDesigner.formCreate)
 ```html
 <fc-designer ref="designer"/>
 ```
+
+## Ant Design Vue 版设计器
+
+**CDN:**
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/ant-design-vue@4/dist/reset.css"></link>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/ant-design-vue@4/dist/antd.min.js"></script>
+<script src="https://unpkg.com/@form-create/ant-design-vue@next/dist/form-create.min.js"></script>
+<script src="https://unpkg.com/@form-create/antd-designer@next/dist/index.umd.js"></script>
+```
+
+**NodeJs:**
+
+```shell
+npm install @form-create/antd-designer@next
+npm install @form-create/ant-design-vue@next
+npm install ant-design-vue
+```
+
+```js
+import FcDesigner from '@form-create/antd-designer'
+import antd from 'ant-design-vue';
+import 'ant-design-vue/dist/reset.css';
+
+app.use(antd);
+app.use(FcDesigner)
+app.use(FcDesigner.formCreate)
+```
+
+**使用**
+
+```html
+<fc-designer ref="designer"/>
+```
+
 
 ## 移动端设计器
 

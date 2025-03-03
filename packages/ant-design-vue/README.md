@@ -53,11 +53,11 @@
 **CDN:**
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css"></link>
+<link rel="stylesheet" href="https://unpkg.com/ant-design-vue@4/dist/reset.css"></link>
 <script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
+<script src="https://unpkg.com/ant-design-vue@4/dist/antd.min.js"></script>
 <script src="https://unpkg.com/@form-create/ant-design-vue@next/dist/form-create.min.js"></script>
-<script src="https://unpkg.com/@form-create/designer@next/dist/index.umd.js"></script>
+<script src="https://unpkg.com/@form-create/antd-designer@next/dist/index.umd.js"></script>
 ```
 
 **NodeJs:**
