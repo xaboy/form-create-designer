@@ -7,7 +7,7 @@
                    @emit-event="$emit"></component>
         <el-button link type="primary" class="fc-clock" v-if="!max || max > this.trs.length"
                    @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
-            {{formCreateInject.t('add') || '添加'}}
+            {{ formCreateInject.t('add') || '添加' }}
         </el-button>
     </div>
 </template>
@@ -49,7 +49,10 @@ export default {
                 this.updateTable()
             },
             deep: true
-        }
+        },
+        'formCreateInject.preview': function (n) {
+            this.emptyRule.children[0].props.colspan = this.columns.length + (n ? 1 : 2);
+        },
     },
     data() {
         return {
@@ -58,7 +61,27 @@ export default {
             fapi: {},
             Form: markRaw(this.formCreateInject.form.$form()),
             copyTrs: '',
-            oldValue: ''
+            oldValue: '',
+            emptyRule: {
+                type: 'tr',
+                _isEmpty: true,
+                native: true,
+                subRule: true,
+                children: [
+                    {
+                        type: 'td',
+                        style: {
+                            textAlign: 'center',
+                        },
+                        native: true,
+                        subRule: true,
+                        props: {
+                            colspan: this.columns.length + (this.formCreateInject.preview ? 1 : 2),
+                        },
+                        children: [this.formCreateInject.t('dataEmpty') || '暂无数据']
+                    }
+                ]
+            },
         };
     },
     methods: {
@@ -103,7 +126,7 @@ export default {
             this.oldValue = str;
             this.trs = this.trs.splice(0, this.modelValue.length);
             if (!this.modelValue.length) {
-                this.addRaw();
+                this.addEmpty();
             }
             this.modelValue.forEach((data, idx) => {
                 if (!this.trs[idx]) {
@@ -112,6 +135,9 @@ export default {
                 this.setRawData(idx, data || {});
             });
             this.rule[0].children[1].children = this.trs;
+        },
+        addEmpty() {
+            this.trs.push(this.emptyRule);
         },
         delRaw(idx) {
             if (this.disabled) {
@@ -122,7 +148,7 @@ export default {
             if (this.trs.length) {
                 this.trs.forEach(tr => this.updateRaw(tr));
             } else {
-                this.addRaw();
+                this.addEmpty();
             }
             this.$emit('delete', idx);
         },
@@ -131,6 +157,9 @@ export default {
                 return;
             }
             const tr = this.formCreateInject.form.parseJson(this.copyTrs)[0];
+            if (this.trs.length === 1 && this.trs[0]._isEmpty) {
+                this.trs.splice(0, 1);
+            }
             this.trs.push(tr);
             this.updateRaw(tr);
             if (flag) {
@@ -262,7 +291,7 @@ export default {
     margin-bottom: 22px;
 }
 
-._fc-table-form .el-form-item__label,._fc-table-form .van-field__label {
+._fc-table-form .el-form-item__label, ._fc-table-form .van-field__label {
     display: none !important;
 }
 
@@ -343,7 +372,7 @@ export default {
     width: 100%;
 }
 
-._fc-tf-head-required:before{
+._fc-tf-head-required:before {
     content: '*';
     color: #f56c6c;
     margin-right: 4px;

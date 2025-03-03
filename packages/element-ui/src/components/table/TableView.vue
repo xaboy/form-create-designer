@@ -20,15 +20,15 @@
                                     </DragBox>
                                     <template #handle>
                                         <div class="_fd-drag-btn _fd-table-view-btn"
-                                             @click="addRow({pid,idx,data: lattice[pid][idx]}, 0)">
+                                             @click.stop="addRow({pid,idx,data: lattice[pid][idx]}, 0)">
                                             <i class="fc-icon icon-add-col"></i>
                                         </div>
                                         <div class="_fd-drag-btn _fd-table-view-btn"
-                                             @click="addCol({pid,idx,data: lattice[pid][idx]}, 0)">
+                                             @click.stop="addCol({pid,idx,data: lattice[pid][idx]}, 0)">
                                             <i class="fc-icon icon-add-col"
                                                style="transform: rotate(90deg);"></i>
                                         </div>
-                                        <div class="_fd-drag-btn _fd-table-view-btn">
+                                        <div class="_fd-drag-btn _fd-table-view-btn" @click.stop>
                                             <el-dropdown trigger="click" @command="command">
                                                 <i class="fc-icon icon-setting"></i>
                                                 <template #dropdown>
@@ -267,13 +267,17 @@ export default defineComponent({
             const key = `${item.pid}:${item.idx}`;
             this.designer.setupState.customActive({
                 name: 'fcTableGrid',
+                onPaste: (rule) => {
+                    rule.slot = key;
+                    this.formCreateInject.children.push(rule);
+                },
                 style: {
                     formData: {
                         style: this.rule.style[key] || {},
                         class: this.rule.class[key] || '',
                     },
                     change: (field, value) => {
-                        this.rule[field][key] = value;
+                        this.rule[field][key] = value || {};
                     },
                 }
             });

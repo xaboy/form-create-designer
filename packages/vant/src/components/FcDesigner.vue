@@ -379,7 +379,11 @@
                     </div>
                     <template v-if="previewStatus === 'form'">
                         <ViewForm :rule="preview.rule" :option="preview.option" v-model:api="preview.api"
-                                  v-if="preview.state"></ViewForm>
+                                  v-if="preview.state">
+                            <template v-for="(_, name) in $slots" #[name]="scope">
+                                <slot :name="name" v-bind="scope ?? {}"/>
+                            </template>
+                        </ViewForm>
                     </template>
                     <pre class="_fd-preview-code" ref="previewCode" v-else-if="previewStatus === 'component'"><code v-html="preview.component"></code></pre>
                     <pre class="_fd-preview-code" ref="previewCode" v-else><code v-html="preview.html"></code></pre>
@@ -920,7 +924,7 @@ export default defineComponent({
                 copyTextToClipboard(data.activeRule.name);
             },
             updateName() {
-                this.activeRule.name = 'ref_' + uniqueId();
+                data.activeRule.name = 'ref_' + uniqueId();
             },
             makeDrag(group, tag, children, on, slot) {
                 return {
@@ -1042,7 +1046,7 @@ export default defineComponent({
                 return methods.getOption();
             },
             getOptionsJson() {
-                return designerForm.toJson([this.getOption()]).slice(1).slice(0, -1);
+                return designerForm.toJson([methods.getOption()]).slice(1).slice(0, -1);
             },
             setRule(rules) {
                 if (!rules) {
@@ -1513,7 +1517,7 @@ export default defineComponent({
                         data.propsForm.api.disabled(true, disabledField);
                     });
                 }
-                if (!this.getConfig('showControl', true)) {
+                if (!methods.getConfig('showControl', true)) {
                     data.baseForm.api.hidden(true, '_control');
                 }
                 const input = hasProperty(rule, 'field');
