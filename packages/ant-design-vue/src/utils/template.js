@@ -67,7 +67,7 @@ export function htmlTemplate(json, options) {
     <head>
         <meta charset="UTF-8">
         <!-- Import style -->
-        <link rel="stylesheet" href="https://unpkg.com/ant-design-vue/dist/reset.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/ant-design-vue@4/dist/reset.css"/>
         <!-- Import Vue 3 -->
         <script src="https://unpkg.com/vue@3"></script>
         <!-- Import dayjs -->
@@ -80,7 +80,7 @@ export function htmlTemplate(json, options) {
         <script src="https://unpkg.com/dayjs/plugin/advancedFormat.js"></script>
         <script src="https://unpkg.com/dayjs/plugin/quarterOfYear.js"></script>
         <!-- Import ant-design-vue -->
-        <script src="https://unpkg.com/ant-design-vue/dist/antd.min.js"></script>
+        <script src="https://unpkg.com/ant-design-vue@4/dist/antd.min.js"></script>
         <!-- Import formCreate -->
         <script src="https://unpkg.com/@form-create/ant-design-vue@3"><\/script>
     </head>
