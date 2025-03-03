@@ -88,6 +88,8 @@ export interface Config {
     showConfig?: boolean;
     //是否显示组件的基础配置表单
     showBaseForm?: boolean;
+    //是否显示组件的编号
+    showComponentName?: boolean;
     //是否显示组件联动
     showControl?: boolean;
     //是否显示json预览按钮
