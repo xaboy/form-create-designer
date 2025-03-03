@@ -68,13 +68,13 @@ export function htmlTemplate(json, options) {
     <head>
         <meta charset="UTF-8">
         <!-- Import style -->
-        <link rel="stylesheet" href="//unpkg.com/vant@4/lib/index.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/vant@4/lib/index.css"/>
         <!-- Import Vue 3 -->
-        <script src="//unpkg.com/vue@3"></script>
+        <script src="https://unpkg.com/vue@3"></script>
         <!-- Import vant -->
-        <script src="//unpkg.com/vant@4/lib/vant.min.js"></script>
+        <script src="https://unpkg.com/vant@4/lib/vant.min.js"></script>
         <!-- Import formCreateMobile -->
-        <script src="//unpkg.com/@form-create/vant@3"><\/script>
+        <script src="https://unpkg.com/@form-create/vant@3"><\/script>
     </head>
     <body>
         <div id="app">

@@ -67,13 +67,13 @@ export function htmlTemplate(json, options) {
     <head>
         <meta charset="UTF-8">
         <!-- Import style -->
-        <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css"/>
         <!-- Import Vue 3 -->
-        <script src="//unpkg.com/vue@3"></script>
+        <script src="https://unpkg.com/vue@3"></script>
         <!-- Import element-plus -->
-        <script src="//unpkg.com/element-plus"></script>
+        <script src="https://unpkg.com/element-plus"></script>
         <!-- Import formCreate -->
-        <script src="//unpkg.com/@form-create/element-ui@3"><\/script>
+        <script src="https://unpkg.com/@form-create/element-ui@3"><\/script>
     </head>
     <body>
         <div id="app">
