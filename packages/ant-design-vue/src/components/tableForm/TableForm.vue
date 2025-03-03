@@ -128,6 +128,8 @@ export default {
             this.trs = this.trs.splice(0, this.modelValue.length);
             if (!this.modelValue.length) {
                 this.addEmpty();
+            } else {
+                this.clearEmpty();
             }
             this.modelValue.forEach((data, idx) => {
                 if (!this.trs[idx]) {
@@ -138,7 +140,15 @@ export default {
             this.rule[0].children[1].children = this.trs;
         },
         addEmpty() {
+            if (this.trs.length) {
+                this.trs.splice(0, this.trs.length);
+            }
             this.trs.push(this.emptyRule);
+        },
+        clearEmpty() {
+            if (this.trs[0] && this.trs[0]._isEmpty) {
+                this.trs.splice(0, 1);
+            }
         },
         delRaw(idx) {
             if (this.disabled) {
