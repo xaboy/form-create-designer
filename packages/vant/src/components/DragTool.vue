@@ -189,6 +189,12 @@ export default defineComponent({
     bottom: 0;;
 }
 
+._fd-drag-tool:hover {
+    outline-color: #2E73FF;
+    outline-style: solid;
+    z-index: 1;
+}
+
 ._fd-drag-tool:has(._fd-drag-tool:not(.active):hover, ._fd-drag-tool.active:hover) > div > ._fd-drag-btn {
     display: none !important;
 }
