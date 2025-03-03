@@ -7,7 +7,7 @@
                    @emit-event="$emit"></component>
         <van-button type="primary" size="mini" class="fc-clock" v-if="!max || max > this.trs.length"
                     @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
-            {{formCreateInject.t('add') || '添加'}}
+            {{ formCreateInject.t('add') || '添加' }}
         </van-button>
     </div>
 </template>
@@ -127,6 +127,8 @@ export default {
             this.trs = this.trs.splice(0, this.modelValue.length);
             if (!this.modelValue.length) {
                 this.addEmpty();
+            } else {
+                this.clearEmpty();
             }
             this.modelValue.forEach((data, idx) => {
                 if (!this.trs[idx]) {
@@ -137,7 +139,15 @@ export default {
             this.rule[0].children[1].children = this.trs;
         },
         addEmpty() {
+            if (this.trs.length) {
+                this.trs.splice(0, this.trs.length);
+            }
             this.trs.push(this.emptyRule);
+        },
+        clearEmpty() {
+            if (this.trs[0] && this.trs[0]._isEmpty) {
+                this.trs.splice(0, 1);
+            }
         },
         delRaw(idx) {
             if (this.disabled) {
@@ -374,7 +384,7 @@ export default {
     border-left: 1px solid #EBEEF5;
 }
 
-._fc-tf-head-required:before{
+._fc-tf-head-required:before {
     content: '*';
     color: #f56c6c;
     margin-right: 4px;
