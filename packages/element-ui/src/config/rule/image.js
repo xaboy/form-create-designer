@@ -8,7 +8,6 @@ export default {
     icon: 'icon-image',
     label,
     name,
-    inline: true,
     rule() {
         return {
             type: name,
