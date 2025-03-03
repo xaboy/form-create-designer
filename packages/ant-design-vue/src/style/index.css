@@ -44,7 +44,7 @@
     background-color: #FFFFFF;
     --fc-drag-empty: "拖拽左侧列表中的组件到此处";
     --fc-child-empty: "点击右下角 \e789  按钮添加一列";
-    --fc-tool-border-color: #DDDDDD;
+    --fc-tool-border-color: #2E73FF;
 }
 
 ._fc-designer > .ant-layout-content {

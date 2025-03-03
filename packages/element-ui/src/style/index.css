@@ -523,14 +523,14 @@
     right: 0;
     padding: 12px;
     background: #FFFFFF;
-    box-shadow: 0 -8px 14px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.05);
     text-align: center;
     margin: 20px;
     z-index: 99;
 }
 
 ._fc-m-drag.mobile {
-    width: 350px;
+    width: 400px;
 }
 
 ._fc-m-drag.pad {
