@@ -1,0 +1,91 @@
+{
+    "name": "@form-create/antd-designer",
+    "version": "3.2.10",
+    "description": "AntDesignVue版本Vue低代码可视化表单设计器，可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率。",
+    "unpkg": "./dist/index.umd.js",
+    "jsdelivr": "./dist/index.umd.js",
+    "typings": "./types/index.d.ts",
+    "main": "./dist/index.umd.js",
+    "module": "./dist/index.es.js",
+    "scripts": {
+        "clean": "rimraf dist/",
+        "dev": "vue-cli-service serve",
+        "build": "vite build --config ./vite.config.build.js",
+        "build:locale": "gulp -f gulpfile.js",
+        "build:preview": "vite build --config ./vite.config.preview.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/xaboy/form-create-designer.git"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "keywords": [
+        "可视化表单设计器",
+        "form-create",
+        "form-builder",
+        "form-designer",
+        "draggable",
+        "form",
+        "components",
+        "vue",
+        "ant-design-vue",
+        "json-form",
+        "dynamic-form"
+    ],
+    "files": [
+        "README.md",
+        "package.json",
+        "LICENSE",
+        "src",
+        "types",
+        "dist",
+        "locale"
+    ],
+    "author": "xaboy",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/xaboy/form-create-designer/issues"
+    },
+    "homepage": "https://form-create.com",
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^3.1.2",
+        "@vitejs/plugin-vue-jsx": "^2.0.1",
+        "@vue/babel-plugin-jsx": "^1.0.7",
+        "@vue/cli-plugin-babel": "^4.5.13",
+        "@vue/cli-service": "^4.5.3",
+        "@vue/compiler-sfc": "^3.0.11",
+        "babel-eslint": "^10.1.0",
+        "gulp": "^4.0.2",
+        "html-webpack-plugin": "^4.3.0",
+        "jsonlint-mod": "^1.7.6",
+        "lint-staged": "^10.2.11",
+        "rimraf": "^3.0.2",
+        "vite": "^3.1.4"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,jsx,vue}": [
+            "eslint --fix",
+            "git add"
+        ]
+    },
+    "peerDependencies": {
+        "vue": "^3.1.5"
+    },
+    "dependencies": {
+        "@form-create/component-wangeditor": "^3.1",
+        "@form-create/ant-design-vue": "^3.1.27",
+        "@form-create/utils": "^3.2.0",
+        "ant-design-vue": "4.x",
+        "codemirror": "^6.65.7",
+        "element-plus": "^2.8.4",
+        "js-beautify": "^1.15.1",
+        "vuedraggable": "4.1.0"
+    }
+}
