@@ -183,6 +183,8 @@ export interface DragRule {
     hiddenBaseField?: string[];
     //是否显示遮罩, 避免对组件操作. 建议有子组件时为true,其他为false
     mask?: false | boolean;
+    //是否是表单组件
+    input?: boolean;
     //是否只能拖入一个
     only?: boolean;
     //当前组件支持的事件

@@ -1714,6 +1714,9 @@ export default defineComponent({
                 if (!rule.effect) {
                     rule.effect = {};
                 }
+                if (config.input && !rule.field) {
+                    rule.field = uniqueId();
+                }
                 if (config.languageKey) {
                     methods.mergeOptions({
                         languageKey: config.languageKey

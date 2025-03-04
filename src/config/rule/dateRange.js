@@ -9,6 +9,7 @@ export default {
     icon: 'icon-date-range',
     label,
     name,
+    input: true,
     event: ['change', 'blur', 'focus'],
     rule({t}) {
         return {
