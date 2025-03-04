@@ -7,7 +7,7 @@
                    @emit-event="$emit"></component>
         <el-button type="text" size="mini" class="fc-clock" v-if="!max || max > this.trs.length"
                    @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
-            添加
+            {{formCreateInject.t('add') || '添加'}}
         </el-button>
     </div>
 </template>
@@ -49,6 +49,9 @@ export default {
                 this.updateTable()
             },
             deep: true
+        },
+        'formCreateInject.preview': function (n) {
+            this.emptyRule.children[0].attrs.colspan = this.columns.length + (n ? 1 : 2);
         }
     },
     data() {
@@ -58,7 +61,27 @@ export default {
             fapi: {},
             Form: markRaw(this.formCreateInject.form.$form()),
             copyTrs: '',
-            oldValue: ''
+            oldValue: '',
+            emptyRule: {
+                type: 'tr',
+                _isEmpty: true,
+                native: true,
+                subRule: true,
+                children: [
+                    {
+                        type: 'td',
+                        style: {
+                            textAlign: 'center',
+                        },
+                        native: true,
+                        subRule: true,
+                        attrs: {
+                            colspan: this.columns.length + (this.formCreateInject.preview ? 1 : 2),
+                        },
+                        children: [this.formCreateInject.t('dataEmpty') || '暂无数据']
+                    }
+                ]
+            },
         };
     },
     methods: {
@@ -103,7 +126,9 @@ export default {
             this.oldValue = str;
             this.trs = this.trs.splice(0, this.value.length);
             if (!this.value.length) {
-                this.addRaw();
+                this.addEmpty();
+            } else {
+                this.clearEmpty();
             }
             this.value.forEach((data, idx) => {
                 if (!this.trs[idx]) {
@@ -112,6 +137,17 @@ export default {
                 this.setRawData(idx, data || {});
             });
             this.rule[0].children[1].children = this.trs;
+        },
+        addEmpty() {
+            if (this.trs.length) {
+                this.trs.splice(0, this.trs.length);
+            }
+            this.trs.push(this.emptyRule);
+        },
+        clearEmpty() {
+            if (this.trs[0] && this.trs[0]._isEmpty) {
+                this.trs.splice(0, 1);
+            }
         },
         delRaw(idx) {
             if (this.disabled) {
@@ -122,7 +158,7 @@ export default {
             if (this.trs.length) {
                 this.trs.forEach(tr => this.updateRaw(tr));
             } else {
-                this.addRaw();
+                this.addEmpty();
             }
             this.$emit('delete', idx);
         },
@@ -131,6 +167,9 @@ export default {
                 return;
             }
             const tr = this.formCreateInject.form.parseJson(this.copyTrs)[0];
+            if (this.trs.length === 1 && this.trs[0]._isEmpty) {
+                this.trs.splice(0, 1);
+            }
             this.trs.push(tr);
             this.updateRaw(tr);
             if (flag) {
@@ -183,7 +222,7 @@ export default {
                 native: true,
                 class: '_fc-tf-edit fc-clock',
                 domProps: {
-                    innerText: '操作'
+                    innerText: this.formCreateInject.t('operation') || '操作'
                 }
             });
             body.push({

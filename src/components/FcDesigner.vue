@@ -950,6 +950,23 @@ export default defineComponent({
                 if (Object.keys(formData).length > 0) {
                     options.formData = formData;
                 }
+                if (options.language) {
+                    Object.keys(options.language).forEach(k => {
+                        Object.keys(options.language[k]).forEach(id => {
+                            if (!options.language[k][id]) {
+                                delete options.language[k][id];
+                            }
+                        })
+                        if (!Object.keys(options.language[k]).length) {
+                            delete options.language[k];
+                        }
+                    })
+                }
+                Object.keys(options).forEach(k => {
+                    if (!Object.keys(options[k]).length) {
+                        delete options[k];
+                    }
+                })
                 delete options._submitBtn;
                 delete options._resetBtn;
                 return options;
@@ -1036,6 +1053,40 @@ export default defineComponent({
             },
             setOptions(opt) {
                 methods.setOption(opt);
+            },
+            mergeOptions(options) {
+                ['form'].forEach((key) => {
+                    if (options[key]) {
+                        $set(data.formOptions, key, {...(data.formOptions[key] || {}), ...options[key]});
+                    }
+                });
+                if(options.style && (!data.formOptions.style || data.formOptions.style.indexOf(options.style) === -1))  {
+                    $set(data.formOptions, 'style', (data.formOptions.style || '') + '\n' + options.style);
+                }
+                if (!data.formOptions.language) {
+                    $set(data.formOptions, 'language', {});
+                }
+                if (options.language) {
+                    Object.keys(options.language).forEach((key) => {
+                        $set(data.formOptions.language, key, {...(data.formOptions.language[key] || {}), ...options.language[key]});
+                    })
+                }
+                if(options.languageKey) {
+                    const language =  methods.getConfig('localeOptions', [
+                        {value: 'zh-cn', label: '简体中文'},
+                        {value: 'en', label: 'English'},
+                    ]);
+                    options.languageKey.forEach((key) => {
+                        language.forEach(({value}) => {
+                            if(!data.formOptions.language[value]){
+                                $set(data.formOptions.language, value, {});
+                            }
+                            if(!data.formOptions.language[value][key]){
+                                $set(data.formOptions.language[value], key, '');
+                            }
+                        })
+                    })
+                }
             },
             updateOptionsValue() {
                 const old = {};
@@ -1662,6 +1713,11 @@ export default defineComponent({
                 }
                 if (!rule.effect) {
                     rule.effect = {};
+                }
+                if (config.languageKey) {
+                    methods.mergeOptions({
+                        languageKey: config.languageKey
+                    })
                 }
                 if (hasProperty(rule, 'field') && !hasProperty(rule, '$required')) {
                     rule.$required = false;

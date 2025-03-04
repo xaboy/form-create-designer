@@ -10,6 +10,7 @@ export default {
     label,
     name,
     event: [],
+    languageKey: ['clickToUpload'],
     validate: ['array'],
     rule({t}) {
         return {
