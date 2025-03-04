@@ -364,7 +364,11 @@
                     </el-tabs>
                     <template v-if="previewStatus === 'form'">
                         <ViewForm :rule="preview.rule" :option="preview.option" v-model="preview.api"
-                                  v-if="preview.state"></ViewForm>
+                                  v-if="preview.state">
+                            <template v-for="(_, name) in $slots" #[name]="scope">
+                                <slot :name="name" v-bind="scope ?? {}"/>
+                            </template>
+                        </ViewForm>
                     </template>
                     <pre class="_fd-preview-code" v-else><code v-html="preview.html"></code></pre>
                 </el-dialog>

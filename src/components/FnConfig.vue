@@ -157,7 +157,9 @@ export default defineComponent({
             if (this.$refs.fn.save()) {
                 this.activeData.fn = this.eventStr;
                 this.destroy();
+                return true;
             }
+            return false;
         },
         destroy() {
             this.activeData = null;
@@ -167,8 +169,8 @@ export default defineComponent({
             this.destroy();
         },
         submit() {
-            if (this.activeData) {
-                return errorMessage(this.t('event.saveMsg'));
+            if (this.activeData && !this.save()) {
+                return;
             }
             this.$emit('input', this.parseFN(this.event));
             this.visible = false;
