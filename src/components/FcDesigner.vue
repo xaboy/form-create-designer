@@ -440,6 +440,7 @@ import LanguageConfig from './language/LanguageConfig.vue';
 import JsonPreview from './JsonPreview.vue';
 import Warning from './Warning.vue';
 import mergeProps from '@form-create/utils/lib/mergeprops';
+import {$del, $set} from '@form-create/utils';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
@@ -1314,16 +1315,17 @@ export default defineComponent({
                     data.dragForm.api.sync(data.activeRule);
                     if (field.indexOf('__') !== 0) {
                         if (field === 'formCreateChild') {
+                            $del(data.activeRule.children, 0);
                             delete data.activeRule.children[0];
                         } else if (field.indexOf('formCreate') === 0 || field.indexOf('>') > 0) {
                             if (field.indexOf('formCreate') < 0) {
                                 field = 'props>' + field;
                             }
                             propFieldDeepFn(field, ({source, field}) => {
-                                delete source[field];
+                                $del(source, field);
                             });
                         } else {
-                            delete data.activeRule.props[field];
+                            $del(data.activeRule.props, field);
                         }
                     }
                     methods.watchActiveRule();
@@ -1358,7 +1360,7 @@ export default defineComponent({
                             }
                             propFieldDeepFn(field, ({source, field}) => {
                                 if (isNull(value)) {
-                                    delete source[field];
+                                    $del(source, field);
                                     data.dragForm.api.sync(data.activeRule);
                                 } else {
                                     set(source, field, value);
@@ -1366,7 +1368,7 @@ export default defineComponent({
                             });
                         } else {
                             if (key && isNull(value)) {
-                                delete data.activeRule[key][field];
+                                $del(data.activeRule[key], field);
                                 data.dragForm.api.sync(data.activeRule);
                             } else {
                                 set((key ? data.activeRule[key] : data.activeRule), field, value);
