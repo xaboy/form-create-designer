@@ -40,8 +40,12 @@ type extendRule = ((arg: { t: t }) => Rule[]) | {
     prepend?: boolean;
 };
 
+type Device = 'pc' | 'pad' | 'mobile';
+
 //设计器组件的props.config配置
 export interface Config {
+    //配置设计区域显示方式
+    device?: Device;
     //是否可以切换组件类型,或者可以相互切换的字段
     switchType?: false | Array<string[]>;
     //是否自动选中拖入的组件
@@ -372,6 +376,8 @@ export declare const FcDesigner: import("vue").DefineComponent<{
     addComponent: (dragRule: DragRule | Array<DragRule>) => void;
     //覆盖添加拖拽组件到指定的菜单下
     setMenuItem: (menuName: string, list: MenuList) => void;
+    //覆盖添加拖拽组件到指定的菜单下
+    setDevice: (device: Device) => void;
     //在设计器左侧添加新的菜单
     addMenu: (menu: Menu) => void;
     //设置设计器表单的⽣成规则
