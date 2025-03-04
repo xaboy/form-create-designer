@@ -257,7 +257,7 @@
                                 <p class="_fc-r-title">{{ t('designer.type') }}</p>
                                 <TypeSelect></TypeSelect>
                                 <template
-                                    v-if="(activeRule && activeRule.name)">
+                                    v-if="(activeRule && activeRule.name && config.showComponentName !== false)">
                                     <p class="_fc-r-title">
                                         <Warning :tooltip="t('warning.name')">
                                             {{ t('designer.name') }}
