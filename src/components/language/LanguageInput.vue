@@ -5,15 +5,20 @@
               @blur="$emit('blur')"
               :size="size || 'mini'">
         <template #append>
-            <el-popover placement="bottom-end" :width="220" :hide-after="0" trigger="click" ref="pop" popper-class="_fd-language-popover">
+            <el-popover placement="bottom-end" :width="300" :hide-after="0" trigger="click" ref="pop" popper-class="_fd-language-popover">
                 <template #reference>
                     <i class="fc-icon icon-language"></i>
                 </template>
                 <div class="_fd-language-list">
                     <div class="_fd-language-header">
-                        <template v-for="item in localeList">
-                            <div :key="item.value">{{ item.label }}</div>
-                        </template>
+                        <div class="_fd-language-title">
+                            {{ t('language.select') }}<i class="fc-icon icon-setting" @click="openConfig"></i>
+                        </div>
+                        <div class="_fd-language-name">
+                            <template v-for="item in localeList">
+                                <div :key="item.value">{{ item.label }}</div>
+                            </template>
+                        </div>
                     </div>
                     <template v-for="lang in language">
                         <div class="_fd-language-item" @click="clickLang(lang.key)" :key="lang.key">
@@ -48,6 +53,9 @@ export default defineComponent({
     computed: {
         isVar() {
             return !!(this.modelValue || '').match(/^\{\{\s*\$t\.(.+)\s*\}\}$/);
+        },
+        t() {
+            return this.designer.t;
         },
         localeList() {
             const localeOptions = this.designer.getConfig('localeOptions', [
@@ -85,6 +93,9 @@ export default defineComponent({
         }
     },
     methods: {
+        openConfig() {
+            this.designer.activeModule = 'language';
+        },
         clickLang(key) {
             this.onInput(`{{$t.${key}}}`);
             this.$refs.pop.doClose();
@@ -103,7 +114,7 @@ export default defineComponent({
 <style>
 ._fd-language-list {
     max-height: 320px;
-    padding-top: 38px;
+    padding-top: 70px;
     overflow: auto;
 }
 
@@ -136,16 +147,31 @@ export default defineComponent({
     left: 0;
     right: 0;
     background-color: #FFFFFF;
+    flex-direction: column;
 }
 
-._fd-language-header > div, ._fd-language-item > div {
+._fd-language-name > div, ._fd-language-item > div {
     flex: 1;
     font-size: 12px;
     padding: 5px;
     min-width: 70px;
 }
 
-._fd-language-header > div {
+._fd-language-title {
+    margin: 6px 0;
+}
+
+._fd-language-title .fc-icon {
+    color: #2E73FF;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+._fd-language-name {
+    display: flex;
+}
+
+._fd-language-name > div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

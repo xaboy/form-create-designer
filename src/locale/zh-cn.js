@@ -244,6 +244,7 @@ const ZhCn = {
         name: '国际化配置',
         add: '新增词条',
         batchRemove: '批量删除',
+        select: '选择多语言',
     },
     menu: {
         main: '基础组件',
