@@ -406,6 +406,47 @@ export default {
 <\/script>`;
 }
 
+export function htmlTemplate(json, options) {
+    return `<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <!-- Import style -->
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
+        <!-- Import Vue 2.7 -->
+        <script src="https://unpkg.com/vue@2"></script>
+        <!-- Import element-ui -->
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        <!-- Import formCreate -->
+        <script src="https://unpkg.com/@form-create/element-ui@super"><\/script>
+    </head>
+    <body>
+        <div id="app">
+            <form-create :rule="rule" :option="options" v-model:value="formData" v-model="api" @submit="onSubmit"></form-create>
+        </div>
+        <script>
+            Vue.use(ELEMENT);
+            Vue.use(formCreate);
+            new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        rule: formCreate.parseJson('${json.replaceAll('\\', '\\\\').replaceAll('\'', '\\\'')}'),
+                        options: formCreate.parseJson('${options.replaceAll('\\', '\\\\').replaceAll('\'', '\\\'')}'),
+                        formData: {},
+                        api: null,
+                    };
+                },
+                methods: {
+                    onSubmit(formData){
+                        console.log('submit', formData);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>`
+}
+
 export function escapeRegExp(str) {
     return str.replace(/[\ .*+?^${}()|[\]\\]/g, '\\$&');
 }

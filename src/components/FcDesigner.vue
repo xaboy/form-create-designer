@@ -361,7 +361,12 @@
                     <el-tabs class="_fd-preview-tabs" v-model="previewStatus">
                         <el-tab-pane :label="t('form.formMode')" name="form"></el-tab-pane>
                         <el-tab-pane :label="t('form.componentMode')" name="component"></el-tab-pane>
+                        <el-tab-pane :label="t('form.htmlMode')" name="html"></el-tab-pane>
                     </el-tabs>
+                    <div class="_fd-preview-copy" v-if="['component', 'html'].indexOf(previewStatus) > -1"
+                         @click="copyCode">
+                        <i class="fc-icon icon-copy"></i>
+                    </div>
                     <template v-if="previewStatus === 'form'">
                         <ViewForm :rule="preview.rule" :option="preview.option" v-model="preview.api"
                                   v-if="preview.state">
@@ -370,7 +375,8 @@
                             </template>
                         </ViewForm>
                     </template>
-                    <pre class="_fd-preview-code" v-else><code v-html="preview.html"></code></pre>
+                    <pre class="_fd-preview-code" ref="previewCode" v-else-if="previewStatus === 'component'"><code v-html="preview.component"></code></pre>
+                    <pre class="_fd-preview-code" ref="previewCode" v-else><code v-html="preview.html"></code></pre>
                 </el-dialog>
             </el-container>
         </el-main>
@@ -395,6 +401,7 @@ import createMenu from '../config/menu';
 import {
     copyTextToClipboard,
     formTemplate,
+    htmlTemplate,
     getFormRuleDescription,
     getRuleDescription,
     getRuleTree,
@@ -472,7 +479,7 @@ export default defineComponent({
     emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown', 'changeDevice'],
     setup(props, {emit}) {
         const {menu, height, mask, locale, handle} = toRefs(props);
-        const vm = getCurrentInstance();
+        const vm = getCurrentInstance().proxy;
         const fcx = reactive({active: null});
         provide('fcx', fcx);
         provide('designer', vm);
@@ -967,10 +974,17 @@ export default defineComponent({
                 const options = methods.getOptionsJson();
                 data.preview.rule = designerForm.parseJson(rule);
                 data.preview.option = designerForm.parseJson(options);
-                data.preview.html = hljs.highlight(
+                data.preview.component = hljs.highlight(
                     formTemplate(rule, options),
                     {language: 'xml'}
-                ).value;
+                ).value
+                data.preview.html = hljs.highlight(
+                    htmlTemplate(rule, options),
+                    {language: 'xml'}
+                ).value
+            },
+            copyCode() {
+                copyTextToClipboard(vm.$refs.previewCode.innerText);
             },
             getRule() {
                 return methods.parseRule(deepCopy(data.dragForm.rule[0].children));

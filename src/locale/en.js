@@ -20,6 +20,7 @@ const En = {
         formMode: 'Form mode',
         formName: 'Form name',
         componentMode: 'Component',
+        htmlMode: 'Html',
         document: 'Document',
         controlDocument: 'Need more detailed configuration methods? Please view {doc}',
         onSubmit: 'Triggered when form is submitted',
