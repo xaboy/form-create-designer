@@ -234,7 +234,18 @@
                                  v-if="!config || config.showFormConfig !== false">
                             <DragForm :rule="form.rule" :option="form.option"
                                       :value="form.value" @change="formOptChange"
-                                      v-model="form.api"></DragForm>
+                                      v-model="form.api">
+                                <template #title="scope">
+                                    <template v-if="scope.rule.warning">
+                                        <Warning :tooltip="scope.rule.warning">
+                                            {{ scope.rule.title }}
+                                        </Warning>
+                                    </template>
+                                    <template v-else>
+                                        {{scope.rule.title}}
+                                    </template>
+                                </template>
+                            </DragForm>
                         </el-main>
                         <el-main class="_fc-r-tab-props" v-show="activeTab==='props'"
                                  :key="activeRule ? activeRule._fc_id: (customForm.config ? customForm.key : '')">
@@ -247,7 +258,11 @@
                                 <TypeSelect></TypeSelect>
                                 <template
                                     v-if="(activeRule && activeRule.name)">
-                                    <p class="_fc-r-title">{{ t('designer.name') }}</p>
+                                    <p class="_fc-r-title">
+                                        <Warning :tooltip="t('warning.name')">
+                                            {{ t('designer.name') }}
+                                        </Warning>
+                                    </p>
                                     <el-input size="mini" class="_fc-r-name-input"
                                               :value="activeRule.name"
                                               readonly>
@@ -267,14 +282,36 @@
                                               :rule="baseForm.rule"
                                               :option="baseForm.options"
                                               :value="baseForm.value"
-                                              @change="baseChange"></DragForm>
+                                              @change="baseChange">
+                                        <template #title="scope">
+                                            <template v-if="scope.rule.warning">
+                                                <Warning :tooltip="scope.rule.warning">
+                                                    {{ scope.rule.title }}
+                                                </Warning>
+                                            </template>
+                                            <template v-else>
+                                                {{scope.rule.title}}
+                                            </template>
+                                        </template>
+                                    </DragForm>
                                 </div>
                                 <div style="grid-area: props;">
                                     <el-divider v-if="propsForm.isShow">{{ t('designer.props') }} <PropsInput v-if="activeRule && getConfig('showCustomProps', true)"></PropsInput></el-divider>
                                     <DragForm v-show="propsForm.isShow" v-model="propsForm.api" :rule="propsForm.rule"
                                               :option="propsForm.options"
                                               :value="propsForm.value"
-                                              @change="propChange" @removeField="propRemoveField"></DragForm>
+                                              @change="propChange" @removeField="propRemoveField">
+                                        <template #title="scope">
+                                            <template v-if="scope.rule.warning">
+                                                <Warning :tooltip="scope.rule.warning">
+                                                    {{ scope.rule.title }}
+                                                </Warning>
+                                            </template>
+                                            <template v-else>
+                                                {{scope.rule.title}}
+                                            </template>
+                                        </template>
+                                    </DragForm>
                                     <el-divider v-if="customForm.isShow && customForm.propsShow">
                                         {{ t('designer.props') }}
                                     </el-divider>
@@ -390,6 +427,7 @@ import TypeSelect from './TypeSelect.vue';
 import PropsInput from './PropsInput.vue';
 import LanguageConfig from './language/LanguageConfig.vue';
 import JsonPreview from './JsonPreview.vue';
+import Warning from './Warning.vue';
 import mergeProps from '@form-create/utils/lib/mergeprops';
 
 hljs.registerLanguage('javascript', javascript);
@@ -398,6 +436,7 @@ hljs.registerLanguage('xml', xml);
 export default defineComponent({
     name: 'FcDesigner',
     components: {
+        Warning,
         JsonPreview,
         LanguageConfig,
         PropsInput,

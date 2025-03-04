@@ -5,6 +5,7 @@ export default function field({t}) {
             field: 'field',
             value: '',
             title: t('form.field'),
+            warning: t('warning.field'),
         }, {
             type: 'LanguageInput',
             field: 'title',
@@ -26,17 +27,7 @@ export default function field({t}) {
             name: 'control',
             value: [],
             title: t('form.control'),
-            info: {
-                native: true,
-                effect: 'light',
-                align: 'left',
-                children: [{
-                    type:'div',
-                    domProps:{
-                        innerHTML: t('form.controlDocument', {doc: '<a target="_blank" href="https://form-create.com/v3/guide/control" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'})
-                    }
-                }],
-            },
+            warning: t('form.controlDocument', {doc: '<a target="_blank" href="https://form-create.com/v3/guide/control" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'}),
             props: {
                 defaultValue: [],
                 validate(val) {

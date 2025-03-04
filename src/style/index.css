@@ -73,6 +73,16 @@
     margin-top: 5px;
 }
 
+._fc-l-info {
+    font-weight: 400;
+    font-size: 12px;
+    color: #AAAAAA;
+    line-height: 17px;
+    text-align: left;
+    font-style: normal;
+    padding: 0 12px;
+}
+
 ._fc-l > .el-container {
     height: 100%;
 }

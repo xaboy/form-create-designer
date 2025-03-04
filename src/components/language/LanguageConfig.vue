@@ -1,6 +1,9 @@
 <template>
     <div class="_fd-language-config">
         <div class="_fc-l-label">{{ t('language.name') }}</div>
+        <div class="_fc-l-info">
+            {{ t('warning.language') }}
+        </div>
         <div class="_fd-lc-header">
             <el-button size="mini" @click="addColumn">{{ t('language.add') }}</el-button>
             <el-button size="mini" type="danger" plain :disabled="!selected.length" @click="batchRmColumn">
@@ -43,6 +46,7 @@
 <script>
 import {defineComponent} from 'vue';
 import {copyTextToClipboard} from '../../utils';
+import {$del} from '@form-create/utils';
 
 export default defineComponent({
     name: 'LanguageConfig',
@@ -80,9 +84,9 @@ export default defineComponent({
             const language = this.designer.formOptions.language;
             this.localeOptions.forEach(item => {
                 if (!language[item.value]) {
-                    language[item.value] = {};
+                    this.$set(language, item.value, {});
                 }
-                language[item.value][row.key] = row[item.value];
+                this.$set(language[item.value], row.key, row[item.value]);
             })
         },
         rmColumn(idx) {
@@ -91,7 +95,7 @@ export default defineComponent({
             const language = this.designer.formOptions.language;
             this.localeOptions.forEach(item => {
                 if (language[item.value]) {
-                    delete language[item.value][row.key]
+                    $del(language[item.value], row.key);
                 }
             })
         },

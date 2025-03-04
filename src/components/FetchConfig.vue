@@ -3,17 +3,36 @@
         <el-badge type="warning" is-dot :hidden="!configured">
             <el-button @click="visible=true" size="mini">{{ t('struct.title') }}</el-button>
         </el-badge>
-        <el-dialog class="_fd-gfc-dialog" :title="t('fetch.optionsType.fetch')" :visible.sync="visible"
+        <el-dialog class="_fd-gfc-dialog" :visible.sync="visible"
                    :close-on-click-modal="false"
                    append-to-body
                    width="980px">
+            <template #title>
+                {{ t('fetch.optionsType.fetch') }}
+                <Warning :tooltip="t('warning.fetch')"></Warning>
+            </template>
             <el-container class="_fd-gfc-con" style="height: 450px;">
                 <el-tabs value="first" class="_fc-tabs" style="width: 100%">
                     <el-tab-pane :label="t('fetch.config')" name="first">
                         <DragForm v-model="form.api" :value.sync="form.formData" :rule="form.rule"
-                                  :option="form.options"></DragForm>
+                                  :option="form.options">
+                            <template #title="scope">
+                                <template v-if="scope.rule.warning">
+                                    <Warning :tooltip="scope.rule.warning">
+                                        {{ scope.rule.title }}
+                                    </Warning>
+                                </template>
+                                <template v-else>
+                                    {{ scope.rule.title }}
+                                </template>
+                            </template>
+                        </DragForm>
                     </el-tab-pane>
-                    <el-tab-pane lazy :label="t('fetch.parse')" name="second">
+                    <el-tab-pane lazy name="second">
+                        <template #label>
+                            {{ t('fetch.parse') }}
+                            <Warning :tooltip="t('warning.fetchParse')"></Warning>
+                        </template>
                         <FnEditor style="height: 415px;" v-model="form.parse" name="parse"
                                   :args="[{name:'res', info: t('fetch.response')}, 'rule', 'api']"
                                   ref="parse"></FnEditor>
@@ -45,6 +64,7 @@ import StructEditor from './StructEditor.vue';
 import {defineComponent} from 'vue';
 import {designerForm} from '../utils/form';
 import {empty} from '../utils';
+import Warning from './Warning.vue';
 
 const makeRule = (t) => {
     return [
@@ -74,6 +94,7 @@ const makeRule = (t) => {
             type: 'radio',
             field: 'dataType',
             title: t('fetch.dataType'),
+            warning: t('warning.fetchDataType'),
             value: 'json',
             props: {
                 size: 'default'
@@ -99,6 +120,7 @@ const makeRule = (t) => {
             type: 'TableOptions',
             field: 'query',
             title: t('fetch.query'),
+            warning: t('warning.fetchQuery'),
             value: {},
             props: {
                 column: [{label: t('props.key'), key: 'label'}, {label: t('props.value'), key: 'value'}],
@@ -110,6 +132,7 @@ const makeRule = (t) => {
             type: 'TableOptions',
             field: 'data',
             title: t('fetch.data'),
+            warning: t('warning.fetchData'),
             value: {},
             props: {
                 column: [{label: t('props.key'), key: 'label'}, {label: t('props.value'), key: 'value'}],
@@ -127,6 +150,7 @@ export default defineComponent({
         to: String,
     },
     components: {
+        Warning,
         DragForm: designerForm.$form(),
         FnEditor,
         StructEditor
