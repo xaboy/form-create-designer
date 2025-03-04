@@ -54,7 +54,7 @@
     },
     "dependencies": {
         "@form-create/component-wangeditor": "^2.7.0",
-        "@form-create/element-ui": "^2.7.0",
+        "@form-create/element-ui": "^2.7.3",
         "@form-create/utils": "^2.7.0",
         "codemirror": "5.60.0",
         "element-ui": "^2.15.2",
