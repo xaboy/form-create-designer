@@ -140,13 +140,7 @@ export default defineComponent({
                         tag: 'el-col',
                     },
                     attrs: {
-                        group: {
-                            name: 'default',
-                            put: (to, ...args) => {
-                                to.el.__rule__ = this.formCreateInject.rule;
-                                return this.designer.dragPut(to, ...args);
-                            }
-                        },
+                        group: 'default',
                         ghostClass: 'ghost',
                         animation: 150,
                         handle: '._fd-drag-btn',
