@@ -104,41 +104,68 @@ const validationMessage = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style  scoped>
 .step-import-settings {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  .mapping-area {
-    border: 1px solid #dcdfe6;
-    border-radius: 4px;
-    overflow: hidden;
-    .mapping-header {
-      display: flex;
-      background-color: #f5f7fa;
-      padding: 10px;
-      font-weight: bold;
-      .excel-column { flex: 1; padding: 0 10px; }
-      .field-column { flex: 1; padding: 0 10px; }
-    }
-    .mapping-rows {
-      max-height: 350px;
-      overflow-y: auto;
-      .mapping-row {
-        display: flex;
-        border-top: 1px solid #ebeef5;
-        padding: 10px;
-        &:hover { background-color: #f5f7fa; }
-        .excel-column {
-          flex: 1; padding: 0 10px; display: flex; align-items: center;
-        }
-        .field-column {
-          flex: 1; padding: 0 10px;
-          :deep(.el-select) { width: 100%; }
-        }
-      }
-    }
-  }
-  .validation-results { margin-top: 10px; }
+}
+
+.step-import-settings .mapping-area {
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.step-import-settings .mapping-area .mapping-header {
+  display: flex;
+  background-color: #f5f7fa;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.step-import-settings .mapping-area .mapping-header .excel-column {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.step-import-settings .mapping-area .mapping-header .field-column {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.step-import-settings .mapping-area .mapping-rows {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.step-import-settings .mapping-area .mapping-rows .mapping-row {
+  display: flex;
+  border-top: 1px solid #ebeef5;
+  padding: 10px;
+}
+
+.step-import-settings .mapping-area .mapping-rows .mapping-row:hover {
+  background-color: #f5f7fa;
+}
+
+.step-import-settings .mapping-area .mapping-rows .mapping-row .excel-column {
+  flex: 1;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.step-import-settings .mapping-area .mapping-rows .mapping-row .field-column {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.step-import-settings .mapping-area .mapping-rows .mapping-row .field-column .el-select {
+  width: 100%;
+}
+
+.step-import-settings .validation-results {
+  margin-top: 10px;
 }
 </style>

@@ -69,40 +69,53 @@ const props = defineProps({
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .step-import-data {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  .importing, .success, .error, .idle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  .loading-text, .result-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 20px 0 10px;
-  }
-  .result-summary {
-    color: #606266;
-    margin-bottom: 20px;
-  }
-  .warning-area {
-    width: 100%;
-    margin-top: 20px;
-    .warning-list {
-      margin-top: 10px;
-      .warning-item {
-        padding: 8px;
-        border-bottom: 1px solid #ebeef5;
-        color: #E6A23C;
-        &:last-child { border-bottom: none; }
-      }
-    }
-  }
+}
+
+.step-import-data .importing,
+.step-import-data .success,
+.step-import-data .error,
+.step-import-data .idle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.step-import-data .loading-text,
+.step-import-data .result-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.step-import-data .result-summary {
+  color: #606266;
+  margin-bottom: 20px;
+}
+
+.step-import-data .warning-area {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.step-import-data .warning-area .warning-list {
+  margin-top: 10px;
+}
+
+.step-import-data .warning-area .warning-list .warning-item {
+  padding: 8px;
+  border-bottom: 1px solid #ebeef5;
+  color: #E6A23C;
+}
+
+.step-import-data .warning-area .warning-list .warning-item:last-child {
+  border-bottom: none;
 }
 </style>

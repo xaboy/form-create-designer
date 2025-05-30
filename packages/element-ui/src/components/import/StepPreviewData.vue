@@ -81,23 +81,35 @@ const tableColumns = computed(() => {
 const handleSheetChange = (sheet) => { emit('change-sheet', sheet) }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .step-preview-data {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  .preview-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    .sheet-selector {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      .label { font-size: 14px; color: #606266; }
-    }
-  }
-  .empty-data { display: flex; justify-content: center; align-items: center; height: 200px; }
+}
+
+.step-preview-data .preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.step-preview-data .preview-header .sheet-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-preview-data .preview-header .sheet-selector .label {
+  font-size: 14px;
+  color: #606266;
+}
+
+.step-preview-data .empty-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
 </style>

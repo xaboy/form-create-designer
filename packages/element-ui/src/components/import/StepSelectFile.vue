@@ -90,25 +90,48 @@ const handleExceed: UploadProps['onExceed'] = () => {
 const downloadTemplate = () => { emit('download-template') }
 </script>
 
-<style lang="scss" scoped>
+
+<style scoped>
 .step-select-file {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  .upload-area {
-    display: flex; justify-content: center;
-    .upload-excel { width: 100%;
-      :deep(.el-upload) { width: 100%; }
-      :deep(.el-upload-dragger) {
-        width: 100%; height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      }
-    }
-  }
-  .upload-tips {
-    padding: 10px;
-    .mb-10px { margin-bottom: 10px; }
-    .tips-list { padding: 10px; .tip-item { line-height: 1.8; color: #606266; font-size: 14px; } }
-    .template-download { display: flex; justify-content: center; margin-top: 10px; }
-  }
+}
+.step-select-file .upload-area {
+  display: flex;
+  justify-content: center;
+}
+.step-select-file .upload-area .upload-excel {
+  width: 100%;
+}
+.step-select-file .upload-area .upload-excel :deep(.el-upload) {
+  width: 100%;
+}
+.step-select-file .upload-area .upload-excel :deep(.el-upload-dragger) {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.step-select-file .upload-tips {
+  padding: 10px;
+}
+.step-select-file .upload-tips .mb-10px {
+  margin-bottom: 10px;
+}
+.step-select-file .upload-tips .tips-list {
+  padding: 10px;
+}
+.step-select-file .upload-tips .tips-list .tip-item {
+  line-height: 1.8;
+  color: #606266;
+  font-size: 14px;
+}
+.step-select-file .upload-tips .template-download {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 </style>
