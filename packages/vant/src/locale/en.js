@@ -691,7 +691,9 @@ const En = {
                 disabled: 'Disabled',
                 filterEmptyColumn: 'Whether to filter empty rows',
                 max: 'Maximum number of rows to add, if 0, there is no limit',
-            }
+            },
+            batchImport: 'Batch Import',
+            batchExport: 'Batch Export'
         },
         tableFormColumn: {
             name: 'TableFormColumn',

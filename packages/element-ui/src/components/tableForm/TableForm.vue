@@ -5,6 +5,14 @@
                    @change="formChange"
                    v-model:api="fapi"
                    @emit-event="$emit"></component>
+        <el-button link type="primary" class="fc-clock" v-if="!disabled" @click="batchImport">
+            <i class="fc-icon icon-import" style="font-weight: 700;"></i>
+            {{ formCreateInject.t('batchImport') || '批量导入' }}
+        </el-button>
+        <el-button link type="primary" class="fc-clock" v-if="modelValue && modelValue.length" @click="batchExport">
+            <i class="fc-icon icon-save" style="font-weight: 700;"></i>
+            {{ formCreateInject.t('batchExport') || '批量导出' }}
+        </el-button>
         <el-button link type="primary" class="fc-clock" v-if="!max || max > this.trs.length"
                    @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
             {{ formCreateInject.t('add') || '添加' }}
@@ -17,7 +25,7 @@ import {markRaw, reactive} from 'vue';
 
 export default {
     name: 'TableForm',
-    emits: ['change', 'add', 'delete', 'update:modelValue'],
+    emits: ['change', 'add', 'delete', 'update:modelValue', 'batch-import', 'batch-export'],
     props: {
         formCreateInject: Object,
         modelValue: {
@@ -87,6 +95,12 @@ export default {
     methods: {
         formChange() {
             this.updateValue();
+        },
+        batchImport() {
+            this.$emit('batch-import');
+        },
+        batchExport() {
+            this.$emit('batch-export', this.modelValue);
         },
         updateValue() {
             const value = this.trs.map((tr, idx) => {
