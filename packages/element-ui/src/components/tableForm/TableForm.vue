@@ -110,11 +110,21 @@ export default {
             this.$emit('batch-import');
         },
         batchExport() {
-            const ws = XLSX.utils.json_to_sheet(this.modelValue || []);
+            const exportData = (this.modelValue || []).map(row => {
+                const item = {};
+                this.columns.forEach(col => {
+                    const field = col.rule && col.rule[0] && col.rule[0].field;
+                    if (field) {
+                        item[col.label] = row[field];
+                    }
+                });
+                return item;
+            });
+            const ws = XLSX.utils.json_to_sheet(exportData);
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
             XLSX.writeFile(wb, 'export.xlsx');
-            this.$emit('batch-export', this.modelValue);
+            this.$emit('batch-export', exportData);
         },
         handleImport(data) {
             this.$emit('update:modelValue', data);
