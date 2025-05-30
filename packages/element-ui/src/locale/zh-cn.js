@@ -751,7 +751,9 @@ const ZhCn = {
                 disabled: '是否禁用',
                 filterEmptyColumn: '是否过滤空行的数据',
                 max: '最多添加几行，为 0 则不限制',
-            }
+            },
+            batchImport: '批量导入',
+            batchExport: '批量导出'
         },
         tableFormColumn: {
             name: '表格格子',
