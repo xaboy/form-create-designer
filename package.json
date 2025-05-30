@@ -65,5 +65,8 @@
         "vue-loader": "^15.9.3",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.11"
+    },
+    "volta": {
+        "node": "18.12.1"
     }
 }
