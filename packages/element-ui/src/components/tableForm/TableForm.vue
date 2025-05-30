@@ -17,14 +17,18 @@
                    @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
             {{ formCreateInject.t('add') || '添加' }}
         </el-button>
+        <ImportSteps v-model:visible="showImport" :columns="columns" @done="handleImportDone" />
     </div>
 </template>
 
 <script>
 import {markRaw, reactive} from 'vue';
+import ImportSteps from '../import/ImportSteps.vue';
+import * as XLSX from 'xlsx';
 
 export default {
     name: 'TableForm',
+    components: { ImportSteps },
     emits: ['change', 'add', 'delete', 'update:modelValue', 'batch-import', 'batch-export'],
     props: {
         formCreateInject: Object,
@@ -70,6 +74,7 @@ export default {
             Form: markRaw(this.formCreateInject.form.$form()),
             copyTrs: '',
             oldValue: '',
+            showImport: false,
             emptyRule: {
                 type: 'tr',
                 _isEmpty: true,
@@ -97,10 +102,20 @@ export default {
             this.updateValue();
         },
         batchImport() {
+            this.showImport = true;
             this.$emit('batch-import');
         },
         batchExport() {
+            const ws = XLSX.utils.json_to_sheet(this.modelValue || []);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+            XLSX.writeFile(wb, 'export.xlsx');
             this.$emit('batch-export', this.modelValue);
+        },
+        handleImportDone(data) {
+            this.$emit('update:modelValue', data);
+            this.$emit('change', data);
+            this.showImport = false;
         },
         updateValue() {
             const value = this.trs.map((tr, idx) => {

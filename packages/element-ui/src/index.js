@@ -25,6 +25,7 @@ import ColorInput from './components/style/ColorInput.vue';
 import StyleConfig from './components/style/StyleConfig.vue';
 import LanguageInput from './components/language/LanguageInput.vue';
 import ValueInput from './components/ValueInput.vue';
+import ImportSteps from './components/import/ImportSteps.vue';
 import formCreate, {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor';
 import draggable from 'vuedraggable/src/vuedraggable';
@@ -73,6 +74,7 @@ designerForm.component('FieldInput', FieldInput);
 designerForm.component('FnConfig', FnConfig);
 designerForm.component('FcRow', Row);
 designerForm.component('ValueInput', ValueInput);
+designerForm.component('ImportSteps', ImportSteps);
 addComponent('FcEditor', FcEditor);
 addComponent('TableForm', TableForm, TableFormView);
 addComponent('FcTable', Table, TableView);
@@ -129,5 +131,6 @@ export {
     makeRequiredRule,
     makeTreeOptions,
     makeTreeOptionsRule,
-    toJSON
+    toJSON,
+    ImportSteps
 };
