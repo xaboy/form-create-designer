@@ -88,5 +88,8 @@
         "element-plus": "^2.8.4",
         "js-beautify": "^1.15.1",
         "vuedraggable": "4.1.0"
+    },
+    "volta": {
+        "node": "18.12.1"
     }
 }

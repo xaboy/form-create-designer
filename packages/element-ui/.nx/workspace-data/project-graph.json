@@ -1,0 +1,19 @@
+{
+  "nodes": {},
+  "externalNodes": {},
+  "dependencies": {},
+  "version": "6.0",
+  "errors": [
+    {
+      "errors": [
+        [
+          "pnpm-lock.yaml",
+          {}
+        ]
+      ],
+      "partialResults": [],
+      "name": "AggregateCreateNodesError"
+    }
+  ],
+  "computedAt": 1748633746562
+}
