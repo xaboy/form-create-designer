@@ -12,7 +12,8 @@
         "dev": "vue-cli-service serve",
         "build": "vite build --config ./vite.config.build.js",
         "build:locale": "gulp -f gulpfile.js",
-        "build:preview": "vite build --config ./vite.config.preview.js"
+        "build:preview": "vite build --config ./vite.config.preview.js",
+        "prepack": "pnpm run build"
     },
     "repository": {
         "type": "git",

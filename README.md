@@ -181,3 +181,14 @@ app.use(FcDesignerMobile.formCreate)
 [MIT](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2021-present xaboy
+
+## 本地打包
+
+打包前需要先构建三套设计器组件，生成 `dist` 目录后再执行 `pnpm pack`：
+
+```bash
+pnpm run build
+pnpm pack
+```
+
+在新增的 `prepack` 钩子作用下，你也可以直接运行 `pnpm pack`，将自动执行构建。
