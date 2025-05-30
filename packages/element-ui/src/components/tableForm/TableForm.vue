@@ -17,7 +17,11 @@
                    @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
             {{ formCreateInject.t('add') || '添加' }}
         </el-button>
-        <ImportSteps v-model:visible="showImport" :columns="columns" @done="handleImportDone" />
+        <ImportSteps
+            v-model="showImport"
+            :columns="columns"
+            :on-import="handleImport"
+        />
     </div>
 </template>
 
@@ -112,10 +116,10 @@ export default {
             XLSX.writeFile(wb, 'export.xlsx');
             this.$emit('batch-export', this.modelValue);
         },
-        handleImportDone(data) {
+        handleImport(data) {
             this.$emit('update:modelValue', data);
             this.$emit('change', data);
-            this.showImport = false;
+            return Promise.resolve();
         },
         updateValue() {
             const value = this.trs.map((tr, idx) => {
@@ -362,10 +366,12 @@ export default {
 }
 
 ._fc-tf-table {
-    width: 100%;
+    /* allow table to grow wider than the container so horizontal
+       scrolling works when there are many columns */
+    min-width: 100%;
+    width: max-content;
     height: 100%;
-    overflow: hidden;
-    table-layout: fixed;
+    table-layout: auto;
     border: 1px solid #EBEEF5;
     border-bottom: 0 none;
 }
@@ -397,8 +403,8 @@ export default {
     position: relative;
     box-sizing: border-box;
     overflow-wrap: break-word;
-    /*white-space: nowrap;*/
-    overflow: hidden;
+    /* allow content to expand; horizontal scroll will appear on container */
+    overflow: visible;
     border: 0 none;
     border-bottom: 1px solid #EBEEF5;
 }
