@@ -8,12 +8,20 @@
     @closed="onClose"
   >
     <div class="import-steps">
-      <el-steps :active="activeStep" finish-status="success" simple class="mb-20px">
-        <el-step title="选择EXCEL表" />
-        <el-step title="数据预览" />
-        <el-step title="导入设置" />
-        <el-step title="导入数据" />
-      </el-steps>
+      <div class="step-bar mb-20px">
+        <div
+          v-for="(label, index) in stepLabels"
+          :key="index"
+          class="step-item"
+          :class="{
+            'is-active': activeStep === index,
+            'is-done': activeStep > index
+          }"
+        >
+          <div class="step-index">{{ index + 1 }}</div>
+          <div class="step-title">{{ label }}</div>
+        </div>
+      </div>
 
       <div class="step-content">
         <!-- 步骤1: 选择EXCEL表 -->
@@ -122,6 +130,12 @@ const dialogVisible = computed({
 // 对话框标题
 const title = computed(() => `批量导入${props.tableTitle || '数据'}`)
 
+const stepLabels = [
+  '选择EXCEL表',
+  '数据预览',
+  '导入设置',
+  '导入数据'
+]
 // 当前激活的步骤
 const activeStep = ref(0)
 
@@ -264,7 +278,6 @@ const createInitialMapping = () => {
 
   columnMapping.value = mapping
 }
-
 // 切换Sheet
 const handleSheetChange = (sheet: string) => {
   selectedSheet.value = sheet
@@ -409,6 +422,74 @@ const onClose = () => {
 <style scoped>
 .import-steps {
   padding: 0 20px;
+}
+.import-steps .step-bar {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.import-steps .step-bar::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background-color: #dcdfe6;
+  z-index: 0;
+}
+.import-steps .step-item {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  z-index: 1;
+}
+.import-steps .step-item::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: calc(50% + 14px);
+  width: calc(100% - 28px);
+  height: 2px;
+  background-color: #dcdfe6;
+  z-index: -1;
+}
+.import-steps .step-item:last-child::after {
+  display: none;
+}
+.import-steps .step-index {
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 50%;
+  border: 2px solid #dcdfe6;
+  background-color: #fff;
+  margin: 0 auto;
+}
+.import-steps .step-title {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #606266;
+}
+.import-steps .step-item.is-active .step-index {
+  background-color: #409eff;
+  border-color: #409eff;
+  color: #fff;
+}
+.import-steps .step-item.is-active .step-title {
+  color: #409eff;
+  font-weight: 700;
+}
+.import-steps .step-item.is-done .step-index {
+  background-color: #67c23a;
+  border-color: #67c23a;
+  color: #fff;
+}
+.import-steps .step-item.is-done .step-title {
+  color: #67c23a;
+}
+.import-steps .step-item.is-done::after {
+  background-color: #67c23a;
 }
 .import-steps .mb-20px {
   margin-bottom: 20px;
