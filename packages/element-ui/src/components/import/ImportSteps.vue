@@ -136,7 +136,6 @@ const stepLabels = [
   '导入设置',
   '导入数据'
 ]
-
 // 当前激活的步骤
 const activeStep = ref(0)
 
@@ -279,7 +278,6 @@ const createInitialMapping = () => {
 
   columnMapping.value = mapping
 }
-
 // 切换Sheet
 const handleSheetChange = (sheet: string) => {
   selectedSheet.value = sheet
