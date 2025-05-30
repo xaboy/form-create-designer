@@ -17,7 +17,11 @@
                    @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
             {{ formCreateInject.t('add') || '添加' }}
         </el-button>
-        <ImportSteps v-model:visible="showImport" :columns="columns" @done="handleImportDone" />
+        <ImportSteps
+            v-model="showImport"
+            :columns="columns"
+            :on-import="handleImport"
+        />
     </div>
 </template>
 
@@ -106,16 +110,26 @@ export default {
             this.$emit('batch-import');
         },
         batchExport() {
-            const ws = XLSX.utils.json_to_sheet(this.modelValue || []);
+            const exportData = (this.modelValue || []).map(row => {
+                const item = {};
+                this.columns.forEach(col => {
+                    const field = col.rule && col.rule[0] && col.rule[0].field;
+                    if (field) {
+                        item[col.label] = row[field];
+                    }
+                });
+                return item;
+            });
+            const ws = XLSX.utils.json_to_sheet(exportData);
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
             XLSX.writeFile(wb, 'export.xlsx');
-            this.$emit('batch-export', this.modelValue);
+            this.$emit('batch-export', exportData);
         },
-        handleImportDone(data) {
+        handleImport(data) {
             this.$emit('update:modelValue', data);
             this.$emit('change', data);
-            this.showImport = false;
+            return Promise.resolve();
         },
         updateValue() {
             const value = this.trs.map((tr, idx) => {
