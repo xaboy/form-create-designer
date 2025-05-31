@@ -63,9 +63,38 @@ export default function field({t}) {
                 },
             ])
         }, {
+            type: 'radio',
+            field: 'formCreateWrap>widthMode',
+            title: t('form.widthMode'),
+            col: {show: false},
+            slot: 'append',
+            value: 1,
+            options: localeOptions(t, [
+                {label: t('form.fixedWidth'), value: 1},
+                {label: t('form.minMaxWidth'), value: 2},
+            ]),
+            control: [
+                {value: 1, rule: ['formCreateWrap>labelWidth']},
+                {value: 2, rule: ['formCreateStyle>minWidth', 'formCreateStyle>maxWidth']}
+            ]
+        }, {
             type: 'SizeInput',
             field: 'formCreateWrap>labelWidth',
             title: t('form.labelWidth'),
+            col: {show: false},
+            slot: 'append',
+            value: '',
+        }, {
+            type: 'SizeInput',
+            field: 'formCreateStyle>minWidth',
+            title: t('form.minWidth'),
+            col: {show: false},
+            slot: 'append',
+            value: '',
+        }, {
+            type: 'SizeInput',
+            field: 'formCreateStyle>maxWidth',
+            title: t('form.maxWidth'),
             col: {show: false},
             slot: 'append',
             value: '',
