@@ -12,7 +12,7 @@
         <el-dialog class="_fd-struct-con" :title="title || t('form.setHiddenCondition')" v-model="visible" destroy-on-close
                    :close-on-click-modal="false"
                    append-to-body width="800px">
-            <div ref="editor" v-if="visible"></div>
+            <ConditionBuilder v-if="visible" v-model="localVal" :fields="fields" :t="t" />
             <template #footer>
                 <div>
                     <el-button @click="visible = false" size="default">{{ t('props.cancel') }}</el-button>
@@ -24,15 +24,9 @@
 </template>
 
 <script>
-import 'codemirror/lib/codemirror.css';
-import CodeMirror from 'codemirror/lib/codemirror';
-import 'codemirror/mode/javascript/javascript';
-import {deepParseFn, toJSON} from '../utils/index';
-import {deepCopy} from '@form-create/utils/lib/deepextend';
-import {defineComponent, markRaw} from 'vue';
+import {defineComponent, computed, ref, watch, inject} from 'vue';
 import is from '@form-create/utils/lib/type';
-import errorMessage from '../utils/message';
-import beautify from 'js-beautify';
+import ConditionBuilder from './ConditionBuilder.vue';
 
 export default defineComponent({
     name: 'HiddenConfig',
@@ -45,73 +39,39 @@ export default defineComponent({
         },
         validate: Function,
     },
-    inject: ['designer'],
-    computed: {
-        t() {
-            return this.designer.setupState.t;
-        },
-        configured() {
-            return !is.empty(this.modelValue) && Object.keys(this.modelValue).length > 0;
-        },
-    },
-    data() {
-        return {
-            editor: null,
-            visible: false,
-            oldVal: null,
-        };
-    },
-    watch: {
-        modelValue() {
-            this.load();
-        },
-        visible(n) {
+    components: {ConditionBuilder},
+    setup(props, {emit}) {
+        const designer = inject('designer');
+        const visible = ref(false);
+        const localVal = ref({});
+        const t = computed(() => designer.setupState.t);
+        const fields = computed(() => {
+            return designer.setupState.fields ? designer.setupState.fields() : [];
+        });
+        const configured = computed(() => {
+            return !is.empty(props.modelValue) && Object.keys(props.modelValue).length > 0;
+        });
+
+        watch(() => props.modelValue, (v) => {
+            localVal.value = v || props.defaultValue || {};
+        }, {immediate: true});
+
+        watch(visible, (n) => {
             if (n) {
-                this.load();
+                localVal.value = props.modelValue || props.defaultValue || {};
             }
-        },
-    },
-    methods: {
-        load() {
-            const val = toJSON(deepParseFn(this.modelValue ? deepCopy(this.modelValue) : this.defaultValue));
-            this.oldVal = val;
-            this.$nextTick(() => {
-                this.editor = markRaw(CodeMirror(this.$refs.editor, {
-                    lineNumbers: true,
-                    mode: 'javascript',
-                    lint: true,
-                    line: true,
-                    tabSize: 2,
-                    lineWrapping: true,
-                    value: val ? beautify.js(val, {
-                        indent_size: '2',
-                        indent_char: ' ',
-                        max_preserve_newlines: '5',
-                        indent_scripts: 'separate',
-                    }) : '',
-                }));
-            });
-        },
-        onOk() {
-            const str = (this.editor.getValue() || '').trim();
-            let val;
-            try {
-                val = (new Function('return ' + str))();
-            } catch (e) {
-                console.error(e);
-                errorMessage(this.t('struct.errorMsg'));
+        });
+
+        function onOk() {
+            if (props.validate && false === props.validate(localVal.value)) {
                 return false;
             }
-            if (this.validate && false === this.validate(val)) {
-                errorMessage(this.t('struct.errorMsg'));
-                return false;
-            }
-            this.visible = false;
-            if (toJSON(val, null, 2) !== this.oldVal) {
-                this.$emit('update:modelValue', val);
-            }
+            visible.value = false;
+            emit('update:modelValue', localVal.value);
             return true;
-        },
+        }
+
+        return {visible, localVal, onOk, t, fields, configured};
     }
 });
 </script>
@@ -130,10 +90,6 @@ export default defineComponent({
     width: 100%;
     border-color: #2E73FF;
     color: #2E73FF;
-}
-
-._fd-struct-con .CodeMirror {
-    height: 500px;
 }
 
 ._fd-struct-con .el-dialog__body {
