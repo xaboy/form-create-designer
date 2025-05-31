@@ -13,7 +13,7 @@
             <i class="fc-icon icon-save" style="font-weight: 700;"></i>
             {{ formCreateInject.t('batchExport') || '批量导出' }}
         </van-button>
-        <van-button type="primary" size="mini" class="fc-clock" v-if="!max || max > this.trs.length"
+        <van-button type="primary" size="mini" class="fc-clock" v-if="(!max || max > this.trs.length) && !disabled"
                     @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
             {{ formCreateInject.t('add') || '添加' }}
         </van-button>
