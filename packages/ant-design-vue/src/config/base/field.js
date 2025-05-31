@@ -52,7 +52,7 @@ export default function field({t}) {
             value: '',
             title: t('form.maxWidth'),
         }, {
-            type: 'Struct',
+            type: 'HiddenConfig',
             field: '_control',
             name: 'control',
             value: [],
@@ -66,6 +66,18 @@ export default function field({t}) {
                     return !val.some(({rule}) => {
                         return !Array.isArray(rule);
                     });
+                }
+            }
+        }, {
+            type: 'HiddenConfig',
+            field: '_computed>hidden',
+            name: 'hidden',
+            value: {},
+            title: t('form.hiddenCondition'),
+            props: {
+                defaultValue: {},
+                validate(val) {
+                    return val && typeof val === 'object';
                 }
             }
         },
