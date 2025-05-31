@@ -332,104 +332,102 @@ export default {
 
 <style>
 ._fc-table-form {
-    overflow: auto;
-    color: #666666;
+  overflow: auto;
+  color: #666666;
 }
 
 ._fc-table-form .form-create .el-form-item {
-    margin-bottom: 1px;
+  margin-bottom: 1px;
 }
 
 ._fc-table-form .form-create .el-form-item.is-error {
-    margin-bottom: 22px;
+  margin-bottom: 22px;
 }
 
 ._fc-table-form .el-form-item__label, ._fc-table-form .van-field__label {
-    display: none !important;
+  display: none !important;
 }
 
 ._fc-table-form .el-form-item__content {
-    display: flex;
-    margin-left: 0px !important;
-    width: 100% !important;
+  display: flex;
+  margin-left: 0px !important;
+  width: 100% !important;
 }
 
 ._fc-tf-head-idx, ._fc-tf-idx {
-    width: 40px;
-    min-width: 40px;
-    font-weight: 500;
-    text-align: center;
+  width: 40px;
+  min-width: 40px;
+  font-weight: 500;
+  text-align: center;
 }
 
 ._fc-tf-edit, ._fc-tf-btn {
-    width: 70px;
-    min-width: 70px;
-    text-align: center;
+  width: 70px;
+  min-width: 70px;
+  text-align: center;
 }
 
 ._fc-tf-btn .fc-icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 ._fc-table-form._fc-disabled ._fc-tf-btn .fc-icon, ._fc-table-form._fc-disabled > .el-button {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 ._fc-tf-table {
-    /* allow table to grow wider than the container so horizontal
-       scrolling works when there are many columns */
-    min-width: 100%;
-    width: max-content;
-    height: 100%;
-    table-layout: auto;
-    border: 1px solid #EBEEF5;
-    border-bottom: 0 none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  table-layout: fixed;
+  border: 1px solid #EBEEF5;
+  border-bottom: 0 none;
 }
 
 ._fc-table-form ._fc-tf-table > thead > tr > th {
-    border: 0 none;
-    border-bottom: 1px solid #EBEEF5;
-    height: 40px;
-    font-weight: 500;
+  border: 0 none;
+  border-bottom: 1px solid #EBEEF5;
+  height: 40px;
+  font-weight: 500;
 }
 
 ._fc-table-form ._fc-tf-table > thead > tr > th + th {
-    border-left: 1px solid #EBEEF5;
+  border-left: 1px solid #EBEEF5;
 }
 
 ._fc-table-form tr {
-    min-height: 50px;
+  min-height: 50px;
 }
 
 ._fc-table-form ._fc-read-view {
-    text-align: center;
-    width: 100%;
+  text-align: center;
+  width: 100%;
 }
 
 ._fc-table-form td {
-    padding: 5px;
-    min-height: 50px;
-    min-width: 80px;
-    position: relative;
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-    /* allow content to expand; horizontal scroll will appear on container */
-    overflow: visible;
-    border: 0 none;
-    border-bottom: 1px solid #EBEEF5;
+  padding: 5px;
+  min-height: 50px;
+  min-width: 80px;
+  position: relative;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  /*white-space: nowrap;*/
+  overflow: hidden;
+  border: 0 none;
+  border-bottom: 1px solid #EBEEF5;
 }
 
 ._fc-table-form td + td {
-    border-left: 1px solid #EBEEF5;
+  border-left: 1px solid #EBEEF5;
 }
 
 ._fc-tf-table .el-input-number, ._fc-tf-table .el-select, ._fc-tf-table .el-slider, ._fc-tf-table .el-cascader, ._fc-tf-table .el-date-editor {
-    width: 100%;
+  width: 100%;
 }
 
 ._fc-tf-head-required:before {
-    content: '*';
-    color: #f56c6c;
-    margin-right: 4px;
+  content: '*';
+  color: #f56c6c;
+  margin-right: 4px;
 }
 </style>
