@@ -1,3 +1,5 @@
+import {localeOptions} from '../../utils';
+
 export default function field({t}) {
     return [
         {
@@ -16,6 +18,19 @@ export default function field({t}) {
             field: 'info',
             value: '',
             title: t('form.info'),
+        }, {
+            type: 'radio',
+            field: 'formCreateWrap>widthMode',
+            value: 1,
+            title: t('form.widthMode'),
+            options: localeOptions(t, [
+                {label: t('form.fixedWidth'), value: 1},
+                {label: t('form.minMaxWidth'), value: 2},
+            ]),
+            control: [
+                {value: 1, rule: ['formCreateWrap>labelWidth']},
+                {value: 2, rule: ['formCreateStyle>minWidth', 'formCreateStyle>maxWidth']}
+            ]
         }, {
             type: 'SizeInput',
             field: 'formCreateWrap>labelWidth',

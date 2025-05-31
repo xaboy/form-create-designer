@@ -1388,6 +1388,14 @@ export default defineComponent({
                             if (field.indexOf('formCreate') < 0) {
                                 field = (key ? key + '>' : '') + field;
                             }
+                            if (org === 'formCreateWrap>widthMode') {
+                                if (value === 1) {
+                                    propFieldDeepFn('formCreateStyle>minWidth', ({source, field}) => delete source[field]);
+                                    propFieldDeepFn('formCreateStyle>maxWidth', ({source, field}) => delete source[field]);
+                                } else {
+                                    propFieldDeepFn('formCreateWrap>labelCol>style>width', ({source, field}) => delete source[field]);
+                                }
+                            }
                             propFieldDeepFn(field, ({source, field}) => {
                                 if (isNull(value)) {
                                     delete source[field];
@@ -1565,10 +1573,18 @@ export default defineComponent({
                 const rule = data.activeRule;
                 let formData = {
                     formCreateChild: '' + rule?.children[0],
+                    'formCreateWrap>widthMode': 1,
                     'formCreateWrap>labelCol>style>width': '',
                     'formCreateStyle>minWidth': '',
                     'formCreateStyle>maxWidth': '',
                 };
+                if (rule.style?.minWidth || rule.style?.maxWidth) {
+                    formData['formCreateWrap>widthMode'] = 2;
+                    formData['formCreateStyle>minWidth'] = rule.style.minWidth || '';
+                    formData['formCreateStyle>maxWidth'] = rule.style.maxWidth || '';
+                } else if (rule.labelCol?.style?.width) {
+                    formData['formCreateWrap>labelCol>style>width'] = rule.labelCol.style.width;
+                }
                 const appendConfigData = configRef.value.appendConfigData;
                 if (is.Function(appendConfigData)) {
                     formData = {...formData, ...appendConfigData(rule)};

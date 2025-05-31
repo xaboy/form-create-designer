@@ -1,3 +1,5 @@
+import {localeOptions} from '../../utils';
+
 export default function field({t}) {
     return [
         {
@@ -22,6 +24,21 @@ export default function field({t}) {
             col: {show: false},
             value: '',
             title: t('form.labelCol'),
+        }, {
+            type: 'radio',
+            field: 'formCreateWrap>widthMode',
+            col: {show: false},
+            value: 1,
+            title: t('form.widthMode'),
+            options: localeOptions(t, [
+                {label: t('form.fixedWidth'), value: 1},
+                {label: t('form.minMaxWidth'), value: 2},
+            ]),
+            props: {optionType: 'button'},
+            control: [
+                {value: 1, rule: ['formCreateWrap>labelCol>style>width']},
+                {value: 2, rule: ['formCreateStyle>minWidth', 'formCreateStyle>maxWidth']}
+            ]
         }, {
             type: 'SizeInput',
             field: 'formCreateStyle>minWidth',
