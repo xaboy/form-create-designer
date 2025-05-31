@@ -51,11 +51,10 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { UploadFilled, Download } from '@element-plus/icons-vue'
-import type { UploadProps, UploadUserFile } from 'element-plus'
 
 defineOptions({ name: 'StepSelectFile' })
 
@@ -68,7 +67,7 @@ const emit = defineEmits(['select-file', 'download-template'])
 
 const fileList = ref([])
 
-const beforeUpload: UploadProps['beforeUpload'] = (file) => {
+const beforeUpload = (file) => {
   const isExcel = file.type === 'application/vnd.ms-excel' ||
     file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
     /(\.xls|\.xlsx)$/.test(file.name.toLowerCase())
@@ -78,12 +77,12 @@ const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   return true
 }
 
-const handleFileChange: UploadProps['onChange'] = (uploadFile) => {
+const handleFileChange = (uploadFile) => {
   fileList.value = [uploadFile.raw]
   emit('select-file', uploadFile.raw)
 }
 
-const handleExceed: UploadProps['onExceed'] = () => {
+const handleExceed = () => {
   ElMessage.warning('只能上传一个文件，请先删除已上传的文件')
 }
 

@@ -49,7 +49,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 
 defineOptions({ name: 'StepImportSettings' })
