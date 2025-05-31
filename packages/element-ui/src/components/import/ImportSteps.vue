@@ -8,12 +8,17 @@
     @closed="onClose"
   >
     <div class="import-steps">
-      <el-steps :active="activeStep" finish-status="success" simple class="mb-20px">
-        <el-step title="选择EXCEL表" />
-        <el-step title="数据预览" />
-        <el-step title="导入设置" />
-        <el-step title="导入数据" />
-      </el-steps>
+      <div class="manual-steps mb-20px">
+        <div
+          v-for="(step, index) in stepTitles"
+          :key="index"
+          class="manual-step"
+          :class="{ active: index === activeStep, done: index < activeStep }"
+        >
+          <div class="step-indicator">{{ index + 1 }}</div>
+          <div class="step-label">{{ step }}</div>
+        </div>
+      </div>
 
       <div class="step-content">
         <!-- 步骤1: 选择EXCEL表 -->
@@ -79,7 +84,7 @@
   </el-dialog>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref, computed } from 'vue'
 import StepSelectFile from './steps/StepSelectFile.vue'
 import StepPreviewData from './steps/StepPreviewData.vue'
@@ -122,24 +127,27 @@ const dialogVisible = computed({
 // 对话框标题
 const title = computed(() => `批量导入${props.tableTitle || '数据'}`)
 
+// 步骤标题
+const stepTitles = ['选择EXCEL表', '数据预览', '导入设置', '导入数据']
+
 // 当前激活的步骤
 const activeStep = ref(0)
 
 // Excel相关数据
-const excelFile = ref<File | null>(null)
-const excelData = ref<any[]>([])
-const excelSheets = ref<string[]>([])
+const excelFile = ref(null)
+const excelData = ref([])
+const excelSheets = ref([])
 const selectedSheet = ref('')
 
 // 映射关系
-const columnMapping = ref<Record<string, string>>({})
+const columnMapping = ref({})
 
 // 导入状态和结果
-const importStatus = ref<'idle' | 'importing' | 'success' | 'error'>('idle')
+const importStatus = ref('idle')
 const importTotal = ref(0)
 const importSuccess = ref(0)
 const importFail = ref(0)
-const importWarnings = ref<string[]>([])
+const importWarnings = ref([])
 
 // 是否可以进入下一步
 const canGoNext = computed(() => {
@@ -174,7 +182,7 @@ const nextStep = async () => {
 }
 
 // 处理文件选择
-const handleFileSelected = async (file: File) => {
+const handleFileSelected = async (file) => {
   excelFile.value = file
   try {
     const arrayBuffer = await file.arrayBuffer()
@@ -220,7 +228,7 @@ const handleFileSelected = async (file: File) => {
 
     if (Array.isArray(headers)) {
       excelData.value = allData.slice(1).map(row => {
-        const obj: Record<string, any> = {}
+        const obj = {}
         headers.forEach((header, index) => {
           if (header) {
             obj[header] = Array.isArray(row) && index < row.length ? row[index] : ''
@@ -240,7 +248,7 @@ const handleFileSelected = async (file: File) => {
     }
 
     createInitialMapping()
-  } catch (error: any) {
+  } catch (error) {
     excelData.value = []
     ElMessage.error('解析Excel文件失败: ' + (error.message || '未知错误'))
   }
@@ -250,10 +258,10 @@ const handleFileSelected = async (file: File) => {
 const createInitialMapping = () => {
   if (excelData.value.length === 0) return
   const firstRow = excelData.value[0]
-  const mapping: Record<string, string> = {}
+  const mapping = {}
 
   for (const excelCol in firstRow) {
-    const matchedColumn = props.columns.find((col: any) => {
+    const matchedColumn = props.columns.find((col) => {
       return col.label === excelCol || (col.rule && col.rule[0] && col.rule[0].field === excelCol)
     })
 
@@ -266,7 +274,7 @@ const createInitialMapping = () => {
 }
 
 // 切换Sheet
-const handleSheetChange = (sheet: string) => {
+const handleSheetChange = (sheet) => {
   selectedSheet.value = sheet
   if (!excelFile.value) return
 
@@ -274,7 +282,7 @@ const handleSheetChange = (sheet: string) => {
   reader.onload = (e) => {
     if (!e.target || !e.target.result) return
     try {
-      const data = new Uint8Array(e.target.result as ArrayBuffer)
+      const data = new Uint8Array(e.target.result)
       const readOpts = {
         type: 'array',
         raw: true,
@@ -301,7 +309,7 @@ const handleSheetChange = (sheet: string) => {
       const headers = allData[0]
       if (Array.isArray(headers)) {
         excelData.value = allData.slice(1).map(row => {
-          const obj: Record<string, any> = {}
+          const obj = {}
           headers.forEach((header, index) => {
             if (header) {
               obj[header] = Array.isArray(row) && index < row.length ? row[index] : ''
@@ -319,7 +327,7 @@ const handleSheetChange = (sheet: string) => {
         throw new Error('无法从Excel工作表提取有效数据')
       }
       createInitialMapping()
-    } catch (error: any) {
+    } catch (error) {
       excelData.value = []
       ElMessage.error('切换Excel工作表失败: ' + (error.message || '未知错误'))
     }
@@ -327,18 +335,18 @@ const handleSheetChange = (sheet: string) => {
   reader.onerror = () => {
     ElMessage.error('读取Excel文件失败')
   }
-  reader.readAsArrayBuffer(excelFile.value as File)
+  reader.readAsArrayBuffer(excelFile.value)
 }
 
 // 更新字段映射
-const handleUpdateMapping = (mapping: Record<string, string>) => {
+const handleUpdateMapping = (mapping) => {
   columnMapping.value = mapping
 }
 
 // 处理模板下载
 const handleDownloadTemplate = () => {
   const wb = XLSX.utils.book_new()
-  const headers = props.columns.map((col: any) => col.label)
+  const headers = props.columns.map((col) => col.label)
   const ws = XLSX.utils.aoa_to_sheet([headers])
   XLSX.utils.book_append_sheet(wb, ws, '导入模板')
   XLSX.writeFile(wb, `${props.tableTitle || '数据'}导入模板.xlsx`)
@@ -352,7 +360,7 @@ const startImport = async () => {
   importWarnings.value = []
   try {
     const transformedData = excelData.value.map(row => {
-      const result: Record<string, any> = {}
+      const result = {}
       for (const excelCol in row) {
         const fieldName = columnMapping.value[excelCol]
         if (fieldName) {
@@ -362,7 +370,7 @@ const startImport = async () => {
       return result
     })
 
-    props.columns.forEach((col: any) => {
+    props.columns.forEach((col) => {
       const field = col.rule && col.rule[0]
       if (field && field.$required) {
         transformedData.forEach((row, index) => {
@@ -412,6 +420,56 @@ const onClose = () => {
 }
 .import-steps .mb-20px {
   margin-bottom: 20px;
+}
+.manual-steps {
+  display: flex;
+  justify-content: space-between;
+}
+.manual-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.manual-step::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  right: -50%;
+  height: 1px;
+  background: #dcdfe6;
+}
+.manual-step:last-child::after {
+  display: none;
+}
+.manual-step.done::after,
+.manual-step.active::after {
+  background: #409eff;
+}
+.step-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #dcdfe6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 4px;
+  background: #fff;
+}
+.manual-step.done .step-indicator,
+.manual-step.active .step-indicator {
+  background: #409eff;
+  color: #fff;
+  border-color: #409eff;
+}
+.step-label {
+  font-size: 12px;
+  color: #606266;
+}
+.manual-step.done .step-label,
+.manual-step.active .step-label {
+  color: #409eff;
 }
 .import-steps .step-content {
   min-height: 300px;

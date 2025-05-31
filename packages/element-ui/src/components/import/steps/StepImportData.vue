@@ -55,7 +55,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { CircleCheck, CircleClose, Loading } from '@element-plus/icons-vue'
 
 defineOptions({ name: 'StepImportData' })

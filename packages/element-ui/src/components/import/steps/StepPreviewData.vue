@@ -53,7 +53,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref, computed, watch } from 'vue'
 
 defineOptions({ name: 'StepPreviewData' })
