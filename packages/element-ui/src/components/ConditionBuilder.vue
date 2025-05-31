@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import {defineComponent, reactive, watch, computed} from 'vue';
+import {defineComponent, reactive, watch, ref} from 'vue';
 
 export default defineComponent({
   name: 'ConditionBuilder',
@@ -62,18 +62,18 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup(props, {emit}) {
     const local = reactive({ mode: 'AND', group: [] });
-    const action = reactive({ val: 'hide' });
+    const action = ref('hide');
     const needValue = (c) => ['==', '!=', 'on', 'notOn'].indexOf(c) > -1;
 
     const load = (val) => {
       if (val && typeof val === 'object') {
         local.mode = val.mode || 'AND';
         local.group = JSON.parse(JSON.stringify(val.group || []));
-        action.val = val.invert ? 'show' : 'hide';
+        action.value = val.invert ? 'show' : 'hide';
       } else {
         local.mode = 'AND';
         local.group = [];
-        action.val = 'hide';
+        action.value = 'hide';
       }
     };
     watch(() => props.modelValue, load, { immediate: true });
@@ -94,15 +94,15 @@ export default defineComponent({
           return r;
         })
       };
-      if (action.val === 'show') val.invert = true;
+      if (action.value === 'show') val.invert = true;
       return val;
     };
 
-    watch([() => local.mode, () => local.group, () => action.val], () => {
+    watch([() => local.mode, () => local.group, action], () => {
       emit('update:modelValue', toVal());
     }, { deep: true });
 
-    return { local, action: action.val, add, remove, needValue };
+    return { local, action, add, remove, needValue };
   }
 });
 </script>
