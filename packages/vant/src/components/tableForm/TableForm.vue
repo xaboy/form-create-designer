@@ -352,10 +352,11 @@ export default {
 }
 
 ._fc-tf-table {
-    width: 100%;
+    width: max-content;
+    min-width: 100%;
     height: 100%;
     overflow: hidden;
-    table-layout: fixed;
+    table-layout: auto;
     border: 1px solid #EBEEF5;
     border-bottom: 0 none;
 }
