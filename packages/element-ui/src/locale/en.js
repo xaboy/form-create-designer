@@ -6,6 +6,7 @@ const En = {
         info: 'Info',
         control: 'Control',
         hiddenCondition: 'Hidden condition',
+        setHiddenCondition: 'Set hidden condition',
         labelPosition: 'Label position',
         labelStyle: 'Label style',
         labelSuffix: 'Label suffix',

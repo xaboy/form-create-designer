@@ -6,6 +6,7 @@ const ZhCn = {
         info: '提示信息',
         control: '联动数据',
         hiddenCondition: '隐藏条件',
+        setHiddenCondition: '设置隐藏条件',
         labelPosition: '标签的位置',
         labelStyle: '标签的样式',
         labelSuffix: '标签的后缀',

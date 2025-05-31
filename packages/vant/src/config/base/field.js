@@ -116,7 +116,7 @@ export default function field({t}) {
                 }
             }
         }, {
-            type: 'Struct',
+            type: 'HiddenConfig',
             field: '_computed>hidden',
             name: 'hidden',
             value: {},

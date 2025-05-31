@@ -7,6 +7,7 @@ const ZhCn = {
         control: '联动数据',
         hiddenCondition: '隐藏条件',
         labelShow: '是否显示',
+        setHiddenCondition: '设置隐藏条件',
         labelStyle: '标签的样式',
         formItem: '配置表单项',
         row: '整行',

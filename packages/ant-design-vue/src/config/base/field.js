@@ -52,7 +52,7 @@ export default function field({t}) {
             value: '',
             title: t('form.maxWidth'),
         }, {
-            type: 'Struct',
+            type: 'HiddenConfig',
             field: '_control',
             name: 'control',
             value: [],
@@ -69,7 +69,7 @@ export default function field({t}) {
                 }
             }
         }, {
-            type: 'Struct',
+            type: 'HiddenConfig',
             field: '_computed>hidden',
             name: 'hidden',
             value: {},
