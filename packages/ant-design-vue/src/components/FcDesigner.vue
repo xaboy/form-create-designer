@@ -1628,6 +1628,7 @@ export default defineComponent({
                         title: rule.title || '',
                         info: rule.info,
                         _control: rule._control,
+                        '_computed>hidden': rule._computed?.hidden,
                         ...formData
                     };
                     data.validateForm.value = {

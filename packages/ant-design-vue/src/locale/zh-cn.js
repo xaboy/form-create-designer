@@ -5,6 +5,7 @@ const ZhCn = {
         title: '字段名称',
         info: '提示信息',
         control: '联动数据',
+        hiddenCondition: '隐藏条件',
         labelShow: '是否显示',
         labelStyle: '标签的样式',
         formItem: '配置表单项',

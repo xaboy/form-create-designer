@@ -5,6 +5,7 @@ const En = {
         title: 'Title',
         info: 'Info',
         control: 'Control',
+        hiddenCondition: 'Hidden condition',
         labelAlign: 'Label position',
         inputAlign: 'Input position',
         labelStyle: 'Label style',
