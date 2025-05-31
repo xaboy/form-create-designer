@@ -70,6 +70,20 @@ export default function field({t}) {
             slot: 'append',
             value: '',
         }, {
+            type: 'SizeInput',
+            field: 'formCreateStyle>minWidth',
+            title: t('form.minWidth'),
+            col: {show: false},
+            slot: 'append',
+            value: '',
+        }, {
+            type: 'SizeInput',
+            field: 'formCreateStyle>maxWidth',
+            title: t('form.maxWidth'),
+            col: {show: false},
+            slot: 'append',
+            value: '',
+        }, {
             type: 'Struct',
             field: '_control',
             name: 'control',

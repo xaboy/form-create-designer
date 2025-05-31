@@ -1538,7 +1538,9 @@ export default defineComponent({
                 const rule = data.activeRule;
                 let formData = {
                     formCreateChild: '' + rule.children[0],
-                    'formCreateWrap>labelWidth': ''
+                    'formCreateWrap>labelWidth': '',
+                    'formCreateStyle>minWidth': '',
+                    'formCreateStyle>maxWidth': ''
                 };
                 const appendConfigData = configRef.value.appendConfigData;
                 if (is.Function(appendConfigData)) {

@@ -1566,6 +1566,8 @@ export default defineComponent({
                 let formData = {
                     formCreateChild: '' + rule?.children[0],
                     'formCreateWrap>labelCol>style>width': '',
+                    'formCreateStyle>minWidth': '',
+                    'formCreateStyle>maxWidth': '',
                 };
                 const appendConfigData = configRef.value.appendConfigData;
                 if (is.Function(appendConfigData)) {

@@ -16,6 +16,8 @@ const En = {
         labelWrap: 'Allow labels to wrap',
         colon: 'Whether to display the colon after the label',
         labelCol: 'Label width',
+        minWidth: 'Min width',
+        maxWidth: 'Max width',
         hideRequiredMark: 'Hide red asterisks next to labels for required fields',
         formItemMarginBottom: 'Bottom margin of form items',
         scrollToFirstError: 'Automatically scroll to the first error field if submission fails',
