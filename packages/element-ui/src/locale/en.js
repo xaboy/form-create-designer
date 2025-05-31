@@ -11,6 +11,8 @@ const En = {
         size: 'Form size',
         event: 'Form event',
         labelWidth: 'Label width',
+        minWidth: 'Min width',
+        maxWidth: 'Max width',
         hideRequiredAsterisk: 'Hide the red asterisk next to the label of a required field',
         showMessage: 'Display verification error message',
         inlineMessage: 'Display validation information inline',

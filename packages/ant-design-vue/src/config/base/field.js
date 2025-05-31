@@ -23,6 +23,18 @@ export default function field({t}) {
             value: '',
             title: t('form.labelCol'),
         }, {
+            type: 'SizeInput',
+            field: 'formCreateStyle>minWidth',
+            col: {show: false},
+            value: '',
+            title: t('form.minWidth'),
+        }, {
+            type: 'SizeInput',
+            field: 'formCreateStyle>maxWidth',
+            col: {show: false},
+            value: '',
+            title: t('form.maxWidth'),
+        }, {
             type: 'Struct',
             field: '_control',
             name: 'control',
