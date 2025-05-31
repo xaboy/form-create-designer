@@ -81,10 +81,10 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
-import StepSelectFile from './StepSelectFile.vue'
-import StepPreviewData from './StepPreviewData.vue'
-import StepImportSettings from './StepImportSettings.vue'
-import StepImportData from './StepImportData.vue'
+import StepSelectFile from './steps/StepSelectFile.vue'
+import StepPreviewData from './steps/StepPreviewData.vue'
+import StepImportSettings from './steps/StepImportSettings.vue'
+import StepImportData from './steps/StepImportData.vue'
 import * as XLSX from 'xlsx'
 import { ElMessage } from 'element-plus'
 
