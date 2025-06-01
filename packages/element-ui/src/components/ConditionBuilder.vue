@@ -1,18 +1,19 @@
 <template>
   <div class="_fd-condition-builder">
     <el-form label-width="80px" size="small">
-      <el-form-item :label="t ? t('props.logic') : 'Logic'">
-        <el-radio-group v-model="local.mode">
-          <el-radio-button label="AND">AND</el-radio-button>
-          <el-radio-button label="OR">OR</el-radio-button>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item :label="t ? t('props.action') : 'Action'">
-        <el-radio-group v-model="action">
-          <el-radio-button label="hide">{{ t('props.hide') || 'Hide' }}</el-radio-button>
-          <el-radio-button label="show">{{ t('props.show') || 'Show' }}</el-radio-button>
-        </el-radio-group>
-      </el-form-item>
+      <div class="_fd-cond-group-header">
+        <el-select v-model="local.mode" size="small" style="width:80px;">
+          <el-option label="AND" value="AND" />
+          <el-option label="OR" value="OR" />
+        </el-select>
+        <div style="display: flex; gap: 10px;">
+          <el-radio-group v-model="action" size="small">
+            <el-radio-button label="hide">{{ t('props.hide') || 'Hide' }}</el-radio-button>
+            <el-radio-button label="show">{{ t('props.show') || 'Show' }}</el-radio-button>
+          </el-radio-group>
+        </div>
+      </div>
+      
       <div class="_fd-cond-group">
         <!-- 渲染条件组和条件项 -->
         <template v-for="(item, idx) in local.group" :key="idx">
@@ -587,50 +588,96 @@ export default defineComponent({
 </script>
 
 <style scoped>
+._fd-condition-builder {
+  max-width: 100%;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+/* 主要逻辑选择器样式 */
+._fd-condition-builder > ._fd-cond-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 8px 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
 ._fd-cond-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
+
 ._fd-cond-row {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin-bottom: 6px;
+  gap: 8px;
+  margin-bottom: 10px;
   flex-wrap: wrap; /* 允许元素换行，防止在小屏幕上挤压 */
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
 }
+
+._fd-cond-row:hover {
+  background-color: #f0f0f0;
+}
+
 ._fd-cond-buttons {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: center;
 }
+
 ._fd-cond-group-container {
   border: 1px dashed #ccc;
   border-radius: 4px;
-  padding: 8px;
-  margin-bottom: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: #f5f7fa;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
+
 ._fd-cond-subgroup-container {
   border: 1px dashed #ddd;
   border-radius: 4px;
-  padding: 8px;
-  margin-bottom: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
   margin-left: 20px;
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
+
 ._fd-cond-group-header {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
 }
+
 ._fd-cond-group-content {
-  padding-left: 10px;
+  padding-left: 15px;
 }
+
 ._fd-cond-group-footer {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
 }
 </style>
 
