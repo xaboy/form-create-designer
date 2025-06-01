@@ -45,9 +45,42 @@ export default defineComponent({
         const visible = ref(false);
         const localVal = ref({});
         const t = computed(() => designer.setupState.t);
+        
+        // 修改fields计算属性，返回包含字段名称和ID的对象数组
         const fields = computed(() => {
-            return designer.setupState.fields ? designer.setupState.fields() : [];
+            if (!designer.setupState.fields) return [];
+            
+            // 获取原始字段列表
+            const fieldList = designer.setupState.fields();
+            
+            // 获取所有规则，以便从中提取标题
+            const rules = designer.setupState.children || [];
+            
+            // 创建字段ID到标题的映射
+            const fieldTitleMap = {};
+            
+            // 递归遍历规则，构建字段ID到标题的映射
+            const buildFieldTitleMap = (items) => {
+                items.forEach(rule => {
+                    if (rule && rule.field && rule.title) {
+                        fieldTitleMap[rule.field] = rule.title;
+                    }
+                    if (rule && rule.children && rule.children.length > 0) {
+                        buildFieldTitleMap(rule.children);
+                    }
+                });
+            };
+            
+            // 构建映射
+            buildFieldTitleMap(rules);
+            
+            // 返回包含标题和ID的对象数组
+            return fieldList.map(fieldId => ({
+                label: fieldTitleMap[fieldId] || fieldId, // 使用标题或默认使用字段ID
+                value: fieldId                          // 字段ID作为值
+            }));
         });
+        
         const configured = computed(() => {
             return !is.empty(props.modelValue) && Object.keys(props.modelValue).length > 0;
         });

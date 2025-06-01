@@ -344,6 +344,18 @@ const ZhCn = {
         _blank: '新的窗口',
         _parent: '父级窗口',
         _top: '顶级窗口',
+        add: '添加条件',
+        addGroup: '添加条件组',
+        component: '组件',
+        variable: '变量',
+        equal: '等于',
+        notEqual: '不等于',
+        contain: '包含',
+        notContain: '不包含',
+        empty: '为空',
+        notEmpty: '不为空',
+        logic: '逻辑',
+        action: '动作',
     },
     com: {
         cascader: {
