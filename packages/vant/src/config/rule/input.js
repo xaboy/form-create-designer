@@ -51,6 +51,7 @@ export default {
                 anchor.attrs.style.display = link ? '' : 'none';
                 anchor.on = {
                     click(e) {
+                        e.preventDefault();
                         e.stopPropagation();
                         if (link) window.open(link, '_blank');
                     }
