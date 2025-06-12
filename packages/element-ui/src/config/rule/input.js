@@ -43,12 +43,18 @@ export default {
                                 cursor: 'pointer'
                             }
                         },
-                        children: ['跳转']
+                        children: ['点击链接']
                     }];
                 }
                 const anchor = rule.children[0];
                 anchor.attrs.href = link;
                 anchor.attrs.style.display = link ? '' : 'none';
+                anchor.on = {
+                    click(e) {
+                        e.stopPropagation();
+                        if (link) window.open(link, '_blank');
+                    }
+                };
             } else {
                 rule._link = '';
                 rule.children = [];
