@@ -27,7 +27,12 @@ export default {
                 attrs: {
                     href: '',
                     target: '_blank',
-                    style: 'display:none;margin-left:4px;color:#52c41a;cursor:pointer;'
+                    style: {
+                        display: 'none',
+                        marginLeft: '4px',
+                        color: '#52c41a',
+                        cursor: 'pointer'
+                    }
                 },
                 children: [t('com.protocol.jump')]
             }]
@@ -39,9 +44,7 @@ export default {
             rule._link = link;
             const anchor = rule.children[0];
             anchor.attrs.href = link;
-            anchor.attrs.style = link
-                ? 'margin-left:4px;color:#52c41a;cursor:pointer;'
-                : 'display:none;margin-left:4px;color:#52c41a;cursor:pointer;';
+            anchor.attrs.style.display = link ? '' : 'none';
         }
     },
     attrs: {
