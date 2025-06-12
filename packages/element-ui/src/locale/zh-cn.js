@@ -678,6 +678,7 @@ const ZhCn = {
         },
         protocol: {
             name: '协议输入框',
+            jump: '打开链接'
         },
         radio: {
             name: '单选框',
