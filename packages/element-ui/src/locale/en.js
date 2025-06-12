@@ -678,7 +678,7 @@ const En = {
         },
         protocol: {
             name: 'Protocol',
-            jump: 'Open link'
+            jump: 'Click link'
         },
         radio: {
             name: 'Radio',
