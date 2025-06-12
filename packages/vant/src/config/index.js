@@ -1,6 +1,7 @@
 import input from './rule/input';
 import textarea from './rule/textarea';
 import password from './rule/password';
+import protocol from './rule/protocol';
 import stepper from './rule/stepper';
 import checkbox from './rule/checkbox';
 import radio from './rule/radio';
@@ -39,7 +40,7 @@ import image from './rule/image';
 
 
 const ruleList = [
-    input, textarea, password, stepper, radio, checkbox, select, _switch, rate, time, date, cascader, calendar, calendarRange, slider, uploader,
+    input, textarea, password, protocol, stepper, radio, checkbox, select, _switch, rate, time, date, cascader, calendar, calendarRange, slider, uploader,
     group, subForm, tableForm, tableFormColumn,
     noticeBar, button, text, html, divider, tag, image, icon,
     row, col, table,

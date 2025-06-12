@@ -38,6 +38,7 @@ export default {
                     {label: 'date', value: 'date'},
                     {label: 'month', value: 'month'},
                     {label: 'datetime-local', value: 'datetime-local'},
+                    {label: 'protocol', value: 'protocol'},
                 ])
             },
             {
