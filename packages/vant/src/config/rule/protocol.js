@@ -24,7 +24,11 @@ export default {
                 slot: 'button',
                 native: true,
                 _fc_drag_tag: '_',
-                attrs: {href: '', target: '_blank', style: 'display:none;margin-left:4px;'},
+                attrs: {
+                    href: '',
+                    target: '_blank',
+                    style: 'display:none;margin-left:4px;color:#52c41a;cursor:pointer;'
+                },
                 children: [t('com.protocol.jump')]
             }]
         };
@@ -35,7 +39,9 @@ export default {
             rule._link = link;
             const anchor = rule.children[0];
             anchor.attrs.href = link;
-            anchor.attrs.style = link ? 'margin-left:4px;' : 'display:none;margin-left:4px;';
+            anchor.attrs.style = link
+                ? 'margin-left:4px;color:#52c41a;cursor:pointer;'
+                : 'display:none;margin-left:4px;color:#52c41a;cursor:pointer;';
         }
     },
     attrs: {
