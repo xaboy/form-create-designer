@@ -3,6 +3,7 @@ import checkbox from './rule/checkbox';
 import input from './rule/input';
 import textarea from './rule/textarea';
 import password from './rule/password';
+import protocol from './rule/protocol';
 import number from './rule/number';
 import select from './rule/select';
 import _switch from './rule/switch';
@@ -42,7 +43,7 @@ import image from './rule/image';
 
 
 const ruleList = [
-    input, textarea, password, number, radio, checkbox, select, _switch, rate, time, timeRange, slider, date, dateRange, color, cascader, upload, transfer, tree, treeSelect, editor,
+    input, textarea, password, protocol, number, radio, checkbox, select, _switch, rate, time, timeRange, slider, date, dateRange, color, cascader, upload, transfer, tree, treeSelect, editor,
     group, subForm, tableForm, tableFormColumn,
     alert, button, text, html, divider, tag, image,
     row, table, tabs, space, card, collapse,
