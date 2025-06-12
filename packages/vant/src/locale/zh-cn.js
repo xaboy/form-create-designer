@@ -329,6 +329,7 @@ const ZhCn = {
         week: '一周',
         datetime: '日期时间',
         'datetime-local': '日期时间',
+        protocol: '协议',
         datetimerange: '日期时间区间',
         daterange: '日期区间',
         monthrange: '月份区间',
@@ -623,6 +624,9 @@ const ZhCn = {
         },
         password: {
             name: '密码输入框',
+        },
+        protocol: {
+            name: '协议输入框',
         },
         radio: {
             name: '单选框',

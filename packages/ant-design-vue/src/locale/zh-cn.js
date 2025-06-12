@@ -345,6 +345,7 @@ const ZhCn = {
         quarter: '季度',
         datetime: '日期时间',
         'datetime-local': '日期时间',
+        protocol: '协议',
         datetimerange: '日期时间区间',
         daterange: '日期区间',
         monthrange: '月份区间',
@@ -662,6 +663,9 @@ const ZhCn = {
                 allowClear: '是否显示清除按钮',
                 bordered: '是否有边框',
             }
+        },
+        protocol: {
+            name: '协议输入框',
         },
         radio: {
             name: '单选框',
