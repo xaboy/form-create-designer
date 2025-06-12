@@ -345,6 +345,7 @@ const En = {
         quarter: 'quarter',
         datetime: 'datetime',
         'datetime-local': 'datetime',
+        protocol: 'protocol',
         datetimerange: 'datetimerange',
         daterange: 'daterange',
         monthrange: 'monthrange',
@@ -662,6 +663,10 @@ const En = {
                 allowClear: 'Whether to display the clear button',
                 bordered: 'Whether there is a border',
             }
+        },
+        protocol: {
+            name: 'Protocol',
+            jump: 'Open link'
         },
         radio: {
             name: 'Radio',
