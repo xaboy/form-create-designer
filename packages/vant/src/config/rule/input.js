@@ -22,6 +22,35 @@ export default {
             props: {}
         };
     },
+    watch: {
+        value({value, rule}) {
+            if (rule.props.type === 'protocol') {
+                const link = /^https?:/.test(value) ? value : '';
+                rule._link = link;
+                if (!rule.children || !rule.children.length) {
+                    rule.children = [{
+                        type: 'a',
+                        slot: 'button',
+                        native: true,
+                        _fc_drag_tag: '_',
+                        attrs: {href: '', target: '_blank', style: 'display:none;margin-left:4px;'},
+                        children: ['跳转']
+                    }];
+                }
+                const anchor = rule.children[0];
+                anchor.attrs.href = link;
+                anchor.attrs.style = link ? 'margin-left:4px;' : 'display:none;margin-left:4px;';
+            } else {
+                rule._link = '';
+                rule.children = [];
+            }
+        }
+    },
+    attrs: {
+        link({rule}) {
+            return rule._link || '';
+        }
+    },
     props(_, {t}) {
         return localeProps(t, name + '.props', [
             {
@@ -38,6 +67,7 @@ export default {
                     {label: 'date', value: 'date'},
                     {label: 'month', value: 'month'},
                     {label: 'datetime-local', value: 'datetime-local'},
+                    {label: 'protocol', value: 'protocol'},
                 ])
             },
             {

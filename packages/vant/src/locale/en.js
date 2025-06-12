@@ -329,6 +329,7 @@ const En = {
         week: 'week',
         datetime: 'datetime',
         'datetime-local': 'datetime',
+        protocol: 'protocol',
         datetimerange: 'datetimerange',
         daterange: 'daterange',
         monthrange: 'monthrange',
@@ -624,6 +625,10 @@ const En = {
         },
         password: {
             name: 'Password',
+        },
+        protocol: {
+            name: 'Protocol',
+            jump: 'Open link'
         },
         radio: {
             name: 'Radio',
