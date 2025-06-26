@@ -24,6 +24,7 @@
                                         <div class="_fd-fn-list-method" @click.stop="edit(item)">
                                             <span>function<span>{{ name }}</span></span>
                                             <span class="_fd-label" v-if="eventInfo[name]">{{ eventInfo[name] }}</span>
+                                            <span class="_fd-dot" v-if="item.fn"></span>
                                         </div>
                                     </el-menu-item>
                                 </template>
@@ -134,7 +135,7 @@ export default defineComponent({
                 const fn = e[k] || '';
                 val[k] = {
                     item, fn
-                };
+                }
             });
             return val;
         },
@@ -268,19 +269,33 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px 0;
+    padding: 10px 20px 10px 0;
     font-size: 14px;
     line-height: 1em;
     font-family: monospace;
     width: 100%;
     overflow: hidden;
     white-space: pre-wrap;
+    position: relative;
+    box-sizing: border-box;
 }
 
 ._fd-fn-list-method ._fd-label {
     margin-top: 4px;
     color: #AAAAAA;
     font-size: 12px;
+}
+
+._fd-fn-list-method ._fd-dot {
+    position: absolute;
+    top: 50%;
+    margin-top: -3px;
+    right: 16px;
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #00C050;
+    border-radius: 15px;
 }
 
 ._fd-fn-list-method-info > span:first-child, ._fd-fn-list-method > span:first-child {
