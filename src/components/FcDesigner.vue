@@ -357,7 +357,7 @@
                         </el-main>
                     </el-container>
                 </el-aside>
-                <el-dialog :visible.sync="preview.state" width="800px" class="_fd-preview-dialog" append-to-body>
+                <el-dialog :visible.sync="preview.state" width="80%" class="_fd-preview-dialog" append-to-body>
                     <el-tabs class="_fd-preview-tabs" v-model="previewStatus">
                         <el-tab-pane :label="t('form.formMode')" name="form"></el-tab-pane>
                         <el-tab-pane :label="t('form.componentMode')" name="component"></el-tab-pane>
@@ -372,7 +372,7 @@
                                   @submit="previewSubmit"
                                   @reset="previewReset"
                                   v-if="preview.state">
-                            <template v-for="(_, name) in $slots" #[name]="scope">
+                            <template v-for="(_, name) in $scopedSlots" #[name]="scope">
                                 <slot :name="name" v-bind="scope ?? {}"/>
                             </template>
                         </ViewForm>
@@ -806,7 +806,7 @@ export default defineComponent({
                 return reactive({children}).children;
             },
             addMenu(config) {
-                if (!config.name || !config.list) return;
+                if (!config.name) return;
                 let flag = true;
                 data.menuList.forEach((v, i) => {
                     if (v.name === config.name) {
