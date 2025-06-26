@@ -5,7 +5,7 @@
                    @change="formChange"
                    v-model="fapi"
                    @emit-event="$emit"></component>
-        <el-button type="text" size="mini" class="fc-clock" v-if="!max || max > this.trs.length"
+        <el-button type="text" size="mini" class="fc-clock" v-if="addable && (!max || max > this.trs.length)"
                    @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
             {{formCreateInject.t('add') || '添加'}}
         </el-button>
@@ -33,6 +33,14 @@ export default {
             type: Boolean,
             default: true,
         },
+        deletable: {
+            type: Boolean,
+            default: true,
+        },
+        addable: {
+            type: Boolean,
+            default: true,
+        },
         options: {
             type: Object,
             default: () => reactive(({
@@ -41,6 +49,7 @@ export default {
             }))
         },
         max: Number,
+        min: Number,
         disabled: Boolean,
     },
     watch: {
@@ -149,10 +158,11 @@ export default {
                 this.trs.splice(0, 1);
             }
         },
-        delRaw(idx) {
-            if (this.disabled) {
+        delRaw(tr) {
+            if (this.disabled || !this.deletable || (this.min > 0 && this.trs.length <= this.min)) {
                 return;
             }
+            const idx = this.trs.indexOf(tr);
             this.trs.splice(idx, 1);
             this.updateValue();
             if (this.trs.length) {
@@ -181,7 +191,7 @@ export default {
             const idx = this.trs.indexOf(tr);
             tr.children[0].domProps.innerText = idx + 1;
             tr.children[tr.children.length - 1].children[0].on.click = () => {
-                this.delRaw(idx);
+                this.delRaw(tr);
             };
         },
         loadRule() {
@@ -205,7 +215,7 @@ export default {
                 header.push({
                     type: 'th',
                     native: true,
-                    style: column.style,
+                    style: {...column.style||{}, textAlign: column.align || 'center'},
                     class: column.required ? '_fc-tf-head-required' : '',
                     domProps: {
                         innerText: column.label || ''
@@ -277,7 +287,6 @@ export default {
                     ]
                 }
             ]
-            this.addRaw();
         },
     },
     created() {
@@ -292,7 +301,7 @@ export default {
 <style>
 ._fc-table-form {
     overflow: auto;
-    color: var(--fc-text-color-2);
+    color: #666666;
 }
 
 ._fc-table-form .form-create .el-form-item {
@@ -348,6 +357,8 @@ export default {
     border-bottom: 1px solid #EBEEF5;
     height: 40px;
     font-weight: 500;
+    padding: 0 5px;
+    box-sizing: border-box;
 }
 
 ._fc-table-form ._fc-tf-table > thead > tr > th + th {
