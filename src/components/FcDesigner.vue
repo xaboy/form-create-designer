@@ -369,6 +369,8 @@
                     </div>
                     <template v-if="previewStatus === 'form'">
                         <ViewForm :rule="preview.rule" :option="preview.option" v-model="preview.api"
+                                  @submit="previewSubmit"
+                                  @reset="previewReset"
                                   v-if="preview.state">
                             <template v-for="(_, name) in $slots" #[name]="scope">
                                 <slot :name="name" v-bind="scope ?? {}"/>
@@ -477,7 +479,7 @@ export default defineComponent({
             designer: this
         };
     },
-    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown', 'changeDevice'],
+    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown', 'changeDevice', 'previewSubmit', 'previewReset'],
     setup(props, {emit}) {
         const {menu, height, mask, locale, handle} = toRefs(props);
         const vm = getCurrentInstance().proxy;
@@ -968,6 +970,12 @@ export default defineComponent({
                     rule: methods.getJson(),
                     options: methods.getOptionsJson(),
                 });
+            },
+            previewSubmit(...args) {
+                vm.$emit('previewSubmit', ...args);
+            },
+            previewReset(...args) {
+                vm.$emit('previewReset', ...args);
             },
             openPreview() {
                 data.preview.state = true;
