@@ -194,6 +194,8 @@ export interface DragRule {
     allowDrag?: AllowDrag;
     //不可拖入的组件列表
     denyDrag?: DenyDrag;
+    //允许拖入到那些组件中
+    allowDragTo?: string | string[];
     //组件,不建议使用
     component?: Component;
     //控制最多拖入几个子组件
