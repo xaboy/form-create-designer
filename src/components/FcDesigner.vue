@@ -484,7 +484,7 @@ export default defineComponent({
             designer: this
         };
     },
-    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown', 'changeDevice', 'previewSubmit', 'previewReset'],
+    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown', 'changeDevice', 'previewSubmit', 'previewReset', 'changeField'],
     setup(props, {emit}) {
         const {menu, height, mask, locale, handle} = toRefs(props);
         const vm = getCurrentInstance().proxy;

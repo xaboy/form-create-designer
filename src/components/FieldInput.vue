@@ -114,6 +114,7 @@ export default defineComponent({
                 this.formValue = this.checkValue();
                 this.oldValue = this.formValue;
                 if (this.formValue !== this.value) {
+                    this.designer.$emit('changeField', {field: this.formValue, oldField: this.value, rule: this.activeRule})
                     this.$emit('input', this.formValue);
                 }
             }
