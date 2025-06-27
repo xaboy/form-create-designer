@@ -1,26 +1,26 @@
 <template>
     <div class="_fd-drag-tool" @click.stop="active" :class="{active: fcx.active === id}">
         <div class="_fd-drag-mask" v-if="mask"></div>
-        <div class="_fd-drag-l" v-if="!hiddenBtn" @click.stop>
+        <div class="_fd-drag-l" v-if="!hiddenBtn && permission.move !== false" @click.stop>
             <div class="_fd-drag-btn" v-if="dragBtn !== false" v-show="fcx.active === id" style="cursor: move;">
                 <i class="fc-icon icon-move"></i>
             </div>
         </div>
-        <div class="_fd-drag-r" v-if="btns !== false && !hiddenMenu">
+        <div class="_fd-drag-r" v-if="btns !== false && !hiddenMenu && permission.dragMenu !== false">
             <slot name="handle">
-                <div class="_fd-drag-btn" v-if="isCreate && (btns === true || btns.indexOf('create') > -1)"
+                <div class="_fd-drag-btn" v-if="permission.create !== false && isCreate && (btns === true || btns.indexOf('create') > -1)"
                      @click.stop="$emit('create')">
                     <i class="fc-icon icon-add"></i>
                 </div>
-                <div class="_fd-drag-btn" v-if="!only && (btns === true || btns.indexOf('copy') > -1)"
+                <div class="_fd-drag-btn" v-if="permission.copy !== false && !only && (btns === true || btns.indexOf('copy') > -1)"
                      @click.stop="$emit('copy')">
                     <i class="fc-icon icon-copy"></i>
                 </div>
-                <div class="_fd-drag-btn" v-if="children && (btns === true || btns.indexOf('addChild') > -1)"
+                <div class="_fd-drag-btn" v-if="permission.addChild !== false && children && (btns === true || btns.indexOf('addChild') > -1)"
                      @click.stop="$emit('addChild')">
                     <i class="fc-icon icon-add-child"></i>
                 </div>
-                <div class="_fd-drag-btn _fd-drag-danger" v-if="btns === true || btns.indexOf('delete') > -1"
+                <div class="_fd-drag-btn _fd-drag-danger" v-if="permission.delete !== false && (btns === true || btns.indexOf('delete') > -1)"
                      @click.stop="$emit('delete')">
                     <i class="fc-icon icon-delete"></i>
                 </div>
@@ -79,6 +79,16 @@ export default defineComponent({
         },
         hiddenBtn() {
             return this.designer.hiddenDragBtn;
+        },
+        rule() {
+            return this.formCreateInject?.rule?._config._get();
+        },
+        permission() {
+            if (!this.rule) {
+                return {};
+            } else {
+                return this.designer.getPermission(this.rule);
+            }
         },
     },
     methods: {
