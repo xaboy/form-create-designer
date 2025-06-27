@@ -591,14 +591,6 @@
     transition: padding-bottom, padding-top .3s ease;
 }
 
-._fd-drag-box ._fd-drag-box {
-    outline: 1px dashed #ECECEC;
-}
-
-._fd-drag-tool > ._fd-drag-box {
-    outline: none;
-}
-
 ._fd-drag-box > div[data-draggable] {
     margin-bottom: 1px;
 }

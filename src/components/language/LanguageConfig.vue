@@ -157,6 +157,10 @@ export default defineComponent({
     height: 34px;
 }
 
+._fd-language-config ._fc-l-info {
+    margin-bottom: 12px;
+}
+
 ._fd-lc-handle {
     display: flex;
     align-items: center;

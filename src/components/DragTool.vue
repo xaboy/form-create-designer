@@ -118,7 +118,7 @@ export default defineComponent({
 }
 
 ._fd-drag-tool.active {
-    outline: 2px solid #2E73FF;
+    outline: 1px solid #2E73FF;
 }
 
 ._fd-drag-tool.active > div > ._fd-drag-btn {
@@ -189,7 +189,7 @@ export default defineComponent({
 }
 
 ._fd-drag-tool:hover {
-    outline-color: #2E73FF;
+    outline-color: rgba(46, 115, 255, 0.5);
     outline-style: solid;
     z-index: 1;
 }

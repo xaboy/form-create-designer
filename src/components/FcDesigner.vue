@@ -1454,6 +1454,7 @@ export default defineComponent({
                 data.validateForm.isShow = false;
                 data.styleForm.isShow = !!config.style && methods.getConfig('showStyleForm') !== false;
                 data.activeRule = null;
+                fcx.active = '';
 
                 data.customForm.config = config;
                 data.customForm.isShow = true;

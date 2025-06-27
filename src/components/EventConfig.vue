@@ -146,7 +146,7 @@ export default defineComponent({
     emits: ['input'],
     props: {
         value: [Object, undefined, null],
-        componentName: '',
+        componentName: String,
         eventName: {
             type: Array,
             default: () => []
