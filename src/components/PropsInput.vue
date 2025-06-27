@@ -27,7 +27,7 @@ export default defineComponent({
             const propsKeys = this.activeRule._fc_store?.props_keys || [];
             const props = {};
             propsKeys.forEach(k => {
-                if (this.activeRule.props && this.activeRule.props[k]) {
+                if (this.activeRule.props && this.activeRule.props[k] != null) {
                     props[k] = this.activeRule.props[k];
                 }
             });

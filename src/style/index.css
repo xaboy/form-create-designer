@@ -174,7 +174,7 @@
 
 ._fc-r-config {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 280px;
     grid-template-areas: "base" "props" "style" "event" "validate";
 }
 
