@@ -43,6 +43,7 @@ const En = {
         fetchQuery: 'Defines GET parameters for requests, passed via the URL.',
         fetchData: 'Defines POST parameters for requests, passed in the request body.',
         fetchDataType: 'Selects the data type for the request body to ensure correct format.',
+        beforeFetch: 'Before the request is sent, you can modify the parameters via a handler. Return false or a rejected Promise to cancel the request.',
         fetchParse: 'Processes the response data after the request and converts it into the required structure.',
         language: 'Manages multilingual data, allowing easy language switching for content display.',
     },
@@ -166,6 +167,7 @@ const En = {
         parse: 'Processing',
         response: 'Data returned by the interface',
         onError: 'onError',
+        beforeFetch: 'Before',
         remote: 'Remote',
         static: 'Static',
         optionsType: {
