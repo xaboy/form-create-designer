@@ -11,14 +11,154 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-search:before {
+    content: "\e608";
+}
+
+.icon-expand:before {
+    content: "\e6df";
+}
+
+.icon-expand-left:before {
+    content: "\e6df";
+    display: inline-block;
+    transform: rotate(-180deg);
+}
+
+.icon-data-select:before {
+    content: "\e6dd";
+}
+
+.icon-markdown:before {
+    content: "\e893";
+}
+
+.icon-grid-line:before {
+    content: "\e600";
+}
+
+.icon-print:before {
+    content: "\e6de";
+}
+
+.icon-city:before {
+    content: "\e64b";
+}
+
+.icon-location:before {
+    content: "\e6d4";
+}
+
+.icon-qrcode:before {
+    content: "\e6ce";
+}
+
+.icon-input-id:before {
+    content: "\e6d1";
+}
+
+.icon-iframe:before {
+    content: "\e6d2";
+}
+
+.icon-audio:before {
+    content: "\e6d3";
+}
+
+.icon-form-model:before {
+    content: "\e6d5";
+}
+
+.icon-title:before {
+    content: "\e6d6";
+}
+
+.icon-sign:before {
+    content: "\e6d7";
+}
+
+.icon-address:before {
+    content: "\e6d8";
+}
+
+.icon-statistic:before {
+    content: "\e6d9";
+}
+
+.icon-barcode:before {
+    content: "\e6da";
+}
+
+.icon-video:before {
+    content: "\e6db";
+}
+
+.icon-avatar:before {
+    content: "\e6dc";
+}
+
+.icon-suspend:before {
+    content: "\e6cf";
+}
+
+.icon-warning:before {
+    content: "\e6d0";
+}
+
+.icon-send:before {
+    content: "\e6cc";
+}
+
+.icon-refresh2:before {
+    content: "\e6cd";
+}
+
+.icon-ai:before {
+    content: "\e6cb";
+}
+
+.icon-ai.bright{
+    background: linear-gradient(to right, #328FF7, #62E3A3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.icon-column4:before {
+    content: "\e6c7";
+}
+
+.icon-column3:before {
+    content: "\e6c6";
+}
+
+.icon-column2:before {
+    content: "\e6c8";
+}
+
+.icon-column1:before {
+    content: "\e6c9";
+}
+
+.icon-layout:before {
+    content: "\e6ca";
+}
+
+.icon-segmented:before {
+    content: "\e682";
+}
+
+.icon-mention:before {
+    content: "\e6c5";
+}
+
+.icon-input-tag:before {
+    content: "\e6c4";
+}
+
 .icon-up:before {
     content: "\e697";
     display: inline-block;
     transform: rotate(180deg);
-}
-
-.icon-down:before {
-    content: "\e609";
 }
 
 .icon-alignitems-flexstart:before {

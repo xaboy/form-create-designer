@@ -36,12 +36,14 @@ import html from './rule/html';
 import table from './rule/table';
 import icon from './rule/icon';
 import image from './rule/image';
+import signaturePad from './rule/signaturePad';
+import title from './rule/title';
 
 
 const ruleList = [
-    input, textarea, password, stepper, radio, checkbox, select, _switch, rate, time, date, cascader, calendar, calendarRange, slider, uploader,
+    input, textarea, password, stepper, radio, checkbox, select, _switch, rate, time, date, cascader, calendar, calendarRange, slider, uploader, signaturePad,
     group, subForm, tableForm, tableFormColumn,
-    noticeBar, button, text, html, divider, tag, image, icon,
+    noticeBar, button, title, text, html, divider, tag, image, icon,
     row, col, table,
     tabs, tabPane, space, collapse, collapseItem, cellGroup, cell2,
 
