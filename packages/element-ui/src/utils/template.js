@@ -73,7 +73,8 @@ export function htmlTemplate(json, options) {
         <!-- Import element-plus -->
         <script src="https://unpkg.com/element-plus"></script>
         <!-- Import formCreate -->
-        <script src="https://unpkg.com/@form-create/element-ui@3"><\/script>
+        <script src="https://unpkg.com/@form-create/element-ui@3"></script>
+        <script src="https://unpkg.com/@form-create/designer@3"></script>
     </head>
     <body>
         <div id="app">

@@ -477,6 +477,8 @@ export declare const FcDesigner: import("vue").DefineComponent<{
     setOptions: (opt: Options) => void;
     //合并更新设计器表单的表单配置
     mergeOptions: (opt: Options) => void;
+    //获取 Html
+    getHtml: () => string;
     //获取设计器表单的渲染规则(Array)
     getRule: () => Rule[];
     //获取设计器表单的json渲染规则(string)
