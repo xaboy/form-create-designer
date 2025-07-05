@@ -1,4 +1,4 @@
-import {localeProps} from '../../utils';
+import {localeProps, localeOptions} from '../../utils';
 
 const name = 'tableFormColumn';
 
@@ -25,6 +25,13 @@ export default {
             {
                 type: 'input',
                 field: 'label',
+            },
+            {
+                type: 'select', field: 'align',
+                options: localeOptions(t, [{label: 'left', value: 'left'}, {label: 'center', value: 'center'}, {
+                    label: 'right',
+                    value: 'right'
+                }])
             },
             {
                 type: 'switch',

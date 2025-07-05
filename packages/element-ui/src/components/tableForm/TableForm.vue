@@ -5,7 +5,7 @@
                    @change="formChange"
                    v-model:api="fapi"
                    @emit-event="$emit"></component>
-        <el-button link type="primary" class="fc-clock" v-if="!max || max > this.trs.length"
+        <el-button link type="primary" class="fc-clock" v-if="addable && (!max || max > this.trs.length)"
                    @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
             {{ formCreateInject.t('add') || '添加' }}
         </el-button>
@@ -33,6 +33,14 @@ export default {
             type: Boolean,
             default: true,
         },
+        deletable: {
+            type: Boolean,
+            default: true,
+        },
+        addable: {
+            type: Boolean,
+            default: true,
+        },
         options: {
             type: Object,
             default: () => reactive(({
@@ -41,6 +49,7 @@ export default {
             }))
         },
         max: Number,
+        min: Number,
         disabled: Boolean,
     },
     watch: {
@@ -150,7 +159,7 @@ export default {
             }
         },
         delRaw(idx) {
-            if (this.disabled) {
+            if (this.disabled || !this.deletable || (this.min > 0 && this.trs.length <= this.min)) {
                 return;
             }
             this.trs.splice(idx, 1);
@@ -205,7 +214,7 @@ export default {
                 header.push({
                     type: 'th',
                     native: true,
-                    style: column.style,
+                    style: {...column.style||{}, textAlign: column.align || 'center'},
                     class: column.required ? '_fc-tf-head-required' : '',
                     props: {
                         innerText: column.label || ''
@@ -293,11 +302,11 @@ export default {
     color: #666666;
 }
 
-._fc-table-form .form-create .el-form-item {
+._fc-table-form .form-create td .el-form-item {
     margin-bottom: 1px;
 }
 
-._fc-table-form .form-create .el-form-item.is-error {
+._fc-table-form .form-create td .el-form-item.is-error {
     margin-bottom: 22px;
 }
 
@@ -346,6 +355,8 @@ export default {
     border-bottom: 1px solid #EBEEF5;
     height: 40px;
     font-weight: 500;
+    padding: 0 5px;
+    box-sizing: border-box;
 }
 
 ._fc-table-form ._fc-tf-table > thead > tr > th + th {

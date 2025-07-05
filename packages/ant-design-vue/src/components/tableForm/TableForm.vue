@@ -5,7 +5,7 @@
                    @change="formChange"
                    v-model:api="fapi"
                    @emit-event="$emit"></component>
-        <a-button type="link" class="fc-clock" v-if="!max || max > this.trs.length"
+        <a-button type="link" class="fc-clock" v-if="addable && (!max || max > this.trs.length)"
                   @click="addRaw(true)" :disabled="disabled"><i class="fc-icon icon-add-circle"
                                                                 style="font-weight: 700;"></i>
             {{formCreateInject.t('add') || '添加'}}
@@ -34,6 +34,14 @@ export default {
             type: Boolean,
             default: true,
         },
+        deletable: {
+            type: Boolean,
+            default: true,
+        },
+        addable: {
+            type: Boolean,
+            default: true,
+        },
         options: {
             type: Object,
             default: () => reactive(({
@@ -41,6 +49,7 @@ export default {
                 resetBtn: false,
             }))
         },
+        min: Number,
         max: Number,
         disabled: Boolean,
     },
@@ -151,7 +160,7 @@ export default {
             }
         },
         delRaw(idx) {
-            if (this.disabled) {
+            if (this.disabled || !this.deletable || (this.min > 0 && this.trs.length <= this.min)) {
                 return;
             }
             this.trs.splice(idx, 1);
@@ -206,7 +215,7 @@ export default {
                 header.push({
                     type: 'th',
                     native: true,
-                    style: column.style,
+                    style: {...column.style||{}, textAlign: column.align || 'center'},
                     class: column.required ? '_fc-tf-head-required' : '',
                     props: {
                         innerText: column.label || ''
@@ -343,6 +352,8 @@ export default {
     border-bottom: 1px solid #EBEEF5;
     height: 40px;
     font-weight: 500;
+    padding: 0 5px;
+    box-sizing: border-box;
 }
 
 ._fc-table-form ._fc-tf-table > thead > tr > th + th {

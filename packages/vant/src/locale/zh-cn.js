@@ -690,12 +690,16 @@ const ZhCn = {
                 disabled: '是否禁用',
                 filterEmptyColumn: '是否过滤空行的数据',
                 max: '最多添加几行，为 0 则不限制',
+                min: '最少添加几行',
+                addable: '允许新增',
+                deletable: '允许删除',
             }
         },
         tableFormColumn: {
             name: '表格格子',
             label: '自定义名称',
             props: {
+                align: '对齐方式',
                 label: '标题',
                 width: '宽度',
                 color: '颜色',

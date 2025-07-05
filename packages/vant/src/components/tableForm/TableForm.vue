@@ -5,9 +5,9 @@
                    @change="formChange"
                    v-model:api="fapi"
                    @emit-event="$emit"></component>
-        <van-button type="primary" size="mini" class="fc-clock" v-if="!max || max > this.trs.length"
+        <van-button type="primary" size="mini" class="fc-clock" v-if="addable && (!max || max > this.trs.length)"
                     @click="addRaw(true)"><i class="fc-icon icon-add-circle" style="font-weight: 700;"></i>
-            {{ formCreateInject.t('add') || '添加' }}
+            {{formCreateInject.t('add') || '添加'}}
         </van-button>
     </div>
 </template>
@@ -33,6 +33,14 @@ export default {
             type: Boolean,
             default: true,
         },
+        deletable: {
+            type: Boolean,
+            default: true,
+        },
+        addable: {
+            type: Boolean,
+            default: true,
+        },
         options: {
             type: Object,
             default: () => reactive(({
@@ -41,6 +49,7 @@ export default {
             }))
         },
         max: Number,
+        min: Number,
         disabled: Boolean,
     },
     watch: {
@@ -150,7 +159,7 @@ export default {
             }
         },
         delRaw(idx) {
-            if (this.disabled) {
+            if (this.disabled || !this.deletable || (this.min > 0 && this.trs.length <= this.min)) {
                 return;
             }
             this.trs.splice(idx, 1);
@@ -205,7 +214,7 @@ export default {
                 header.push({
                     type: 'th',
                     native: true,
-                    style: column.style,
+                    style: {...column.style||{}, textAlign: column.align || 'center'},
                     class: column.required ? '_fc-tf-head-required' : '',
                     props: {
                         innerText: column.label || ''
@@ -294,7 +303,6 @@ export default {
 }
 
 ._fc-table-form .van-button {
-    display: block;
     margin-top: 10px;
     overflow: hidden;
 }
@@ -304,11 +312,11 @@ export default {
     align-items: center;
 }
 
-._fc-table-form .form-create .el-form-item {
+._fc-table-form .form-create td .el-form-item {
     margin-bottom: 1px;
 }
 
-._fc-table-form .form-create .el-form-item.is-error {
+._fc-table-form .form-create td .el-form-item.is-error {
     margin-bottom: 22px;
 }
 
@@ -352,6 +360,8 @@ export default {
     height: 40px;
     font-weight: 500;
     text-align: center;
+    padding: 0 5px;
+    box-sizing: border-box;
 }
 
 ._fc-table-form ._fc-tf-table > thead > tr > th + th {
@@ -384,7 +394,7 @@ export default {
     border-left: 1px solid #EBEEF5;
 }
 
-._fc-tf-head-required:before {
+._fc-tf-head-required:before{
     content: '*';
     color: #f56c6c;
     margin-right: 4px;

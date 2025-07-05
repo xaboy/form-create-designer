@@ -1,6 +1,6 @@
 <template>
     <div class="_fd-tf-col" :style="colStyle">
-        <div class="_fd-tf-title">
+        <div class="_fd-tf-title" :style="{textAlign: align || 'center'}">
             <span v-if="required" class="_fd-tf-required">*</span>{{ label || '' }}
         </div>
         <div class="_fd-tf-con">
@@ -17,6 +17,7 @@ export default defineComponent({
     name: 'TableFormColumnView',
     props: {
         label: String,
+        align: String,
         width: [Number, String],
         color: String,
         required: Boolean,
@@ -62,13 +63,12 @@ export default defineComponent({
 }
 
 ._fd-tf-title {
-    display: flex;
     height: 40px;
-    width: 100% !important;
     border-bottom: 1px solid #ebeef5;
-    align-items: center;
     margin-bottom: 0px;
-    padding-left: 5px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    line-height: 32px;
 }
 
 ._fd-tf-required {
@@ -84,4 +84,7 @@ export default defineComponent({
     width: 100%;
 }
 
+._fd-tf-col:has(._fd-tf-col) {
+    width: auto !important;
+}
 </style>
