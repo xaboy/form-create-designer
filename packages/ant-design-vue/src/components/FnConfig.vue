@@ -7,7 +7,7 @@
         </a-badge>
         <a-modal class="_fd-fn-list-dialog _fd-config-dialog" :title="t('event.title')" v-model:open="visible"
                  centered :maskClosable="false" :destroyOnClose="true"
-                 width="980px">
+                 width="1080px">
             <a-layout class="_fd-fn-list-con" style="height: 600px">
                 <a-layout-sider width="300px">
                     <a-layout class="_fd-fn-list-l">
