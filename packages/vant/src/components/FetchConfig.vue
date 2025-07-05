@@ -28,7 +28,16 @@
                             </template>
                         </DragForm>
                     </el-tab-pane>
-                    <el-tab-pane lazy name="second">
+                    <el-tab-pane lazy :label="t('fetch.beforeFetch')" name="second">
+                        <template #label>
+                            {{ t('fetch.beforeFetch') }}
+                            <Warning :tooltip="t('warning.beforeFetch')"></Warning>
+                        </template>
+                        <FnEditor style="height: 415px;" v-model="form.beforeFetch" name="beforeFetch"
+                                  :args="['config', 'data']"
+                                  ref="beforeFetch"></FnEditor>
+                    </el-tab-pane>
+                    <el-tab-pane lazy name="third">
                         <template #label>
                             {{ t('fetch.parse') }}
                             <Warning :tooltip="t('warning.fetchParse')"></Warning>
@@ -37,7 +46,7 @@
                                   :args="[{name:'res', info: t('fetch.response')}, 'rule', 'api']"
                                   ref="parse"></FnEditor>
                     </el-tab-pane>
-                    <el-tab-pane lazy :label="t('fetch.onError')" name="third">
+                    <el-tab-pane lazy :label="t('fetch.onError')" name="fourth">
                         <FnEditor style="height: 415px;" v-model="form.onError" name="onError"
                                   :args="['e']"
                                   ref="error"></FnEditor>
@@ -205,15 +214,17 @@ export default defineComponent({
             this.form.data = formData.data;
             this.form.dataType = formData.dataType;
             this.form.parse = formData.parse || '';
+            this.form.beforeFetch = formData.beforeFetch || '';
             this.form.onError = formData.onError || '';
         },
         save() {
             this.form.api.validate().then(() => {
                 const formData = {...this.form.formData};
-                if ((this.$refs.parse && !this.$refs.parse.save()) || (this.$refs.error && !this.$refs.error.save())) {
+                if ((this.$refs.parse && !this.$refs.parse.save()) || (this.$refs.beforeFetch && !this.$refs.beforeFetch.save()) || (this.$refs.error && !this.$refs.error.save())) {
                     return;
                 }
-                formData.parse = this.form.parse;
+                formData.parse = elmFormCreate.parseFn(this.form.parse);
+                formData.beforeFetch = elmFormCreate.parseFn(this.form.beforeFetch);
                 formData.onError = this.form.onError;
                 formData.label = this.form.label;
                 formData.type = this.form.type;

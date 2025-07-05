@@ -43,6 +43,7 @@ const ZhCn = {
         fetchQuery: '定义请求的 GET 参数，通过 URL 传递数据。',
         fetchData: '定义请求的 POST 参数，通过请求体传递数据。',
         fetchDataType: '选择请求体的数据类型，确保数据格式正确。',
+        beforeFetch: '在请求发送前，可通过处理函数修改请求参数；若需终止请求，直接返回 false 或一个拒绝的 Promise。',
         fetchParse: '请求返回后，可以通过处理函数对返回的结果进行处理，将结果转换为组件所需的数据和结构。',
         language: '管理页面的多语言数据，在组件中配置不同语言的文本，支持一键切换语言体系，便于在多语言环境下使用和展示内容。',
     },
@@ -166,6 +167,7 @@ const ZhCn = {
         parse: '数据处理',
         response: '接口返回的数据',
         onError: '错误处理',
+        beforeFetch: '前置处理',
         remote: '远程数据',
         static: '静态数据',
         optionsType: {
