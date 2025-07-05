@@ -6,7 +6,7 @@
         <el-dialog class="_fd-gfc-dialog" :visible.sync="visible"
                    :close-on-click-modal="false"
                    append-to-body
-                   width="980px">
+                   width="1080px">
             <template #title>
                 {{ t('fetch.optionsType.fetch') }}
                 <Warning :tooltip="t('warning.fetch')"></Warning>

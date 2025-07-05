@@ -6,7 +6,7 @@
         <el-dialog class="_fd-event-dialog" :title="t('event.title')" :visible.sync="visible"
                    :close-on-click-modal="false"
                    append-to-body
-                   width="980px">
+                   width="1080px">
             <el-container class="_fd-event-con" style="height: 600px">
                 <el-aside style="width:300px;">
                     <el-container class="_fd-event-l">
