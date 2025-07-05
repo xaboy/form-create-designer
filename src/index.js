@@ -23,6 +23,8 @@ import LanguageInput from './components/language/LanguageInput.vue';
 import ValueInput from './components/ValueInput.vue';
 import TableFormView from './components/tableForm/TableFormView.vue';
 import TableForm from './components/tableForm/TableForm.vue';
+import SignaturePad from './components/SignaturePad.vue';
+import FcTitle from './components/FcTitle.vue';
 import TableFormColumnView from './components/tableForm/TableFormColumnView.vue';
 import ConfigItem from './components/style/ConfigItem.vue';
 import formCreate, {designerForm} from './utils/form';
@@ -74,6 +76,8 @@ designerForm.component('FcRow', Row);
 designerForm.component('ValueInput', ValueInput);
 designerForm.component('TableFormColumn', TableFormColumnView);
 addComponent('FcEditor', FcEditor);
+addComponent('FcTitle', FcTitle);
+addComponent('SignaturePad', SignaturePad);
 addComponent('FcTable', Table, TableView);
 addComponent('TableForm', TableForm, TableFormView);
 

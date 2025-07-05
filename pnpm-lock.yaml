@@ -12,8 +12,8 @@ importers:
         specifier: ^2.7.0
         version: 2.7.0
       '@form-create/element-ui':
-        specifier: ^2.7.3
-        version: 2.7.3
+        specifier: ^2.7.11
+        version: 2.7.11
       '@form-create/utils':
         specifier: ^2.7.0
         version: 2.7.0
@@ -26,8 +26,11 @@ importers:
       js-beautify:
         specifier: ^1.15.1
         version: 1.15.1
+      signature_pad:
+        specifier: ^5.0.10
+        version: 5.0.10
       vue:
-        specifier: ^2.7.14
+        specifier: ^2.7.16
         version: 2.7.16
       vuedraggable:
         specifier: ^2.24.3
@@ -223,26 +226,26 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@form-create/component-elm-checkbox@2.7.1':
-    resolution: {integrity: sha512-CZxxJo66P3ujN+MLCEtX7ki9dkKld5pV8B4qHeH3ixn7ajiHMzUW2ZL6nGLXrZy3fb6cSPoQ1SlvsS8WVf4i4Q==}
+  '@form-create/component-elm-checkbox@2.7.8':
+    resolution: {integrity: sha512-CC9vXlomXo/xqoSZeV9KsASWGtKDA1VWc9xlvN5a7fvsLEhqy05GCbIp2bOfwpxuGwKzBzZHLPK1UnzOFRvbqw==}
 
-  '@form-create/component-elm-frame@2.7.2':
-    resolution: {integrity: sha512-wj5j6m427yZCuoTEuEG3eJ5xgJZGoJdM7cDXQpPtVavHS9r5d5AZpJQ6TnYI6siyakhUXtlP76ZVQIN8ujB4UA==}
+  '@form-create/component-elm-frame@2.7.8':
+    resolution: {integrity: sha512-AtHnfZzfZEMpO/mYnj43Snjweua+6rAZPj67zPva1u3QJWeWxkhtulEwKhK/wekckMD9mXNkzO9Nze6VbLqG2w==}
 
-  '@form-create/component-elm-group@2.7.1':
-    resolution: {integrity: sha512-9lBjdyqOiINgmDTAmTH2L7znH4ClHrOda9LQj9cSNC3B2nIBKiak39V41/7fxQOYwZJU0pndFDd0wCb0ASLXlA==}
+  '@form-create/component-elm-group@2.7.8':
+    resolution: {integrity: sha512-0rEWSnU+U8vBC/FZ3wdQLAsxyjZ5n18+iU9L82gOJDVESdMvwTKwjhvNmJ1zPbHOlYodblAPOADsgKBaGcuNqw==}
 
-  '@form-create/component-elm-radio@2.7.1':
-    resolution: {integrity: sha512-vFkNTPaIfNsboI6o2CSidmliekM2GMbO5PwgKpL+Xy0f+QV4w1QOfn3IDyi4ipRvP5Mm/zNvDeeGTtW0ucrvVQ==}
+  '@form-create/component-elm-radio@2.7.8':
+    resolution: {integrity: sha512-LKykitghN57bpUFbeDggNiTX3Iz0lBkD7HeoA7OvStZUluw7hOfaDn4uqE8NwS0hfH9lVgRInUFBOhNc8JT+eg==}
 
-  '@form-create/component-elm-select@2.7.1':
-    resolution: {integrity: sha512-SXfKj5a71waX2A+Ft078NdPBTRmURM975ZrSLSiQ+Qtp2wjQ9irPXkoaNujSeGkrt26nF2l6whTVZvH+FXV1AQ==}
+  '@form-create/component-elm-select@2.7.8':
+    resolution: {integrity: sha512-JRn6WSevxqE3nuVQwOT/eoqGKKbivqa0k/bwl2lzf5wwTlDnL+JOMqkmoSNxLssII4vz33txJxZAKUUWULYK5w==}
 
-  '@form-create/component-elm-tree@2.7.1':
-    resolution: {integrity: sha512-Z3wxSjAI5/o10MfyjMu59rJamumTzXkRZCapiC+2c31GsGG/2oWsAasMSHV5/GSqyHc4pxgovNidd0tKXPinjA==}
+  '@form-create/component-elm-tree@2.7.8':
+    resolution: {integrity: sha512-MD4PzYnbOGI3Q5VEIhEr4uM0L0Gmi36pZ5XZARNdwG7Pt29w0EjUTOuXmuW6jbfWENke6HI/4yI69/T2lhHE/A==}
 
-  '@form-create/component-elm-upload@2.7.2':
-    resolution: {integrity: sha512-dOFCdwb82zQReLOHvxUd041uWpeOJAeQfm3mYIkeAseenqquWaozKNn7tqvqLmwETXiI6/0jvLV0ALV7cY0LLg==}
+  '@form-create/component-elm-upload@2.7.11':
+    resolution: {integrity: sha512-2RHRT7tHbAqVyWlJS9qwE/Sf9Uh6IPUYcyUZxu4JKeIgwJmgGjEY5sT/9hhgsbKnmI39xtWD3Sprf9RBoC7oZA==}
 
   '@form-create/component-subform@2.7.1':
     resolution: {integrity: sha512-qR6uZFCMnUfFyjh1A3Q6CTwHWp7piLGS0fbaS8k0MfjcQCPDuhvMt1WYBGQBJZMcNwuDx2kceHcjFtk/ZMYOjg==}
@@ -250,14 +253,17 @@ packages:
   '@form-create/component-wangeditor@2.7.0':
     resolution: {integrity: sha512-nAhWUIb6m3sFztkeCLmtIYUEsaDyCGFv9gJZD+R8kxtEt1yUb+E5yR5bKwwFl/IyxSzF/7FwDRn5KnabtiHVlA==}
 
-  '@form-create/core@2.7.3':
-    resolution: {integrity: sha512-uzwGw8vaI9Unvs06wbsXhnFnfa+k5kZke8Rq+WPitQkRNz22EOILd6w5iv7jx3GI37XbhB6E9L6ahKOX/cAaLg==}
+  '@form-create/core@2.7.11':
+    resolution: {integrity: sha512-2LV36UgV/ixBP0VxyFzYYBCQebKlnYr16Eikmf38mD+Hcvj2GIWG9+vA//eE6ZyYdm2GCzIGtdw/G2oarR0OBg==}
 
-  '@form-create/element-ui@2.7.3':
-    resolution: {integrity: sha512-Rf1YngczUqcpJzyt+h21gsS0pKmN4z0PU+Cp74YTXP/DR9J9Z7X2aX25MCAGpzkGEQ7IsyWT/YEy8js3T9B/Pw==}
+  '@form-create/element-ui@2.7.11':
+    resolution: {integrity: sha512-4YWSd55Nd8EUQqD5ipKrNxLRujyjyHaDOkAR2R5Y8TwWEf6XDT9pDJ20BwOQTKZfsXlyRWMm/qbBA7t7Czectw==}
 
   '@form-create/utils@2.7.0':
     resolution: {integrity: sha512-A6hoUEcn7kPiA7A4V+R808xmlJopGW1Odnim7nXhVG/tQ8iCuWJrvmBqTpbTYz/1wa94MsEj3ghoxKcEkWlyEA==}
+
+  '@form-create/utils@2.7.8':
+    resolution: {integrity: sha512-49bOop5HUh7ixOtDpIACB83wi6VR9e3kQvTZqEdsYmhL3Cli9OTkP/Cn8solw/KGGthmW67UyW5v0+meaelBHA==}
 
   '@gulpjs/messages@1.1.0':
     resolution: {integrity: sha512-Ys9sazDatyTgZVb4xPlDufLweJ/Os2uHWOv+Caxvy2O85JcnT4M3vc73bi8pdLWlv3fdWQz3pdI9tVwo8rQQSg==}
@@ -1083,6 +1089,9 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
+  signature_pad@5.0.10:
+    resolution: {integrity: sha512-t7rLjpAtxYAIrTHr7EKfY8ulTWF+G/LFMto502a61KZvZNWZSwhTPeLE6171YMDd2sSYRBwQ17ENK5huAi9Rsg==}
+
   sortablejs@1.10.2:
     resolution: {integrity: sha512-YkPGufevysvfwn5rfdlGyrGjt7/CRHwvRPogD/lC+TnvcN29jDpCifKP+rBqf+LRldfXSTh+0CGLcSg0VIxq3A==}
 
@@ -1395,33 +1404,33 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@form-create/component-elm-checkbox@2.7.1':
+  '@form-create/component-elm-checkbox@2.7.8':
     dependencies:
-      '@form-create/utils': 2.7.0
+      '@form-create/utils': 2.7.8
 
-  '@form-create/component-elm-frame@2.7.2':
+  '@form-create/component-elm-frame@2.7.8':
     dependencies:
-      '@form-create/utils': 2.7.0
+      '@form-create/utils': 2.7.8
 
-  '@form-create/component-elm-group@2.7.1':
+  '@form-create/component-elm-group@2.7.8':
     dependencies:
-      '@form-create/utils': 2.7.0
+      '@form-create/utils': 2.7.8
 
-  '@form-create/component-elm-radio@2.7.1':
+  '@form-create/component-elm-radio@2.7.8':
     dependencies:
-      '@form-create/utils': 2.7.0
+      '@form-create/utils': 2.7.8
 
-  '@form-create/component-elm-select@2.7.1':
+  '@form-create/component-elm-select@2.7.8':
     dependencies:
-      '@form-create/utils': 2.7.0
+      '@form-create/utils': 2.7.8
 
-  '@form-create/component-elm-tree@2.7.1':
+  '@form-create/component-elm-tree@2.7.8':
     dependencies:
-      '@form-create/utils': 2.7.0
+      '@form-create/utils': 2.7.8
 
-  '@form-create/component-elm-upload@2.7.2':
+  '@form-create/component-elm-upload@2.7.11':
     dependencies:
-      '@form-create/utils': 2.7.0
+      '@form-create/utils': 2.7.8
 
   '@form-create/component-subform@2.7.1': {}
 
@@ -1429,24 +1438,26 @@ snapshots:
     dependencies:
       wangeditor: 4.7.15
 
-  '@form-create/core@2.7.3':
+  '@form-create/core@2.7.11':
     dependencies:
-      '@form-create/utils': 2.7.0
+      '@form-create/utils': 2.7.8
 
-  '@form-create/element-ui@2.7.3':
+  '@form-create/element-ui@2.7.11':
     dependencies:
-      '@form-create/component-elm-checkbox': 2.7.1
-      '@form-create/component-elm-frame': 2.7.2
-      '@form-create/component-elm-group': 2.7.1
-      '@form-create/component-elm-radio': 2.7.1
-      '@form-create/component-elm-select': 2.7.1
-      '@form-create/component-elm-tree': 2.7.1
-      '@form-create/component-elm-upload': 2.7.2
+      '@form-create/component-elm-checkbox': 2.7.8
+      '@form-create/component-elm-frame': 2.7.8
+      '@form-create/component-elm-group': 2.7.8
+      '@form-create/component-elm-radio': 2.7.8
+      '@form-create/component-elm-select': 2.7.8
+      '@form-create/component-elm-tree': 2.7.8
+      '@form-create/component-elm-upload': 2.7.11
       '@form-create/component-subform': 2.7.1
-      '@form-create/core': 2.7.3
-      '@form-create/utils': 2.7.0
+      '@form-create/core': 2.7.11
+      '@form-create/utils': 2.7.8
 
   '@form-create/utils@2.7.0': {}
+
+  '@form-create/utils@2.7.8': {}
 
   '@gulpjs/messages@1.1.0': {}
 
@@ -2257,6 +2268,8 @@ snapshots:
   shebang-regex@3.0.0: {}
 
   signal-exit@4.1.0: {}
+
+  signature_pad@5.0.10: {}
 
   sortablejs@1.10.2: {}
 

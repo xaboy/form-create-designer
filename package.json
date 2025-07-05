@@ -54,12 +54,13 @@
     },
     "dependencies": {
         "@form-create/component-wangeditor": "^2.7.0",
-        "@form-create/element-ui": "^2.7.3",
+        "@form-create/element-ui": "^2.7.11",
         "@form-create/utils": "^2.7.0",
         "codemirror": "5.60.0",
         "element-ui": "^2.15.2",
         "js-beautify": "^1.15.1",
-        "vue": "^2.7.14",
+        "signature_pad": "^5.0.10",
+        "vue": "^2.7.16",
         "vuedraggable": "^2.24.3"
     },
     "devDependencies": {
