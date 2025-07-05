@@ -735,6 +735,10 @@
     cursor: pointer;
 }
 
+._fd-preview-dialog {
+    min-height: 40%;
+}
+
 ._fd-preview-dialog .ant-modal-content {
     padding: 6px 16px 16px;
 }

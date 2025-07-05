@@ -367,7 +367,7 @@
                         </el-main>
                     </el-container>
                 </el-aside>
-                <el-dialog v-model="preview.state" width="800px" class="_fd-preview-dialog" append-to-body>
+                <el-dialog v-model="preview.state" width="80%" class="_fd-preview-dialog" append-to-body>
                     <el-tabs class="_fd-preview-tabs" v-model="previewStatus">
                         <el-tab-pane :label="t('form.formMode')" name="form"></el-tab-pane>
                         <el-tab-pane :label="t('form.componentMode')" name="component"></el-tab-pane>
@@ -813,7 +813,7 @@ export default defineComponent({
                 return reactive({children}).children;
             },
             addMenu(config) {
-                if (!config.name || !config.list) return;
+                if (!config.name) return;
                 let flag = true;
                 data.menuList.forEach((v, i) => {
                     if (v.name === config.name) {

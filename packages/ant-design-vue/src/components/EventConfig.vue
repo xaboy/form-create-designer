@@ -215,8 +215,15 @@ export default defineComponent({
         loadFnStr(v) {
             if (isFNX(v)) {
                 return v.replace($T, '');
-            } else if (is.Function(v) && isFNX(v.__json)) {
-                return v.__json.replace($T, '');
+            } else if (is.Function(v)) {
+                const json = v.__json || '';
+                if (!json) {
+                    return '' + v;
+                } else if (isFNX(json)) {
+                    return json.replace($T, '');
+                } else {
+                    return json;
+                }
             } else if (v && v.indexOf('$GLOBAL:') === 0) {
                 return v;
             }

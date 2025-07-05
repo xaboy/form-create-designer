@@ -254,8 +254,15 @@ export default defineComponent({
                     val[k] = data;
                 } else if (isFNX(e[k])) {
                     val[k] = [e[k].replace($T, '')];
-                } else if (is.Function(e[k]) && isFNX(e[k].__json)) {
-                    val[k] = [e[k].__json.replace($T, '')];
+                } else if (is.Function(e[k])) {
+                    const json = e[k].__json || '';
+                    if (!json) {
+                        val[k] = ['' + e[k]];
+                    } else if (isFNX(json)) {
+                        val[k] = [json.replace($T, '')];
+                    } else {
+                        val[k] = [json];
+                    }
                 } else if (e[k] && e[k].indexOf('$GLOBAL:') === 0) {
                     val[k] = [e[k]];
                 }

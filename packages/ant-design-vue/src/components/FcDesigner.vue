@@ -362,7 +362,7 @@
                             </a-layout-content>
                         </a-layout>
                     </a-layout-sider>
-                    <a-modal v-model:open="preview.state" width="800px" class="_fd-preview-dialog"
+                    <a-modal v-model:open="preview.state" width="80%" class="_fd-preview-dialog"
                              centered :destroyOnClose="true" :footer="null">
                         <a-tabs class="_fd-preview-tabs" v-model:activeKey="previewStatus">
                             <a-tab-pane :tab="t('form.formMode')" key="form"></a-tab-pane>
@@ -828,7 +828,7 @@ export default defineComponent({
                 return reactive({children}).children;
             },
             addMenu(config) {
-                if (!config.name || !config.list) return;
+                if (!config.name) return;
                 let flag = true;
                 data.menuList.forEach((v, i) => {
                     if (v.name === config.name) {
