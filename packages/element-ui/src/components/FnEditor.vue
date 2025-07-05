@@ -108,7 +108,7 @@ export default defineComponent({
             } else {
                 let fn;
                 try {
-                    fn = (new Function('return function ' + this.name + '(' + this.argStr + '){' + str + '}'))();
+                    fn = (new Function('return function (' + this.argStr + '){\n' + str + '\n}'))();
                 } catch (e) {
                     console.error(e);
                     errorMessage(this.t('struct.errorMsg'));

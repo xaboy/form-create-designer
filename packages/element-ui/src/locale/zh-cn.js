@@ -4,7 +4,7 @@ const ZhCn = {
         field: '字段 ID',
         title: '字段名称',
         info: '提示信息',
-        control: '联动数据',
+        control: '组件联动',
         labelPosition: '标签的位置',
         labelStyle: '标签的样式',
         labelSuffix: '标签的后缀',
