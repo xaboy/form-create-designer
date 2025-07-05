@@ -138,7 +138,13 @@ export default defineComponent({
                 rule: {
                     props: {
                         tag: 'el-col',
-                        group: 'default',
+                        group: {
+                            name: 'default',
+                            put: (to, ...args) => {
+                                to.el.__rule__ = this.formCreateInject.rule;
+                                return this.designer.setupState.dragPut(to, ...args);
+                            }
+                        },
                         ghostClass: 'ghost',
                         animation: 150,
                         handle: '._fd-drag-btn',

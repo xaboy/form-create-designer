@@ -40,6 +40,22 @@ type extendRule = ((arg: { t: t }) => Rule[]) | {
     prepend?: boolean;
 };
 
+//可拖入的组件列表
+type AllowDrag = string[] | {
+    //可拖入的菜单列表
+    menu: string[];
+    //可拖入的组件列表
+    item: string[];
+}
+
+//不可拖入的组件列表
+type DenyDrag = string[] | {
+    //不可拖入的菜单列表
+    menu: string[];
+    //不可拖入的组件列表
+    item: string[];
+}
+
 type Device = 'pc' | 'pad' | 'mobile';
 
 //设计器组件的props.config配置
@@ -54,6 +70,8 @@ export interface Config {
     autoResetName?: boolean;
     //设置右侧配置项的顺序
     configFormOrder?: Array<"base" | "props" | "validate" | "style" | "event">
+    //判断组件是否可以拖入
+    checkDrag?: (drag: {rule: Rule | undefined, menu: DragRule, toRule: Rule, toMenu: DragRule})=> boolean;
     //右侧配置更新方式
     updateConfigOnBlur?: boolean;
     //是否生成vue2语法的模板组件
@@ -81,6 +99,16 @@ export interface Config {
         default?: string[];
         //拖拽规则name: 禁用的字段名
         [id: string]: string[];
+    };
+    //可拖入的组件列表
+    allowDrag?: {
+        //拖拽规则name: 可拖入的规则
+        [id: string]: AllowDrag;
+    };
+    //不可拖入的组件列表
+    denyDrag?: {
+        //拖拽规则name: 不可拖入的规则
+        [id: string]: DenyDrag;
     };
     //是否显示保存按钮
     showSaveBtn?: boolean;
@@ -156,8 +184,16 @@ export interface DragRule {
     style?: boolean;
     //如果是子表单组件,需要定义`value`的类型
     subForm?: 'object' | 'array';
+    //可拖入的组件列表
+    allowDrag?: AllowDrag;
+    //不可拖入的组件列表
+    denyDrag?: DenyDrag;
     //组件,不建议使用
     component?: Component;
+    //控制最多拖入几个子组件
+    maxChildren?: number;
+    //判断组件是否可以拖入
+    checkDrag?: (drag: {rule: Rule | undefined, menu: DragRule, toRule: Rule, toMenu: DragRule})=> boolean;
     //多语言配置项
     languageKey: string[];
 
