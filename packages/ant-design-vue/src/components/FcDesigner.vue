@@ -4,7 +4,7 @@
                   @dragenter="handleDragenter" @dragleave="handleDragleave" @drop="handleDrop">
             <a-layout-content>
                 <a-layout style="height: 100%;" :key="locale && locale.name">
-                    <a-layout-sider class="_fc-l-menu" width="40px">
+                    <a-layout-sider class="_fc-l-menu" v-show="!hiddenLeft" width="40px">
                         <a-tooltip
                             :title="t('designer.comList')"
                             placement="right"
@@ -35,7 +35,8 @@
                             </div>
                         </a-tooltip>
                     </a-layout-sider>
-                    <a-layout-sider class="_fc-l" :width="activeModule === 'language' ? '450px' : '266px'">
+                    <a-layout-sider class="_fc-l" v-if="!hiddenLeft" :width="activeModule === 'language' ? '450px' : '266px'">
+                        <div class="_fc-l-close" @click="hiddenLeft = true"><i class="fc-icon icon-arrow"></i></div>
                         <LanguageConfig v-if="activeModule === 'language'"></LanguageConfig>
                         <JsonPreview v-if="activeModule === 'json'"></JsonPreview>
                         <a-layout v-if="activeModule === 'base'">
@@ -218,7 +219,8 @@
                             </div>
                         </a-layout-content>
                     </a-layout>
-                    <a-layout-sider class="_fc-r" width="320px" v-if="!config || config.showConfig !== false">
+                    <a-layout-sider class="_fc-r" width="320px" v-show="!hiddenRight" v-if="!config || config.showConfig !== false">
+                        <div class="_fc-r-close" @click="hiddenRight = true"><i class="fc-icon icon-arrow"></i></div>
                         <a-layout style="height: 100%;">
                             <a-layout-header style="height:auto;" class="_fc-r-tabs">
                                 <div class="_fc-r-tab" :class="{active: activeTab==='props'}"
@@ -362,6 +364,8 @@
                             </a-layout-content>
                         </a-layout>
                     </a-layout-sider>
+                    <div class="_fc-l-open" v-if="hiddenLeft" @click="hiddenLeft = false"><i class="fc-icon icon-arrow"></i></div>
+                    <div class="_fc-r-open" v-if="hiddenRight" @click="hiddenRight = false"><i class="fc-icon icon-arrow"></i></div>
                     <a-modal v-model:open="preview.state" width="80%" class="_fd-preview-dialog"
                              centered :destroyOnClose="true" :footer="null">
                         <a-tabs class="_fd-preview-tabs" v-model:activeKey="previewStatus">
@@ -564,6 +568,8 @@ export default defineComponent({
                 idx: -1,
                 list: []
             },
+            hiddenLeft: false,
+            hiddenRight: false,
             moveRule: null,
             addRule: null,
             added: null,

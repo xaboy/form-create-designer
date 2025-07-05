@@ -2,7 +2,7 @@
     <el-container class="_fc-designer" :style="height ? `height:${dragHeight};flex:0;` : ''" @dragenter="handleDragenter" @dragleave="handleDragleave" @drop="handleDrop">
         <el-main>
             <el-container style="height: 100%;" :key="locale && locale.name">
-                <el-aside class="_fc-l-menu" width="40px">
+                <el-aside class="_fc-l-menu" v-show="!hiddenLeft" width="40px">
                     <el-tooltip
                         effect="dark"
                         :content="t('designer.comList')"
@@ -39,7 +39,8 @@
                         </div>
                     </el-tooltip>
                 </el-aside>
-                <el-aside class="_fc-l" :width="activeModule === 'language' ? '450px' : '266px'">
+                <el-aside class="_fc-l" v-if="!hiddenLeft" :width="activeModule === 'language' ? '450px' : '266px'">
+                    <div class="_fc-l-close" @click="hiddenLeft = true"><i class="fc-icon icon-arrow"></i></div>
                     <LanguageConfig v-if="activeModule === 'language'"></LanguageConfig>
                     <JsonPreview v-if="activeModule === 'json'"></JsonPreview>
                     <el-container style="height: 100%;" v-if="activeModule === 'base'">
@@ -222,7 +223,8 @@
                         </div>
                     </el-main>
                 </el-container>
-                <el-aside class="_fc-r" width="320px" v-if="!config || config.showConfig !== false">
+                <el-aside class="_fc-r" width="320px" v-show="!hiddenRight" v-if="!config || config.showConfig !== false">
+                    <div class="_fc-r-close" @click="hiddenRight = true"><i class="fc-icon icon-arrow"></i></div>
                     <el-container style="height: 100%;">
                         <el-header height="40px" class="_fc-r-tabs">
                             <div class="_fc-r-tab" :class="{active: activeTab==='props'}"
@@ -367,6 +369,8 @@
                         </el-main>
                     </el-container>
                 </el-aside>
+                <div class="_fc-l-open" v-if="hiddenLeft" @click="hiddenLeft = false"><i class="fc-icon icon-arrow"></i></div>
+                <div class="_fc-r-open" v-if="hiddenRight" @click="hiddenRight = false"><i class="fc-icon icon-arrow"></i></div>
                 <el-dialog v-model="preview.state" width="80%" class="_fd-preview-dialog" append-to-body>
                     <el-tabs class="_fd-preview-tabs" v-model="previewStatus">
                         <el-tab-pane :label="t('form.formMode')" name="form"></el-tab-pane>
@@ -565,6 +569,8 @@ export default defineComponent({
                 idx: -1,
                 list: []
             },
+            hiddenLeft: false,
+            hiddenRight: false,
             moveRule: null,
             addRule: null,
             added: null,

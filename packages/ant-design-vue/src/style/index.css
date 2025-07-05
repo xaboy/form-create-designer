@@ -159,11 +159,56 @@
     border-top: 1px solid #ECECEC;
     box-sizing: border-box;
     transition: none !important;
+    overflow: unset;
+    position: relative;
 }
 
 ._fc-r-tab-props {
     padding: 0 20px;
     position: relative;
+}
+
+._fc-l-close, ._fc-r-close, ._fc-l-open, ._fc-r-open {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 46px;
+    top: 50%;
+    right: -12px;
+    cursor: pointer;
+    background: #FFFFFF;
+    z-index: 1;
+    border-radius: 0 5px 5px 0;
+}
+
+._fc-l-open {
+    left: 0;
+    right: unset;
+}
+
+._fc-r-close {
+    left: -12px;
+    right: unset;
+    border-radius: 5px 0 0 5px;
+}
+
+._fc-r-open {
+    right: 0;
+    border-radius: 5px 0 0 5px;
+}
+
+._fc-l-close > i, ._fc-r-open > i {
+    display: block;
+    transform: rotate(-90deg);
+    font-size: 9px;
+}
+
+._fc-r-close > i, ._fc-l-open > i {
+    display: block;
+    transform: rotate(90deg);
+    font-size: 9px;
 }
 
 ._fc-r-tools-close {
