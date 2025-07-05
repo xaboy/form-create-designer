@@ -2105,31 +2105,15 @@ export default defineComponent({
             },
             bindHotkey(event) {
                 const isCtrlOrCmd = event.ctrlKey || event.metaKey;
-                if (!getSelection().toString() && isCtrlOrCmd && event.target.tagName === 'BODY' && ['ArrowUp', 'ArrowDown', 'c'].indexOf(event.key) > -1 && data.activeRule) {
+                if (!getSelection().toString() && isCtrlOrCmd && event.target.tagName === 'BODY' && ['ArrowUp', 'ArrowDown', 'Backspace', 'c', 'x', 'z', 'p', '1', '2', '3', '4'].indexOf(event.key) > -1) {
                     event.preventDefault();
-                    let rule = data.activeRule;
-                    if (event.key === 'c') {
-                        copyTextToClipboard('FormCreate:' + designerForm.toJson(methods.parseRule([rule])[0]));
-                        vm.emit('copyRule', {event, rule});
-                        return;
-                    }
                     if (data.inputForm.state) {
                         return;
                     }
-                    if (!rule._menu.inside) {
-                        rule = rule.__fc__.parent.rule;
-                    }
-                    const parentRule = rule.__fc__.parent.rule;
-                    const idx = parentRule.children.indexOf(rule);
-
-                    if (parentRule.children.length > 1 && idx >= 0) {
-                        const direction = event.key === 'ArrowUp' ? -1 : (event.key === 'ArrowDown' ? 1 : 0);
-
-                        if (direction && idx + direction >= 0 && idx + direction < parentRule.children.length) {
-                            parentRule.children.splice(idx, 1);
-                            parentRule.children.splice(idx + direction, 0, rule);
-                            vm.emit('sort' + (event.key === 'ArrowUp' ? 'Up' : 'Down'), {event, rule});
-                        }
+                    if (hotKey[event.key]) {
+                        hotKey[event.key](event)
+                    } else if ('1234'.indexOf(event.key) > -1) {
+                        hotKey.num(event);
                     }
                 }
             },
@@ -2142,7 +2126,17 @@ export default defineComponent({
                     let children = data.children;
                     content = content.slice(11, content.length);
                     const copyRule = methods.loadRule([designerForm.parseJson(content)])[0];
+                    let flag = true;
                     if (data.activeRule && data.activeRule._menu.drag) {
+                        const _rule = methods.getTrueRule(copyRule);
+                        if (_rule && !methods.checkDrag({
+                            rule: _rule,
+                            menu: _rule._menu,
+                            toRule: data.activeRule,
+                            toMenu: data.activeRule._menu
+                        })) {
+                            return;
+                        }
                         if (data.activeRule._menu.inside) {
                             children = data.activeRule.children[0].children[0].children;
                         } else {
@@ -2150,11 +2144,89 @@ export default defineComponent({
                         }
                     } else if (data.customForm.config && data.customForm.config.onPaste) {
                         data.customForm.config.onPaste(copyRule)
-                        return;
+                        flag = false;
                     }
-                    children.push(copyRule)
+                    if (flag) {
+                        children.push(copyRule);
+                    }
+                    methods.updateTree();
+                    methods.addOperationRecord();
                     vm.emit('pasteRule', {event, copyRule});
                 }
+            }
+        }
+
+        const hotKey = {
+            z(e) {
+                if (e.shiftKey) {
+                    methods.nextOperationRecord();
+                } else {
+                    methods.prevOperationRecord();
+                }
+            },
+            Backspace() {
+                if (!data.activeRule) {
+                    return;
+                }
+                methods.toolHandle(data.activeRule, 'delete');
+            },
+            c(event) {
+                const rule = data.activeRule;
+                if (!rule) {
+                    return;
+                }
+                copyTextToClipboard('FormCreate:' + designerForm.toJson(methods.parseRule([rule])[0]));
+                vm.emit('copyRule', {event, rule});
+            },
+            x(e) {
+                if (!data.activeRule) {
+                    return;
+                }
+                hotKey.c(e);
+                methods.toolHandle(data.activeRule, 'delete');
+            },
+            p() {
+                methods.openPreview();
+            },
+            num(event) {
+                const num = event.key;
+                if (event.key === '1') {
+                    data.activeModule = 'base';
+                    data.activeMenuTab = 'menu';
+                } else if (event.key === '2') {
+                    data.activeModule = 'base';
+                    data.activeMenuTab = 'tree';
+                } else if (event.key === '3') {
+                    data.activeModule = 'json';
+                } else if (event.key === '4') {
+                    data.activeModule = 'language';
+                }
+            },
+            ArrowUp(event) {
+                let rule = data.activeRule;
+                if (!rule) {
+                    return;
+                }
+                if (!rule._menu.inside) {
+                    rule = rule.__fc__.parent.rule;
+                }
+                const parentRule = rule.__fc__.parent.rule;
+                const idx = parentRule.children.indexOf(rule);
+
+                if (parentRule.children.length > 1 && idx >= 0) {
+                    const direction = event.key === 'ArrowUp' ? -1 : (event.key === 'ArrowDown' ? 1 : 0);
+
+                    if (direction && idx + direction >= 0 && idx + direction < parentRule.children.length) {
+                        parentRule.children.splice(idx, 1);
+                        parentRule.children.splice(idx + direction, 0, rule);
+                        methods.updateTree();
+                        methods.addOperationRecord();
+                        vm.emit('sort' + (event.key === 'ArrowUp' ? 'Up' : 'Down'), {event, rule});
+                    }
+                }
+            },
+            ArrowDown(event) {
+                hotKey.ArrowUp(event);
             }
         }
         data.dragForm.rule = methods.makeDragRule(methods.makeChildren(data.children));
