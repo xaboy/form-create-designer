@@ -719,6 +719,7 @@
 ._fd-preview-dialog {
     border-radius: 6px;
     padding-top: 0;
+    min-height: 40%;
 }
 
 ._fd-preview-dialog .el-dialog__header {
