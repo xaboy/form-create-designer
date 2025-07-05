@@ -6,7 +6,7 @@
         </a-badge>
         <a-modal class="_fd-fetch-dialog _fd-config-dialog" v-model:open="visible"
                  centered :maskClosable="false" :destroyOnClose="true"
-                 width="980px">
+                 width="1080px">
             <template #title>
                 {{ t('fetch.optionsType.fetch') }}
                 <Warning :tooltip="t('warning.fetch')"></Warning>
