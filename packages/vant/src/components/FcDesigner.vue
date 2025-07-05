@@ -1636,7 +1636,9 @@ export default defineComponent({
                 };
             },
             clickMenu(menu) {
-                methods.dragMenu({menu, children: data.children, index: data.children.length});
+                if (this.checkDragToContainer(menu)) {
+                    methods.dragMenu({menu, children: data.children, index: data.children.length});
+                }
             },
             checkOnly(menu) {
                 let flag = false;
