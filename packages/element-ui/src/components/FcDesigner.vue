@@ -1583,13 +1583,13 @@ export default defineComponent({
                 let permission = {};
                 (configRef.value?.componentPermission || []).forEach(item => {
                     let flag = false
-                    if (item.field && Array.isArray(item.field) ? item.field.indexOf(rule.field) > -1 : item.field === rule.field) {
+                    if (item.field && (Array.isArray(item.field) ? item.field.indexOf(rule.field) > -1 : item.field === rule.field)) {
                         flag = true;
-                    } else if (item.name && Array.isArray(item.name) ? item.name.indexOf(rule.name) > -1 : item.name === rule.name) {
+                    } else if (item.name && (Array.isArray(item.name) ? item.name.indexOf(rule.name) > -1 : item.name === rule.name)) {
                         flag = true;
-                    } else if (item.id && Array.isArray(item.id) ? item.id.indexOf(rule._fc_id) > -1 : item.id === rule._fc_id) {
+                    } else if (item.id && (Array.isArray(item.id) ? item.id.indexOf(rule._fc_id) > -1 : item.id === rule._fc_id)) {
                         flag = true;
-                    } else if (item.tag && Array.isArray(item.tag) ? item.tag.indexOf(rule._fc_drag_tag) > -1 : item.tag === rule._fc_drag_tag) {
+                    } else if (item.tag && (Array.isArray(item.tag) ? item.tag.indexOf(rule._fc_drag_tag) > -1 : item.tag === rule._fc_drag_tag)) {
                         flag = true;
                     }
                     if (flag) {
