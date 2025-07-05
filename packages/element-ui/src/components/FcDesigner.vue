@@ -1496,6 +1496,9 @@ export default defineComponent({
                 return rule;
             },
             toolActive(rule) {
+                if (configRef.value.beforeActiveRule && false === configRef.value.beforeActiveRule({rule})) {
+                    return;
+                }
                 methods.unWatchActiveRule();
                 data.customForm.isShow = false;
                 data.customForm.config = null;
@@ -2079,7 +2082,10 @@ export default defineComponent({
             },
             handleAddBefore() {
             },
-            handleRemoveBefore() {
+            handleRemoveBefore({rule}) {
+                if (configRef.value.beforeRemoveRule && false === configRef.value.beforeRemoveRule({rule})) {
+                    return false;
+                }
             },
             handleCopyBefore() {
             },
