@@ -113,6 +113,7 @@ export default defineComponent({
                 this.value = this.checkValue();
                 this.oldValue = this.value;
                 if (this.value !== this.modelValue) {
+                    this.designer.emit('changeField', {field: this.value, oldField: this.modelValue, rule: this.activeRule});
                     this.$emit('update:modelValue', this.value);
                 }
             }
