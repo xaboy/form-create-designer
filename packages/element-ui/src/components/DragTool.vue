@@ -105,7 +105,6 @@ export default defineComponent({
     overflow: hidden;
     word-wrap: break-word;
     word-break: break-all;
-    transition: outline-color 0.3s ease;
     z-index: 0;
 }
 
