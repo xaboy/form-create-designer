@@ -117,6 +117,12 @@ if (compareVersion(minVersion, formCreate.version) === 1) {
     console.warn('Please use FormCreate version ' + minVersion + ' or greater, see https://github.com/xaboy/form-create.');
 }
 
+FcDesignerMobile.version = '3.1.11';
+
+if (typeof window !== 'undefined') {
+    window.FcDesignerMobile = FcDesignerMobile;
+}
+
 export default FcDesignerMobile;
 
 export {

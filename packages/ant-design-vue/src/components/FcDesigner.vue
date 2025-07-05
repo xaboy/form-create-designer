@@ -167,6 +167,7 @@
                                         :title="t('designer.clearWarn')"
                                         :ok-text="t('props.clear')"
                                         :cancel-text="t('props.cancel')"
+                                        placement="bottom"
                                         @confirm="clearDragRule"
                                     >
                                         <a-button class="_fd-btn-danger" size="small">
@@ -1973,10 +1974,13 @@ export default defineComponent({
                     })
                 }
                 if (!hasProperty(rule, 'display')) {
-                rule.display = true;
+                    rule.display = true;
                 }
                 if (!hasProperty(rule, 'hidden')) {
-                rule.hidden = false;
+                    rule.hidden = false;
+                }
+                if (!rule.children) {
+                    rule.children = [];
                 }
                 rule._fc_drag_tag = config.name;
                 let only = config.only === true;
