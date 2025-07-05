@@ -157,7 +157,7 @@
                                         t('props.save')
                                     }}
                                 </el-button>
-                                <el-button type="primary" plain size="small"
+                                <el-button v-if="false !== getConfig('showPreviewBtn')" type="primary" plain size="small"
                                            @click="openPreview"><i class="fc-icon icon-preview"></i> {{
                                         t('props.preview')
                                     }}
