@@ -133,7 +133,7 @@ export default defineComponent({
     emits: ['update:modelValue'],
     props: {
         modelValue: [Object, undefined, null],
-        componentName: '',
+        componentName: String,
         eventName: {
             type: Array,
             default: () => []
