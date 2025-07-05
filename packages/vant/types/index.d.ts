@@ -24,7 +24,9 @@ export interface Menu {
     //菜单id
     name: string;
     //拖拽组件列表
-    list: MenuItem[];
+    list?: MenuItem[];
+    //放在列表最顶部
+    before?: boolean;
 }
 
 //菜单列表
