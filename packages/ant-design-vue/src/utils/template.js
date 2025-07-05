@@ -82,7 +82,8 @@ export function htmlTemplate(json, options) {
         <!-- Import ant-design-vue -->
         <script src="https://unpkg.com/ant-design-vue@4/dist/antd.min.js"></script>
         <!-- Import formCreate -->
-        <script src="https://unpkg.com/@form-create/ant-design-vue@3"><\/script>
+        <script src="https://unpkg.com/@form-create/ant-design-vue@3"></script>
+        <script src="https://unpkg.com/@form-create/antd-designer@3"></script>
     </head>
     <body>
         <div id="app">

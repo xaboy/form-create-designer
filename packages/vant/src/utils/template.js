@@ -74,7 +74,8 @@ export function htmlTemplate(json, options) {
         <!-- Import vant -->
         <script src="https://unpkg.com/vant@4/lib/vant.min.js"></script>
         <!-- Import formCreateMobile -->
-        <script src="https://unpkg.com/@form-create/vant@3"><\/script>
+        <script src="https://unpkg.com/@form-create/vant@3"></script>
+        <script src="https://unpkg.com/@form-create/vant-designer@3"></script>
     </head>
     <body>
         <div id="app">
