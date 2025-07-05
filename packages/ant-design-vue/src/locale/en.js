@@ -730,12 +730,16 @@ const En = {
                 disabled: 'Disabled',
                 filterEmptyColumn: 'Whether to filter empty rows',
                 max: 'Maximum number of rows to add, if 0, there is no limit',
+                min: 'Minimum number of rows to add',
+                addable: 'Allow to add',
+                deletable: 'Allow delete',
             }
         },
         tableFormColumn: {
             name: 'TableFormColumn',
             label: 'TableFormColumn',
             props: {
+                align: 'Align',
                 label: 'Title',
                 width: 'Width',
                 color: 'Color',

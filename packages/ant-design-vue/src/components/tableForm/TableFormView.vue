@@ -40,6 +40,7 @@ export default defineComponent({
     display: flex;
     margin: 2px;
     height: auto;
+    overflow: auto;
 }
 
 </style>
