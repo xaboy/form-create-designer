@@ -28,7 +28,7 @@ export default function field({t}) {
             name: 'control',
             value: [],
             title: t('form.control'),
-            warning: t('form.controlDocument', {doc: '<a target="_blank" href="https://form-create.com/v3/guide/control" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'}),
+            warning: t('form.controlDocument', {doc: '<a target="_blank" href="https://pro.form-create.com/doc/control" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'}),
             props: {
                 defaultValue: [],
                 validate(val) {
