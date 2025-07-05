@@ -104,6 +104,11 @@ export default function form({t}) {
                         args: ['field', 'value', 'options'],
                     },
                     {
+                        name: 'beforeSubmit',
+                        info: t('form.beforeSubmit'),
+                        args: ['formData', 'data'],
+                    },
+                    {
                         name: 'beforeFetch',
                         info: t('form.beforeFetch'),
                         args: ['config', 'data'],

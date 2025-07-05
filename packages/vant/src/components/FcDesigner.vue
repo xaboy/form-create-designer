@@ -1028,7 +1028,7 @@ export default defineComponent({
             },
             getOption() {
                 const options = deepCopy(data.formOptions);
-                ['onReset', 'onSubmit', 'onCreated', 'onMounted', 'onReload', 'onChange', 'beforeFetch'].forEach(key => {
+                ['onReset', 'onSubmit', 'beforeSubmit', 'onCreated', 'onMounted', 'onReload', 'onChange', 'beforeFetch'].forEach(key => {
                     delete options[key];
                 });
                 Object.keys(options._event || {}).forEach(k => {
@@ -1131,6 +1131,7 @@ export default defineComponent({
                     onSubmit: options.onSubmit || '',
                     onCreated: options.onCreated || '',
                     onMounted: options.onMounted || '',
+                    beforeSubmit: options.beforeSubmit || '',
                     onReload: options.onReload || '',
                     onChange: options.onChange || '',
                     beforeFetch: options.beforeFetch || '',

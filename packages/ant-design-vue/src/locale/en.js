@@ -34,6 +34,7 @@ const En = {
         onMounted: 'Triggered after the form component is mounted',
         onReload: 'Triggered after the form rendering rule is reloaded',
         onChange: 'Triggered when the component value changes',
+        beforeSubmit: 'Triggered when form validation passed',
         beforeFetch: 'Triggered before remote data request is sent',
     },
     warning: {
