@@ -487,7 +487,7 @@ export default defineComponent({
         locale: Object,
         handle: Array
     },
-    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown', 'onChangeDevice', 'previewSubmit', 'previewReset'],
+    emits: ['active', 'create', 'copy', 'delete', 'drag', 'inputData', 'save', 'clear', 'copyRule', 'pasteRule', 'sortUp', 'sortDown', 'onChangeDevice', 'previewSubmit', 'previewReset', 'changeField'],
     setup(props) {
         const {menu, height, mask, locale, handle} = toRefs(props);
         const vm = getCurrentInstance();
