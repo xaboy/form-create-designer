@@ -90,6 +90,44 @@ export interface Config {
     hiddenDragMenu?: boolean;
     //隐藏拖拽按钮
     hiddenDragBtn?: boolean;
+    //控制组件的配置权限
+    componentPermission?: {
+        //组件的 field
+        field?: string | string[];
+        //组件的 name
+        name?: string | string[];
+        //组件的 _fc_drag_tag
+        tag?: string | string[];
+        //组件的 _fc_id
+        id?: string | string[];
+        //权限
+        permission: {
+            //是否可以删除
+            delete?: false,
+            //是否可以复制
+            copy?: false,
+            //是否可以拖动
+            move?: false,
+            //是否可以配置验证
+            validate?: false,
+            //是否可以配置事件
+            event?: false,
+            //是否可以基础配置
+            base?: false,
+            //是否可以组件配置
+            props?: false,
+            //是否可以配置样式
+            style?: false,
+            //是否可以切换组件
+            switchType?: false,
+            //是否显示 name
+            name?: false,
+            //定义隐藏的配置项
+            hiddenConfig?: string[],
+            //定义禁用的配置项
+            disabledConfig?: string[]
+        },
+    }[],
     //隐藏部分菜单
     hiddenMenu?: MenuName[]
     //隐藏部分组件
@@ -148,6 +186,8 @@ export interface Config {
     showDevice?: boolean;
     //是否显示国际化配置
     showLanguage?: boolean;
+    //关闭页面时确认弹窗
+    exitConfirm?: boolean;
     //定义渲染规则所需的formData
     appendConfigData?: string[] | ((rule: Rule) => Object);
     //基础配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面

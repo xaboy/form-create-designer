@@ -1,10 +1,10 @@
 <template>
     <el-dropdown class="_fd-type-select" trigger="click" size="default" popper-class="_fd-type-select-pop"
-                 :disabled="!menus.length" @command="handleCommand">
+                 :disabled="disabled || !menus.length" @command="handleCommand">
         <el-tag type="success" effect="plain" disable-transitions>
             <template v-if="activeRule">
                 {{ t('com.' + (activeRule._menu.name) + '.name') || activeRule._menu.label }} <i
-                class="fc-icon icon-down" v-if="menus.length"></i>
+                class="fc-icon icon-down" v-if="!disabled && menus.length"></i>
             </template>
             <template v-else>
                 {{
@@ -28,6 +28,9 @@ import {defineComponent} from 'vue';
 export default defineComponent({
     name: 'TypeSelect',
     inject: ['designer'],
+    props: {
+        disabled: Boolean,
+    },
     computed: {
         t() {
             return this.designer.setupState.t;
