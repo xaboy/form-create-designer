@@ -207,9 +207,11 @@
                                  :style="{'--fc-drag-empty': `'${t('designer.dragEmpty')}'`,'--fc-child-empty': `'${t('designer.childEmpty')}'`}">
                                 <div class="_fc-m-input" v-if="inputForm.state">
                                     <ViewForm :key="inputForm.key" :rule="inputForm.rule" :option="inputForm.option"
+                                              :locale="locale?.name"
                                               v-model:api="inputForm.api" :disabled="false"></ViewForm>
                                 </div>
                                 <DragForm v-else :rule="dragForm.rule" :option="formOptions"
+                                          :locale="locale?.name"
                                           v-model:api="dragForm.api"></DragForm>
                             </div>
                             <div class="_fc-m-input-handle" v-if="inputForm.state">
@@ -257,9 +259,9 @@
                                 <template
                                     v-if="activeRule || (customForm.config && (customForm.config.name || customForm.config.label))">
                                     <p class="_fc-r-title">{{ t('designer.type') }}</p>
-                                    <TypeSelect></TypeSelect>
+                                    <TypeSelect :disabled="activePermission.switchType === false"></TypeSelect>
                                     <template
-                                        v-if="(activeRule && activeRule.name && config.showComponentName !== false)">
+                                        v-if="activePermission.name !== false && (activeRule && activeRule.name && config.showComponentName !== false)">
                                         <p class="_fc-r-title">
                                             <Warning :tooltip="t('warning.name')">
                                                 {{ t('designer.name') }}
@@ -381,6 +383,7 @@
                             <ViewForm :rule="preview.rule" :option="preview.option" v-model:api="preview.api"
                                       @submit="previewSubmit"
                                       @reset="previewReset"
+                                      :locale="locale?.name"
                                       v-if="preview.state">
                                 <template v-for="(_, name) in $slots" #[name]="scope">
                                     <slot :name="name" v-bind="scope ?? {}"/>
@@ -580,6 +583,7 @@ export default defineComponent({
             activeTab: 'form',
             activeMenuTab: 'menu',
             activeRule: null,
+            activePermission: {},
             children: ref([]),
             treeInfo: [],
             menuList: menu.value || createMenu({t}),
@@ -1125,6 +1129,7 @@ export default defineComponent({
             },
             clearActiveRule() {
                 data.activeRule = null;
+                data.activePermission = {};
                 data.customForm.config = null;
                 data.activeTab = 'form';
                 fcx.active = '';
@@ -1480,6 +1485,7 @@ export default defineComponent({
                 data.validateForm.isShow = false;
                 data.styleForm.isShow = !!config.style && methods.getConfig('showStyleForm') !== false;
                 data.activeRule = null;
+                data.activePermission = {};
                 fcx.active = '';
 
                 data.customForm.config = config;
@@ -1540,7 +1546,9 @@ export default defineComponent({
                     delete data.styleForm.api[data.activeRule._fc_id];
                     delete data.dragForm.api.activeRule;
                 }
+                const permission = methods.getPermission(rule);
                 data.activeRule = rule;
+                data.activePermission = permission;
                 data.dragForm.api.activeRule = rule;
 
                 nextTick(() => {
@@ -1557,16 +1565,19 @@ export default defineComponent({
                 }
                 const hiddenItemConfig = methods.getConfig('hiddenItemConfig', {});
                 const disabledItemConfig = methods.getConfig('disabledItemConfig', {});
-                const hiddenField = uniqueArray([...hiddenItemConfig?.default || [], ...hiddenItemConfig?.[rule._menu.name] || [], ...rule._menu.hiddenBaseField || []]);
-                const disabledField = uniqueArray([...disabledItemConfig?.default || [], ...disabledItemConfig?.[rule._menu.name] || []]);
-                data.baseForm.api.hidden(false);
+                const hiddenField = uniqueArray([...permission.hiddenConfig || [], ...hiddenItemConfig?.default || [], ...hiddenItemConfig?.[rule._menu.name] || []]);
+                const hiddenBaseField = [...hiddenField, ...rule._menu.hiddenBaseField || []];
+                const disabledField = uniqueArray([...permission.disabledConfig || [], ...disabledItemConfig?.default || [], ...disabledItemConfig?.[rule._menu.name] || []]);
                 data.baseForm.api.disabled(false);
-                if (hiddenField.length) {
-                    nextTick(() => {
-                        data.baseForm.api.hidden(true, hiddenField);
-                        data.propsForm.api.hidden(true, hiddenField);
-                    });
-                }
+                data.baseForm.api.hidden(false);
+                nextTick(() => {
+                    data.baseForm.api.all().forEach((item) => {
+                        if (item.name || item.field) {
+                            item.hidden = hiddenBaseField.indexOf(item.name) !== -1 || hiddenBaseField.indexOf(item.field) !== -1;
+                        }
+                    })
+                    data.propsForm.api.hidden(true, hiddenField);
+                });
                 if (disabledField.length) {
                     data.baseForm.api.disabled(true, disabledField);
                     nextTick(() => {
@@ -1577,18 +1588,37 @@ export default defineComponent({
                     data.baseForm.api.hidden(true, '_control');
                 }
                 const input = hasProperty(rule, 'field');
-                data.baseForm.isShow = input && rule.input !== false && methods.getConfig('showBaseForm') !== false;
-                data.propsForm.isShow = data.cacheProps[rule._fc_id].length > 0 && methods.getConfig('showPropsForm') !== false;
-                data.eventShow = rule._menu.event && rule._menu.event.length > 0 && methods.getConfig('showEventForm') !== false;
-                data.styleForm.isShow = rule._menu.style !== false && methods.getConfig('showStyleForm') !== false;
+                data.baseForm.isShow = permission.base !== false && input && rule.input !== false && methods.getConfig('showBaseForm') !== false;
+                data.propsForm.isShow = permission.props !== false && data.cacheProps[rule._fc_id].length > 0 && methods.getConfig('showPropsForm') !== false;
+                data.styleForm.isShow = permission.style !== false && rule._menu.style !== false && methods.getConfig('showStyleForm') !== false;
+                data.eventShow = permission.event !== false && rule._menu.event !== false && methods.getConfig('showEventForm') !== false;
                 const showValidateForm = methods.getConfig('showValidateForm');
-                data.validateForm.isShow = ((data.baseForm.isShow && showValidateForm !== false) || showValidateForm === true) && rule._menu.validate !== false;
+                data.validateForm.isShow = permission.validate !== false && ((data.baseForm.isShow && showValidateForm !== false) || showValidateForm === true) && rule._menu.validate !== false;
                 data.propsForm.rule = data.cacheProps[rule._fc_id];
                 methods.updateRuleFormData();
                 methods.watchActiveRule();
             },
             getConfig(key, def) {
                 return configRef.value ? (hasProperty(configRef.value, key) ? configRef.value[key] : def) : def;
+            },
+            getPermission(rule) {
+                let permission = {};
+                (configRef.value?.componentPermission || []).forEach(item => {
+                    let flag = false
+                    if (item.field && Array.isArray(item.field) ? item.field.indexOf(rule.field) > -1 : item.field === rule.field) {
+                        flag = true;
+                    } else if (item.name && Array.isArray(item.name) ? item.name.indexOf(rule.name) > -1 : item.name === rule.name) {
+                        flag = true;
+                    } else if (item.id && Array.isArray(item.id) ? item.id.indexOf(rule._fc_id) > -1 : item.id === rule._fc_id) {
+                        flag = true;
+                    } else if (item.tag && Array.isArray(item.tag) ? item.tag.indexOf(rule._fc_drag_tag) > -1 : item.tag === rule._fc_drag_tag) {
+                        flag = true;
+                    }
+                    if (flag) {
+                        permission = item.permission || {};
+                    }
+                })
+                return permission;
             },
             updateRuleFormData() {
                 const rule = data.activeRule;
@@ -2395,7 +2425,7 @@ export default defineComponent({
             e.stopPropagation();
         };
         window.onbeforeunload = (e) => {
-            if(this.unloadStatus){
+            if (this.unloadStatus && this.config?.exitConfirm !== false) {
                 e.returnValue = this.t('designer.unload');
             }
         }
