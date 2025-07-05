@@ -139,6 +139,11 @@ export default defineComponent({
 </script>
 
 <style>
+._fd-language-config {
+    height: 100%;
+    overflow: auto;
+}
+
 ._fd-lc-body, ._fd-lc-header {
     padding: 0 12px;
 }
