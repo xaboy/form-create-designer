@@ -844,7 +844,11 @@ export default defineComponent({
                     }
                 });
                 if (flag) {
-                    data.menuList.push(config);
+                    if (config.before) {
+                        data.menuList.unshift(config);
+                    } else {
+                        data.menuList.push(config);
+                    }
                 }
             },
             removeMenu(name) {
