@@ -154,6 +154,8 @@ export interface Config {
         //拖拽规则name: 不可拖入的规则
         [id: string]: DenyDrag;
     };
+    //是否显示左侧
+    showMenuBar?: boolean;
     //是否显示保存按钮
     showSaveBtn?: boolean;
     //是否显示预览按钮
