@@ -1,6 +1,6 @@
 <template>
-    <el-col :span="24">
-        <div class="_fc-table">
+    <van-col :span="24">
+        <div class="_fc-table" :class="{'is-mini': mini}">
             <table border="1" cellspacing="0" cellpadding="0" :style="tableColor">
                 <template v-for="(_,pid) in rule.row" :key="pid">
                     <tr>
@@ -20,7 +20,7 @@
                 </template>
             </table>
         </div>
-    </el-col>
+    </van-col>
 </template>
 
 <script>
@@ -28,6 +28,7 @@
 export default {
     name: 'FcTable',
     props: {
+        mini: Boolean,
         label: String,
         width: [Number, String],
         border: {
@@ -188,6 +189,7 @@ export default {
     border: 1px solid #EBEEF5;
     border-bottom: 0 none;
     border-right: 0 none;
+    border-collapse: collapse;
 }
 
 ._fc-table tr {
@@ -206,5 +208,15 @@ export default {
     border: 0 none;
     border-right: 1px solid #EBEEF5;
     border-bottom: 1px solid #EBEEF5;
+}
+
+._fc-table.is-mini td {
+    padding: 0;
+    min-height: 12px;
+}
+
+._fc-table.is-mini .van-cell {
+    padding: 0;
+    margin: 0;
 }
 </style>
