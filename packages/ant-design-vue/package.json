@@ -86,6 +86,7 @@
         "codemirror": "^6.65.7",
         "element-plus": "^2.8.4",
         "js-beautify": "^1.15.1",
+        "signature_pad": "^5.0.10",
         "vuedraggable": "4.1.0"
     }
 }

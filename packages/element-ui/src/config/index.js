@@ -39,12 +39,14 @@ import table from './rule/table';
 import tableForm from './rule/tableForm';
 import tableFormColumn from './rule/tableFormColumn';
 import image from './rule/image';
+import signaturePad from './rule/signaturePad';
+import title from './rule/title';
 
 
 const ruleList = [
-    input, textarea, password, number, radio, checkbox, select, _switch, rate, time, timeRange, slider, date, dateRange, color, cascader, upload, transfer, tree, treeSelect, editor,
+    input, textarea, password, number, radio, checkbox, select, _switch, rate, time, timeRange, slider, date, dateRange, color, cascader, upload, transfer, tree, treeSelect, editor, signaturePad,
     group, subForm, tableForm, tableFormColumn,
-    alert, button, text, html, divider, tag, image,
+    alert, button, text, title, html, divider, tag, image,
     row, table, tabs, space, card, collapse,
     col, tabPane, collapseItem,
 ];

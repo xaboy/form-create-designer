@@ -575,6 +575,14 @@ const ZhCn = {
                 src: '图片链接'
             }
         },
+        fcTitle: {
+            name: '标题',
+            props: {
+                title: '标题',
+                size: '尺寸',
+                align: '对齐方式'
+            }
+        },
         fcEditor: {
             name: '富文本框',
             props: {
@@ -600,6 +608,13 @@ const ZhCn = {
         },
         fcTableGrid: {
             name: '格子',
+        },
+        signaturePad: {
+            name: '手写签名',
+            props: {
+                penColor: '线条的颜色',
+                disabled: '禁用',
+            }
         },
         group: {
             name: '子表单',

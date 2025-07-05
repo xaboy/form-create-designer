@@ -570,6 +570,14 @@ const En = {
                 preview: 'Enable preview',
             }
         },
+        fcTitle: {
+            name: 'Title',
+            props: {
+                title: 'Title',
+                size: 'Size',
+                align: 'Align'
+            }
+        },
         fcEditor: {
             name: 'Editor',
             props: {
@@ -594,6 +602,13 @@ const En = {
         },
         fcTableGrid: {
             name: 'Grid',
+        },
+        signaturePad: {
+            name: 'Signature',
+            props: {
+                penColor: 'Line color',
+                disabled: 'Disabled',
+            }
         },
         group: {
             name: 'Subform',
