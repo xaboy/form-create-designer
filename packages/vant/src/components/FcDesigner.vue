@@ -2,7 +2,7 @@
     <el-container class="_fc-designer" :style="height ? `height:${dragHeight};flex:0;` : ''" @dragenter="handleDragenter" @dragleave="handleDragleave" @drop="handleDrop">
         <el-main>
             <el-container style="height: 100%;" :key="locale && locale.name">
-                <el-aside class="_fc-l-menu" v-show="!hiddenLeft" width="40px">
+                <el-aside class="_fc-l-menu" v-show="!hiddenLeft" width="40px" v-if="false !== getConfig('showMenuBar')">
                     <el-tooltip
                         effect="dark"
                         :content="t('designer.comList')"
