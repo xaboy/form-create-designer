@@ -4,7 +4,7 @@
               @update:modelValue="onInput"
               @blur="$emit('blur')"
               :size="size || 'small'">
-        <template #append>
+        <template #append v-if="showLanguage !== false">
             <el-popover placement="bottom-end" :width="300" :hide-after="0" trigger="click" ref="pop"
                         popper-class="_fd-language-popover">
                 <template #reference>
@@ -72,6 +72,9 @@ export default defineComponent({
                 localeList.pop();
             }
             return localeList;
+        },
+        showLanguage() {
+            return this.designer.setupState.getConfig('showLanguage');
         },
         language() {
             const language = this.designer.setupState.formOptions.language || {};
