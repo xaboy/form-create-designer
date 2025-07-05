@@ -417,7 +417,8 @@ export function htmlTemplate(json, options) {
         <!-- Import element-ui -->
         <script src="https://unpkg.com/element-ui/lib/index.js"></script>
         <!-- Import formCreate -->
-        <script src="https://unpkg.com/@form-create/element-ui@super"><\/script>
+        <script src="https://unpkg.com/@form-create/element-ui@super"></script>
+        <script src="https://unpkg.com/@form-create/designer"></script>
     </head>
     <body>
         <div id="app">

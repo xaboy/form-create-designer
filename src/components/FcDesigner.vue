@@ -1017,6 +1017,9 @@ export default defineComponent({
             copyCode() {
                 copyTextToClipboard(vm.$refs.previewCode.innerText);
             },
+            getHtml() {
+                  return htmlTemplate(methods.getJson(), methods.getOptionsJson());
+            },
             getRule() {
                 return methods.parseRule(deepCopy(data.dragForm.rule[0].children));
             },
