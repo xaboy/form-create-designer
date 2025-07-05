@@ -62,9 +62,10 @@ export default defineComponent({
             this.oldValue = designerForm.toJson(this.value);
         },
         handleBlur() {
-            if (this.$refs.editor.save() && designerForm.toJson(this.value) !== this.oldValue) {
+            let str;
+            if (this.$refs.editor.save() && (str = designerForm.toJson(this.value)) !== this.oldValue) {
                 if (this.active === 'rule') {
-                    this.designer.setupState.setRule(this.value || []);
+                    this.designer.setupState.setRule(str);
                 } else {
                     this.designer.setupState.setOptions(this.value || {});
                 }
