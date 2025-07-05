@@ -84,6 +84,8 @@ export interface Config {
     };
     //是否显示保存按钮
     showSaveBtn?: boolean;
+    //是否显示预览按钮
+    showPreviewBtn?: boolean;
     //是否显示右侧的配置界面
     showConfig?: boolean;
     //是否显示组件的基础配置表单

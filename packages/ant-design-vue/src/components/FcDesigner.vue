@@ -157,7 +157,7 @@
                                             t('props.save')
                                         }}
                                     </a-button>
-                                    <a-button class="_fd-btn-primary" size="small" @click="openPreview">
+                                    <a-button v-if="false !== getConfig('showPreviewBtn')" class="_fd-btn-primary" size="small" @click="openPreview">
                                         <i class="fc-icon icon-preview"></i> {{
                                             t('props.preview')
                                         }}
