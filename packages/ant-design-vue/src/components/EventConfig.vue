@@ -18,7 +18,7 @@
                                 </a-button>
                                 <template #overlay>
                                     <a-menu>
-                                        <a-menu-item v-for="name in eventName" :key="name" @click="add(name)"
+                                        <a-menu-item v-for="name in eventList" :key="name" @click="add(name)"
                                                      :disabled="useEventKeys.indexOf(name) > -1">
                                             <div class="_fd-event-item">
                                                 <span>{{ name }}</span>
@@ -27,7 +27,7 @@
                                                 </span>
                                             </div>
                                         </a-menu-item>
-                                        <a-menu-divider v-if="eventName.length > 0"/>
+                                        <a-menu-divider v-if="eventList.length > 0"/>
                                         <template v-for="(hook) in hookList">
                                             <a-menu-item @click="add(hook)"
                                                          :disabled="useEventKeys.indexOf(hook) > -1">
@@ -39,7 +39,7 @@
                                                 </div>
                                             </a-menu-item>
                                         </template>
-                                        <a-menu-divider v-if="eventName.length > 0"/>
+                                        <a-menu-divider v-if="eventList.length > 0"/>
                                         <a-menu-item @click="cusEvent">
                                             <div>{{ t('props.custom') }}</div>
                                         </a-menu-item>
@@ -173,9 +173,15 @@ export default defineComponent({
         activeRule() {
             return this.designer.setupState.activeRule;
         },
+        eventList() {
+            if (!this.eventName || !this.eventName.length) {
+                return ['click'];
+            }
+            return this.eventName;
+        },
         eventInfo() {
             const info = {};
-            this.eventName.forEach(v => {
+            this.eventList.forEach(v => {
                 info[v] = this.t('com.' + this.componentName + '.event.' + v) || this.t('eventInfo.' + v) || '';
             })
             this.hookList.forEach(v => {

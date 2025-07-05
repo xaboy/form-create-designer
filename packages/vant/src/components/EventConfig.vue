@@ -20,7 +20,7 @@
                               </span>
                                 <template #dropdown>
                                     <el-dropdown-menu>
-                                        <el-dropdown-item v-for="name in eventName" :key="name" @click="add(name)"
+                                        <el-dropdown-item v-for="name in eventList" :key="name" @click="add(name)"
                                                           :disabled="Object.keys(event).indexOf(name) > -1">
                                             <div class="_fd-event-item">
                                                 <span>{{ name }}</span>
@@ -30,7 +30,7 @@
                                             </div>
                                         </el-dropdown-item>
                                         <template v-for="(hook, idx) in hookList">
-                                            <el-dropdown-item :divided="eventName.length > 0 && !idx"
+                                            <el-dropdown-item :divided="eventList.length > 0 && !idx"
                                                               @click="add(hook)"
                                                               :disabled="Object.keys(event).indexOf(hook) > -1">
                                                 <div class="_fd-event-item">
@@ -41,7 +41,7 @@
                                                 </div>
                                             </el-dropdown-item>
                                         </template>
-                                        <el-dropdown-item :divided="eventName.length > 0" @click="cusEvent">
+                                        <el-dropdown-item :divided="eventList.length > 0" @click="cusEvent">
                                             <div>{{ t('props.custom') }}</div>
                                         </el-dropdown-item>
                                     </el-dropdown-menu>
@@ -183,9 +183,15 @@ export default defineComponent({
         activeRule() {
             return this.designer.setupState.activeRule;
         },
+        eventList() {
+            if (!this.eventName || !this.eventName.length) {
+                return ['click'];
+            }
+            return this.eventName;
+        },
         eventInfo() {
             const info = {};
-            this.eventName.forEach(v => {
+            this.eventList.forEach(v => {
                 info[v] = this.t('com.' + this.componentName + '.event.' + v) || this.t('eventInfo.' + v) || '';
             })
             this.hookList.forEach(v => {
