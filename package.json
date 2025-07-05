@@ -7,7 +7,8 @@
         "dev:vant": "lerna run dev --scope=@form-create/vant-designer",
         "dev:antd": "lerna run dev --scope=@form-create/antd-designer",
         "build": "lerna run build",
-        "build:locale": "lerna run build:locale"
+        "build:locale": "lerna run build:locale",
+        "build:preview": "lerna run build:preview"
     },
     "repository": {
         "type": "git",

@@ -1953,6 +1953,9 @@ export default defineComponent({
                 if (!hasProperty(rule, 'hidden')) {
                     rule.hidden = false;
                 }
+                if (!rule.children) {
+                    rule.children = [];
+                }
                 rule._fc_drag_tag = config.name;
                 let only = config.only === true;
                 let drag;

@@ -9,6 +9,7 @@ export default {
     label: '单元格',
     children: 'vanCell',
     childrenLen: 2,
+    mask: false,
     rule({t}) {
         return {
             type: name,
