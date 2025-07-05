@@ -411,6 +411,7 @@ import validate from '../config/base/validate';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
 import is, {hasProperty} from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
+import toArray from '@form-create/utils/lib/toarray';
 import Mitt from '@form-create/utils/lib/mitt';
 import ruleList, {defaultDrag} from '../config';
 import fcDraggable from 'vuedraggable/src/vuedraggable';
@@ -948,14 +949,19 @@ export default defineComponent({
                         rule: {
                             props: {
                                 tag: 'el-col',
-                                group: group === true ? 'default' : group,
-                                swapThreshold: 0.65,
+                                group: {
+                                    name: group === true ? 'default' : group,
+                                    put(...args) {
+                                        return methods.dragPut(...args);
+                                    }
+                                },
+                                swapThreshold: tag === 'draggable' ? 0.25 : 0.8,
                                 ghostClass: 'ghost',
                                 animation: 150,
                                 handle: '._fd-drag-btn',
                                 emptyInsertThreshold: 0,
-                                direction: 'vertical',
-                                itemKey: 'type',
+                                direction: 'auto',
+                                itemKey: '_fc_id',
                             }
                         },
                         tag,
@@ -1704,10 +1710,111 @@ export default defineComponent({
                 });
                 return json;
             },
+            getTrueRule(rule) {
+                if (!rule) {
+                    return;
+                }
+                if (rule._menu) {
+                    return rule._menu._get();
+                }
+                if (rule._config) {
+                    return rule._config._get();
+                }
+            },
+            checkDragToContainer(menu) {
+                return !menu.allowDragTo || (Array.isArray(menu.allowDragTo) ? menu.allowDragTo.indexOf('draggable') > -1 : menu.allowDragTo === 'draggable');
+            },
+            dragPut(to, from, dragEl) {
+                const toRule = methods.getTrueRule(to.el.__rule__);
+                const _menu = dragEl._underlying_vm_.__fc__ ? (dragEl._underlying_vm_._config || dragEl._underlying_vm_._menu) : dragEl._underlying_vm_;
+                if (!toRule) {
+                    return !_menu || this.checkDragToContainer(_menu);
+                }
+                const toMenu = toRule._menu;
+                const _fc_allow_drag = dragEl._fc_allow_drag || {};
+                if (_fc_allow_drag[toRule._fc_id] === undefined) {
+                    const _rule = methods.getTrueRule(dragEl._underlying_vm_);
+                    _fc_allow_drag[toRule._fc_id] = !(_menu && toMenu && !methods.checkDrag({
+                        menu: _menu,
+                        toMenu,
+                        rule: _rule,
+                        toRule
+                    }));
+                    dragEl._fc_allow_drag = _fc_allow_drag;
+                }
+                return dragEl._fc_allow_drag[toRule._fc_id];
+            },
+            checkDrag({menu, toMenu, rule, toRule}) {
+                if (!methods.checkAllowDrag(menu, toMenu)) {
+                    return false;
+                }
+                if (toRule.children && toMenu.maxChildren && toMenu.maxChildren <= toRule.children[0]?.children?.length) {
+                    return false;
+                }
+                if (menu.checkDrag && false === menu.checkDrag({
+                    menu,
+                    toMenu,
+                    rule,
+                    toRule,
+                    designer: vm
+                })) {
+                    return false;
+                }
+                if (toMenu.checkDrag && false === toMenu.checkDrag({
+                    menu,
+                    toMenu,
+                    rule,
+                    toRule,
+                    designer: vm
+                })) {
+                    return false;
+                }
+                if (configRef.value.checkDrag && false === configRef.value.checkDrag({
+                    menu,
+                    toMenu,
+                    rule,
+                    toRule
+                })) {
+                    return false;
+                }
+                return true;
+            },
+            checkAllowDrag(from, to) {
+                function checkDragCondition(tmp) {
+                    if (Array.isArray(tmp)) {
+                        tmp = {item: tmp};
+                    }
+                    if (toArray(tmp.item).indexOf(from.name) > -1) {
+                        return true;
+                    }
+                    return toArray(tmp.menu).indexOf(from.menu) > -1;
+                }
+
+                const globalAllowDrag = methods.getConfig('allowDrag', {})[to.name];
+                const globalDenyDrag = methods.getConfig('denyDrag', {})[to.name];
+                if (from.allowDragTo && (Array.isArray(from.allowDragTo) ? from.allowDragTo.indexOf(to.name) === -1 : from.allowDragTo !== to.name)) {
+                    return false;
+                }
+                if (to.allowDrag && checkDragCondition(to.allowDrag)) {
+                    return true;
+                }
+                if (globalAllowDrag && checkDragCondition(globalAllowDrag)) {
+                    return true;
+                }
+                if (to.allowDrag || globalAllowDrag) {
+                    return false;
+                }
+                if (to.denyDrag && checkDragCondition(to.denyDrag)) {
+                    return false;
+                }
+                return !(globalDenyDrag && checkDragCondition(globalDenyDrag));
+            },
             dragAdd(children, evt, slot) {
                 // console.log('top dragAdd')
+                delete evt.item._fc_allow_drag;
                 const newIndex = evt.newIndex;
                 const menu = evt.item._underlying_vm_ || evt.item.__rule__;
+                data.added = true;
                 if (menu && menu.__fc__) {
                     if (data.addRule) {
                         methods.handleSortBefore();
@@ -1723,11 +1830,10 @@ export default defineComponent({
                 } else {
                     methods.dragMenu({menu, children, index: newIndex, slot});
                 }
-                data.added = true;
                 // data.dragForm.api.refresh();
             },
-            dragEnd(children, {newIndex, oldIndex}, slot) {
-                // console.log('top dragEnd')
+            dragEnd(children, {item, newIndex, oldIndex}, slot) {
+                delete item._fc_allow_drag;
                 if (!data.added && !(data.moveRule === children && newIndex === oldIndex)) {
                     methods.handleSortBefore();
                     const rule = data.moveRule.splice(oldIndex, 1);
@@ -1768,7 +1874,10 @@ export default defineComponent({
                         rule = mergeProps([rule, _rule]);
                     }
                 }
-                rule._menu = markRaw(config);
+                rule._menu = markRaw({...config});
+                rule._menu._get = () => {
+                    return rule;
+                }
                 if (!rule._fc_id) {
                     rule._fc_id = 'id_' + uniqueId();
                 }
@@ -1810,6 +1919,7 @@ export default defineComponent({
                         start: (inject, evt) => methods.dragStart(inject.self.children, evt),
                         unchoose: (inject, evt) => methods.dragUnchoose(inject.self.children, evt),
                     })];
+                    drag._config = rule._menu;
                 }
 
                 if (config.children && !_rule && !children.length) {
@@ -1882,6 +1992,7 @@ export default defineComponent({
                                 }, 10);
                             }
                         },
+                        _config: rule._menu,
                         children: rule.children
                     }]);
                     return rule;
@@ -1946,6 +2057,7 @@ export default defineComponent({
                                 }, 10);
                             }
                         },
+                        _config: rule._menu,
                         children: methods.makeChildren([rule])
                     };
                 }
