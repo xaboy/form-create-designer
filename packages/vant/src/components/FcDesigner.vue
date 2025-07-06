@@ -1065,7 +1065,7 @@ export default defineComponent({
                     })
                 }
                 Object.keys(options).forEach(k => {
-                    if (!Object.keys(options[k]).length) {
+                    if (is.Object(options[k]) && !Object.keys(options[k]).length) {
                         delete options[k];
                     }
                 })
