@@ -4,6 +4,7 @@ import toCase from '@form-create/utils/lib/tocase';
 import {computed, isRef, ref, unref} from 'vue';
 import ZhCn from '../locale/zh-cn';
 import {message} from './message';
+import {copy} from '@form-create/utils/lib/extend';
 
 export {formTemplate, formTemplateV3, htmlTemplate} from './template';
 
@@ -321,6 +322,7 @@ export const getRuleDescription = (children) => {
                     name: rule.name,
                     slot: rule.slot,
                     props: {...rule.props || {}},
+                    options: copy(rule.options),
                     children: getTree(rule.children || [])
                 };
                 if (rule.children && typeof rule.children[0] === 'string') {
