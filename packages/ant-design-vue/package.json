@@ -76,11 +76,11 @@
         ]
     },
     "peerDependencies": {
-        "vue": "^3.1.5"
+        "vue": "^3.5"
     },
     "dependencies": {
-        "@form-create/ant-design-vue": "^3.1.27",
-        "@form-create/component-wangeditor": "^3.1",
+        "@form-create/ant-design-vue": "^3.2.27",
+        "@form-create/component-wangeditor": "^3.2.14",
         "@form-create/utils": "^3.2.0",
         "ant-design-vue": "4.x",
         "codemirror": "^6.65.7",

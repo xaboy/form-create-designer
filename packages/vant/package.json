@@ -78,13 +78,13 @@
         ]
     },
     "peerDependencies": {
-        "vue": "^3.1.5"
+        "vue": "^3.5"
     },
     "dependencies": {
-        "@form-create/component-wangeditor": "^3.1",
+        "@form-create/component-wangeditor": "^3.2.14",
         "@form-create/element-ui": "^3.1.27",
         "@form-create/utils": "^3.2.0",
-        "@form-create/vant": "^3.2.18",
+        "@form-create/vant": "^3.2.27",
         "codemirror": "^6.65.7",
         "element-plus": "^2.8.4",
         "js-beautify": "^1.15.1",
