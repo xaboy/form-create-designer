@@ -22,7 +22,7 @@ export default {
             $required: false,
             props: {
                 action: '/',
-                onSuccess: new Function('res', 'file', 'file.url = res.data.url;')
+                onSuccess: '$FNX:const res = $inject.args[0];\nconst file = $inject.args[1];\n\nfile.url = res.data.url;'
             }
         };
     },
@@ -44,10 +44,16 @@ export default {
             type: 'input',
             field: 'action'
         }, {
+            type: 'input',
+            field: 'accept'
+        }, {
             type: 'FnInput',
             field: 'beforeUpload',
             props: {
-                args: ['file'],
+                body: true,
+                button: true,
+                fnx: true,
+                args: [getInjectArg(t)],
                 name: 'beforeUpload',
             }
         }, {
@@ -65,7 +71,10 @@ export default {
             field: 'onSuccess',
             warning: t('com.upload.info'),
             props: {
-                args: ['res', 'file'],
+                body: true,
+                button: true,
+                fnx: true,
+                args: [getInjectArg(t)],
                 name: 'onSuccess',
             }
         }, {
@@ -82,10 +91,10 @@ export default {
                 column: [{label: t('props.key'), key: 'label'}, {label: t('props.value'), key: 'value'}],
                 valueType: 'object'
             }
-        }, {type: 'input', field: 'name'}, {
+        }, {
             type: 'switch',
             field: 'withCredentials'
-        }, {type: 'input', field: 'accept'}, {
+        }, {
             type: 'switch',
             field: 'autoUpload',
             value: true
