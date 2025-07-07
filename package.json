@@ -50,11 +50,11 @@
         "access": "public"
     },
     "peerDependencies": {
-        "vue": "^2.7"
+        "vue": "^2.7.16"
     },
     "dependencies": {
-        "@form-create/component-wangeditor": "^2.7.0",
-        "@form-create/element-ui": "^2.7.11",
+        "@form-create/component-wangeditor": "^2.7.1",
+        "@form-create/element-ui": "^2.7.12",
         "@form-create/utils": "^2.7.0",
         "codemirror": "5.60.0",
         "element-ui": "^2.15.2",

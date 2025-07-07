@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@form-create/component-wangeditor':
-        specifier: ^2.7.0
-        version: 2.7.0
+        specifier: ^2.7.1
+        version: 2.7.1
       '@form-create/element-ui':
-        specifier: ^2.7.11
-        version: 2.7.11
+        specifier: ^2.7.12
+        version: 2.7.12
       '@form-create/utils':
         specifier: ^2.7.0
         version: 2.7.0
@@ -250,14 +250,14 @@ packages:
   '@form-create/component-subform@2.7.1':
     resolution: {integrity: sha512-qR6uZFCMnUfFyjh1A3Q6CTwHWp7piLGS0fbaS8k0MfjcQCPDuhvMt1WYBGQBJZMcNwuDx2kceHcjFtk/ZMYOjg==}
 
-  '@form-create/component-wangeditor@2.7.0':
-    resolution: {integrity: sha512-nAhWUIb6m3sFztkeCLmtIYUEsaDyCGFv9gJZD+R8kxtEt1yUb+E5yR5bKwwFl/IyxSzF/7FwDRn5KnabtiHVlA==}
+  '@form-create/component-wangeditor@2.7.1':
+    resolution: {integrity: sha512-gt2CpKTl/U6cup8Ic1Gab5BsEry6+txwCon0krS0a5Elk905o3gWtHQs3cZOt3AIwh7T1U6pKeLYuV9v0TgWnQ==}
 
-  '@form-create/core@2.7.11':
-    resolution: {integrity: sha512-2LV36UgV/ixBP0VxyFzYYBCQebKlnYr16Eikmf38mD+Hcvj2GIWG9+vA//eE6ZyYdm2GCzIGtdw/G2oarR0OBg==}
+  '@form-create/core@2.7.12':
+    resolution: {integrity: sha512-8RoSWG0DyvjiLgUP+36Y70KwX4brWKt3H5B4PkhRUOs2Uk1jtmbPMQMzq/xXyJEE6NyPQuIvULRkg4V5OlRv4Q==}
 
-  '@form-create/element-ui@2.7.11':
-    resolution: {integrity: sha512-4YWSd55Nd8EUQqD5ipKrNxLRujyjyHaDOkAR2R5Y8TwWEf6XDT9pDJ20BwOQTKZfsXlyRWMm/qbBA7t7Czectw==}
+  '@form-create/element-ui@2.7.12':
+    resolution: {integrity: sha512-eOx3drub1cEexUM3qruCjZtVJuvEn1NDp28Auj0dfh2navbinxA0QX4kWYsm2ghsnOrUrv0TyfspWKIihlEvUw==}
 
   '@form-create/utils@2.7.0':
     resolution: {integrity: sha512-A6hoUEcn7kPiA7A4V+R808xmlJopGW1Odnim7nXhVG/tQ8iCuWJrvmBqTpbTYz/1wa94MsEj3ghoxKcEkWlyEA==}
@@ -1434,15 +1434,15 @@ snapshots:
 
   '@form-create/component-subform@2.7.1': {}
 
-  '@form-create/component-wangeditor@2.7.0':
+  '@form-create/component-wangeditor@2.7.1':
     dependencies:
       wangeditor: 4.7.15
 
-  '@form-create/core@2.7.11':
+  '@form-create/core@2.7.12':
     dependencies:
       '@form-create/utils': 2.7.8
 
-  '@form-create/element-ui@2.7.11':
+  '@form-create/element-ui@2.7.12':
     dependencies:
       '@form-create/component-elm-checkbox': 2.7.8
       '@form-create/component-elm-frame': 2.7.8
@@ -1452,7 +1452,7 @@ snapshots:
       '@form-create/component-elm-tree': 2.7.8
       '@form-create/component-elm-upload': 2.7.11
       '@form-create/component-subform': 2.7.1
-      '@form-create/core': 2.7.11
+      '@form-create/core': 2.7.12
       '@form-create/utils': 2.7.8
 
   '@form-create/utils@2.7.0': {}
