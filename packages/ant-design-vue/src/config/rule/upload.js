@@ -22,7 +22,7 @@ export default {
             $required: false,
             props: {
                 action: '/',
-                onSuccess: new Function('file', 'file.url = res.response.url;')
+                onSuccess: '$FNX:const file = $inject.args[0];\n\nfile.url = file.response.url;'
             }
         };
     },

@@ -767,6 +767,7 @@ const ZhCn = {
                 disabled: '是否禁用',
                 action: '上传的地址(必填)',
                 onSuccess: '上传成功回调',
+                beforeDelete: '文件删除前的回调',
                 headers: '设置上传的请求头部',
                 data: '上传时附带的额外参数',
                 uploadName: '上传的文件字段名',

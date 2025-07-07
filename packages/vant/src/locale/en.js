@@ -768,6 +768,7 @@ const En = {
                 disabled: 'Whether to disable',
                 action: 'Upload address (required)',
                 onSuccess: 'Upload success callback',
+                beforeDelete: 'Callback before file deletion',
                 headers: 'Set the upload request header',
                 data: 'Additional parameters attached to the upload',
                 uploadName: 'Uploaded file field name',

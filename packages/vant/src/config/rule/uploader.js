@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {localeProps} from '../../utils';
+import {getInjectArg, localeProps} from '../../utils';
 
 const label = '上传';
 const name = 'uploader';
@@ -21,7 +21,7 @@ export default {
             $required: false,
             props: {
                 action: '/',
-                onSuccess: new Function('res', 'file', 'file.url = res.data.url;')
+                onSuccess: '$FNX:const res = $inject.args[0];\nconst file = $inject.args[1];\n\nfile.url = res.data.url;'
             }
         };
     },
@@ -50,11 +50,23 @@ export default {
             }, {
                 type: 'FnInput',
                 field: 'onSuccess',
-                warning: t('com.upload.info'),
+                warning: t('com.uploader.info'),
                 props: {
-                    args: ['res', 'file'],
-                    name: 'onSuccess',
+                    body: true,
                     button: true,
+                    fnx: true,
+                    args: [getInjectArg(t)],
+                    name: 'onSuccess',
+                }
+            },  {
+                type: 'FnInput',
+                field: 'beforeDelete',
+                props: {
+                    body: true,
+                    button: true,
+                    fnx: true,
+                    args: [getInjectArg(t)],
+                    name: 'beforeDelete',
                 }
             }, {
                 type: 'TableOptions',
