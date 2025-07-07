@@ -282,7 +282,7 @@ export interface DragRule {
     //是否只能拖入一个
     only?: boolean;
     //当前组件支持的事件
-    event?: string[];
+    event?: Array<string | {name: string, info: string}>;
     //当前组件`value`的数据类型
     validate?: string[] | boolean;
 }

@@ -176,16 +176,25 @@ export default defineComponent({
         activeRule() {
             return this.designer.activeRule;
         },
-        eventList() {
+        orgEvent() {
             if (!this.eventName || !this.eventName.length) {
                 return ['click'];
             }
             return this.eventName;
         },
+        eventList() {
+            return this.orgEvent.map(v => {
+                return typeof v === 'object' ? v.name : v;
+            })
+        },
         eventInfo() {
             const info = {};
-            this.eventList.forEach(v => {
-                info[v] = this.t('com.' + this.componentName + '.event.' + v) || this.t('eventInfo.' + v) || '';
+            this.orgEvent.forEach(v => {
+                if (typeof v === 'object') {
+                    info[v.name] = this.t('com.' + this.componentName + '.event.' + v.name) || v.info || this.t('eventInfo.' + v.name) || '';
+                } else {
+                    info[v] = this.t('com.' + this.componentName + '.event.' + v) || this.t('eventInfo.' + v) || '';
+                }
             })
             this.hookList.forEach(v => {
                 info[v] = this.t('eventInfo.' + v) || '';
