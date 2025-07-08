@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/ant-design-vue
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/element-ui
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/vant
+    schedule:
+      interval: weekly
