@@ -668,6 +668,7 @@ const ZhCn = {
             },
             props: {
                 disabled: '是否禁用',
+                placeholder: '输入框占位提示文字',
                 readonly: '是否为只读状态',
                 title: '顶部栏标题',
                 visibleOptionNum: '可见的选项个数',
