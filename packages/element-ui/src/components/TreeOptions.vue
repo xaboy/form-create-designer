@@ -6,11 +6,11 @@
             :expand-on-click-node="false">
             <template #default="{ node, data }">
                 <div class="_fd-tree-opt-node">
-                    <el-input class="_fd-tree-opt-first" v-model="data[overColumns.label]"
+                    <el-input class="_fd-tree-opt-first" v-model="data[overColumns.label]" :disabled="disabled"
                               @blur="change"/>
-                    <ValueInput class="_fd-tree-opt-last" v-model="data[overColumns.value]" @blur="change"
+                    <ValueInput class="_fd-tree-opt-last" v-model="data[overColumns.value]" @blur="change" :disabled="disabled"
                                 @change-type="change">
-                        <template #append>
+                        <template #append v-if="!disabled">
                             <div class="_fd-tree-opt-btn" @click="add(node, data)">
                                 <i class="fc-icon icon-add"></i>
                             </div>
@@ -44,6 +44,7 @@ export default defineComponent({
     props: {
         modelValue: Array,
         columns: Object,
+        disabled: Boolean,
     },
     inject: ['designer'],
     data() {

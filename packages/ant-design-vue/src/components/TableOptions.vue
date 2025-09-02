@@ -12,16 +12,16 @@
                 <template #bodyCell="scope">
                     <template v-if="scope.column.dataIndex !== 'handle'">
                         <template v-if="scope.column.value">
-                            <ValueInput :size="size || 'small'" :modelValue="scope.record[scope.column.key]"
+                            <ValueInput :size="size || 'small'" :modelValue="scope.record[scope.column.key]" :disabled="disabled"
                                         @update:modelValue="(n)=>(scope.record[scope.column.key] = n)"
                                         @blur="onInput(scope.record)" @change-type="onInput(scope.record)"></ValueInput>
                         </template>
                         <template v-else>
-                            <a-input :size="size || 'small'" v-model:value="scope.record[scope.column.key]"
+                            <a-input :size="size || 'small'" v-model:value="scope.record[scope.column.key]" :disabled="disabled"
                                      @blur="onInput(scope.record)"></a-input>
                         </template>
                     </template>
-                    <template v-else>
+                    <template v-else-if="!disabled">
                         <i class="fc-icon icon-delete" @click="del(scope.index)"></i>
                     </template>
                 </template>
@@ -55,6 +55,7 @@ export default defineComponent({
         valueType: String,
         max: Number,
         size: String,
+        disabled: Boolean,
     },
     inject: ['designer'],
     watch: {
@@ -70,12 +71,13 @@ export default defineComponent({
             const columns = this.overColumn.map(col => {
                 return {...col, title: col.label};
             })
-            columns.push({
-                title: '',
-                width: '40px',
-                dataIndex: 'handle'
-            })
-
+            if(!this.disabled) {
+                columns.push({
+                    title: '',
+                    width: '40px',
+                    dataIndex: 'handle'
+                })
+            }
             return columns;
         },
         overColumn() {

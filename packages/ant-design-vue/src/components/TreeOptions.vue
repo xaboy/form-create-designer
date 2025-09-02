@@ -7,12 +7,12 @@
                 :virtual="false">
                 <template #title="node">
                     <div class="_fd-tree-opt-node">
-                            <a-input class="_fd-tree-opt-first" size="small"
+                            <a-input class="_fd-tree-opt-first" size="small" :disabled="disabled"
                                      v-model:value="node.data[overColumns.label]"
                                      @blur="change"/>
                             <ValueInput class="_fd-tree-opt-last" size="small" v-model="node.data[overColumns.value]"
-                                     @blur="change" @change-type="change">
-                                <template #addonAfter>
+                                     @blur="change" @change-type="change" :disabled="disabled">
+                                <template #addonAfter v-if="!disabled">
                                     <div class="_fd-tree-opt-btn" @click="add(node)">
                                         <i class="fc-icon icon-add"></i>
                                     </div>
@@ -48,6 +48,7 @@ export default defineComponent({
     props: {
         modelValue: Array,
         columns: Object,
+        disabled: Boolean,
     },
     inject: ['designer'],
     data() {
