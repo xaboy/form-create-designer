@@ -359,8 +359,11 @@ export default defineComponent({
         rm(data) {
             if (data.index !== undefined) {
                 data.item.splice(data.index, 1);
+                if(data.item.length === 0) {
+                    delete this.event[data.name];
+                }
             } else {
-                this.$delete(this.event, data.name);
+                delete this.event[data.name];
             }
             if (this.defActive === (data.name + (data.index || 0))) {
                 this.destroy();
