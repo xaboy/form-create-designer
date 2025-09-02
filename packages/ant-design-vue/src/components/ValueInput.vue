@@ -1,7 +1,7 @@
 <template>
-    <a-input class="_fd-value-input" :size="size" v-model:value="value" @blur="onBlur" v-bind="$attrs">
+    <a-input class="_fd-value-input" :size="size" :disabled="disabled" v-model:value="value" @blur="onBlur" v-bind="$attrs">
         <template #addonBefore>
-            <a-select v-model:value="type" :size="size" style="width: 100%">
+            <a-select v-model:value="type" :size="size" :disabled="disabled" style="width: 100%">
                 <a-select-option style="font-size: 13px;padding: 3px 0;text-align: center;" value="1">{{t('validate.types.string')}}</a-select-option>
                 <a-select-option style="font-size: 13px;padding: 5px 0;text-align: center;" value="2">{{t('validate.types.number')}}</a-select-option>
                 <a-select-option style="font-size: 13px;padding: 5px 0;text-align: center;" value="3">{{t('validate.types.boolean')}}</a-select-option>
@@ -23,6 +23,7 @@ export default defineComponent({
     props: {
         modelValue: [String, Number, Boolean],
         size: String,
+        disabled: Boolean,
     },
     data() {
         return {

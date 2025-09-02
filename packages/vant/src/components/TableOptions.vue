@@ -9,19 +9,19 @@
                 <el-table-column :label="col.label">
                     <template #default="scope">
                         <template v-if="col.value">
-                            <ValueInput :size="size || 'small'" :modelValue="scope.row[col.key]"
+                            <ValueInput :size="size || 'small'" :modelValue="scope.row[col.key]" :disabled="disabled"
                                         @update:modelValue="(n)=>(scope.row[col.key] = n)"
                                         @blur="onInput(scope.row)" @change-type="onInput(scope.row)"></ValueInput>
                         </template>
                         <template v-else>
-                            <el-input :size="size || 'small'" :modelValue="scope.row[col.key] || ''"
+                            <el-input :size="size || 'small'" :disabled="disabled" :modelValue="scope.row[col.key] || ''"
                                       @Update:modelValue="(n)=>(scope.row[col.key] = n)"
                                       @blur="onInput(scope.row)"></el-input>
                         </template>
                     </template>
                 </el-table-column>
             </template>
-            <el-table-column width="45" align="center" fixed="right">
+            <el-table-column width="45" align="center" fixed="right" v-if="!disabled">
                 <template #default="scope">
                     <i class="fc-icon icon-delete" @click="del(scope.$index)"></i>
                 </template>
@@ -56,6 +56,7 @@ export default defineComponent({
         valueType: String,
         max: Number,
         size: String,
+        disabled: Boolean,
     },
     inject: ['designer'],
     watch: {
