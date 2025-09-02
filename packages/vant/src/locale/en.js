@@ -669,6 +669,7 @@ const En = {
             },
             props: {
                 disabled: 'Disabled',
+                placeholder: 'Input box placeholder text',
                 readonly: 'Readonly',
                 title: 'Top bar title',
                 visibleOptionNum: 'Number of visible options',

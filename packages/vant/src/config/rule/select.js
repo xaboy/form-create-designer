@@ -35,6 +35,10 @@ export default {
                 field: 'title',
             },
             {
+                type: 'input',
+                field: 'placeholder',
+            },
+            {
                 type: 'switch',
                 field: 'disabled',
             },
