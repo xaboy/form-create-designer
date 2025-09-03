@@ -63,7 +63,7 @@ type Device = 'pc' | 'pad' | 'mobile';
 //设计器组件的props.config配置
 export interface Config {
     //扩展字体
-    fontFamily: Array<string | {label: string, value: string}>;
+    fontFamily?: Array<string | {label: string, value: string}>;
     //配置设计区域显示方式
     device?: Device;
     //是否可以切换组件类型,或者可以相互切换的字段
@@ -133,7 +133,11 @@ export interface Config {
     //隐藏部分菜单
     hiddenMenu?: MenuName[]
     //隐藏部分组件
-    hiddenItem?: string[]
+    hiddenItem?: string[];
+    //隐藏表单部分配置项
+    hiddenFormConfig?: string[];
+    //禁用表单部分配置项
+    disabledFormConfig?: string[];
     //隐藏组件的部分配置项
     hiddenItemConfig?: {
         default?: string[];
