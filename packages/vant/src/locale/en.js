@@ -221,10 +221,19 @@ const En = {
         font: {
             name: 'Font',
             size: 'Size',
+            family: 'Family',
             align: 'Align',
             height: 'line-height',
             spacing: 'letter-spacing',
             preview: 'Preview',
+        },
+        family: {
+            'Microsoft YaHei': 'Microsoft YaHei',
+            SimSun: 'SimSun',
+            SimHei: 'SimHei',
+            KaiTi: 'KaiTi',
+            FangSong: 'FangSong',
+            LiSu: 'LiSu',
         },
         decoration: {
             name: 'Decoration',

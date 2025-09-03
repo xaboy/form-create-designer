@@ -6,11 +6,22 @@
         <template #append>
             <div class="_fd-font-input">
                 <a-form size="small" layout="vertical">
+                    <a-form-item :label="t('style.font.family')">
+                        <a-select v-model:value="fontStyle.fontFamily" allowClear @change="onInput">
+                            <a-select-option
+                                v-for="item in familyType"
+                                :key="item.value"
+                                :value="item.value"
+                            >
+                                <span :style="{fontFamily: item.value}">{{ item.label }}</span>
+                            </a-select-option>
+                        </a-select>
+                    </a-form-item>
                     <a-form-item :label="t('style.font.size')">
                         <SizeInput v-model="fontStyle.fontSize" size="small" @change="onInput"/>
                     </a-form-item>
                     <a-form-item :label="t('style.weight.name')">
-                        <a-select v-model:value="fontStyle.fontWeight" clearable @change="onInput">
+                        <a-select v-model:value="fontStyle.fontWeight" allowClear @change="onInput">
                             <a-select-option
                                 v-for="item in weightType"
                                 :key="item.value"
@@ -21,7 +32,7 @@
                         </a-select>
                     </a-form-item>
                     <a-form-item :label="t('style.decoration.name')">
-                        <a-select v-model:valuel="fontStyle.textDecoration" clearable @change="onInput">
+                        <a-select v-model:value="fontStyle.textDecoration" allowClear @change="onInput">
                             <a-select-option
                                 v-for="item in decorationType"
                                 :key="item.value"
@@ -32,7 +43,7 @@
                         </a-select>
                     </a-form-item>
                     <a-form-item :label="t('style.font.align')">
-                        <a-select v-model:value="fontStyle.textAlign" clearable @change="onInput">
+                        <a-select v-model:value="fontStyle.textAlign" allowClear @change="onInput">
                             <a-select-option
                                 v-for="item in alignType"
                                 :key="item.value"
@@ -101,6 +112,16 @@ export default defineComponent({
                 return {label: this.t('style.weight.' + v), value: v};
             });
         },
+        familyType() {
+            const fontFamily = this.designer.setupState.getConfig('fontFamily') || ['Microsoft YaHei', 'SimSun', 'SimHei', 'KaiTi', 'FangSong', 'Arial', 'sans-serif', 'monospace'];
+            return fontFamily.map(v => {
+                if (typeof v === 'string') {
+                    return {label: this.t('style.family.' + v) || v, value: v};
+                } else {
+                    return v;
+                }
+            });
+        },
     },
     data() {
         const t = this.designer.setupState.t;
@@ -108,6 +129,7 @@ export default defineComponent({
             t,
             fontStyle: {
                 fontSize: '',
+                fontFamily: '',
                 fontWeight: '',
                 fontStyle: '',
                 textDecoration: '',

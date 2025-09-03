@@ -62,6 +62,8 @@ type Device = 'pc' | 'pad' | 'mobile';
 
 //设计器组件的props.config配置
 export interface Config {
+    //扩展字体
+    fontFamily: Array<string | {label: string, value: string}>;
     //配置设计区域显示方式
     device?: Device;
     //是否可以切换组件类型,或者可以相互切换的字段
