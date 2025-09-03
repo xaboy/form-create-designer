@@ -46,6 +46,8 @@ import globalUseLocale, {t} from './utils/locale';
 import './style/index.css';
 import './style/icon.css';
 import './utils/highlight/style.css';
+import menus from './config/menu';
+import dragRuleList from './config/index';
 
 const addComponent = (id, component, previewComponent) => {
     designerForm.component(id, previewComponent || component);
@@ -87,6 +89,28 @@ const install = function (Vue) {
     Vue.component('FcDesignerMobile', FcDesignerMobile);
 };
 
+const addMenu = function (menu, before) {
+    if (!Array.isArray(menu)) {
+        menu = [menu];
+    }
+    if (before) {
+        menus.unshift(...menu);
+    } else {
+        menus.push(...menu);
+    }
+}
+
+const addDragRule = function (dragRule, before) {
+    if (!Array.isArray(dragRule)) {
+        dragRule = [dragRule];
+    }
+    if (before) {
+        dragRuleList.unshift(...dragRule);
+    } else {
+        dragRuleList.push(...dragRule);
+    }
+}
+
 FcDesignerMobile.install = install;
 FcDesignerMobile.makeOptionsRule = makeOptionsRule;
 FcDesignerMobile.copyTextToClipboard = copyTextToClipboard;
@@ -101,6 +125,8 @@ FcDesignerMobile.formCreate = formCreate;
 FcDesignerMobile.designerForm = designerForm;
 FcDesignerMobile.component = addComponent;
 FcDesignerMobile.useLocale = globalUseLocale;
+FcDesignerMobile.addMenu = addMenu;
+FcDesignerMobile.addDragRule = addDragRule;
 FcDesignerMobile.t = t;
 
 FcDesignerMobile.utils = {
@@ -141,5 +167,7 @@ export {
     makeRequiredRule,
     makeTreeOptions,
     makeTreeOptionsRule,
+    addDragRule,
+    addMenu,
     toJSON
 };
