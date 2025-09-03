@@ -219,12 +219,20 @@ const ZhCn = {
             solid: '立体',
         },
         font: {
-            name: '字体',
+            name: '文字',
             size: '大小',
             align: '对齐方式',
             height: '行高',
             spacing: '字间距',
             preview: '样式预览',
+        },
+        family: {
+            'Microsoft YaHei': '微软雅黑',
+            SimSun: '宋体',
+            SimHei: '黑体',
+            KaiTi: '楷体',
+            FangSong: '仿宋',
+            LiSu: '隶书',
         },
         decoration: {
             name: '修饰',

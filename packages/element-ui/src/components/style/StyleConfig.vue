@@ -47,6 +47,7 @@ import {isNull} from '../../utils/index';
 import TableOptions from '../TableOptions.vue';
 
 const fontKey = [
+    'fontFamily',
     'fontSize',
     'fontWeight',
     'fontStyle',
