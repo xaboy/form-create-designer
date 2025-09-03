@@ -1582,15 +1582,15 @@ export default defineComponent({
                         }
                     })
                     data.propsForm.api.hidden(true, hiddenField);
+                    if (!methods.getConfig('showControl', true)) {
+                        data.baseForm.api.hidden(true, '_control');
+                    }
                 });
                 if (disabledField.length) {
                     data.baseForm.api.disabled(true, disabledField);
                     nextTick(() => {
                         data.propsForm.api.disabled(true, disabledField);
                     });
-                }
-                if (!methods.getConfig('showControl', true)) {
-                    data.baseForm.api.hidden(true, '_control');
                 }
                 const input = hasProperty(rule, 'field');
                 data.baseForm.isShow = permission.base !== false && input && rule.input !== false && methods.getConfig('showBaseForm') !== false;
