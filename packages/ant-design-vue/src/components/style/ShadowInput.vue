@@ -49,9 +49,9 @@ export default defineComponent({
         return {
             t,
             options: [
-                {label: t('style.shadow.classic'), value: '3px 5px 7px 2px #CBCBCBFF'},
-                {label: t('style.shadow.flat'), value: '4px 4px 3px -2px #E7E5E5FF'},
-                {label: t('style.shadow.solid'), value: '1px 2px 4px 2px #979797FF'}
+                {label: t('style.shadow.classic'), value: '3px 5px 7px 2px #CBCBCB'},
+                {label: t('style.shadow.flat'), value: '4px 4px 3px -2px #E7E5E5'},
+                {label: t('style.shadow.solid'), value: '1px 2px 4px 2px #979797'}
             ],
             value: this.modelValue || ''
         }

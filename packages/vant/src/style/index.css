@@ -781,6 +781,16 @@
     min-height: 40%;
 }
 
+._fd-preview-dialog .el-dialog__body > .form-create-m {
+    border-radius: 24px;
+    border: 6px solid #000;
+    box-sizing: border-box;
+    width: 350px;
+    overflow: auto;
+    height: 70vh;
+    margin: 0 auto;
+}
+
 ._fd-preview-dialog .el-dialog__header {
     position: absolute;
     right: 0;
