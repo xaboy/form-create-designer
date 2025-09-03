@@ -242,7 +242,7 @@
                                  v-if="!config || config.showFormConfig !== false">
                             <DragForm :rule="form.rule" :option="form.option"
                                       :modelValue="form.value" @change="formOptChange"
-                                      v-model:api="form.api">
+                                      v-model:api="form.api"  @mounted="formMounted">
                                 <template #title="scope">
                                     <template v-if="scope.rule.warning">
                                         <Warning :tooltip="scope.rule.warning">
@@ -1202,6 +1202,7 @@ export default defineComponent({
                 Object.keys(data.formOptions).forEach(key => {
                     const item = data.formOptions[key];
                     value['>' + key] = item;
+                    value['formCreate' + upper(key)] = item;
                     if (typeof item === 'object') {
                         Object.keys(item).forEach(k => {
                             value[key + '>' + k] = item[k];
@@ -1324,11 +1325,18 @@ export default defineComponent({
             fields() {
                 return data.dragForm.api.all().map(rule => rule.field).filter(id => !!id);
             },
+            formMounted() {
+                data.form.api.hidden(true, configRef.value.hiddenFormConfig || []);
+                data.form.api.disabled(true, configRef.value.disabledFormConfig || []);
+            },
             baseChange(field, value, _, fapi) {
                 methods.handleChange('', field, value, _, fapi);
             },
             formOptChange(field, value) {
                 data.form.value[field] = value;
+                if (field.indexOf('formCreate') === 0) {
+                    field = '>' + lower(field.replace('formCreate', ''));
+                }
                 if (field.indexOf('>') === -1) {
                     field = 'form>' + field;
                 }

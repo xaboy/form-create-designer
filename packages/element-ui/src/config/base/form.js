@@ -4,7 +4,7 @@ export default function form({t}) {
     return [
         {
             type: 'input',
-            field: '>formName',
+            field: 'formCreateFormName',
             value: '',
             title: t('form.formName'),
         }, {
@@ -67,7 +67,8 @@ export default function form({t}) {
             title: t('form.resetBtn'),
         }, {
             type: 'FnConfig',
-            field: '>_event',
+            field: 'formCreate_event',
+            name: 'event',
             warning: t('form.controlDocument', {doc: '<a target="_blank" href="https://form-create.com/v3/guide/global-event" style="color: inherit;text-decoration: underline;">' + t('form.document') + '</a>'}),
             value: {},
             col: {show: true},
