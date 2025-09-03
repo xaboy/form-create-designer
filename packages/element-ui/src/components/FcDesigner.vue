@@ -1581,6 +1581,11 @@ export default defineComponent({
                 const showValidateForm = methods.getConfig('showValidateForm');
                 data.validateForm.isShow = permission.validate !== false && ((data.baseForm.isShow && showValidateForm !== false) || showValidateForm === true) && rule._menu.validate !== false;
                 data.propsForm.rule = data.cacheProps[rule._fc_id];
+                if (data.validateForm.isShow) {
+                    nextTick(() => {
+                        data.validateForm.api.hidden(methods.getConfig('validateOnlyRequired') === true || rule._menu.validate === 'required', ['validate']);
+                    })
+                }
                 methods.updateRuleFormData();
                 methods.watchActiveRule();
             },
