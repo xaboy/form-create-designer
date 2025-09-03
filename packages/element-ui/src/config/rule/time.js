@@ -37,10 +37,6 @@ export default {
             type: 'switch',
             field: 'clearable',
             value: true
-        }, {
-            type: 'Struct',
-            field: 'pickerOptions',
-            props: {defaultValue: {}}
         }, {type: 'switch', field: 'editable', value: true}, {
             type: 'input',
             field: 'placeholder'
