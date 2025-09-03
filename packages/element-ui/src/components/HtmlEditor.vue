@@ -56,7 +56,7 @@ export default defineComponent({
     methods: {
         validateXML(xmlString) {
             const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
+            const xmlDoc = parser.parseFromString(xmlString, 'text/html');
             const parseErrors = xmlDoc.getElementsByTagName('parsererror');
             if (parseErrors.length > 0) {
                 return parseErrors[0].innerText.split('\n')[0] ?? '';

@@ -122,6 +122,7 @@
     box-sizing: border-box;
     overflow: unset;
     position: relative;
+    background-color: #FFFFFF;
 }
 
 ._fc-l-close, ._fc-r-close, ._fc-l-open, ._fc-r-open {
