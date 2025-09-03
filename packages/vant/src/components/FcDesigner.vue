@@ -272,8 +272,8 @@
                                         </Warning>
                                     </p>
                                     <el-input size="small" class="_fc-r-name-input"
-                                              :model-value="activeRule.name"
-                                              readonly>
+                                              v-model="activeRule.name"
+                                              :readonly="getConfig('nameReadonly') !== false">
                                         <template #suffix>
                                             <i class="fc-icon icon-group" @click="copyName"></i>
                                         </template>

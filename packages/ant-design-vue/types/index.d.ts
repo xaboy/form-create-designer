@@ -90,6 +90,8 @@ export interface Config {
     formOptions?: Object;
     //配置field是否可以编辑
     fieldReadonly?: boolean;
+    //配置name是否可以编辑
+    nameReadonly?: boolean;
     //隐藏拖拽操作按钮
     hiddenDragMenu?: boolean;
     //隐藏拖拽按钮
