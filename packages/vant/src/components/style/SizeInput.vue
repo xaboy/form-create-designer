@@ -110,7 +110,7 @@ export default defineComponent({
 }
 
 ._fd-size-input .el-button {
-    font-size: 14px;
+    font-size: 12px;
     padding: 5px;
     margin-left: 3px;
     width: 25px;

@@ -13,6 +13,7 @@
             <RadiusInput v-model="radius" @change="onInput"/>
             <FontInput v-model="font" @change="onInput"/>
             <ShadowInput v-model="boxShadow" @change="onInput"></ShadowInput>
+            <PositionInput v-model="position" @change="onInput"></PositionInput>
             <ConfigItem :label="t('style.opacity')" class="_fd-opacity-input">
                 <a-slider v-model:value="opacity"
                           @change="onInput"></a-slider>
@@ -39,7 +40,6 @@
 <script>
 import {defineComponent} from 'vue';
 import BoxSizeInput from './BoxSizeInput.vue';
-import BoxSpaceInput from './BoxSpaceInput.vue';
 import BorderInput from './BorderInput.vue';
 import RadiusInput from './RadiusInput.vue';
 import FontInput from './FontInput.vue';
@@ -48,6 +48,10 @@ import ColorInput from './ColorInput.vue';
 import ShadowInput from './ShadowInput.vue';
 import {isNull} from '../../utils/index';
 import TableOptions from '../TableOptions.vue';
+import BoxSpaceInput from './BoxSpaceInput.vue';
+import toCase from '@form-create/utils/lib/tocase';
+import toLine from '@form-create/utils/lib/toline';
+import PositionInput from './PositionInput.vue';
 
 const fontKey = [
     'fontFamily',
@@ -68,6 +72,14 @@ const sizeKey = [
     'maxWidth',
     'maxHeight',
     'overflow'
+];
+
+const positionKey = [
+    'position',
+    'top',
+    'left',
+    'bottom',
+    'right',
 ];
 
 const styleKey = [
@@ -103,7 +115,8 @@ const styleKey = [
     'borderRightColor',
     'borderRightWidth',
     ...fontKey,
-    ...sizeKey
+    ...sizeKey,
+    ...positionKey,
 ];
 
 export default defineComponent({
@@ -111,12 +124,13 @@ export default defineComponent({
     inject: ['designer'],
     emits: ['update:modelValue'],
     components: {
+        PositionInput,
+        BoxSpaceInput,
         TableOptions,
         ColorInput,
         ConfigItem,
         RadiusInput,
         BoxSizeInput,
-        BoxSpaceInput,
         BorderInput,
         ShadowInput,
         FontInput,
@@ -128,8 +142,11 @@ export default defineComponent({
         }
     },
     watch: {
-        modelValue() {
-            this.tidyStyle();
+        modelValue: {
+            handler() {
+                this.tidyStyle();
+            },
+            deep: true,
         },
     },
     data() {
@@ -137,10 +154,11 @@ export default defineComponent({
         return {
             t,
             formData: {},
-            size: {},
             space: {},
+            size: {},
             border: {},
             font: {},
+            position: {},
             radius: '',
             backgroundColor: '',
             color: '',
@@ -154,10 +172,11 @@ export default defineComponent({
             const style = {...this.modelValue || {}};
             const space = {};
             Object.keys(style).forEach(k => {
+                const key = toCase(k);
                 if (['margin', 'padding'].indexOf(k) > -1) {
-                    space[k] = style[k];
+                    space[key] = style[k];
                 } else if (k.indexOf('margin') > -1 || k.indexOf('padding') > -1) {
-                    space[k] = style[k];
+                    space[key] = style[k];
                 }
             });
 
@@ -165,6 +184,13 @@ export default defineComponent({
             sizeKey.forEach(k => {
                 if (style[k]) {
                     size[k] = style[k];
+                }
+            });
+
+            const position = {};
+            positionKey.forEach(k => {
+                if (style[k]) {
+                    position[k] = style[k];
                 }
             });
 
@@ -201,6 +227,7 @@ export default defineComponent({
             this.opacity = opacity;
             this.scale = scale;
             this.size = size;
+            this.position = position;
             this.space = space;
             this.border = border;
             this.font = font;
@@ -214,8 +241,19 @@ export default defineComponent({
         },
         onInput() {
             let temp = {...this.formData};
+            let overStyle = {};
             styleKey.forEach(k => {
-                delete temp[k];
+                if (temp[k]) {
+                    overStyle[k] = temp[k];
+                    delete temp[k];
+                } else {
+                    const v = toLine(k);
+                    if (temp[v]) {
+                        overStyle[k] = temp[v];
+                        delete temp[v];
+                    }
+
+                }
             })
             const style = {
                 ...temp,
@@ -225,7 +263,7 @@ export default defineComponent({
                 borderRadius: this.radius || '',
                 boxShadow: this.boxShadow || '',
                 scale: (this.scale >= 0 && this.scale !== 100) ? (this.scale + '%') : '',
-                ...this.space, ...this.size, ...this.border, ...this.font
+                ...this.space, ...this.size, ...this.border, ...this.font, ...this.position, ...overStyle
             }
             Object.keys(style).forEach(k => {
                 if (isNull(style[k])) {

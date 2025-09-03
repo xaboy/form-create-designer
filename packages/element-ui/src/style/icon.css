@@ -11,8 +11,24 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-write:before {
+    content: "\e60b";
+}
+
+.icon-branch:before {
+    content: "\e6e3";
+}
+
+.icon-device:before {
+    content: "\e6e0";
+}
+
+.icon-position-left:before {
+    content: "\e6e2";
+}
+
 .icon-search:before {
-    content: "\e608";
+    content: "\e6e1";
 }
 
 .icon-expand:before {
