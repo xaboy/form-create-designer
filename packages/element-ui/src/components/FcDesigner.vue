@@ -2292,6 +2292,12 @@ export default defineComponent({
                 if (content && content.indexOf('FormCreate:') === 0) {
                     let children = data.children;
                     content = content.slice(11, content.length);
+                    if (methods.getConfig('autoResetField') !== false) {
+                        content = methods.batchReplaceField(content);
+                    }
+                    if (methods.getConfig('autoResetName') !== false) {
+                        content = methods.batchReplaceName(content);
+                    }
                     const copyRule = methods.loadRule([designerForm.parseJson(content)])[0];
                     let flag = true;
                     if (data.activeRule && data.activeRule._menu.drag) {

@@ -72,6 +72,8 @@ export interface Config {
     autoActive?: boolean;
     //是否在复制时自动重置组件的name,默认开启
     autoResetName?: boolean;
+    //是否在复制时自动重置组件的field,默认开启
+    autoResetField?: boolean;
     //删除组件前置事件, 返回 false 终止删除
     beforeRemoveRule?: (data: { rule: Rule }) => false|void;
     //选中组件前置事件, 返回 false 终止选中
