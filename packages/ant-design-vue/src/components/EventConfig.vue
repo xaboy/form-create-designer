@@ -244,7 +244,7 @@ export default defineComponent({
             }
         },
         init() {
-            const hooks = this.activeRule ? {...this.activeRule.hook || {}} : {};
+            const hooks = this.activeRule ? {...this.activeRule._hook || {}} : {};
             const ons = {...deepCopy(this.modelValue || {})};
             Object.keys(hooks).forEach(k => {
                 ons['hook_' + k] = hooks[k];
@@ -352,7 +352,7 @@ export default defineComponent({
             this.save().then(() => {
                 const {on, num, hooks} = this.getValue();
                 this.$emit('update:modelValue', on);
-                this.activeRule.hook = hooks;
+                this.activeRule._hook = hooks;
                 this.visible = false;
                 this.eventNum = num;
             });
