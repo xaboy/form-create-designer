@@ -154,7 +154,7 @@ export default defineComponent({
     position: absolute;
     right: 18px;
     display: inline-block;
-    color: var(--fc-text-color-3);
+    color: #AAAAAA;
     transform: rotate(45deg);
 }
 
@@ -165,5 +165,6 @@ export default defineComponent({
     border: 1px dashed #D4D7E0;
     background-image: linear-gradient(#FFFFFF 14px, transparent 0), linear-gradient(90deg, #FFFFFF 14px, #D4D7E0 0);
     background-size: 15px 15px;
+    min-height: 170px;
 }
 </style>
