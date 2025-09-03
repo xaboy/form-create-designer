@@ -221,17 +221,23 @@ export default defineComponent({
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+    padding: 0 5px;
 }
 
 ._fd-sc-form .fc-icon {
     font-size: 12px;
 }
 
+._fd-shadow-content .el-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    grid-column-gap: 10px;
+}
+
 ._fd-shadow-content .el-form-item {
-    width: 50%;
-    padding: 0 0 0 10px;
-    margin: 0 0 5px !important;
-    box-sizing: border-box;
+    display: grid !important;
+    margin: 0 !important;
 }
 
 ._fd-shadow-content .el-input__wrapper {
@@ -305,8 +311,8 @@ export default defineComponent({
     padding: 0;
 }
 
-._fd-shadow-content .el-input {
-    width: 105px;
+._fd-shadow-content .el-input, ._fd-shadow-content ._fd-color-input {
+    width: 100%;
 }
 
 ._fd-shadow-content ._fd-sc-right {
@@ -314,7 +320,7 @@ export default defineComponent({
 }
 
 ._fd-shadow-content ._fd-sc-radio {
-    width: 105px;
+    width: 100%;
 }
 
 ._fd-shadow-content ._fd-sc-radio .el-radio-button {

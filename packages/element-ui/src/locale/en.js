@@ -233,6 +233,14 @@ const En = {
             FangSong: 'FangSong',
             LiSu: 'LiSu',
         },
+        position: {
+            name: 'Position',
+            static: 'static',
+            relative: 'relative',
+            absolute: 'absolute',
+            fixed: 'fixed',
+            sticky: 'sticky',
+        },
         decoration: {
             name: 'Decoration',
             underline: 'underline',

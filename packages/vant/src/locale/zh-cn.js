@@ -234,6 +234,14 @@ const ZhCn = {
             FangSong: '仿宋',
             LiSu: '隶书',
         },
+        position: {
+            name: '位置',
+            static: '默认定位',
+            relative: '相对定位',
+            absolute: '绝对定位',
+            fixed: '固定定位',
+            sticky: '粘性定位',
+        },
         decoration: {
             name: '修饰',
             underline: '下划线',
