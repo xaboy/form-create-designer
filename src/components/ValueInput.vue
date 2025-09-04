@@ -1,7 +1,7 @@
 <template>
-    <el-input class="_fd-value-input" v-model="inputValue" :size="size || undefined" @blur="onBlur" v-bind="$attrs">
+    <el-input class="_fd-value-input" v-model="inputValue" :size="size || undefined" @blur="onBlur" v-bind="$attrs" :disabled="disabled">
         <template #prepend>
-            <el-select v-model="type" size="mini" style="width: 55px">
+            <el-select v-model="type" size="mini" style="width: 55px" :disabled="disabled">
                 <el-option :label="t('validate.types.string')" value="1"/>
                 <el-option :label="t('validate.types.number')" value="2"/>
                 <el-option :label="t('validate.types.boolean')" value="3"/>
@@ -23,6 +23,7 @@ export default defineComponent({
     props: {
         value: [String, Number, Boolean],
         size: String,
+        disabled: Boolean,
     },
     data() {
         return {
