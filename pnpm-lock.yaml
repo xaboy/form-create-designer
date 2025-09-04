@@ -12,11 +12,11 @@ importers:
         specifier: ^2.7.1
         version: 2.7.1
       '@form-create/element-ui':
-        specifier: ^2.7.12
-        version: 2.7.12
+        specifier: ^2.7.16
+        version: 2.7.16
       '@form-create/utils':
-        specifier: ^2.7.0
-        version: 2.7.0
+        specifier: ^2.7.8
+        version: 2.7.8
       codemirror:
         specifier: 5.60.0
         version: 5.60.0
@@ -253,14 +253,11 @@ packages:
   '@form-create/component-wangeditor@2.7.1':
     resolution: {integrity: sha512-gt2CpKTl/U6cup8Ic1Gab5BsEry6+txwCon0krS0a5Elk905o3gWtHQs3cZOt3AIwh7T1U6pKeLYuV9v0TgWnQ==}
 
-  '@form-create/core@2.7.12':
-    resolution: {integrity: sha512-8RoSWG0DyvjiLgUP+36Y70KwX4brWKt3H5B4PkhRUOs2Uk1jtmbPMQMzq/xXyJEE6NyPQuIvULRkg4V5OlRv4Q==}
+  '@form-create/core@2.7.16':
+    resolution: {integrity: sha512-gBqC4r94fD2rR55tLF4ZUDzEZZrVXuvtln0dwOclhb4wwFvRU2fGhA24qvFe6r8uKwMA5rlhFBSsNKuhPB6H+A==}
 
-  '@form-create/element-ui@2.7.12':
-    resolution: {integrity: sha512-eOx3drub1cEexUM3qruCjZtVJuvEn1NDp28Auj0dfh2navbinxA0QX4kWYsm2ghsnOrUrv0TyfspWKIihlEvUw==}
-
-  '@form-create/utils@2.7.0':
-    resolution: {integrity: sha512-A6hoUEcn7kPiA7A4V+R808xmlJopGW1Odnim7nXhVG/tQ8iCuWJrvmBqTpbTYz/1wa94MsEj3ghoxKcEkWlyEA==}
+  '@form-create/element-ui@2.7.16':
+    resolution: {integrity: sha512-feHkWLuhe5lf2FV5QuLkC/alUYAA0cKnXrJAizlaJC0zhnqxnuNM6Q4ww6AMzM9Pu9f2HewARU6NEg8kEARiqQ==}
 
   '@form-create/utils@2.7.8':
     resolution: {integrity: sha512-49bOop5HUh7ixOtDpIACB83wi6VR9e3kQvTZqEdsYmhL3Cli9OTkP/Cn8solw/KGGthmW67UyW5v0+meaelBHA==}
@@ -1438,11 +1435,11 @@ snapshots:
     dependencies:
       wangeditor: 4.7.15
 
-  '@form-create/core@2.7.12':
+  '@form-create/core@2.7.16':
     dependencies:
       '@form-create/utils': 2.7.8
 
-  '@form-create/element-ui@2.7.12':
+  '@form-create/element-ui@2.7.16':
     dependencies:
       '@form-create/component-elm-checkbox': 2.7.8
       '@form-create/component-elm-frame': 2.7.8
@@ -1452,10 +1449,8 @@ snapshots:
       '@form-create/component-elm-tree': 2.7.8
       '@form-create/component-elm-upload': 2.7.11
       '@form-create/component-subform': 2.7.1
-      '@form-create/core': 2.7.12
+      '@form-create/core': 2.7.16
       '@form-create/utils': 2.7.8
-
-  '@form-create/utils@2.7.0': {}
 
   '@form-create/utils@2.7.8': {}
 
