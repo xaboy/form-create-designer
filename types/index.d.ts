@@ -373,6 +373,12 @@ export type makeRequiredRule = () => Rule;
 //转JSON字符串
 export type toJSON = (obj: Object) => string;
 
+//全局导入菜单分类
+export type addMenu = (menu: Menu | Menu[], before?: boolean) => void;
+
+//全局导入拖拽规则
+export type addDragRule = (menu: DragRule | DragTemplateRule | Array<DragRule | DragTemplateRule>, before?: boolean) => void;
+
 type Utils = {
 
     //复制内容
@@ -439,6 +445,12 @@ interface FcDesignerProtoType {
 
     //转JSON字符串
     toJSON: toJSON;
+
+    //全局导入菜单分类
+    addMenu: addMenu;
+
+    //全局导入拖拽规则
+    addDragRule: addDragRule;
 
     //往渲染器中挂载组件
     component(name: string, component: Component, previewComponent?: Component): void;

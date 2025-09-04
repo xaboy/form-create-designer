@@ -407,7 +407,7 @@ import {lower} from '@form-create/utils/lib/tocase';
 import toArray from '@form-create/utils/lib/toarray.js';
 import ruleList, {defaultDrag} from '../config';
 import fcDraggable from 'vuedraggable/src/vuedraggable';
-import createMenu from '../config/menu';
+import menus from '../config/menu';
 import {
     copyTextToClipboard,
     formTemplate,
@@ -562,6 +562,8 @@ export default defineComponent({
             return orgRule(...args);
         };
 
+        const defaultMenus = ref(deepCopy(menus));
+
         const data = reactive({
             cacheProps: {},
             operation: {
@@ -581,7 +583,6 @@ export default defineComponent({
             activePermission: {},
             children: ref([]),
             treeInfo: [],
-            menuList: menu.value || createMenu({t}),
             dragRuleList: {},
             eventShow: false,
             unloadStatus: false,
@@ -798,6 +799,10 @@ export default defineComponent({
             });
         });
 
+        const menuList = computed(() => {
+            return Array.isArray(menu.value) ? menu.value : defaultMenus.value;
+        });
+
         const methods = {
             setDevice(device) {
                 data.device = device;
@@ -818,44 +823,50 @@ export default defineComponent({
             },
             addMenu(config) {
                 if (!config.name) return;
+                if (!config.list) {
+                    config.list = [];
+                }
                 let flag = true;
-                data.menuList.forEach((v, i) => {
+                menuList.value.forEach((v, i) => {
                     if (v.name === config.name) {
-                        data.menuList[i] = config;
+                        menuList.value[i] = config;
                         flag = false;
                     }
                 });
                 if (flag) {
                     if (config.before) {
-                        data.menuList.unshift(config);
+                        menuList.value.unshift(config);
                     } else {
-                        data.menuList.push(config);
+                        menuList.value.push(config);
                     }
                 }
             },
             removeMenu(name) {
-                [...data.menuList].forEach((v, i) => {
+                [...menuList.value].forEach((v, i) => {
                     if (v.name === name) {
-                        data.menuList.splice(i, 1);
+                        menuList.value.splice(i, 1);
                     }
                 });
             },
             setMenuItem(name, list) {
-                data.menuList.forEach(v => {
+                menuList.value.forEach(v => {
                     if (v.name === name) {
                         v.list = list;
                     }
                 });
             },
             appendMenuItem(name, item) {
-                data.menuList.forEach(v => {
+                menuList.value.forEach(v => {
                     if (v.name === name) {
+                        if (!v.list) {
+                            v.list = [];
+                        }
                         v.list.push(...(Array.isArray(item) ? item : [item]));
                     }
                 });
             },
             removeMenuItem(item) {
-                data.menuList.forEach(v => {
+                menuList.value.forEach(v => {
                     let idx;
                     if (is.String(item)) {
                         [...v.list].forEach((menu, idx) => {
@@ -2321,6 +2332,7 @@ export default defineComponent({
                 }
             }
         };
+        methods.addDragRule = methods.addComponent;
 
         const hotKey = {
             z(e) {
@@ -2421,6 +2433,7 @@ export default defineComponent({
             hiddenItem,
             hiddenDragMenu,
             hiddenDragBtn,
+            menuList,
             configFormOrderStyle,
         };
     },
