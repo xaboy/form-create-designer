@@ -196,6 +196,8 @@ export interface Config {
     showLanguage?: boolean;
     //关闭页面时确认弹窗
     exitConfirm?: boolean;
+    //控制组件验证是否只显示必填验证
+    validateOnlyRequired?: boolean;
     //定义渲染规则所需的formData
     appendConfigData?: string[] | ((rule: Rule) => Object);
     //基础配置的渲染规则,可以覆盖默认规则.append为true时追加到默认规则后面
@@ -290,7 +292,7 @@ export interface DragRule {
     //当前组件支持的事件
     event?: Array<string | {name: string, info: string}>;
     //当前组件`value`的数据类型
-    validate?: string[] | boolean;
+    validate?: string[] | 'required' | boolean;
 }
 
 //远程数据
