@@ -6,6 +6,18 @@
         <template #append>
             <div class="_fd-font-input">
                 <el-form label-width="50px" label-position="top" inline size="mini">
+                    <el-form-item :label="t('style.font.family')">
+                        <el-select v-model="fontStyle.fontFamily" clearable @change="onInput">
+                            <el-option
+                                v-for="item in familyType"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            >
+                                <span :style="{fontFamily: item.value}">{{ item.label }}</span>
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
                     <el-form-item :label="t('style.font.size')">
                         <SizeInput v-model="fontStyle.fontSize" @change="onInput"/>
                     </el-form-item>
@@ -103,6 +115,16 @@ export default defineComponent({
                 return {label: this.t('style.weight.' + v), value: v};
             });
         },
+        familyType() {
+            const fontFamily = this.designer.getConfig('fontFamily') || ['Microsoft YaHei', 'SimSun', 'SimHei', 'KaiTi', 'FangSong', 'Arial', 'sans-serif', 'monospace'];
+            return fontFamily.map(v => {
+                if (typeof v === 'string') {
+                    return {label: this.t('style.family.' + v) || v, value: v};
+                } else {
+                    return v;
+                }
+            });
+        },
     },
     data() {
         const t = this.designer.t;
@@ -110,6 +132,7 @@ export default defineComponent({
             t,
             fontStyle: {
                 fontSize: '',
+                fontFamily: '',
                 fontWeight: '',
                 fontStyle: '',
                 textDecoration: '',
@@ -165,11 +188,6 @@ export default defineComponent({
 ._fd-font-input .el-form--inline .el-form-item {
     margin: 0;
     padding: 0;
-}
-
-._fd-font-input .el-form--inline .el-form-item__label {
-    font-size: 12px;
-    padding-bottom: 0;
 }
 
 ._fd-font-input ._fd-size-input .el-input-number {

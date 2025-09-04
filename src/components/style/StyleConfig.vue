@@ -1,35 +1,39 @@
 <template>
     <div class="_fd-style-config">
-        <BoxSpaceInput v-model="space" @change="onInput" style="margin-bottom: 10px;"></BoxSpaceInput>
-        <BoxSizeInput v-model="size" @change="onInput"></BoxSizeInput>
-        <ConfigItem :label="t('style.color')">
-            <ColorInput v-model="color" @change="onInput"></ColorInput>
-        </ConfigItem>
-        <ConfigItem :label="t('style.backgroundColor')">
-            <ColorInput v-model="backgroundColor" @change="onInput"></ColorInput>
-        </ConfigItem>
-        <BorderInput v-model="border" @change="onInput"></BorderInput>
-        <RadiusInput v-model="radius" @change="onInput"/>
-        <FontInput v-model="font" @change="onInput"/>
-        <ShadowInput v-model="boxShadow" @change="onInput"></ShadowInput>
-        <ConfigItem :label="t('style.opacity')" class="_fd-opacity-input">
-            <el-slider :show-tooltip="false" v-model="opacity"
-                       @change="onInput"></el-slider>
-            <span>{{ opacity }}%</span>
-        </ConfigItem>
-        <ConfigItem :label="t('style.scale')" class="_fd-opacity-input">
-            <el-slider :min="80" :max="120" :show-tooltip="false" v-model="scale"
-                       @change="onInput"></el-slider>
-            <span>{{ scale }}%</span>
-        </ConfigItem>
-        <ConfigItem :label="t('props.custom')" :info="Object.keys(formData).length > 0 ? t('struct.configured') : ''">
-            <template #append>
-                <TableOptions v-model="formData" @change="onInput" v-bind="{
+        <el-form-item size="mini">
+            <BoxSpaceInput v-model="space" @change="onInput" style="margin-bottom: 10px;"></BoxSpaceInput>
+            <BoxSizeInput v-model="size" @change="onInput"></BoxSizeInput>
+            <ConfigItem :label="t('style.color')">
+                <ColorInput v-model="color" @change="onInput"></ColorInput>
+            </ConfigItem>
+            <ConfigItem :label="t('style.backgroundColor')">
+                <ColorInput v-model="backgroundColor" @change="onInput"></ColorInput>
+            </ConfigItem>
+            <BorderInput v-model="border" @change="onInput"></BorderInput>
+            <RadiusInput v-model="radius" @change="onInput"/>
+            <FontInput v-model="font" @change="onInput"/>
+            <ShadowInput v-model="boxShadow" @change="onInput"></ShadowInput>
+            <PositionInput v-model="position" @change="onInput"></PositionInput>
+            <ConfigItem :label="t('style.opacity')" class="_fd-opacity-input">
+                <el-slider :show-tooltip="false" v-model="opacity"
+                           @change="onInput"></el-slider>
+                <span>{{ opacity }}%</span>
+            </ConfigItem>
+            <ConfigItem :label="t('style.scale')" class="_fd-opacity-input">
+                <el-slider :min="80" :max="120" :show-tooltip="false" v-model="scale"
+                           @change="onInput"></el-slider>
+                <span>{{ scale }}%</span>
+            </ConfigItem>
+            <ConfigItem :label="t('props.custom')"
+                        :info="Object.keys(formData).length > 0 ? t('struct.configured') : ''">
+                <template #append>
+                    <TableOptions v-model="formData" @change="onInput" v-bind="{
                 column: [{label: t('props.key'), key: 'label'}, {label: t('props.value'), key: 'value'}],
                 valueType: 'object'
             }"></TableOptions>
-            </template>
-        </ConfigItem>
+                </template>
+            </ConfigItem>
+        </el-form-item>
     </div>
 </template>
 
@@ -45,8 +49,12 @@ import ColorInput from './ColorInput.vue';
 import ShadowInput from './ShadowInput.vue';
 import {isNull} from '../../utils/index';
 import TableOptions from '../TableOptions.vue';
+import toCase from '@form-create/utils/lib/tocase';
+import toLine from '@form-create/utils/lib/toline';
+import PositionInput from './PositionInput.vue';
 
 const fontKey = [
+    'fontFamily',
     'fontSize',
     'fontWeight',
     'fontStyle',
@@ -64,6 +72,14 @@ const sizeKey = [
     'maxWidth',
     'maxHeight',
     'overflow'
+];
+
+const positionKey = [
+    'position',
+    'top',
+    'left',
+    'bottom',
+    'right',
 ];
 
 const styleKey = [
@@ -99,7 +115,8 @@ const styleKey = [
     'borderRightColor',
     'borderRightWidth',
     ...fontKey,
-    ...sizeKey
+    ...sizeKey,
+    ...positionKey,
 ];
 
 export default defineComponent({
@@ -107,12 +124,13 @@ export default defineComponent({
     inject: ['designer'],
     emits: ['input'],
     components: {
+        PositionInput,
+        BoxSpaceInput,
         TableOptions,
         ColorInput,
         ConfigItem,
         RadiusInput,
         BoxSizeInput,
-        BoxSpaceInput,
         BorderInput,
         ShadowInput,
         FontInput,
@@ -124,8 +142,11 @@ export default defineComponent({
         }
     },
     watch: {
-        value() {
-            this.tidyStyle();
+        value: {
+            handler() {
+                this.tidyStyle();
+            },
+            deep: true,
         },
     },
     data() {
@@ -133,27 +154,29 @@ export default defineComponent({
         return {
             t,
             formData: {},
-            size: {},
             space: {},
+            size: {},
             border: {},
             font: {},
+            position: {},
             radius: '',
             backgroundColor: '',
             color: '',
             boxShadow: '',
             opacity: 100,
             scale: 100,
-        }
+        };
     },
     methods: {
         tidyStyle() {
             const style = {...this.value || {}};
             const space = {};
             Object.keys(style).forEach(k => {
+                const key = toCase(k);
                 if (['margin', 'padding'].indexOf(k) > -1) {
-                    space[k] = style[k];
+                    space[key] = style[k];
                 } else if (k.indexOf('margin') > -1 || k.indexOf('padding') > -1) {
-                    space[k] = style[k];
+                    space[key] = style[k];
                 }
             });
 
@@ -161,6 +184,13 @@ export default defineComponent({
             sizeKey.forEach(k => {
                 if (style[k]) {
                     size[k] = style[k];
+                }
+            });
+
+            const position = {};
+            positionKey.forEach(k => {
+                if (style[k]) {
+                    position[k] = style[k];
                 }
             });
 
@@ -181,7 +211,7 @@ export default defineComponent({
 
             let scale = style.scale;
             if (isNull(style.scale)) {
-                scale = 100
+                scale = 100;
             } else if (isNaN(Number(scale))) {
                 scale = parseFloat(scale) || 100;
             } else {
@@ -197,6 +227,7 @@ export default defineComponent({
             this.opacity = opacity;
             this.scale = scale;
             this.size = size;
+            this.position = position;
             this.space = space;
             this.border = border;
             this.font = font;
@@ -205,14 +236,25 @@ export default defineComponent({
             this.backgroundColor = style.backgroundColor || '';
             styleKey.forEach(k => {
                 delete style[k];
-            })
+            });
             this.formData = style;
         },
         onInput() {
             let temp = {...this.formData};
+            let overStyle = {};
             styleKey.forEach(k => {
-                delete temp[k];
-            })
+                if (temp[k]) {
+                    overStyle[k] = temp[k];
+                    delete temp[k];
+                } else {
+                    const v = toLine(k);
+                    if (temp[v]) {
+                        overStyle[k] = temp[v];
+                        delete temp[v];
+                    }
+
+                }
+            });
             const style = {
                 ...temp,
                 color: this.color || '',
@@ -221,13 +263,13 @@ export default defineComponent({
                 borderRadius: this.radius || '',
                 boxShadow: this.boxShadow || '',
                 scale: (this.scale >= 0 && this.scale !== 100) ? (this.scale + '%') : '',
-                ...this.space, ...this.size, ...this.border, ...this.font
-            }
+                ...this.space, ...this.size, ...this.border, ...this.font, ...this.position, ...overStyle
+            };
             Object.keys(style).forEach(k => {
                 if (isNull(style[k])) {
                     delete style[k];
                 }
-            })
+            });
             this.$emit('input', style);
         },
     },
