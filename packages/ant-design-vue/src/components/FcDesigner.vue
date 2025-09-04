@@ -1,7 +1,7 @@
 <template>
-    <a-config-provider :theme="{token: {fontSize: 14,fontSizeSM: 12}}">
-        <a-layout class="_fc-designer" :style="height ? `height:${dragHeight};flex:initial;` : ''" ref="designer"
+    <a-layout class="_fc-designer" :style="height ? `height:${dragHeight};flex:initial;` : ''" ref="designer"
                   @dragenter="handleDragenter" @dragleave="handleDragleave" @drop="handleDrop">
+        <a-config-provider :theme="{token: {fontSize: 14,fontSizeSM: 12}}">
             <a-layout-content>
                 <a-layout style="height: 100%;" :key="locale && locale.name">
                     <a-layout-sider class="_fc-l-menu" v-show="!hiddenLeft" width="40px" v-if="false !== getConfig('showMenuBar')">
@@ -396,8 +396,8 @@
                     </a-modal>
                 </a-layout>
             </a-layout-content>
-        </a-layout>
-    </a-config-provider>
+        </a-config-provider>
+    </a-layout>
 </template>
 
 <style>
