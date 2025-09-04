@@ -134,6 +134,10 @@ export interface Config {
     hiddenMenu?: MenuName[]
     //隐藏部分组件
     hiddenItem?: string[]
+    //隐藏表单部分配置项
+    hiddenFormConfig?: string[];
+    //禁用表单部分配置项
+    disabledFormConfig?: string[];
     //隐藏组件的部分配置项
     hiddenItemConfig?: {
         default?: string[];
