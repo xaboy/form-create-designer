@@ -84,6 +84,7 @@
                 </template>
             </template>
         </a-modal>
+        <ConfigPanel :menus="menus" @change="panelChange"></ConfigPanel>
     </div>
 </template>
 
@@ -110,12 +111,16 @@ import formCreate from '@form-create/ant-design-vue';
 import ZhCn from "../src/locale/zh-cn";
 import En from "../src/locale/en";
 import {copyTextToClipboard} from "../src/utils";
+import ConfigPanel from "./components/ConfigPanel.vue";
 
 const CACHE_KEY = 'fc-config-$105';
 const TITLE = ['生成规则', '表单规则', '生成组件', '设置生成规则', '设置表单规则'];
 
 export default {
     name: 'app',
+    components: {
+        ConfigPanel,
+    },
     data() {
         let data = window.location.hash.substring(1);
         let hashData = null;
@@ -135,6 +140,7 @@ export default {
             autoSaveId: null,
             lang: 'cn',
             locale: null,
+            menus: [],
             hashData,
             topImg: true,
             config: {
@@ -166,6 +172,16 @@ export default {
     methods: {
         goPro() {
             location.href = 'https://pro.form-create.com/view';
+        },
+        panelChange(config) {
+            if (config.locale === 'en') {
+                this.locale = En;
+                this.lang = 'en';
+            } else {
+                this.locale = ZhCn;
+                this.lang = 'cn';
+            }
+            this.config = {...this.config, ...config};
         },
         getCache() {
             function def() {
@@ -404,10 +420,10 @@ export default {
                 }
             });
         }
-
         this.$nextTick(() => {
             this.loadAutoSave();
         });
+        this.menus = this.$refs.designer.menuList;
     },
     beforeDestroy() {
         const id = this.autoSaveId;
