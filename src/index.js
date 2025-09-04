@@ -31,7 +31,7 @@ import formCreate, {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor/dist/index.es.js';
 import './style/index.css';
 import './style/icon.css';
-import draggable from 'vuedraggable';
+import draggable from 'vuedraggable/src/vuedraggable';
 import {
     compareVersion,
     copyTextToClipboard,

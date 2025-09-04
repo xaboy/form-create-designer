@@ -1,5 +1,5 @@
 <script>
-import draggable from 'vuedraggable';
+import draggable from 'vuedraggable/src/vuedraggable';
 
 export default {
     name: 'DragBox',

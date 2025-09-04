@@ -1772,14 +1772,14 @@ export default defineComponent({
             },
             dragPut(to, from, dragEl) {
                 const toRule = methods.getTrueRule(to.el.__rule__);
-                const _menu = dragEl._underlying_vm_.__fc__ ? (dragEl._underlying_vm_._config || dragEl._underlying_vm_._menu) : dragEl._underlying_vm_;
+                const _menu = dragEl?.__rule__?._config || (dragEl._underlying_vm_.__fc__ ? (dragEl._underlying_vm_._config || dragEl._underlying_vm_._menu) : dragEl._underlying_vm_);
                 if (!toRule) {
                     return !_menu || this.checkDragToContainer(_menu);
                 }
                 const toMenu = toRule._menu;
                 const _fc_allow_drag = dragEl._fc_allow_drag || {};
                 if (_fc_allow_drag[toRule._fc_id] === undefined) {
-                    const _rule = methods.getTrueRule(dragEl._underlying_vm_);
+                    const _rule = methods.getTrueRule(dragEl._underlying_vm_ || dragEl.__rule__);
                     _fc_allow_drag[toRule._fc_id] = !(_menu && toMenu && !methods.checkDrag({
                         menu: _menu,
                         toMenu,
