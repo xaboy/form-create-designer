@@ -206,9 +206,9 @@ export default defineComponent({
             Object.keys(this.value || {}).forEach(k => {
                 num += Array.isArray(this.value[k]) ? this.value[k].length : 1;
             });
-            const hooks = this.activeRule ? {...this.activeRule.hook || {}} : {};
+            const hooks = this.activeRule ? {...this.activeRule._hook || {}} : {};
             Object.keys(hooks).forEach(k => {
-                num += Array.isArray(this.activeRule.hook[k]) ? this.activeRule.hook[k].length : 1;
+                num += Array.isArray(hooks[k]) ? hooks[k].length : 1;
             });
             return num;
         },
@@ -242,7 +242,7 @@ export default defineComponent({
         },
         loadFN() {
             const e = deepExtend({}, this.value || {});
-            const hooks = this.activeRule ? {...this.activeRule.hook || {}} : {};
+            const hooks = this.activeRule ? {...this.activeRule._hook || {}} : {};
             Object.keys(hooks).forEach(k => {
                 e['hook_' + k] = hooks[k];
             })
@@ -379,7 +379,7 @@ export default defineComponent({
             }
             const {on, hooks} = this.parseFN(this.event);
             this.$emit('input', on);
-            this.activeRule.hook = hooks;
+            this.activeRule._hook = hooks;
             this.visible = false;
             this.destroy();
             this.closeCus();

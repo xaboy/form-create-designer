@@ -1242,6 +1242,10 @@ export default defineComponent({
                         rule._on = rule.on;
                         delete rule.on;
                     }
+                    if (rule.hook) {
+                        rule._hook = rule.hook;
+                        delete rule.hook;
+                    }
                     if (config) {
                         const slot = rule.slot;
                         let _config;
@@ -1317,6 +1321,10 @@ export default defineComponent({
                     if (rule._on) {
                         rule.on = rule._on;
                         delete rule._on;
+                    }
+                    if (rule._hook) {
+                        rule.hook = rule._hook;
+                        delete rule._hook;
                     }
                     rule.props && Object.keys(rule.props).forEach(k => {
                         const v = rule.props[k];
