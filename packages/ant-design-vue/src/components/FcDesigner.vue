@@ -1345,6 +1345,10 @@ export default defineComponent({
                         rule.computed = rule._computed;
                         delete rule._computed;
                     }
+                    if (rule._on) {
+                        rule.on = rule._on;
+                        delete rule._on;
+                    }
                     if (!rule.slot) {
                         delete rule.slot;
                     }
