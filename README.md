@@ -29,7 +29,7 @@
 
 **[@form-create/antd-designer](https://github.com/xaboy/form-create-designer/tree/next/packages/ant-design-vue)** 是基于 [@form-create/ant-design-vue](https://github.com/xaboy/form-create) 和 **AntDesignVue** 实现的低代码表单设计器组件。支持Vue3
 
-[![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg)](https://pro.form-create.com/view)
+[![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg?20251027)](https://pro.form-create.com/view)
 
 ## 特点
 - 使用JSON数据生成表单
