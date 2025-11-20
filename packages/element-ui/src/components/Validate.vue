@@ -7,29 +7,45 @@
                         <span>{{ idx + 1 }}</span>
                         {{ modes[item.mode] }}
                     </div>
-                    <i class="fc-icon icon-delete2" @click="remove(idx)"></i>
+                    <i class="fc-icon icon-delete-circle" @click="remove(idx)"></i>
                 </div>
                 <el-row>
                     <el-col :span="getSpan(item)">
                         <el-form-item :label="t('validate.mode')">
                             <el-select v-model="item.trigger" @change="onInput">
-                                <el-option
-                                    v-for="item in triggers"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value"
-                                />
+                                <el-option v-for="item in triggers" :key="item.value" :label="item.label" :value="item.value" />
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="getSpan(item)">
+                    <el-col
+                        :span="getSpan(item)"
+                        v-if="
+                            [
+                                'required',
+                                'uppercase',
+                                'lowercase',
+                                'email',
+                                'url',
+                                'ip',
+                                'phone',
+                                'positive',
+                                'negative',
+                                'integer',
+                                'number',
+                            ].indexOf(item.mode) === -1
+                        "
+                    >
                         <el-form-item :label="modes[item.mode]">
                             <template v-if="item.mode === 'pattern'">
                                 <elInput v-model="item[item.mode]" @change="onInput"></elInput>
                             </template>
                             <template v-else-if="item.mode === 'validator'">
-                                <FnInput v-model="item[item.mode]" name="name" :args="['rule', 'value', 'callback']"
-                                         @change="onInput">{{ t('validate.modes.validator') }}
+                                <FnInput
+                                    v-model="item[item.mode]"
+                                    name="validator"
+                                    :args="item.adapter ? ['value', 'callback'] : ['rule', 'value', 'callback']"
+                                    @change="onInput"
+                                >{{ t('validate.modes.validator') }}
                                 </FnInput>
                             </template>
                             <template v-else>
@@ -39,8 +55,7 @@
                     </el-col>
                     <el-col :span="24">
                         <el-form-item :label="t('validate.message')">
-                            <LanguageInput v-model="item.message" :placeholder="t('validate.requiredPlaceholder')"
-                                           @change="onInput">
+                            <LanguageInput v-model="item.message" :placeholder="t('validate.requiredPlaceholder')" @change="onInput">
                             </LanguageInput>
                         </el-form-item>
                     </el-col>
@@ -49,7 +64,7 @@
         </template>
 
         <el-dropdown trigger="click" size="default" popper-class="_fd-validate-pop" @command="handleCommand">
-            <el-button class="_fd-validate-btn" size="small">{{ t('validate.rule') }} +</el-button>
+            <el-button class="_fd-validate-btn" plain size="small">{{ t('validate.rule') }} + </el-button>
             <template #dropdown>
                 <el-dropdown-menu>
                     <el-dropdown-item :command="value" v-for="(label, value) in modes" :key="value">
@@ -82,7 +97,7 @@ export default defineComponent({
     watch: {
         modelValue(n) {
             this.validate = this.parseValue(n || []);
-        }
+        },
     },
     data() {
         return {
@@ -98,15 +113,27 @@ export default defineComponent({
             if (activeRule && activeRule._menu.subForm === 'object') {
                 return {
                     validator: this.t('validate.modes.validator'),
-                }
+                };
             } else {
                 return {
+                    len: this.t('validate.modes.len'),
+                    maxLen: this.t('validate.modes.maxLen'),
+                    minLen: this.t('validate.modes.minLen'),
+                    pattern: this.t('validate.modes.pattern'),
+                    uppercase: this.t('validate.modes.uppercase'),
+                    lowercase: this.t('validate.modes.lowercase'),
+                    email: this.t('validate.modes.email'),
+                    url: this.t('validate.modes.url'),
+                    ip: this.t('validate.modes.ip'),
+                    phone: this.t('validate.modes.phone'),
                     min: this.t('validate.modes.min'),
                     max: this.t('validate.modes.max'),
-                    len: this.t('validate.modes.len'),
-                    pattern: this.t('validate.modes.pattern'),
+                    positive: this.t('validate.modes.positive'),
+                    negative: this.t('validate.modes.negative'),
+                    integer: this.t('validate.modes.integer'),
+                    number: this.t('validate.modes.number'),
                     validator: this.t('validate.modes.validator'),
-                }
+                };
             }
         },
         triggers() {
@@ -115,60 +142,90 @@ export default defineComponent({
                 {label: 'change', value: 'change'},
                 {label: 'submit', value: 'submit'},
             ]);
-        }
+        },
     },
     methods: {
         handleCommand(mode) {
-            this.validate.push({
-                transform: new Function('val', 'this.type = val == null ? \'string\' : (Array.isArray(val) ? \'array\' : (typeof val)); return val;'),
+            const newItem = {
                 mode,
-                trigger: 'blur'
-            });
+                trigger: 'blur',
+                adapter: true,
+            };
+
+            // 为不同类型的验证规则设置默认值
+            if (['uppercase', 'lowercase', 'email', 'url', 'ip', 'phone', 'positive', 'negative', 'integer', 'number'].includes(mode)) {
+                newItem[mode] = true;
+            } else if (['min', 'max', 'len', 'minLen', 'maxLen'].includes(mode)) {
+                newItem[mode] = 0;
+            } else if (mode === 'pattern') {
+                newItem[mode] = '';
+            }
+            this.validate.push(newItem);
         },
         autoMessage(item) {
             const title = this.designer.setupState.activeRule.title;
             if (this.designer.setupState.activeRule) {
-                item.message = this.t('validate.autoRequired', {title})
+                item.message = this.t('validate.autoRequired', {title});
                 this.onInput();
             }
         },
         getSpan(item) {
-            return ['pattern', 'validator', 'required'].indexOf(item.mode) > -1 ? 24 : 12;
+            return [
+                'pattern',
+                'validator',
+                'required',
+                'uppercase',
+                'lowercase',
+                'email',
+                'url',
+                'ip',
+                'phone',
+                'positive',
+                'negative',
+                'integer',
+                'number',
+            ].indexOf(item.mode) > -1
+                ? 24
+                : 12;
         },
         onInput: function () {
-            this.$emit('update:modelValue', this.validate.map(item => {
-                item = {...item};
-                if (!item.message) {
-                    delete item.message;
-                }
-                return item;
-            }));
+            this.$emit(
+                'update:modelValue',
+                this.validate.map(item => {
+                    item = {...item};
+                    if (!item.message) {
+                        delete item.message;
+                    }
+                    return item;
+                })
+            );
         },
         remove(idx) {
             this.validate.splice(idx, 1);
             this.onInput();
         },
         parseValue(val) {
-            return deepCopy(val.map(v => {
-                if (v.validator) {
-                    v.mode = 'validator';
-                }
-                if (!v.mode) {
-                    Object.keys(v).forEach(k => {
-                        if (['message', 'type', 'trigger', 'mode'].indexOf(k) < 0) {
-                            v.mode = k;
-                        }
-                    });
-                }
-                return v;
-            }));
-        }
-    }
+            return deepCopy(
+                val.map(v => {
+                    if (v.validator) {
+                        v.mode = 'validator';
+                    }
+                    if (!v.mode) {
+                        Object.keys(v).forEach(k => {
+                            if (['message', 'type', 'trigger', 'mode'].indexOf(k) < 0) {
+                                v.mode = k;
+                            }
+                        });
+                    }
+                    return v;
+                })
+            );
+        },
+    },
 });
 </script>
 
 <style>
-
 ._fd-validate {
     display: flex;
     flex-direction: column;
