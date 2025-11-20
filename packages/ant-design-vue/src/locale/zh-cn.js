@@ -178,7 +178,11 @@ const ZhCn = {
         optionsType: {
             fetch: '远程数据',
             struct: '静态数据',
-        }
+        },
+        preview: '预览响应数据',
+        test: '测试请求',
+        previewEmpty: '点击"测试请求"按钮预览响应数据',
+        requestFailed: '请求失败'
     },
     style: {
         width: '宽度',
