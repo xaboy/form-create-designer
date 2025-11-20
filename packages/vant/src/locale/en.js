@@ -370,7 +370,7 @@ const En = {
         top: 'top',
         bottom: 'bottom',
         round: 'round',
-        card: 'card',
+        card: 'Card',
         line: 'line',
         text: 'text',
         picture: 'picture',
@@ -624,15 +624,18 @@ const En = {
         },
         group: {
             name: 'Subform',
+            info: 'Callback function before removing subform item, return false to prevent removal',
             props: {
+                type: 'Type',
+                title: 'Title',
                 disabled: 'Disabled',
-                syncDisabled: 'Whether to force synchronization of the disabled state with the subform',
                 expand: 'Set the default expansion items',
                 button: 'Whether to display the operation button',
                 sortBtn: 'Whether to display the sort button',
                 min: 'Set the minimum number of items to add',
                 max: 'Set the maximum number of items to add',
-            }
+                onBeforeRemove: 'Before remove callback',
+            },
         },
         html: {
             name: 'HTML',

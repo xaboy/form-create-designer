@@ -402,6 +402,7 @@ const ZhCn = {
         option: '选项',
         callback: '回调',
         style: '样式',
+        card: '卡片',
         _self: '当前窗口',
         _blank: '新的窗口',
         _parent: '父级窗口',
@@ -647,7 +648,10 @@ const ZhCn = {
         },
         group: {
             name: '子表单',
+            info: '删除子表单项前的回调函数,返回 false 可阻止删除操作',
             props: {
+                type: '类型',
+                title: '标题',
                 disabled: '是否禁用',
                 syncDisabled: '是否与子表单强制同步禁用状态',
                 expand: '设置默认展开几项',
@@ -655,7 +659,8 @@ const ZhCn = {
                 sortBtn: '是否显示排序按钮',
                 min: '设置最小添加几项',
                 max: '设置最多添加几项',
-            }
+                onBeforeRemove: '删除前置回调',
+            },
         },
         html: {
             name: 'HTML',
