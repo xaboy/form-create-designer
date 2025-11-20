@@ -603,9 +603,11 @@ const En = {
         },
         signaturePad: {
             name: 'Signature',
+            info: 'Callback function before removing signature, return false to prevent removal',
             props: {
                 penColor: 'Line color',
                 disabled: 'Disabled',
+                beforeRemove: 'Before remove callback',
             }
         },
         group: {

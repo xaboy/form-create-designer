@@ -602,9 +602,11 @@ const ZhCn = {
         },
         signaturePad: {
             name: '手写签名',
+            info: '删除签名前的回调函数，返回 false 可阻止删除操作',
             props: {
                 penColor: '线条的颜色',
                 disabled: '禁用',
+                beforeRemove: '删除前置回调',
             }
         },
         group: {
