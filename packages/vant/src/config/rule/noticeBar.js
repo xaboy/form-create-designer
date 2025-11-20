@@ -15,6 +15,9 @@ export default {
             props: {
                 text: t('com.' + name + '.description'),
             },
+            style: {
+                width: '100%',
+            },
             children: []
         };
     },
