@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import {localeProps} from '../../utils';
+import {getInjectArg, localeProps} from '../../utils';
 
 const label = '手写签名';
 const name = 'signaturePad';
@@ -32,6 +32,18 @@ export default {
             {
                 type: 'switch',
                 field: 'disabled',
+            },
+            {
+                type: 'FnInput',
+                field: 'beforeRemove',
+                warning: t('com.signaturePad.info'),
+                props: {
+                    body: true,
+                    button: true,
+                    fnx: true,
+                    args: [getInjectArg(t)],
+                    name: 'beforeRemove',
+                }
             },
         ]);
     },
