@@ -79,12 +79,13 @@
         "vue": "^3.5"
     },
     "dependencies": {
-        "@form-create/ant-design-vue": "^3.2.30",
+        "@form-create/ant-design-vue": "^3.2.33",
         "@form-create/component-wangeditor": "^3.2.14",
-        "@form-create/utils": "^3.2.23",
+        "@form-create/utils": "^3.2.31",
         "ant-design-vue": "~4.2.6",
         "codemirror": "^6.65.7",
         "js-beautify": "^1.15.1",
+        "marked": "^17.0.0",
         "signature_pad": "^5.0.10",
         "vuedraggable": "4.1.0"
     }

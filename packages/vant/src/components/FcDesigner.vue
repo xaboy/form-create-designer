@@ -38,9 +38,21 @@
                             <i class="fc-icon icon-script"></i>
                         </div>
                     </el-tooltip>
+                    <el-tooltip
+                        v-if="getConfig('showAi', true)"
+                        effect="dark"
+                        :content="t('ai.name')"
+                        placement="right"
+                        :hide-after="0"
+                    >
+                        <div class="_fc-l-menu-item" :class="{ active: activeModule === 'ai' }" @click="activeModule = 'ai'">
+                            <i class="fc-icon icon-ai bright"></i>
+                        </div>
+                    </el-tooltip>
                 </el-aside>
-                <el-aside class="_fc-l" v-if="!hiddenLeft" :width="activeModule === 'language' ? '450px' : '266px'">
+                <el-aside class="_fc-l" v-if="!hiddenLeft" :width="activeModule === 'language' || activeModule === 'ai' ? '450px' : '266px'">
                     <div class="_fc-l-close" @click="hiddenLeft = true"><i class="fc-icon icon-arrow"></i></div>
+                    <FcAiPanel v-show="activeModule === 'ai'"></FcAiPanel>
                     <LanguageConfig v-if="activeModule === 'language'"></LanguageConfig>
                     <JsonPreview v-if="activeModule === 'json'"></JsonPreview>
                     <el-container style="height: 100%;" v-if="activeModule === 'base'">
@@ -464,6 +476,7 @@ import TypeSelect from './TypeSelect.vue';
 import PropsInput from './PropsInput.vue';
 import mergeProps from '@form-create/utils/lib/mergeprops';
 import LanguageConfig from './language/LanguageConfig.vue';
+import FcAiPanel from './ai/AiPanel.vue';
 import JsonPreview from './JsonPreview.vue';
 import Warning from './Warning.vue';
 import ConfigItem from './style/ConfigItem.vue';
@@ -478,6 +491,7 @@ export default defineComponent({
         Warning,
         JsonPreview,
         LanguageConfig,
+        FcAiPanel,
         PropsInput,
         TypeSelect,
         fcDraggable,
