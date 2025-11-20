@@ -36,7 +36,7 @@ export function makeTreeOptions(pre, config, level, data = []) {
     return data;
 }
 
-export const makeTitleRule = ()=>{
+export const makeTitleRule = () => {
     return [
         {
             type: 'switch', field: 'formCreateNative', props: {
@@ -78,7 +78,11 @@ export function makeOptionsRule(t, to) {
                     type: 'TableOptions',
                     field: 'formCreate' + upper(to).replace('.', '>'),
                     props: {
-                        column: [{label: t('props.key'), key: 'text'}, {value: true, label: t('props.value'), key: 'value'}],
+                        column: [{label: t('props.key'), key: 'text'}, {
+                            value: true,
+                            label: t('props.value'),
+                            key: 'value'
+                        }],
                         keyValue: 'text',
                     }
                 },
@@ -427,4 +431,65 @@ export function copyTextToClipboard(text) {
 
 export function uniqueArray(arr) {
     return arr.filter((item, index) => arr.indexOf(item) === index);
+}
+
+/**
+ * 节流函数 - 在指定时间内只执行一次函数
+ * @param {Function} func 要节流的函数
+ * @param {number} delay 延迟时间（毫秒）
+ * @param {Object} options 选项
+ * @param {boolean} options.leading 是否在开始时执行
+ * @param {boolean} options.trailing 是否在结束时执行
+ * @returns {Function} 节流后的函数
+ */
+export function throttle(func, delay, options = {}) {
+    const {leading = false, trailing = true} = options;
+    let timeout;
+    let previous = 0;
+    let result;
+    let lastArgs;
+    let lastContext;
+
+    const throttled = function (...args) {
+        const now = Date.now();
+        const context = this;
+
+        // 保存最后一次调用的参数和上下文
+        lastArgs = args;
+        lastContext = context;
+
+        // 如果是第一次调用且不需要在开始时执行
+        if (!previous && !leading) {
+            previous = now;
+        }
+
+        const remaining = delay - (now - previous);
+
+        if (remaining <= 0 || remaining > delay) {
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+            previous = now;
+            result = func.apply(lastContext, lastArgs);
+        } else if (!timeout && trailing) {
+            timeout = setTimeout(() => {
+                previous = leading ? 0 : Date.now();
+                timeout = null;
+                result = func.apply(lastContext, lastArgs);
+            }, remaining);
+        }
+
+        return result;
+    };
+
+    throttled.cancel = function () {
+        clearTimeout(timeout);
+        previous = 0;
+        timeout = null;
+        lastArgs = null;
+        lastContext = null;
+    };
+
+    return throttled;
 }

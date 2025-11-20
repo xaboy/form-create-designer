@@ -433,6 +433,7 @@ import {
     isNull,
     mobileTemplate,
     mobileTemplateV3,
+    throttle,
     uniqueArray,
     upper,
     useLocale,
@@ -829,9 +830,18 @@ export default defineComponent({
             },
             watchActiveRule() {
                 methods.unWatchActiveRule();
-                unWatchActiveRule = watch(() => data.activeRule, function (n) {
-                    n && methods.updateRuleFormData()
-                }, {deep: true, flush: 'post'});
+                unWatchActiveRule = watch(
+                    () => data.activeRule,
+                    function (n, o) {
+                        if (n) {
+                            methods.updateRuleFormData();
+                            if (n === o) {
+                                methods.addOperationRecordThrottle(methods.getJson());
+                            }
+                        }
+                    },
+                    {deep: true, flush: 'post'}
+                );
             },
             makeChildren(children) {
                 return reactive({children}).children;
@@ -1433,6 +1443,7 @@ export default defineComponent({
                         rule: data.activeRule,
                         ctx: vm,
                     });
+                    methods.addOperationRecordThrottle(methods.getJson());
                 }
             },
             validateChange(field, value, _, fapi) {
@@ -2168,15 +2179,24 @@ export default defineComponent({
             },
             handleSortBefore() {
             },
-            addOperationRecord() {
-                const rule = methods.getJson();
+            addOperationRecord(_rule) {
+                const rule = _rule || methods.getJson();
                 const formData = deepCopy(data.inputForm.data);
                 const list = data.operation.list.slice(0, data.operation.idx + 1);
                 list.push({rule, formData});
+                const maxRecords = 20;
+                if (list.length > maxRecords) {
+                    list.splice(0, list.length - maxRecords);
+                    data.operation.idx = maxRecords - 1;
+                } else {
+                    data.operation.idx = list.length - 1;
+                }
                 data.operation.list = list;
-                data.operation.idx = list.length - 1;
                 data.unloadStatus = list.length !== 1;
             },
+            addOperationRecordThrottle: throttle(rule => {
+                methods.addOperationRecord(rule);
+            }, 3000),
             prevOperationRecord() {
                 if (!data.operation.list[data.operation.idx - 1]) {
                     return;
