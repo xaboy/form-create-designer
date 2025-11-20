@@ -11,7 +11,7 @@
                 {{ t('fetch.optionsType.fetch') }}
                 <Warning :tooltip="t('warning.fetch')"></Warning>
             </template>
-            <el-container class="_fd-gfc-con" style="height: 450px;">
+            <el-container class="_fd-gfc-con" style="height: 600px;">
                 <el-tabs model-value="first" class="_fc-tabs" style="width: 100%">
                     <el-tab-pane :label="t('fetch.config')" name="first">
                         <DragForm v-model:api="form.api" v-model="form.formData" :rule="form.rule"

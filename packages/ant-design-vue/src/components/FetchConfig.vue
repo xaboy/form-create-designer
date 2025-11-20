@@ -11,7 +11,7 @@
                 {{ t('fetch.optionsType.fetch') }}
                 <Warning :tooltip="t('warning.fetch')"></Warning>
             </template>
-            <a-layout class="_fd-fetch-con" style="height: 450px;">
+            <a-layout class="_fd-fetch-con" style="height: 600px;">
                 <a-tabs class="_fc-tabs">
                     <a-tab-pane :tab="t('fetch.config')" key="first" style="padding-right: 15px;">
                         <DragForm v-model:api="form.api" v-model="form.formData" :rule="form.rule"

@@ -198,9 +198,6 @@ export default {
                 type: 'th',
                 native: true,
                 class: '_fc-tf-head-idx',
-                props: {
-                    innerText: '#'
-                }
             }];
             let body = [{
                 type: 'td',

@@ -36,58 +36,6 @@
                                         <i class="fc-icon icon-add-col"
                                            style="transform: rotate(90deg);"></i>
                                     </div>
-                                    <div class="_fd-drag-btn _fd-table-view-btn" @click.stop>
-                                        <el-dropdown trigger="click" @command="command">
-                                            <i class="fc-icon icon-setting"></i>
-                                            <template #dropdown>
-                                                <el-dropdown-menu>
-                                                    <el-dropdown-item
-                                                        :command="['addCol', [{pid,idx,data: lattice[pid][idx]}, 1]]">
-                                                        {{ t('tableOptions.addLeft') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item
-                                                        :command="['addCol', [{pid,idx,data: lattice[pid][idx]}, 0]]">
-                                                        {{ t('tableOptions.addRight') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item
-                                                        :command="['addRow', [{pid,idx,data: lattice[pid][idx]}, 1]]">
-                                                        {{ t('tableOptions.addTop') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item
-                                                        :command="['addRow', [{pid,idx,data: lattice[pid][idx]}, 0]]">
-                                                        {{ t('tableOptions.addBottom') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item divided :disabled="lattice[pid][idx].right"
-                                                                      :command="['mergeRight', [{pid,idx,data: lattice[pid][idx]}]]">
-                                                        {{ t('tableOptions.mergeRight') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item :disabled="lattice[pid][idx].bottom"
-                                                                      :command="['mergeBottom', [{pid,idx,data: lattice[pid][idx]}]]">
-                                                        {{ t('tableOptions.mergeBottom') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item divided
-                                                                      :disabled="!(lattice[pid][idx].layout && lattice[pid][idx].layout.col > 1)"
-                                                                      :command="['splitCol', [{pid,idx,data: lattice[pid][idx]}]]">
-                                                        {{ t('tableOptions.splitCol') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item
-                                                        :disabled="!(lattice[pid][idx].layout && lattice[pid][idx].layout.row > 1)"
-                                                        :command="['splitRow', [{pid,idx,data: lattice[pid][idx]}]]">
-                                                        {{ t('tableOptions.splitRow') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item divided :disabled="rule.col < 2"
-                                                                      :command="['rmCol', [{pid,idx,data: lattice[pid][idx]}]]">
-                                                        {{ t('tableOptions.rmCol') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item :disabled="rule.row < 2"
-                                                                      :command="['rmRow', [{pid,idx,data: lattice[pid][idx]}]]">
-                                                        {{ t('tableOptions.rmRow') }}
-                                                    </el-dropdown-item>
-                                                </el-dropdown-menu>
-                                            </template>
-                                        </el-dropdown>
-                                    </div>
-
                                 </template>
                             </DragTool>
                         </td>
@@ -558,9 +506,6 @@ export default defineComponent({
                 }
             });
         },
-        command(type) {
-            this[type[0]](...type[1]);
-        },
         rmSlot(slot, rmSlot) {
             const slotKey = Object.keys(slot);
             const children = this.formCreateInject.children;
@@ -580,89 +525,6 @@ export default defineComponent({
             rmSlot.forEach(v => {
                 delete this.style[v];
             });
-            this.loadRule();
-        },
-        rmRow(row) {
-            this.clearSelection();
-            this.rule.row--;
-            const slot = {};
-            const rmSlot = [];
-            for (let index = row.pid; index < this.rule.row + 1; index++) {
-                for (let idx = 0; idx < this.rule.col; idx++) {
-                    if (index === row.pid) {
-                        rmSlot.push(`${row.pid}:${idx}`);
-                    } else {
-                        slot[`${index}:${idx}`] = `${index - 1}:${idx}`;
-                    }
-                }
-            }
-            let del = 0;
-            const layout = this.rule.layout;
-            [...layout].forEach((v, i) => {
-                if (v.top === row.pid) {
-                    layout.splice(i - del, 1);
-                    del++;
-                }
-            });
-            layout.forEach(v => {
-                if (v.top > row.pid) {
-                    v.top--;
-                }
-            });
-            this.rmSlot(slot, rmSlot);
-        },
-        rmCol(row) {
-            this.clearSelection();
-            this.rule.col--;
-            const slot = {};
-            const rmSlot = [];
-            for (let index = 0; index < this.rule.row; index++) {
-                for (let idx = row.idx + 1; idx < this.rule.col + 1; idx++) {
-                    slot[`${index}:${idx}`] = `${index}:${idx - 1}`;
-                }
-                rmSlot.push(`${index}:${row.idx}`);
-            }
-            let del = 0;
-            const layout = this.rule.layout;
-            [...layout].forEach((v, i) => {
-                if (v.left === row.idx) {
-                    layout.splice(i - del, 1);
-                    del++;
-                }
-            });
-            layout.forEach(v => {
-                if (v.left > row.idx) {
-                    v.left--;
-                }
-            });
-            this.rmSlot(slot, rmSlot);
-        },
-        splitRow(item) {
-            this.clearSelection();
-            const layout = item.data.layout;
-            const row = layout.row;
-            layout.row = 0;
-            if (row > 1) {
-                for (let i = 1; i < row; i++) {
-                    this.rule.layout.push({
-                        ...layout, top: layout.top + i
-                    });
-                }
-            }
-            this.loadRule();
-        },
-        splitCol(item) {
-            this.clearSelection();
-            const layout = item.data.layout;
-            const col = layout.col;
-            layout.col = 0;
-            if (col > 1) {
-                for (let i = 1; i < col; i++) {
-                    this.rule.layout.push({
-                        ...layout, left: layout.left + i
-                    });
-                }
-            }
             this.loadRule();
         },
         makeMap(layout) {
@@ -786,54 +648,6 @@ export default defineComponent({
                 this.rmSlot(slot, []);
             }
             this.rule.layout = layout;
-            this.loadRule();
-        },
-        mergeRight(item) {
-            this.clearSelection();
-            let layout;
-            if (item.data.layout) {
-                const col = (item.data.layout.col || 1) + 1;
-                item.data.layout.col = (col + item.idx) > this.rule.col ? this.rule.col - item.idx : col;
-                layout = item.data.layout;
-            } else {
-                layout = {
-                    top: item.pid,
-                    left: item.idx,
-                    col: 2,
-                };
-                this.rule.layout.push(layout);
-            }
-            const map = this.makeMap(layout);
-            this.formCreateInject.children.forEach(child => {
-                if (!child.slot) return;
-                if (map.indexOf(child.slot) > -1) {
-                    child.slot = `${item.pid}:${item.idx}`;
-                }
-            });
-            this.loadRule();
-        },
-        mergeBottom(item) {
-            this.clearSelection();
-            let layout;
-            if (item.data.layout) {
-                const row = (item.data.layout.row || 1) + 1;
-                item.data.layout.row = (row + row.pid) > this.rule.col ? this.rule.col - item.pid : row;
-                layout = item.data.layout;
-            } else {
-                layout = {
-                    top: item.pid,
-                    left: item.idx,
-                    row: 2,
-                };
-                this.rule.layout.push(layout);
-            }
-            const map = this.makeMap(layout);
-            this.formCreateInject.children.forEach(child => {
-                if (!child.slot) return;
-                if (map.indexOf(child.slot) > -1) {
-                    child.slot = `${item.pid}:${item.idx}`;
-                }
-            });
             this.loadRule();
         },
         addCol(row, type) {
@@ -1045,8 +859,22 @@ export default defineComponent({
     max-height: 100%;
 }
 
-._fd-table-view-cell > ._fd-drag-tool > ._fd-tableCell-drag {
+._fd-table-view ._fd-table-view-cell > ._fd-drag-tool > ._fd-tableCell-drag {
     min-height: 80px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+._fd-table-view ._fd-table-view-cell [class*='_fd-fcTable-slot'] {
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 ._fd-table-view-btn {
@@ -1058,15 +886,6 @@ export default defineComponent({
     width: 18px;
     color: #fff;
     font-size: 16px;
-}
-
-._fd-table-view-icon {
-    color: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    margin-top: 1px;
 }
 
 ._fd-table-view > table {

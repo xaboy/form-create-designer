@@ -208,6 +208,8 @@ export default {
     border: 0 none;
     border-right: 1px solid #EBEEF5;
     border-bottom: 1px solid #EBEEF5;
+    text-align: center;
+    vertical-align: middle;
 }
 
 ._fc-table.is-mini td {

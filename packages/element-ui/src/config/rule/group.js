@@ -1,4 +1,4 @@
-import {localeProps} from '../../utils';
+import {getInjectArg, localeProps} from '../../utils';
 import uniqueId from '@form-create/utils/lib/unique';
 
 const label = '子表单';
@@ -9,11 +9,11 @@ export default {
     icon: 'icon-subform',
     label,
     name,
+    input: true,
     inside: false,
     drag: true,
     dragBtn: true,
     mask: false,
-    input: true,
     event: ['change'],
     subForm: 'array',
     loadRule(rule) {
@@ -34,20 +34,53 @@ export default {
             title: t('com.group.name'),
             info: '',
             $required: false,
-            props: {},
-            children: []
+            props: {
+                title: '第{index}页',
+            },
+            children: [],
         };
     },
     props(_, {t}) {
-        return localeProps(t, name + '.props', [{
-            type: 'switch',
-            field: 'disabled'
-        }, {type: 'switch', field: 'syncDisabled', value: true},
-        {type: 'switch', field: 'button', value: true},
-        {type: 'switch', field: 'sortBtn', value: true},
-        {type: 'inputNumber', field: 'expand'},
-        {type: 'inputNumber', field: 'min'},
-        {type: 'inputNumber', field: 'max'},
+        return localeProps(t, name + '.props', [
+            {
+                type: 'select',
+                field: 'type',
+                options: [
+                    {label: t('props.default'), value: 'default'},
+                    {label: t('props.card'), value: 'card'},
+                ],
+                control: [
+                    {
+                        value: 'card',
+                        rule: ['title'],
+                    },
+                ],
+            },
+            {
+                type: 'input',
+                field: 'title',
+            },
+            {
+                type: 'switch',
+                field: 'disabled',
+            },
+            {type: 'switch', field: 'button', value: true},
+            {type: 'switch', field: 'sortBtn', value: true},
+            {type: 'inputNumber', field: 'expand'},
+            {type: 'inputNumber', field: 'min'},
+            {type: 'inputNumber', field: 'max'},
+            {
+                type: 'FnInput',
+                field: 'onBeforeRemove',
+                warning: t('com.group.info'),
+                props: {
+                    body: true,
+                    button: true,
+                    fnx: true,
+                    args: [getInjectArg(t)],
+                    name: 'onBeforeRemove',
+                },
+            },
         ]);
-    }
+    },
 };
