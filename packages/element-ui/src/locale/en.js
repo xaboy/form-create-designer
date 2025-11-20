@@ -175,7 +175,11 @@ const En = {
         optionsType: {
             fetch: 'Fetch',
             struct: 'Static',
-        }
+        },
+        preview: 'Preview Response Data',
+        test: 'Test Request',
+        previewEmpty: 'Click "Test Request" button to preview response data',
+        requestFailed: 'Request Failed'
     },
     style: {
         width: 'Width',

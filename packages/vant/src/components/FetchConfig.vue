@@ -27,6 +27,31 @@
                                 </template>
                             </template>
                         </DragForm>
+                        <div class="_fd-fetch-preview">
+                            <div class="_fd-fetch-preview-header">
+                                <span class="_fd-fetch-preview-title">{{ t('fetch.preview') }}</span>
+                                <el-button size="small" type="primary" @click="previewData" :loading="previewLoading">
+                                    {{ t('fetch.test') }}
+                                </el-button>
+                            </div>
+                            <div class="_fd-fetch-preview-content">
+                                <div v-if="!previewResult" class="_fd-fetch-preview-empty">
+                                    {{ t('fetch.previewEmpty') }}
+                                </div>
+                                <div v-else class="_fd-fetch-preview-result">
+                                    <div class="_fd-fetch-preview-status">
+                                        <el-tag disable-transitions
+                                                :type="previewResult.success ? 'success' : 'danger'">
+                                            {{ previewResult.success ? t('props.success') : t('props.error') }}
+                                        </el-tag>
+                                        <span class="_fd-fetch-preview-time">{{ previewResult.time }}ms</span>
+                                    </div>
+                                    <div class="_fd-fetch-preview-data">
+                                        <pre>{{ previewResult.data }}</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </el-tab-pane>
                     <el-tab-pane lazy :label="t('fetch.beforeFetch')" name="second">
                         <template #label>
@@ -71,7 +96,7 @@ import {deepCopy} from '@form-create/utils/lib/deepextend';
 import FnEditor from './FnEditor.vue';
 import StructEditor from './StructEditor.vue';
 import {defineComponent} from 'vue';
-import {elmFormCreate} from '../utils/form';
+import {elmFormCreate as designerForm} from '../utils/form';
 import errorMessage from '../utils/message';
 import is from '@form-create/utils/lib/type';
 import Warning from './Warning.vue';
@@ -161,7 +186,7 @@ export default defineComponent({
     },
     components: {
         Warning,
-        DragForm: elmFormCreate.$form(),
+        DragForm: designerForm.$form(),
         FnEditor,
         StructEditor
     },
@@ -182,7 +207,9 @@ export default defineComponent({
                     submitBtn: false,
                     resetBtn: false,
                 }
-            }
+            },
+            previewLoading: false,
+            previewResult: null
         };
     },
     computed: {
@@ -223,8 +250,8 @@ export default defineComponent({
                 if ((this.$refs.parse && !this.$refs.parse.save()) || (this.$refs.beforeFetch && !this.$refs.beforeFetch.save()) || (this.$refs.error && !this.$refs.error.save())) {
                     return;
                 }
-                formData.parse = elmFormCreate.parseFn(this.form.parse);
-                formData.beforeFetch = elmFormCreate.parseFn(this.form.beforeFetch);
+                formData.parse = designerForm.parseFn(this.form.parse);
+                formData.beforeFetch = designerForm.parseFn(this.form.beforeFetch);
                 formData.onError = this.form.onError;
                 formData.label = this.form.label;
                 formData.type = this.form.type;
@@ -234,6 +261,40 @@ export default defineComponent({
             }).catch(err => {
                 console.error(err);
                 errorMessage(err[Object.keys(err)[0]][0].message);
+            });
+        },
+        previewData() {
+            this.form.api.validate().then(() => {
+                this.previewLoading = true;
+                this.previewResult = null;
+                const startTime = Date.now();
+                const formData = {...this.form.formData};
+                delete formData.beforeFetch;
+                delete formData.parse;
+                delete formData.onError;
+                if (this.form.beforeFetch) {
+                    formData.beforeFetch = designerForm.parseFn(this.form.beforeFetch);
+                }
+                this.designer.setupState.dragForm.api
+                    .fetch(formData)
+                    .then(response => {
+                        const endTime = Date.now();
+                        this.previewResult = {
+                            success: true,
+                            time: endTime - startTime,
+                            data: JSON.stringify(response, null, 2),
+                        };
+                        this.previewLoading = false;
+                    })
+                    .catch(() => {
+                        const endTime = Date.now();
+                        this.previewResult = {
+                            success: false,
+                            time: endTime - startTime,
+                            data: this.t('fetch.requestFailed'),
+                        };
+                        this.previewLoading = false;
+                    });
             });
         },
     },
@@ -270,5 +331,85 @@ export default defineComponent({
 
 ._fd-gfc-con .CodeMirror-wrap pre.CodeMirror-line {
     padding-left: 20px;
+}
+
+._fd-fetch-preview {
+    margin-top: 20px;
+    margin-left: 15px;
+    border: 1px solid #ececec;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+._fd-fetch-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #ececec;
+    background: #f5f5f5;
+    border-radius: 6px 6px 0 0;
+}
+
+._fd-fetch-preview-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #262626;
+}
+
+._fd-fetch-preview-content {
+    padding: 15px;
+    min-height: 120px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+._fd-fetch-preview-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    color: #aaaaaa;
+    font-size: 13px;
+    background: rgba(170, 170, 170, 0.05);
+    border-radius: 4px;
+    border: 1px dashed #ececec;
+}
+
+._fd-fetch-preview-result {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+._fd-fetch-preview-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+._fd-fetch-preview-time {
+    font-size: 12px;
+    color: #aaaaaa;
+    font-family: monospace;
+}
+
+._fd-fetch-preview-data {
+    background: #f5f5f5;
+    border: 1px solid #ececec;
+    border-radius: 4px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+._fd-fetch-preview-data pre {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #666666;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 </style>
