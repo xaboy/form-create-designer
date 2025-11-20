@@ -277,6 +277,10 @@
     color: #2E73FF;
 }
 
+._fc-r-tab-props > ._fd-config-item{
+    margin-top: 15px;
+}
+
 ._fc-r .ant-layout-content {
     padding: 20px 20px 100px;
 }

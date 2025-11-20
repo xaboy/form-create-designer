@@ -1,6 +1,7 @@
 <template>
     <div class="_fd-drag-tool" @click.stop="active" :class="{active: fcx.active === id}">
         <div class="_fd-drag-mask" v-if="mask"></div>
+        <div class="_fd-drag-hidden" v-if="hidden"><i class="fc-icon icon-eye-close"></i> {{ t('props.hide') }}</div>
         <div class="_fd-drag-l" v-if="!hiddenBtn && permission.move !== false" @click.stop>
             <div class="_fd-drag-btn" v-if="dragBtn !== false" v-show="fcx.active === id" style="cursor: move;">
                 <i class="fc-icon icon-move"></i>
@@ -40,6 +41,7 @@ export default defineComponent({
         dragBtn: Boolean,
         children: String,
         mask: Boolean,
+        hidden: Boolean,
         handleBtn: [Boolean, Array],
         formCreateInject: Object,
         unique: String,
@@ -82,6 +84,9 @@ export default defineComponent({
         },
         rule() {
             return this.formCreateInject?.rule?._config._get();
+        },
+        t() {
+            return this.designer.setupState.t;
         },
         permission() {
             if (!this.rule) {
@@ -189,13 +194,33 @@ export default defineComponent({
     font-size: 14px;
 }
 
-._fd-drag-mask {
+._fd-drag-mask,
+._fd-drag-hidden {
     z-index: 1900;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;;
+    bottom: 0;
+}
+
+._fd-drag-hidden {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(51, 51, 51, 0.7);
+    color: #ffffff;
+    font-size: 14px;
+}
+
+._fd-drag-tool:hover ._fd-drag-hidden,
+._fd-drag-tool.active ._fd-drag-hidden,
+._fd-drag-tool:has(._fd-drag-tool.active) ._fd-drag-hidden {
+    display: none;
+}
+
+._fd-drag-hidden .fc-icon {
+    margin-right: 5px;
 }
 
 ._fd-drag-tool:hover {
