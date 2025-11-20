@@ -10,7 +10,8 @@
     "scripts": {
         "clean": "rimraf dist/",
         "dev": "vue-cli-service serve",
-        "build": "vite build --config ./vite.config.build.js",
+        "build": "vite build --config ./vite.config.build.js && vite build --config ./vite.config.form.js",
+        "build:form": "vite build --config ./vite.config.form.js",
         "build:locale": "gulp -f gulpfile.js",
         "build:preview": "vite build --config ./vite.config.preview.js"
     },
