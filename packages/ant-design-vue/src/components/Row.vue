@@ -1,10 +1,7 @@
 <template>
-    <a-col :span="24">
-        <div class="_fd-row ant-row" :class="{'_fc-child-empty' : !$slots.default}" v-bind="$attrs">
-            <slot name="default"></slot>
-        </div>
-    </a-col>
-
+    <div class="_fd-row ant-row" :class="{'_fc-child-empty': !$slots.default}" v-bind="$attrs">
+        <slot name="default"></slot>
+    </div>
 </template>
 
 <script>
@@ -20,9 +17,10 @@ export default defineComponent({
 
 <style>
 ._fd-row {
-    display: flex;
-    flex-flow: row wrap;
-    min-width: 0;
     width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
 }
 </style>
