@@ -282,6 +282,11 @@
                                         </template>
                                     </el-input>
                                 </template>
+                                <template v-if="activeRule">
+                                    <ConfigItem :label="t('props.hide')">
+                                        <el-switch size="small" :modelValue="activeRule._hidden" @update:modelValue="toolHidden(activeRule)"></el-switch>
+                                    </ConfigItem>
+                                </template>
                             </template>
                             <div class="_fc-r-config" :style="{'grid-template-areas': configFormOrderStyle}">
                                 <div style="grid-area: base;">
@@ -460,6 +465,7 @@ import mergeProps from '@form-create/utils/lib/mergeprops';
 import LanguageConfig from './language/LanguageConfig.vue';
 import JsonPreview from './JsonPreview.vue';
 import Warning from './Warning.vue';
+import ConfigItem from './style/ConfigItem.vue';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
@@ -467,6 +473,7 @@ hljs.registerLanguage('xml', xml);
 export default defineComponent({
     name: 'FcDesignerMobile',
     components: {
+        ConfigItem,
         Warning,
         JsonPreview,
         LanguageConfig,
@@ -1238,22 +1245,13 @@ export default defineComponent({
                     }
                     config && config.loadRule && config.loadRule(rule);
                     rule.children = methods.loadRule(rule.children || [], config, template);
-                    if (rule.control) {
-                        rule._control = rule.control;
-                        delete rule.control;
-                    }
-                    if (rule.computed) {
-                        rule._computed = rule.computed;
-                        delete rule.computed;
-                    }
-                    if (rule.on) {
-                        rule._on = rule.on;
-                        delete rule.on;
-                    }
-                    if (rule.hook) {
-                        rule._hook = rule.hook;
-                        delete rule.hook;
-                    }
+                    const alias = ['control', 'computed', 'on', 'hidden', 'display', 'hook'];
+                    alias.forEach(k => {
+                        if (rule[k] != null) {
+                            rule['_' + k] = rule[k];
+                            delete rule[k];
+                        }
+                    });
                     if (config) {
                         const slot = rule.slot;
                         let _config;
@@ -1309,24 +1307,15 @@ export default defineComponent({
                     if (rule._fc_drag_tag === '_') {
                         delete rule._fc_drag_tag;
                     }
-                    if (rule._control) {
-                        rule.control = rule._control;
-                        delete rule._control;
-                    }
-                    if (rule._computed) {
-                        rule.computed = rule._computed;
-                        delete rule._computed;
-                    }
+                    const alias = ['control', 'computed', 'on', 'hidden', 'display', 'hook'];
+                    alias.forEach(k => {
+                        if (rule['_' + k] != null && rule['_' + k] !== '') {
+                            rule[k] = rule['_' + k];
+                        }
+                        delete rule['_' + k];
+                    });
                     if (!rule.slot) {
                         delete rule.slot;
-                    }
-                    if (rule._on) {
-                        rule.on = rule._on;
-                        delete rule._on;
-                    }
-                    if (rule._hook) {
-                        rule.hook = rule._hook;
-                        delete rule._hook;
                     }
                     rule.props && Object.keys(rule.props).forEach(k => {
                         const v = rule.props[k];
@@ -2018,6 +2007,7 @@ export default defineComponent({
                             dragBtn: config.dragBtn !== false,
                             children: config.children,
                             mask: dragMask,
+                            hidden: rule._hidden === true || rule._display === false,
                             handleBtn: config.handleBtn,
                             only,
                         },
@@ -2082,6 +2072,7 @@ export default defineComponent({
                             dragBtn: config.dragBtn !== false,
                             children: config.children,
                             mask: dragMask,
+                            hidden: rule._hidden === true || rule._display === false,
                             handleBtn: config.handleBtn,
                             only,
                         },
@@ -2139,6 +2130,18 @@ export default defineComponent({
                         _config: rule._menu,
                         children: methods.makeChildren([rule])
                     };
+                }
+            },
+            toolHidden(rule) {
+                const status = !(rule._hidden === undefined ? false : rule._hidden);
+                if (rule._menu.inside) {
+                    rule.children[0].props.hidden = status;
+                } else {
+                    rule.__fc__.parent.rule.props.hidden = status;
+                }
+                rule._hidden = status;
+                if (!status) {
+                    rule._display = true;
                 }
             },
             toolHandle(rule, event) {

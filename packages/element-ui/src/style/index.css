@@ -234,6 +234,10 @@
     color: #2E73FF;
 }
 
+._fc-r-tab-props > ._fd-config-item{
+    margin-top: 15px;
+}
+
 ._fc-r .el-main {
     padding-bottom: 100px;
 }
