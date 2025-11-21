@@ -50,6 +50,7 @@ export default defineComponent({
         penColor: String,
         disabled: Boolean,
         formCreateInject: Object,
+        beforeRemove: Function,
     },
     watch: {
         visible(val) {
@@ -89,9 +90,17 @@ export default defineComponent({
             this.$emit('update:modelValue', val);
             this.$emit('change', val);
         },
-        remove() {
+        async remove() {
             if (this.disabled) {
-                return ;
+                return;
+            }
+            // 检查是否有删除前置回调
+            if (this.beforeRemove) {
+                const result = await this.beforeRemove();
+                // 如果回调返回 false，则停止删除
+                if (result === false) {
+                    return;
+                }
             }
             this.updateValue('');
             this.$emit('remove');
