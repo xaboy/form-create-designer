@@ -174,6 +174,7 @@ const ZhCn = {
         hook_watch: '组件规则发生变化后触发',
         hook_value: '组件的值发生变化后触发',
         hook_hidden: '组件显示状态发生变化后触发',
+        hook_titleClick: '点击组件的标签名称时触发',
     },
     fetch: {
         title: '设置数据源',

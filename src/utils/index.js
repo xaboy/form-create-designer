@@ -353,13 +353,7 @@ export const getRuleDescription = (children) => {
 export function getInjectArg(t) {
     return {
         name: '$inject',
-        columns: [
-            {label: '$inject.api', info: t('event.inject.api'), type: 'Api'},
-            {label: '$inject.rule', info: t('event.inject.rule'), type: 'Rule[]'},
-            {label: '$inject.self', info: t('event.inject.self'), type: 'Rule'},
-            {label: '$inject.option', info: t('event.inject.option'), type: 'Object'},
-            {label: '$inject.args', info: t('event.inject.args'), type: 'Array'},
-        ]
+        info: `$inject <a href="https://view.form-create.com/inject" target="_blank">${t('form.document')}</a>`,
     };
 }
 

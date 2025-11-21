@@ -206,7 +206,11 @@ export default {
             return this.designer.config?.ai?.api || 'https://api.form-create.com/ai/v2/chat/form';
         },
         token() {
-            return this.designer.config?.ai?.token;
+            let token = this.designer.config?.ai?.token || '';
+            if (token.indexOf('Bearer') === -1) {
+                token = `Bearer ${token}`;
+            }
+            return token;
         },
     },
     methods: {
