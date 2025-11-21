@@ -1075,8 +1075,12 @@ export default defineComponent({
                 delete options._event;
                 options.submitBtn = options._submitBtn;
                 options.resetBtn = options._resetBtn;
-                options.resetBtn.innerText = t('props.reset');
-                options.submitBtn.innerText = t('props.submit');
+                if (!options.resetBtn.innerText) {
+                    options.resetBtn.innerText = t('props.reset');
+                }
+                if (!options.submitBtn.innerText) {
+                    options.submitBtn.innerText = t('props.submit');
+                }
                 const formData = deepCopy(data.inputForm.data);
                 if (Object.keys(formData).length > 0) {
                     options.formData = formData;
