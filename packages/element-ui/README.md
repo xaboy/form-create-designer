@@ -21,6 +21,8 @@
 
 **FcDesigner 是基于 [@form-create/element-ui](https://github.com/xaboy/form-create) 实现的低代码表单设计器组件。可以通过拖拽的方式快速创建表单，提高开发者对表单的开发效率，节省开发者的时间。支持Vue2和Vue3**
 
+**AI 表单助理已开源:[GitHub](https://github.com/xaboy/form-create-assistant)，用于根据自然语言描述自动生成和修改 FormCreate 表单规则**
+
 [![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg?20251027)](https://pro.form-create.com/view)
 
 ## 特点
@@ -35,6 +37,7 @@
 - 支持表单验证
 - 支持多语言
 - 支持表单多语言
+- 支持AI表单助理
 
 ## 支持的UI框架
 
