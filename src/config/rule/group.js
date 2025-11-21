@@ -1,4 +1,4 @@
-import {localeProps} from '../../utils';
+import {getInjectArg, localeProps} from '../../utils';
 import uniqueId from '@form-create/utils/lib/unique';
 
 const label = '子表单';
@@ -35,19 +35,32 @@ export default {
             info: '',
             $required: false,
             props: {},
-            children: []
+            children: [],
         };
     },
     props(_, {t}) {
-        return localeProps(t, name + '.props', [{
-            type: 'switch',
-            field: 'disabled'
-        }, {type: 'switch', field: 'syncDisabled', value: true},
-        {type: 'switch', field: 'button', value: true},
-        {type: 'switch', field: 'sortBtn', value: true},
-        {type: 'inputNumber', field: 'expand'},
-        {type: 'inputNumber', field: 'min'},
-        {type: 'inputNumber', field: 'max'},
+        return localeProps(t, name + '.props', [
+            {
+                type: 'switch',
+                field: 'disabled',
+            },
+            {type: 'switch', field: 'button', value: true},
+            {type: 'switch', field: 'sortBtn', value: true},
+            {type: 'inputNumber', field: 'expand'},
+            {type: 'inputNumber', field: 'min'},
+            {type: 'inputNumber', field: 'max'},
+            {
+                type: 'FnInput',
+                field: 'onBeforeRemove',
+                warning: t('com.group.info'),
+                props: {
+                    body: true,
+                    button: true,
+                    fnx: true,
+                    args: [getInjectArg(t)],
+                    name: 'onBeforeRemove',
+                },
+            },
         ]);
-    }
+    },
 };

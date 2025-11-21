@@ -199,9 +199,6 @@ export default {
                 type: 'th',
                 native: true,
                 class: '_fc-tf-head-idx',
-                domProps: {
-                    innerText: '#'
-                }
             }];
             let body = [{
                 type: 'td',

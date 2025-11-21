@@ -376,6 +376,7 @@ const En = {
         option: 'Option',
         callback: 'Callback',
         style: 'Style',
+        card: 'Card',
         _self: 'Current Window',
         _blank: 'New Window',
         _parent: 'Parent Window',
@@ -634,6 +635,7 @@ const En = {
         },
         group: {
             name: 'Subform',
+            info: 'Callback function before removing subform item, return false to prevent removal',
             props: {
                 disabled: 'Disabled',
                 syncDisabled: 'Whether to force synchronization of the disabled state with the subform',
@@ -642,7 +644,8 @@ const En = {
                 sortBtn: 'Whether to display the sort button',
                 min: 'Set the minimum number of items to add',
                 max: 'Set the maximum number of items to add',
-            }
+                onBeforeRemove: 'Before remove callback',
+            },
         },
         html: {
             name: 'HTML',

@@ -112,6 +112,7 @@ export default defineComponent({
             })
             children.splice(children.indexOf(rule), 1, replaceRule);
             this.$nextTick(() => {
+                this.designer.updateTree();
                 this.designer.triggerActive(newRule);
             });
         }
