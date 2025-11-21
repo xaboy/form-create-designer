@@ -23,6 +23,7 @@
         "access": "public"
     },
     "keywords": [
+        "AI",
         "可视化表单设计器",
         "移动端",
         "form-create",
@@ -85,7 +86,7 @@
         "@form-create/component-wangeditor": "^3.2.14",
         "@form-create/element-ui": "^3.2.33",
         "@form-create/utils": "^3.2.31",
-        "@form-create/vant": "^3.2.32",
+        "@form-create/vant": "^3.2.33",
         "codemirror": "^6.65.7",
         "element-plus": "^2.11.1",
         "js-beautify": "^1.15.1",

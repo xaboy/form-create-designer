@@ -2,30 +2,35 @@
     <div class="_fd-fn">
         <div class="_fd-fn-tip">
             <div class="_fd-fn-ind"></div>
-            <div class="cm-keyword"><span>function {{ name }}(<template
-                v-for="(item, idx) in argList" :key="idx">{{ idx > 0 ? ', ' : '' }}<template
-                v-if="item.type === 'string'"><span>{{ item.name }}</span>
-</template><template v-else><a-popover trigger="click"
-                                       :title="item.name"
-                                       :content="item.info || undefined"
-            ><span class="_fd-fn-arg">{{ item.name }}<i
-                class="fc-icon icon-question"></i></span>
-                            <template #content v-if="item.columns">
-                                <a-table
-                                    :data-source="item.columns"
-                                    :columns="columns"
-                                    size="small"
-                                    bordered
-                                    :pagination="false"
-                                    style="width: 400px">
-                                    <template #bodyCell="scope">
-                                        {{ scope.record[scope.column.dataIndex] }}
+            <div class="cm-keyword"><span
+            >function {{ name }}(<template v-for="(item, idx) in argList" :key="idx"
+            >{{
+                    idx > 0 ? ', ' : ''
+                }}<template v-if="item.type === 'string'"
+                ><span>{{ item.name }}</span> </template
+                ><template v-else
+                ><a-popover trigger="click" :title="item.name"
+                ><span class="_fd-fn-arg">{{ item.name }}<i class="fc-icon icon-question"></i></span>
+                                    <template #content>
+                                        <div class="_fd-fn-info" v-if="item.info" v-html="item.info"></div>
+                                        <a-table
+                                            v-if="item.columns"
+                                            :data-source="item.columns"
+                                            :columns="columns"
+                                            size="small"
+                                            bordered
+                                            :pagination="false"
+                                            style="width: 400px"
+                                        >
+                                            <template #bodyCell="scope">
+                                                {{ scope.record[scope.column.dataIndex] }}
+                                            </template>
+                                        </a-table>
                                     </template>
-                                </a-table>
-                            </template>
-                        </a-popover>
-                    </template>
-                    </template>) {</span></div>
+                                </a-popover>
+                            </template> </template
+            >) {</span
+            ></div>
         </div>
         <div ref="editor" class="_fd-fn-editor"></div>
         <div class="_fd-fn-tip">
@@ -274,4 +279,7 @@ export default defineComponent({
     color: #2E73FF;
 }
 
+._fd-fn-info a {
+    text-decoration: underline;
+}
 </style>

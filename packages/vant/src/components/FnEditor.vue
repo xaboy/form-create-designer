@@ -2,24 +2,31 @@
     <div class="_fd-fn">
         <div class="_fd-fn-tip">
             <div class="_fd-fn-ind"></div>
-            <div class="cm-keyword"><span>function {{ name }}(<template
-                v-for="(item, idx) in argList">{{ idx > 0 ? ', ' : '' }}<template v-if="item.type === 'string'">
-<span>{{ item.name }}</span>
-</template><template v-else><el-popover placement="top-start" :width="400" :hide-after="0" trigger="click"
-                                        :title="item.name"
-                                        :content="item.info || ''"
-            ><template #reference><span class="_fd-fn-arg">{{ item.name }}<i
-                class="fc-icon icon-question"></i></span></template>
-                            <template v-if="item.columns">
-                                <el-table :data="item.columns" border>
-                            <el-table-column width="120" property="label" :label="t('event.label')"/>
-                            <el-table-column property="info" :label="t('event.info')"/>
-                            <el-table-column width="80" property="type" :label="t('event.type')"/>
-                          </el-table>
-                            </template>
-                        </el-popover>
-                    </template>
-                    </template>) {</span></div>
+            <div class="cm-keyword"><span
+            >function {{ name }}(<template v-for="(item, idx) in argList"
+            >{{
+                    idx > 0 ? ', ' : ''
+                }}<template v-if="item.type === 'string'">
+                                <span>{{ item.name }}</span> </template
+                ><template v-else
+                ><el-popover placement="top-start" :width="400" :hide-after="0" trigger="click" :title="item.name"
+                ><template #reference
+                ><span class="_fd-fn-arg">{{ item.name }}<i class="fc-icon icon-question"></i></span
+                ></template>
+                                    <template v-if="item.info">
+                                        <div class="_fd-fn-info" v-html="item.info || ''"></div>
+                                    </template>
+                                    <template v-if="item.columns">
+                                        <el-table :data="item.columns" border>
+                                            <el-table-column width="120" property="label" :label="t('props.field')"/>
+                                            <el-table-column property="info" :label="t('event.info')"/>
+                                            <el-table-column width="80" property="type" :label="t('event.type')"/>
+                                        </el-table>
+                                    </template>
+                                </el-popover>
+                            </template> </template
+            >) {</span
+            ></div>
         </div>
         <div ref="editor" class="_fd-fn-editor"></div>
         <div class="_fd-fn-tip">
@@ -248,4 +255,7 @@ export default defineComponent({
     color: #3073ff;
 }
 
+._fd-fn-info a {
+    text-decoration: underline;
+}
 </style>

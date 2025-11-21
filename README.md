@@ -31,6 +31,8 @@
 
 [![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg?20251027)](https://pro.form-create.com/view)
 
+**AI 表单助理已开源:[GitHub](https://github.com/xaboy/form-create-assistant) | [Gitee](https://gitee.com/xaboy/form-create-assistant)，用于根据自然语言描述自动生成和修改 FormCreate 表单规则**
+
 ## 特点
 - 使用JSON数据生成表单
 - 支持扩展自定义组件
@@ -42,6 +44,7 @@
 - 支持表格布局
 - 支持表单验证
 - 支持表单多语言
+- 支持AI表单助理
 
 ## 支持的UI框架
 

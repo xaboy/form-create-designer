@@ -174,6 +174,7 @@ const En = {
         hook_watch: 'Triggered after component rules change',
         hook_value: 'Triggered after component value changes',
         hook_hidden: 'Triggered after component display status changes',
+        hook_titleClick: 'Triggered when the component label is clicked',
     },
     fetch: {
         title: 'Set data',
@@ -315,6 +316,8 @@ const En = {
         tree: 'Structure'
     },
     props: {
+        success: 'Success',
+        error: 'Error',
         disabled: 'disabled',
         time: 'time',
         size: 'Size',

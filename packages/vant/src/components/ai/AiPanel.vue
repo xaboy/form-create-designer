@@ -210,7 +210,7 @@ export default {
             return this.designer.props.config?.ai?.api || 'https://api.form-create.com/ai/v2/chat/form';
         },
         token() {
-            let token = this.designer.props.config?.ai?.token;
+            let token = this.designer.props.config?.ai?.token || '';
             if (token.indexOf('Bearer') === -1) {
                 token = `Bearer ${token}`;
             }
