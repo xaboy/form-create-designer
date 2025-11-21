@@ -10,7 +10,8 @@
     "module": "./dist/index.es.js",
     "scripts": {
         "dev": "vite --config vite.dev.config.js",
-        "build": "vite build",
+        "build": "vite build && vite build --config vite.config.form.js",
+        "build:form": "vite build --config vite.config.form.js",
         "build:locale": "gulp -f gulpfile.js",
         "preview": "vite build --config vite.dev.config.js"
     },
