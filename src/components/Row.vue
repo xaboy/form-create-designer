@@ -1,9 +1,7 @@
 <template>
-    <el-col :span="24">
-        <div class="_fd-row el-row" :class="{'_fc-child-empty' : !$slots.default}" v-bind="$attrs">
-            <slot name="default"></slot>
-        </div>
-    </el-col>
+    <div class="_fd-row el-row" :class="{'_fc-child-empty' : !$slots.default}" v-bind="$attrs">
+        <slot name="default"></slot>
+    </div>
 
 </template>
 
@@ -21,5 +19,9 @@ export default defineComponent({
 <style>
 ._fd-row {
     width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
 }
 </style>
