@@ -164,6 +164,15 @@ export interface Config {
         //拖拽规则name: 不可拖入的规则
         [id: string]: DenyDrag;
     };
+    //AI 模块相关配置
+    ai?: {
+        //AI 接口
+        api?: string;
+        //AI token
+        token?: string;
+    };
+    //是否显示 AI 模块,
+    showAi?: boolean;
     //是否显示左侧
     showMenuBar?: boolean;
     //是否显示保存按钮

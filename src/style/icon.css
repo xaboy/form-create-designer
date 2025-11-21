@@ -11,8 +11,20 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-vue:before {
+    content: "\e6e7";
+}
+
+.icon-stack:before {
+    content: "\e6e5";
+}
+
+.icon-excel:before {
+    content: "\e6e6";
+}
+
 .icon-write:before {
-    content: "\e60b";
+    content: "\e6e4";
 }
 
 .icon-branch:before {

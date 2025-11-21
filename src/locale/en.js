@@ -32,6 +32,15 @@ const En = {
         beforeSubmit: 'Triggered when form validation passed',
         beforeFetch: 'Triggered before remote data request is sent',
     },
+    ai: {
+        name: 'Smart Assistant',
+        welcome: 'Welcome to the AI Assistant',
+        info: 'I can help you quickly generate and modify forms, making form design easy and efficient.',
+        try: 'Try asking me',
+        change: 'Change',
+        placeholder: 'Please describe your requirements...',
+        error: 'AI service is temporarily unavailable, please try again later',
+    },
     warning: {
         name: 'Unique identifier for the component, used to access and modify its configuration rules.',
         field: 'Field name for binding data to the component. Must start with a letter for proper recognition.',
@@ -334,6 +343,7 @@ const En = {
         submit: 'Submit',
         reset: 'Reset',
         copy: 'Copy',
+        import: 'Import',
         delete: 'Delete',
         hide: 'Hidden',
         show: 'Show',
