@@ -11,6 +11,8 @@
     <span>&nbsp;|&nbsp;</span>
     <a href="https://form-create.com/v3/designer/" target="_blank">在线演示</a>
     <span>&nbsp;|&nbsp;</span>
+    <a href="https://github.com/xaboy/form-create-assistant/" target="_blank">AI 表单助理</a>
+    <span>&nbsp;|&nbsp;</span>
     <a href="https://form-create.com/v3/mobile/" target="_blank">移动端在线演示</a>
     <span>&nbsp;|&nbsp;</span>
     <a href="https://form-create.com/v3/" target="_blank">FormCreate 文档</a>
