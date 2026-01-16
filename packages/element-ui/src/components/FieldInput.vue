@@ -1,17 +1,33 @@
 <template>
     <div class="_fd-field-input">
         <i class="fc-icon icon-group" @click.stop="copy"></i>
-        <el-input
-            v-model="value"
-            :readonly="fieldReadonly || disabled"
-            :disabled="fieldReadonly || disabled"
-            @focus="onFocus"
-            @blur="onInput"
-        >
-            <template #append v-if="!fieldReadonly">
-                <i class="fc-icon icon-auto" @click="makeField"></i>
-            </template>
-        </el-input>
+        <!-- 有字段ID选项时显示下拉框 -->
+        <template v-if="hasFieldOptions">
+            <el-cascader
+                v-model="cascaderValue"
+                :options="fieldIdOptions"
+                :props="cascaderProps"
+                :placeholder="t('form.selectField') || '请选择字段'"
+                :disabled="fieldReadonly || disabled"
+                clearable
+                filterable
+                @change="onCascaderChange"
+            />
+        </template>
+        <!-- 没有选项时显示原来的输入框 -->
+        <template v-else>
+            <el-input
+                v-model="value"
+                :readonly="fieldReadonly || disabled"
+                :disabled="fieldReadonly || disabled"
+                @focus="onFocus"
+                @blur="onInput"
+            >
+                <template #append v-if="!fieldReadonly">
+                    <i class="fc-icon icon-auto" @click="makeField"></i>
+                </template>
+            </el-input>
+        </template>
     </div>
 </template>
 
@@ -39,17 +55,37 @@ export default defineComponent({
         },
         t() {
             return this.designer.setupState.t;
+        },
+        // 获取字段ID选项配置
+        fieldIdOptions() {
+            return this.designer.setupState.fieldIdOptions || [];
+        },
+        // 是否有字段ID选项
+        hasFieldOptions() {
+            return is.trueArray(this.fieldIdOptions);
+        },
+        // 级联选择器配置
+        cascaderProps() {
+            return {
+                value: 'value',
+                label: 'label',
+                children: 'children',
+                emitPath: false, // 只返回选中节点的值，不返回路径
+                checkStrictly: false, // 只能选择叶子节点
+            };
         }
     },
     data() {
         return {
             value: this.modelValue || '',
             oldValue: '',
+            cascaderValue: this.modelValue || '',
         }
     },
     watch: {
         modelValue(n) {
             this.value = n;
+            this.cascaderValue = n;
         }
     },
     methods: {
@@ -119,6 +155,22 @@ export default defineComponent({
                 }
             }
         },
+        // 级联选择器变化处理
+        onCascaderChange(val) {
+            if (val && val !== this.modelValue) {
+                this.oldValue = this.modelValue;
+                this.value = val;
+                this.cascaderValue = val;
+                // 检查是否重复
+                if (this.getSubFieldChildren().filter(v => v.field === val).length > 0) {
+                    errorMessage(this.t('computed.fieldExist', {label: val}));
+                    this.cascaderValue = this.modelValue;
+                    return;
+                }
+                this.designer.emit('changeField', {field: val, oldField: this.modelValue, rule: this.activeRule});
+                this.$emit('update:modelValue', val);
+            }
+        },
     },
 });
 </script>
@@ -150,5 +202,9 @@ export default defineComponent({
     margin: 0;
     color: #606266;
     cursor: pointer;
+}
+
+._fd-field-input .el-cascader {
+    width: 100%;
 }
 </style>

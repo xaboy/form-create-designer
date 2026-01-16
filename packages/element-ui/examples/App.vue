@@ -153,6 +153,37 @@ export default {
                 autoActive: true,
                 fieldReadonly: false,
                 showSaveBtn: true,
+                // 字段ID选项配置 - 用于动态修改字段ID选项功能
+                fieldIdOptions: [
+                    {
+                        label: '商品表',
+                        value: 'goods_table',
+                        children: [
+                            { label: '商品名称', value: 'goods_name' },
+                            { label: '商品简介', value: 'goods_desc' },
+                            { label: '商品分类', value: 'goods_category' },
+                            { label: '商品价格', value: 'goods_price' }
+                        ]
+                    },
+                    {
+                        label: '订单表',
+                        value: 'order_table',
+                        children: [
+                            { label: '订单编号', value: 'order_no' },
+                            { label: '订单金额', value: 'order_amount' },
+                            { label: '下单时间', value: 'order_time' }
+                        ]
+                    },
+                    {
+                        label: '用户表',
+                        value: 'user_table',
+                        children: [
+                            { label: '用户名', value: 'user_name' },
+                            { label: '手机号', value: 'user_phone' },
+                            { label: '邮箱', value: 'user_email' }
+                        ]
+                    }
+                ]
             },
             handle: [
                 {
