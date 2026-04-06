@@ -28,6 +28,15 @@ export default function form({t}) {
                 {value: 'small', label: 'small'},
             ])
         }, {
+            type: 'radio',
+            field: 'inline',
+            value: 'true',
+            title: t('form.inline'),
+            options: localeOptions(t, [
+                {value: true, label: 'true'},
+                {value: false, label: 'false'},
+            ])
+        }, {
             type: 'input',
             field: 'labelSuffix',
             value: '',
