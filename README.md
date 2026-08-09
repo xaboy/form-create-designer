@@ -32,7 +32,7 @@
 
 **[@form-create/antd-designer](https://github.com/xaboy/form-create-designer/tree/next/packages/ant-design-vue)** 是基于 [@form-create/ant-design-vue](https://github.com/xaboy/form-create) 和 **AntDesignVue** 实现的低代码表单设计器组件。支持Vue3
 
-[![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg?20251027)](https://pro.form-create.com/view)
+[![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg?20260809)](https://pro.form-create.com/view)
 
 **AI 表单助理已开源:[GitHub](https://github.com/xaboy/form-create-assistant) | [Gitee](https://gitee.com/xaboy/form-create-assistant) | [AtomGit](https://atomgit.com/xaboy/form-create-assistant)，用于根据自然语言描述自动生成和修改 FormCreate 表单规则**
 
