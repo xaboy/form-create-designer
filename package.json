@@ -24,7 +24,7 @@
         "@sixian/css-url": "^1.0.3",
         "@types/chalk": "^2.2.0",
         "@types/shelljs": "^0.8.9",
-        "@vitejs/plugin-vue": "^3.1.2",
+        "@vitejs/plugin-vue": "^3.2.0",
         "@vitejs/plugin-vue-jsx": "^2.0.1",
         "@vue/babel-plugin-jsx": "^1.0.7",
         "@vue/cli-plugin-babel": "^4.5.13",
