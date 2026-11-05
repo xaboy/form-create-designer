@@ -24,13 +24,13 @@
   <a href="https://github.com/xaboy/form-create" target="_blank"><img src="https://atomgit.com/xaboy/form-create-designer/star/badge.svg" alt="dt" /></a>
 </p>
 
-## FormCreate 低代码表单设计器
+## FormCreate AI表单设计器
 
-**[@form-create/designer](https://github.com/xaboy/form-create-designer/tree/next/packages/element-ui)** 是基于 [@form-create/element-ui](https://github.com/xaboy/form-create) 和 **ElementPlus** 实现的低代码表单设计器组件。支持Vue2和Vue3
+**[@form-create/designer](https://github.com/xaboy/form-create-designer/tree/next/packages/element-ui)** 是基于 [@form-create/element-ui](https://github.com/xaboy/form-create) 和 **ElementPlus** 实现的AI表单设计器组件。支持Vue2和Vue3
 
-**[@form-create/vant-designer](https://github.com/xaboy/form-create-designer/tree/next/packages/vant)** 是基于 [@form-create/vant](https://github.com/xaboy/form-create) 和 **Vant** 实现的**移动端**低代码表单设计器组件。支持Vue3
+**[@form-create/vant-designer](https://github.com/xaboy/form-create-designer/tree/next/packages/vant)** 是基于 [@form-create/vant](https://github.com/xaboy/form-create) 和 **Vant** 实现的**移动端**AI表单设计器组件。支持Vue3
 
-**[@form-create/antd-designer](https://github.com/xaboy/form-create-designer/tree/next/packages/ant-design-vue)** 是基于 [@form-create/ant-design-vue](https://github.com/xaboy/form-create) 和 **AntDesignVue** 实现的低代码表单设计器组件。支持Vue3
+**[@form-create/antd-designer](https://github.com/xaboy/form-create-designer/tree/next/packages/ant-design-vue)** 是基于 [@form-create/ant-design-vue](https://github.com/xaboy/form-create) 和 **AntDesignVue** 实现的AI表单设计器组件。支持Vue3
 
 [![FcDesigner](https://static.form-create.com/file/img/banner-m2.jpg?20260809)](https://pro.form-create.com/view)
 
