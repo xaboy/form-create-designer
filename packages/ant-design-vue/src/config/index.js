@@ -25,6 +25,7 @@ import text from './rule/text';
 import space from './rule/space';
 import tabs from './rule/tabs';
 import button from './rule/button';
+import buttonGroup from './rule/buttonGroup';
 import editor from './rule/editor';
 import group from './rule/group';
 import subForm from './rule/subForm';
@@ -45,7 +46,7 @@ import title from './rule/title';
 const ruleList = [
     input, textarea, password, number, radio, checkbox, select, _switch, rate, time, timeRange, slider, date, dateRange, cascader, upload, transfer, tree, treeSelect, editor, signaturePad,
     group, subForm, tableForm, tableFormColumn,
-    alert, button, text, title, html, divider, tag, image,
+    alert, button, buttonGroup, text, title, html, divider, tag, image,
     row, table, tabs, space, card, collapse,
     col, tabPane, collapseItem,
 ];

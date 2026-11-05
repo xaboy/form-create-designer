@@ -533,6 +533,12 @@ const ZhCn = {
                 showIcon: '是否显示图标',
             }
         },
+        aButtonGroup: {
+            name: '按钮组',
+            props: {
+                size: '尺寸',
+            }
+        },
         aButton: {
             name: '按钮',
             props: {

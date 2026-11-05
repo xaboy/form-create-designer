@@ -538,6 +538,13 @@ const En = {
                 effect: 'Select a provided theme'
             }
         },
+        elButtonGroup: {
+            name: 'Button Group',
+            props: {
+                size: 'Size',
+                type: 'Type',
+            }
+        },
         elButton: {
             name: 'Button',
             props: {

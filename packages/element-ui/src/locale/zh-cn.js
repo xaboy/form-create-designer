@@ -538,6 +538,13 @@ const ZhCn = {
                 effect: '选择提供的主题'
             }
         },
+        elButtonGroup: {
+            name: '按钮组',
+            props: {
+                size: '尺寸',
+                type: '类型',
+            }
+        },
         elButton: {
             name: '按钮',
             props: {

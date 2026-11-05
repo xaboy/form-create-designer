@@ -533,6 +533,12 @@ const En = {
                 showIcon: 'Whether to display the icon',
             }
         },
+        aButtonGroup: {
+            name: 'Button Group',
+            props: {
+                size: 'Size',
+            }
+        },
         aButton: {
             name: 'Button',
             props: {
