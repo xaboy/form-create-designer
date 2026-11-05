@@ -147,8 +147,8 @@ importers:
   packages/ant-design-vue:
     dependencies:
       '@form-create/ant-design-vue':
-        specifier: ^3.3.1
-        version: 3.3.1(vue@3.5.17(typescript@4.9.5))
+        specifier: ^3.3.6
+        version: 3.3.6(vue@3.5.17(typescript@4.9.5))
       '@form-create/component-wangeditor':
         specifier: ^3.3.0
         version: 3.3.0(vue@3.5.17(typescript@4.9.5))
@@ -226,8 +226,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0(vue@3.5.17(typescript@4.9.5))
       '@form-create/element-ui':
-        specifier: ^3.3.1
-        version: 3.3.1(vue@3.5.17(typescript@4.9.5))
+        specifier: ^3.3.6
+        version: 3.3.6(vue@3.5.17(typescript@4.9.5))
       '@form-create/utils':
         specifier: ^3.3.0
         version: 3.3.0
@@ -305,14 +305,14 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0(vue@3.5.17(typescript@4.9.5))
       '@form-create/element-ui':
-        specifier: ^3.3.1
-        version: 3.3.1(vue@3.5.17(typescript@4.9.5))
+        specifier: ^3.3.6
+        version: 3.3.6(vue@3.5.17(typescript@4.9.5))
       '@form-create/utils':
         specifier: ^3.3.0
         version: 3.3.0
       '@form-create/vant':
-        specifier: ^3.3.1
-        version: 3.3.1(vue@3.5.17(typescript@4.9.5))
+        specifier: ^3.3.6
+        version: 3.3.6(vue@3.5.17(typescript@4.9.5))
       codemirror:
         specifier: ^6.65.7
         version: 6.65.7
@@ -1086,18 +1086,18 @@ packages:
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
 
-  '@form-create/ant-design-vue@3.3.1':
-    resolution: {integrity: sha512-IGfQqB8lCNOORht9zoUAkX3rHvh6XcKVVe6GCjvvvmjZVWEr5wzBN6ctjHysefejD7VEPpypKajPiRApXdTJJQ==}
+  '@form-create/ant-design-vue@3.3.6':
+    resolution: {integrity: sha512-ECv4PH8R98TmxGFXxU8jw/adpsjts7zZ9JgcK/6VTF+jheCU1cGec4rqAfDCkyFhlM5z7dzjqfLL12hqHk8oWA==}
     peerDependencies:
       vue: ^3.5.12
 
-  '@form-create/component-antdv-frame@3.3.0':
-    resolution: {integrity: sha512-J8FNvOJDhCEUeHjmrltl4wVFq3ZgxqO99d/yF7ZX7yTRvGDueblWm9ZBDqAFZ7dk28G1cnNnOiAYi6TlY9F9ZA==}
+  '@form-create/component-antdv-frame@3.3.6':
+    resolution: {integrity: sha512-DDJ0McamaiTyLhNzxxInbkjFqQTabKvdA5o37Ad6L+gdrUQ7NGiZg5fD1djMbwz0a7g8NKIvPZghF6l3HozPgA==}
     peerDependencies:
       vue: ^3.5.12
 
-  '@form-create/component-antdv-group@3.3.0':
-    resolution: {integrity: sha512-v+r9meiSfZ09+JjjqVKml03IVSFq/e3kzAZYnaAqu56W6ZR2ClICLTJD0itYw5QePtNHeIpi+63fBCo1597d7w==}
+  '@form-create/component-antdv-group@3.3.6':
+    resolution: {integrity: sha512-JfmUT07AybJhwNNo5t1LH6JVwdhe6fFR6QnNNVEMeS6Zn7oqZr0yJ7P/zwPCiQb6aEu3gRinF8kmbs0azOKchw==}
     peerDependencies:
       vue: ^3.5.12
 
@@ -1111,13 +1111,13 @@ packages:
     peerDependencies:
       vue: ^3.5.12
 
-  '@form-create/component-elm-frame@3.3.0':
-    resolution: {integrity: sha512-4iFyg7Jaqv/Q8Lq24XEoQOBClflmMSNxh83KV+cgH3afDIJYHngVSbCqrflaB+lWyMHzIPA3cVrgRbkhkw1eyA==}
+  '@form-create/component-elm-frame@3.3.6':
+    resolution: {integrity: sha512-xEawbIxoAvDvHPnXPVqOwGy1RgbYUU20AL2VPDTXLPgddQW/2r+zZpIHfa0IGDfGj/dlD5H2kTGNPCZqdijmSg==}
     peerDependencies:
       vue: ^3.5.12
 
-  '@form-create/component-elm-group@3.3.0':
-    resolution: {integrity: sha512-9lJKkEH+hCet27WkXEX6vRf1Kc01Sj4lcEksfKHmNJe/aP+Zp6D96kmYt5M6Ew9aKSNNAPdpkkLae9AUCAz4YQ==}
+  '@form-create/component-elm-group@3.3.6':
+    resolution: {integrity: sha512-Thh+6tF24pKoxTYw8W5zkdCLBmMxTwxP/xXuLGyYVjSraEtDJKiUCovrkTjtNWxkj5Dw25NBuawcaHy9mFfXFw==}
     peerDependencies:
       vue: ^3.5.12
 
@@ -1131,8 +1131,8 @@ packages:
     peerDependencies:
       vue: ^3.5.12
 
-  '@form-create/component-elm-tree@3.3.0':
-    resolution: {integrity: sha512-C2cAxTL8zHrt2LC1HLyp+kxhXgfGU71pkv2hCM+kleU+eJ6Ly4TQoaACUwf9oCZexxjCe1dA+zq0HZ/osQdYrQ==}
+  '@form-create/component-elm-tree@3.3.6':
+    resolution: {integrity: sha512-WFRduxlZJuIVo0uNLlcrgMDsKzAOIarfJ9kMi1wJBKnT4KNzpwAjYw5JQ9+xdSHc7L5VYCeoCkfgcKBOi2G2YA==}
     peerDependencies:
       vue: ^3.5.12
 
@@ -1151,21 +1151,21 @@ packages:
     peerDependencies:
       vue: ^3.5.12
 
-  '@form-create/core@3.3.1':
-    resolution: {integrity: sha512-anUYh93YRQokYPRKKFhMh/VY/CrWnKBWblJKlzyis4d/0d5fkACMbrVBxlG1vf2ICRVL4aVadsGZqDLvrK0r/A==}
+  '@form-create/core@3.3.6':
+    resolution: {integrity: sha512-7kgEP5WAjDtpPDa5TElqk5Ez06qckCaLW2zP+ZnH54GWS5qWC4q7FNbCh2FpqaZsW5JLtLB9hO8X/zeRc8EZ5w==}
     peerDependencies:
       vue: ^3.5.12
 
-  '@form-create/element-ui@3.3.1':
-    resolution: {integrity: sha512-Iz6ikbaX+xRWGK+xelYM665KNDWfwKRREXHGtvDRrgv9Eq2X3ZzHfNTC/oPpppnoFgC9PV6LAT4XKLqhCxV+Yw==}
+  '@form-create/element-ui@3.3.6':
+    resolution: {integrity: sha512-RutgLCSTMTxFPr2zjOLZ77gSQvPbgc/gUvtynBMZqAqmYh5TRHfOflTfu7bL+q20AzeRzltDeHR1Fnw7x2reWg==}
     peerDependencies:
       vue: ^3.5.12
 
   '@form-create/utils@3.3.0':
     resolution: {integrity: sha512-4VGI3Qowkc0HsrxmC6NT1eUlEnN2xURqStjJXD+PjgbYKqzR01pNHJbz1UyfkrmcFE9HTUaWrH7IgPPxjlSo2g==}
 
-  '@form-create/vant@3.3.1':
-    resolution: {integrity: sha512-cq/ie9L1HjcXa7FE2KOx9D86p2rk8RKsMsZNBY4C/0CA++vahHL2lyJV4Fj8eAuLSDECRWA5thneRGnHjfV6uQ==}
+  '@form-create/vant@3.3.6':
+    resolution: {integrity: sha512-C3b5+pnOWtuJMk8CHj6srP0K2pQ+IAvjbRpXm8gf0kiMXwsCLgywNJeSqudO/NmXDoHxbz159rumF6HEfg4KDQ==}
     peerDependencies:
       vue: ^3.5.12
 
@@ -2819,9 +2819,6 @@ packages:
 
   dayjs@1.11.13:
     resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
-
-  dayjs@1.11.21:
-    resolution: {integrity: sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==}
 
   de-indent@1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
@@ -8172,22 +8169,22 @@ snapshots:
 
   '@floating-ui/utils@0.2.9': {}
 
-  '@form-create/ant-design-vue@3.3.1(vue@3.5.17(typescript@4.9.5))':
+  '@form-create/ant-design-vue@3.3.6(vue@3.5.17(typescript@4.9.5))':
     dependencies:
-      '@form-create/component-antdv-frame': 3.3.0(vue@3.5.17(typescript@4.9.5))
-      '@form-create/component-antdv-group': 3.3.0(vue@3.5.17(typescript@4.9.5))
+      '@form-create/component-antdv-frame': 3.3.6(vue@3.5.17(typescript@4.9.5))
+      '@form-create/component-antdv-group': 3.3.6(vue@3.5.17(typescript@4.9.5))
       '@form-create/component-antdv-upload': 3.3.0(vue@3.5.17(typescript@4.9.5))
       '@form-create/component-subform': 3.3.0(vue@3.5.17(typescript@4.9.5))
-      '@form-create/core': 3.3.1(vue@3.5.17(typescript@4.9.5))
+      '@form-create/core': 3.3.6(vue@3.5.17(typescript@4.9.5))
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
 
-  '@form-create/component-antdv-frame@3.3.0(vue@3.5.17(typescript@4.9.5))':
+  '@form-create/component-antdv-frame@3.3.6(vue@3.5.17(typescript@4.9.5))':
     dependencies:
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
 
-  '@form-create/component-antdv-group@3.3.0(vue@3.5.17(typescript@4.9.5))':
+  '@form-create/component-antdv-group@3.3.6(vue@3.5.17(typescript@4.9.5))':
     dependencies:
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
@@ -8202,12 +8199,12 @@ snapshots:
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
 
-  '@form-create/component-elm-frame@3.3.0(vue@3.5.17(typescript@4.9.5))':
+  '@form-create/component-elm-frame@3.3.6(vue@3.5.17(typescript@4.9.5))':
     dependencies:
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
 
-  '@form-create/component-elm-group@3.3.0(vue@3.5.17(typescript@4.9.5))':
+  '@form-create/component-elm-group@3.3.6(vue@3.5.17(typescript@4.9.5))':
     dependencies:
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
@@ -8222,7 +8219,7 @@ snapshots:
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
 
-  '@form-create/component-elm-tree@3.3.0(vue@3.5.17(typescript@4.9.5))':
+  '@form-create/component-elm-tree@3.3.6(vue@3.5.17(typescript@4.9.5))':
     dependencies:
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
@@ -8241,33 +8238,32 @@ snapshots:
       vue: 3.5.17(typescript@4.9.5)
       wangeditor: 4.7.15
 
-  '@form-create/core@3.3.1(vue@3.5.17(typescript@4.9.5))':
+  '@form-create/core@3.3.6(vue@3.5.17(typescript@4.9.5))':
     dependencies:
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
 
-  '@form-create/element-ui@3.3.1(vue@3.5.17(typescript@4.9.5))':
+  '@form-create/element-ui@3.3.6(vue@3.5.17(typescript@4.9.5))':
     dependencies:
       '@form-create/component-elm-checkbox': 3.3.0(vue@3.5.17(typescript@4.9.5))
-      '@form-create/component-elm-frame': 3.3.0(vue@3.5.17(typescript@4.9.5))
-      '@form-create/component-elm-group': 3.3.0(vue@3.5.17(typescript@4.9.5))
+      '@form-create/component-elm-frame': 3.3.6(vue@3.5.17(typescript@4.9.5))
+      '@form-create/component-elm-group': 3.3.6(vue@3.5.17(typescript@4.9.5))
       '@form-create/component-elm-radio': 3.3.0(vue@3.5.17(typescript@4.9.5))
       '@form-create/component-elm-select': 3.3.0(vue@3.5.17(typescript@4.9.5))
-      '@form-create/component-elm-tree': 3.3.0(vue@3.5.17(typescript@4.9.5))
+      '@form-create/component-elm-tree': 3.3.6(vue@3.5.17(typescript@4.9.5))
       '@form-create/component-elm-upload': 3.3.0(vue@3.5.17(typescript@4.9.5))
       '@form-create/component-subform': 3.3.0(vue@3.5.17(typescript@4.9.5))
-      '@form-create/core': 3.3.1(vue@3.5.17(typescript@4.9.5))
+      '@form-create/core': 3.3.6(vue@3.5.17(typescript@4.9.5))
       '@form-create/utils': 3.3.0
       vue: 3.5.17(typescript@4.9.5)
 
   '@form-create/utils@3.3.0': {}
 
-  '@form-create/vant@3.3.1(vue@3.5.17(typescript@4.9.5))':
+  '@form-create/vant@3.3.6(vue@3.5.17(typescript@4.9.5))':
     dependencies:
       '@form-create/component-subform': 3.3.0(vue@3.5.17(typescript@4.9.5))
-      '@form-create/core': 3.3.1(vue@3.5.17(typescript@4.9.5))
+      '@form-create/core': 3.3.6(vue@3.5.17(typescript@4.9.5))
       '@form-create/utils': 3.3.0
-      dayjs: 1.11.21
       vue: 3.5.17(typescript@4.9.5)
 
   '@hapi/address@2.1.4': {}
@@ -10579,8 +10575,6 @@ snapshots:
       is-data-view: 1.0.1
 
   dayjs@1.11.13: {}
-
-  dayjs@1.11.21: {}
 
   de-indent@1.0.2: {}
 

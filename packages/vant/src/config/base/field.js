@@ -18,6 +18,10 @@ export default function field({t}) {
             field: 'info',
             value: '',
             title: t('form.info'),
+            props: {
+                placeholder: t('form.infoPlaceholder'),
+                html: true,
+            },
         }, {
             type: 'select',
             field: 'formCreateWrap>labelAlign',

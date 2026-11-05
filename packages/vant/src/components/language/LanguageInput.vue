@@ -1,9 +1,17 @@
 <template>
-    <el-input class="_fd-language-input" :class="{'is-variable': isVar}" :placeholder="placeholder" :disabled="disabled"
+    <el-input class="_fd-language-input" :class="{'is-variable': isVar, 'is-break': hasBreak}" :placeholder="placeholder" :disabled="disabled"
+              :readonly="hasBreak"
               :modelValue="modelValue"
               @update:modelValue="onInput"
+              @click="onClick"
               @blur="$emit('blur')"
               :size="size || 'small'">
+        <template #suffix v-if="html">
+            <HtmlEditor ref="htmlEditor" class="_fd-language-html" :modelValue="modelValue" :title="t('form.info')"
+                        @update:modelValue="onInput" @click.stop>
+                <i class="fc-icon icon-script"></i>
+            </HtmlEditor>
+        </template>
         <template #append v-if="showLanguage !== false">
             <el-popover placement="bottom-end" :width="300" :hide-after="0" trigger="click" ref="pop"
                         popper-class="_fd-language-popover">
@@ -36,20 +44,26 @@
 
 <script>
 import {defineComponent} from 'vue';
+import HtmlEditor from '../HtmlEditor.vue';
 
 export default defineComponent({
     name: 'LanguageInput',
     inject: ['designer'],
+    components: {HtmlEditor},
     emits: ['update:modelValue', 'blur', 'change'],
     props: {
         size: String,
         placeholder: String,
         modelValue: String,
         disabled: Boolean,
+        html: Boolean,
     },
     computed: {
         isVar() {
             return !!(this.modelValue || '').match(/^\{\{\s*\$t\.(.+)\s*\}\}$/);
+        },
+        hasBreak() {
+            return this.html && /[\r\n]/.test(this.modelValue || '');
         },
         t() {
             return this.designer.setupState.t;
@@ -103,6 +117,15 @@ export default defineComponent({
         onInput(val) {
             this.$emit('update:modelValue', val);
             this.$emit('change', val);
+        },
+        onClick(e) {
+            if (!this.hasBreak || this.disabled) {
+                return;
+            }
+            if (e.target.closest('.el-input-group__append, ._fd-language-html')) {
+                return;
+            }
+            this.$refs.htmlEditor.open();
         }
     },
     mounted() {
@@ -118,6 +141,27 @@ export default defineComponent({
     overflow: auto;
 }
 
+._fd-language-input ._fd-language-html._fd-html-editor {
+    width: auto;
+    display: inline-flex;
+    line-height: 1;
+}
+
+._fd-language-input ._fd-language-html ._fd-html-editor-trigger {
+    display: inline-flex;
+    line-height: 1;
+}
+
+._fd-language-html .fc-icon {
+    cursor: pointer;
+    font-size: 14px;
+    color: #AAAAAA;
+}
+
+._fd-language-html .fc-icon:hover {
+    color: #2E73FF;
+}
+
 ._fd-language-input .el-input-group__append {
     width: 25px;
     padding: 0;
@@ -128,6 +172,10 @@ export default defineComponent({
 
 ._fd-language-input.is-variable input {
     color: #2E73FF;
+}
+
+._fd-language-input.is-break input {
+    cursor: pointer;
 }
 
 ._fd-language-header, ._fd-language-item {

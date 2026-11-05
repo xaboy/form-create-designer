@@ -1,6 +1,10 @@
 <template>
     <div class="_fd-html-editor">
-        <el-button @click="visible=true" style="width: 100%;">{{ title || t('struct.title') }}</el-button>
+        <div class="_fd-html-editor-trigger" @click="visible=true">
+            <slot>
+                <el-button style="width: 100%;">{{ title || t('struct.title') }}</el-button>
+            </slot>
+        </div>
         <el-dialog class="_fd-html-editor-con" :title="title || t('struct.title')" v-model="visible"
                   :close-on-click-modal="false" append-to-body>
             <div ref="editor" v-if="visible"></div>
@@ -64,9 +68,15 @@ export default defineComponent({
                 return '';
             }
         },
+        open() {
+            this.visible = true;
+        },
         load() {
             this.oldVal = this.modelValue;
             this.$nextTick(() => {
+                if (!this.$refs.editor) {
+                    return;
+                }
                 this.editor = markRaw(CodeMirror(this.$refs.editor, {
                     lineNumbers: true,
                     mode: 'xml',

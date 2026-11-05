@@ -4,6 +4,7 @@ const En = {
         field: 'Field',
         title: 'Title',
         info: 'Info',
+        infoPlaceholder: 'HTML is supported. Use <br/> for line breaks',
         control: 'Control',
         labelPosition: 'Label position',
         labelStyle: 'Label style',

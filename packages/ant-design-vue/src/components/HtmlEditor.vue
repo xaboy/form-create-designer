@@ -1,6 +1,10 @@
 <template>
     <div class="_fd-html-editor">
-        <a-button class="_fd-plain-button" type="primary" size="small" ghost @click="visible=true">{{ title || t('struct.title') }}</a-button>
+        <div class="_fd-html-editor-trigger" @click="visible=true">
+            <slot>
+                <a-button class="_fd-plain-button" type="primary" size="small" ghost>{{ title || t('struct.title') }}</a-button>
+            </slot>
+        </div>
         <a-modal class="_fd-html-editor-con" :title="title || t('struct.title')" v-model:open="visible"
                  centered :maskClosable="false" :destroyOnClose="true" width="800px">
             <div ref="editor" v-if="visible"></div>
@@ -64,9 +68,15 @@ export default defineComponent({
                 return '';
             }
         },
+        open() {
+            this.visible = true;
+        },
         load() {
             this.oldVal = this.modelValue;
             this.$nextTick(() => {
+                if (!this.$refs.editor) {
+                    return;
+                }
                 this.editor = markRaw(CodeMirror(this.$refs.editor, {
                     lineNumbers: true,
                     mode: 'xml',
@@ -99,7 +109,7 @@ export default defineComponent({
     width: 100%;
 }
 
-._fd-html-editor > .ant-btn {
+._fd-html-editor-trigger > .ant-btn {
     font-weight: 400;
     width: 100%;
     font-size: 12px;
