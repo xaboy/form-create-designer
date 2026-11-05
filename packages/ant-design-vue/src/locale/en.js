@@ -810,10 +810,16 @@ const En = {
                 tags: 'Tags',
                 combobox: 'Combobox',
             },
+            filterProp: {
+                label: 'Label',
+                value: 'Value',
+            },
             props: {
                 disabled: 'Disabled',
                 allowClear: 'Is it possible to clear the options?',
                 placeholder: 'Placeholder',
+                showSearch: 'Whether search is enabled',
+                optionFilterProp: 'Field used when searching',
                 bordered: 'Whether there is a border',
                 mode: 'Mode',
             }

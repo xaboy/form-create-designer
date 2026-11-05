@@ -47,6 +47,17 @@ export default {
                     {label: 'tags', value: 'tags'},
                     {label: 'combobox', value: 'combobox'},
                 ], 'com.select.modeOpt'),
-            }, {type: 'input', field: 'placeholder'}, {type: 'switch', field: 'bordered'}])
+            }, {type: 'input', field: 'placeholder'}, {
+                type: 'switch',
+                field: 'showSearch',
+            }, {
+                type: 'select',
+                field: 'optionFilterProp',
+                value: 'value',
+                options: localeOptions(t, [
+                    {label: 'label', value: 'label'},
+                    {label: 'value', value: 'value'},
+                ], 'com.select.filterProp'),
+            }, {type: 'switch', field: 'bordered'}])
     }
 };

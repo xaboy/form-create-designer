@@ -811,10 +811,16 @@ const ZhCn = {
                 tags: '标签',
                 combobox: '单选',
             },
+            filterProp: {
+                label: '选项标签',
+                value: '选项值',
+            },
             props: {
                 disabled: '是否禁用',
                 allowClear: '是否可以清空选项',
                 placeholder: '占位符',
+                showSearch: '是否可搜索',
+                optionFilterProp: '搜索时匹配的字段',
                 bordered: '是否有边框',
                 mode: '模式',
             }
