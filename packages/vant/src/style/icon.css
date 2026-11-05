@@ -11,8 +11,32 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-config:before {
+.icon-btn-group:before {
+    content: '\e72a';
+}
+
+.icon-config-slots:before {
+    content: '\e72b';
+}
+
+.icon-btn:before {
+    content: '\e72c';
+}
+
+.icon-shortcut:before {
     content: '\e724';
+}
+
+.icon-config:before {
+    content: '\e728';
+}
+
+.icon-write-line:before {
+    content: '\e726';
+}
+
+.icon-layout-line:before {
+    content: '\e721';
 }
 
 .icon-ai-chat:before {
@@ -314,7 +338,7 @@
 }
 
 .icon-grid-line:before {
-    content: '\e600';
+    content: '\e727';
 }
 
 .icon-print:before {

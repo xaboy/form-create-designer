@@ -114,7 +114,7 @@ function isSubFormContainer(rule, dragRule) {
 }
 
 function isRequired(rule) {
-    return rule.$required !== false;
+    return !!rule.$required;
 }
 
 function typeToColumnDef(typeInfo, options = {}) {
