@@ -21,7 +21,7 @@
                 <div class="_fd-language-list">
                     <div class="_fd-language-header">
                         <div class="_fd-language-title">
-                            {{ t('language.select') }}<i class="fc-icon icon-setting" @click="openConfig"></i>
+                            <div>{{ t('language.select') }}<i class="fc-icon icon-setting" @click="openConfig"></i></div>
                         </div>
                         <div class="_fd-language-name">
                             <template v-for="item in localeList" :key="item.value">
@@ -137,7 +137,6 @@ export default defineComponent({
 <style>
 ._fd-language-list {
     max-height: 320px;
-    padding-top: 70px;
     overflow: auto;
 }
 
@@ -181,31 +180,53 @@ export default defineComponent({
 ._fd-language-header, ._fd-language-item {
     display: flex;
     border-bottom: 1px solid #ECECEC;
-    padding: 0 12px;
 }
 
 ._fd-language-header {
     font-weight: 500;
-    padding-top: 10px;
-    overflow: auto;
+    overflow: hidden;
     color: #262626;
-    position: absolute;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
+    z-index: 1;
     background-color: #FFFFFF;
     flex-direction: column;
+    border-bottom: none;
 }
 
 ._fd-language-name > div, ._fd-language-item > div {
     flex: 1;
     font-size: 12px;
-    padding: 5px;
-    min-width: 70px;
+    line-height: 18px;
+    padding: 8px 12px;
+    min-width: 0;
+    word-break: break-word;
+}
+
+._fd-language-name > div + div,
+._fd-language-item > div + div {
+    border-left: 1px solid #ECECEC;
 }
 
 ._fd-language-title {
-    margin: 6px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin: 0;
+    padding: 10px 12px 8px;
+}
+
+._fd-language-title > div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+._fd-language-title .el-input {
+    width: 100%;
 }
 
 ._fd-language-title .fc-icon {
@@ -216,16 +237,31 @@ export default defineComponent({
 
 ._fd-language-name {
     display: flex;
+    background: #F5F5F5;
+    border-top: 1px solid #ECECEC;
+    border-bottom: 1px solid #ECECEC;
 }
 
 ._fd-language-name > div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #AAAAAA;
+    font-weight: 400;
 }
 
 ._fd-language-item {
     cursor: pointer;
+    align-items: flex-start;
+}
+
+._fd-language-empty {
+    color: #AAAAAA;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
 }
 
 ._fd-language-item:hover {
