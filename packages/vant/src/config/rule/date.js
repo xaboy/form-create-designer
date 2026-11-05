@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeOptions, localeProps} from '../../utils';
+import {datePickerSqlType} from '../../utils/sqlType';
 
 const label = '日期';
 const name = 'datePicker';
@@ -10,6 +11,7 @@ export default {
     label,
     name,
     input: true,
+    sqlType: datePickerSqlType,
     event: ['confirm', 'cancel', 'change'],
     rule({t}) {
         return {

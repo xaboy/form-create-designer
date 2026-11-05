@@ -12,6 +12,7 @@ export default {
     input: true,
     event: ['change', 'search', 'selectChange'],
     validate: ['array'],
+    sqlType: 'array',
     rule({t}) {
         return {
             type: name,

@@ -10,6 +10,7 @@ export default {
     label,
     name,
     input: true,
+    sqlType: 'array',
     inside: false,
     drag: true,
     dragBtn: true,

@@ -12,6 +12,12 @@ export default {
     input: true,
     event: ['change'],
     validate: ['number'],
+    sqlType(rule) {
+        const max = rule.props?.max ?? 5;
+        const scale = 1;
+        const integerDigits = Math.max(1, Math.floor(max).toString().length);
+        return {type: 'decimal', precision: integerDigits + scale, scale};
+    },
     rule({t}) {
         return {
             type: name,

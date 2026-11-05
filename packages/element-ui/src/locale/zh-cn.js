@@ -22,6 +22,7 @@ const ZhCn = {
         formName: '表单名称',
         componentMode: '生成组件',
         htmlMode: '生成HTML',
+        sqlMode: '生成SQL',
         document: '帮助文档',
         controlDocument: '需要更详细的配置方法？请查看{doc}',
         onSubmit: '表单提交时触发',

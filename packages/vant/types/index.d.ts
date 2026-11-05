@@ -260,6 +260,38 @@ export interface Config {
     };
 }
 
+export type SqlTypeName = 'string' | 'text' | 'float' | 'number' | 'decimal' | 'date' | 'array' | 'object' | 'boolean';
+
+export interface SqlTypeDecimalConfig {
+    type: 'decimal';
+    /** 总位数，默认 10 */
+    precision?: number;
+    /** 小数位数，默认 2 */
+    scale?: number;
+}
+
+export type SqlType = SqlTypeName | SqlTypeDecimalConfig;
+
+export interface SqlTable {
+    /** 数据表名称 */
+    name: string;
+    /** 建表 SQL */
+    sql: string;
+}
+
+export type SqlAlterAction = 'createTable' | 'dropTable' | 'addColumn' | 'dropColumn' | 'modifyColumn' | 'renameColumn';
+
+export interface SqlAlter {
+    /** 数据表名称 */
+    name: string;
+    /** 变更类型 */
+    action: SqlAlterAction;
+    /** 字段名称 */
+    field?: string;
+    /** 变更 SQL */
+    sql: string;
+}
+
 //拖拽组件描述规则
 export interface DragRule {
     //组件id,不能重复
@@ -325,6 +357,8 @@ export interface DragRule {
     event?: Array<string | {name: string, info: string}>;
     //当前组件`value`的数据类型
     validate?: string[] | 'required' | boolean;
+    //生成 SQL 时字段值类型: string→VARCHAR, text→TEXT, float→DOUBLE, number→INT, decimal→DECIMAL(p,s), date→TIMESTAMP, boolean→TINYINT(1), array/object→JSON
+    sqlType?: SqlType | ((rule: Rule) => SqlType);
 }
 
 //远程数据
@@ -533,6 +567,10 @@ export declare const FcDesigner: import("vue").DefineComponent<{
     mergeOptions: (opt: Options) => void;
     //获取 Html
     getHtml: () => string;
+    //获取表单对应的数据表建表 SQL
+    getSQL: () => SqlTable[];
+    //对比历史建表 SQL 与当前表单，生成 schema 变更语句（CREATE / ALTER / DROP）
+    getSQLDiff: (oldSql?: SqlTable[]) => SqlAlter[];
     //获取设计器表单的渲染规则(Array)
     getRule: () => Rule[];
     //获取设计器表单的json渲染规则(string)

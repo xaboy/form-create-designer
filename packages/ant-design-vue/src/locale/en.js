@@ -27,6 +27,7 @@ const En = {
         formName: 'Form name',
         componentMode: 'Component',
         htmlMode: 'HTML',
+        sqlMode: 'SQL',
         document: 'Document',
         controlDocument: 'Need more detailed configuration methods? Please view {doc}',
         onSubmit: 'Triggered when form is submitted',

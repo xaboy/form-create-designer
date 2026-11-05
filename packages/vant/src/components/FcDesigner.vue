@@ -377,8 +377,9 @@
                         <el-tab-pane :label="t('form.formMode')" name="form"></el-tab-pane>
                         <el-tab-pane :label="t('form.componentMode')" name="component"></el-tab-pane>
                         <el-tab-pane :label="t('form.htmlMode')" name="html"></el-tab-pane>
+                        <el-tab-pane :label="t('form.sqlMode')" name="sql"></el-tab-pane>
                     </el-tabs>
-                    <div class="_fd-preview-copy" v-if="['component', 'html'].indexOf(previewStatus) > -1"
+                    <div class="_fd-preview-copy" v-if="['component', 'html', 'sql'].indexOf(previewStatus) > -1"
                          @click="copyCode">
                         <i class="fc-icon icon-copy"></i>
                     </div>
@@ -394,7 +395,8 @@
                         </ViewForm>
                     </template>
                     <pre class="_fd-preview-code" ref="previewCode" v-else-if="previewStatus === 'component'"><code v-html="preview.component"></code></pre>
-                    <pre class="_fd-preview-code" ref="previewCode" v-else><code v-html="preview.html"></code></pre>
+                    <pre class="_fd-preview-code" ref="previewCode" v-else-if="previewStatus === 'html'"><code v-html="preview.html"></code></pre>
+                    <pre class="_fd-preview-code" ref="previewCode" v-else-if="previewStatus === 'sql'"><code v-html="preview.sql"></code></pre>
                 </el-dialog>
             </el-container>
         </el-main>
@@ -454,6 +456,8 @@ import errorMessage from '../utils/message';
 import hljs from '../utils/highlight/highlight.min';
 import xml from '../utils/highlight/xml.min';
 import javascript from '../utils/highlight/javascript.min';
+import sql from '../utils/highlight/sql.min';
+import {sqlAlterTemplate, sqlTemplate} from '../utils/sql';
 import TypeSelect from './TypeSelect.vue';
 import PropsInput from './PropsInput.vue';
 import mergeProps from '@form-create/utils/lib/mergeprops';
@@ -467,6 +471,7 @@ import ConfigItem from './style/ConfigItem.vue';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
+hljs.registerLanguage('sql', sql);
 
 function flatOptionValue(value, prefix, data) {
     if (data == null || typeof data !== 'object' || Array.isArray(data)) {
@@ -625,6 +630,7 @@ export default defineComponent({
             activePermission: {},
             children: ref([]),
             treeInfo: [],
+            oldSql: null,
             dragRuleList: {},
             eventShow: false,
             unloadStatus: false,
@@ -635,6 +641,7 @@ export default defineComponent({
                 rule: [],
                 option: {},
                 api: {},
+                sql: '',
             },
             inputForm: {
                 state: false,
@@ -1092,12 +1099,33 @@ export default defineComponent({
                     htmlTemplate(rule, options),
                     {language: 'xml'}
                 ).value
+                data.preview.sql = hljs.highlight(
+                    sqlTemplate(data.children, data.dragRuleList, {
+                        ...data.preview.option,
+                        getTitle: methods.getTitle,
+                    }).map(item => item.sql).join('\n\n'),
+                    {language: 'sql'}
+                ).value
             },
             copyCode() {
                 copyTextToClipboard(this.$refs.previewCode.innerText);
             },
             getHtml() {
                 return htmlTemplate(methods.getJson(), methods.getOptionsJson());
+            },
+            getSQL() {
+                const options = designerForm.parseJson(methods.getOptionsJson());
+                return sqlTemplate(data.children, data.dragRuleList, {
+                    ...options,
+                    getTitle: methods.getTitle,
+                });
+            },
+            getSQLDiff(oldSql) {
+                const options = designerForm.parseJson(methods.getOptionsJson());
+                return sqlAlterTemplate(oldSql || data.oldSql || [], data.children, data.dragRuleList, {
+                    ...options,
+                    getTitle: methods.getTitle,
+                });
             },
             getRule() {
                 return methods.parseRule(deepCopy(data.dragForm.rule[0].children));
@@ -1167,7 +1195,15 @@ export default defineComponent({
                 data.children = ref(methods.loadRule(is.String(rules) ? designerForm.parseJson(rules) : deepCopy(rules)));
                 methods.clearActiveRule();
                 data.dragForm.rule = methods.makeDragRule(methods.makeChildren(data.children));
+                if (data.children.length && !data.oldSql) {
+                    methods.refreshSQL();
+                }
                 methods.updateTree();
+            },
+            refreshSQL() {
+                nextTick(() => {
+                    data.oldSql = methods.getSQL();
+                });
             },
             setBaseRuleConfig(rule, append) {
                 baseRule.value = {rule, append};
@@ -1394,6 +1430,15 @@ export default defineComponent({
             },
             fields() {
                 return data.dragForm.api.all().map(rule => rule.field).filter(id => !!id);
+            },
+            getTitle(rule) {
+                return (
+                    (rule?.__fc__?.refRule?.__$title?.value || rule.title || '').trim() ||
+                    (rule.props && rule.props.label) ||
+                    t('com.' + (rule._menu && rule._menu.name) + '.name') ||
+                    (rule._menu && rule._menu.label) ||
+                    rule.type
+                );
             },
             formMounted() {
                 data.form.api.hidden(true, configRef.value.hiddenFormConfig || []);

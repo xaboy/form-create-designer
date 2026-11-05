@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeOptions, localeProps, makeTreeOptions, makeTreeOptionsRule} from '../../utils/index';
+import {cascaderSqlType} from '../../utils/sqlType';
 
 const label = '级联选择器';
 const name = 'cascader';
@@ -12,6 +13,7 @@ export default {
     input: true,
     event: ['change', 'expandChange', 'blur', 'focus', 'visibleChange', 'removeTag'],
     validate: ['string', 'number', 'array'],
+    sqlType: cascaderSqlType,
     rule({t}) {
         return {
             type: name,

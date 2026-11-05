@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeProps} from '../../utils';
+import {switchSqlType} from '../../utils/sqlType';
 
 const label = '开关';
 const name = 'switch';
@@ -10,6 +11,7 @@ export default {
     label,
     name,
     input: true,
+    sqlType: switchSqlType,
     event: ['change'],
     rule({t}) {
         return {

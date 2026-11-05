@@ -10,6 +10,7 @@ export default {
     label: label,
     name: name,
     input: true,
+    sqlType: 'text',
     mask: true,
     languageKey: ['signaturePadTip', 'signaturePadTitle', 'reset', 'ok'],
     event: ['change', 'remove'],

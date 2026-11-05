@@ -13,6 +13,7 @@ export default {
     languageKey: ['clickToUpload'],
     event: ['change', 'download', 'preview', 'remove'],
     validate: ['array'],
+    sqlType: 'array',
     rule({t}) {
         return {
             type: name,

@@ -10,6 +10,7 @@ export default {
     label,
     name,
     input: true,
+    sqlType: 'array',
     event: ['change', 'ok', 'calendarChange'],
     rule({t}) {
         return {

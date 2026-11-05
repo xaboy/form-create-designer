@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeOptions, localeProps} from '../../utils';
+import {calendarSqlType} from '../../utils/sqlType';
 
 const label = '日历';
 const name = 'calendar';
@@ -10,6 +11,7 @@ export default {
     label,
     name,
     input: true,
+    sqlType: calendarSqlType,
     event: ['select', 'confirm', 'open', 'close', 'opened', 'closed', 'unselect', 'monthShow', 'overRange', 'clickSubtitle', 'clickDisabledDate', 'panelChange'],
     rule({t}) {
         return {

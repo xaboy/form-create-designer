@@ -12,6 +12,7 @@ export default {
     input: true,
     event: ['blur', 'focus', 'clear', 'click'],
     validate: ['string', 'url', 'email'],
+    sqlType: 'string',
     rule({t}) {
         return {
             type: name,

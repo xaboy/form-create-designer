@@ -12,6 +12,7 @@ export default {
     input: true,
     event: ['change'],
     validate: ['string'],
+    sqlType: 'text',
     rule({t}) {
         return {
             type: name,

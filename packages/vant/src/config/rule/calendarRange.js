@@ -10,6 +10,7 @@ export default {
     label,
     name,
     input: true,
+    sqlType: 'array',
     event: ['select', 'confirm', 'open', 'close', 'opened', 'closed', 'unselect', 'monthShow', 'overRange', 'clickSubtitle', 'clickDisabledDate', 'panelChange'],
     rule({t}) {
         return {

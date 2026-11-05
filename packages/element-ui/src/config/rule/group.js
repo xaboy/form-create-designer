@@ -16,6 +16,7 @@ export default {
     mask: false,
     event: ['change'],
     subForm: 'array',
+    sqlType: 'array',
     loadRule(rule) {
         rule.children = rule.props.rule || [];
         rule.type = 'FcRow';

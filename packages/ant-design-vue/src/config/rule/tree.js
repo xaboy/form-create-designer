@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeProps, makeTreeOptions, makeTreeOptionsRule} from '../../utils/index';
+import {treeSqlType} from '../../utils/sqlType';
 
 const label = '树形控件';
 const name = 'tree';
@@ -12,6 +13,7 @@ export default {
     input: true,
     event: ['check', 'expand', 'select', 'rightClick'],
     validate: ['string', 'number', 'array'],
+    sqlType: treeSqlType,
     rule({t}) {
         return {
             type: name,

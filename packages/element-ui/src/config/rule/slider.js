@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeProps} from '../../utils';
+import {sliderSqlType} from '../../utils/sqlType';
 
 const label = '滑块';
 const name = 'slider';
@@ -12,6 +13,7 @@ export default {
     input: true,
     event: ['change', 'input'],
     validate: ['number', 'array'],
+    sqlType: sliderSqlType,
     rule({t}) {
         return {
             type: name,

@@ -12,6 +12,7 @@ export default {
     input: true,
     event: ['change', 'activeChange', 'focus', 'blur'],
     validate: ['string'],
+    sqlType: 'string',
     rule({t}) {
         return {
             type: name,

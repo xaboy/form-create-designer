@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {getInjectArg, localeProps, makeOptionsRule, makeTreeOptions} from '../../utils/index';
+import {selectSqlType} from '../../utils/sqlType';
 
 const label = '选择器';
 const name = 'select';
@@ -12,6 +13,7 @@ export default {
     input: true,
     event: ['change', 'visibleChange', 'removeTag', 'clear', 'blur', 'focus'],
     validate: ['string', 'number', 'array'],
+    sqlType: selectSqlType,
     rule({t}) {
         return {
             type: name,

@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeOptions, localeProps} from '../../utils';
+import {datePickerSqlType} from '../../utils/sqlType';
 
 const label = '日期区间';
 const name = 'dateRange';
@@ -11,6 +12,7 @@ export default {
     name,
     input: true,
     event: ['change', 'blur', 'focus', 'calendarChange', 'panelChange', 'visibleChange'],
+    sqlType: datePickerSqlType,
     rule({t}) {
         return {
             type: 'datePicker',

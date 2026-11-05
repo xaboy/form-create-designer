@@ -11,6 +11,7 @@ export default {
     name,
     mask: false,
     input: true,
+    sqlType: 'array',
     subForm: 'array',
     languageKey: ['add', 'operation', 'dataEmpty'],
     event: ['change', 'add', 'delete'],

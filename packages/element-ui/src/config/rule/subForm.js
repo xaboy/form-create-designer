@@ -15,6 +15,7 @@ export default {
     mask: false,
     input: true,
     subForm: 'object',
+    sqlType: 'object',
     event: ['change'],
     loadRule(rule) {
         rule.children = rule.props.rule || [];

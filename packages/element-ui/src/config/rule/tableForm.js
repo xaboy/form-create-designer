@@ -12,6 +12,7 @@ export default {
     mask: false,
     input: true,
     subForm: 'array',
+    sqlType: 'array',
     languageKey: ['add', 'operation', 'dataEmpty'],
     event: ['change', 'add', 'delete'],
     children: 'tableFormColumn',

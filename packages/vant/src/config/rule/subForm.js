@@ -14,6 +14,7 @@ export default {
     dragBtn: true,
     mask: false,
     input: true,
+    sqlType: 'object',
     subForm: 'object',
     event: ['change'],
     loadRule(rule) {

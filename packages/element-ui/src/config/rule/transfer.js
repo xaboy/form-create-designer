@@ -12,6 +12,7 @@ export default {
     input: true,
     event: ['change', 'leftCheckChange', 'rightCheckChange'],
     validate: ['string', 'number', 'array'],
+    sqlType: 'array',
     rule({t}) {
         return {
             type: name,

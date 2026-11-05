@@ -13,6 +13,7 @@ export default {
     mask: true,
     languageKey: ['signaturePadTip', 'signaturePadTitle', 'reset', 'ok'],
     event: ['change', 'remove'],
+    sqlType: 'text',
     rule({t}) {
         return {
             type: name,

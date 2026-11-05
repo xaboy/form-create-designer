@@ -12,6 +12,7 @@ export default {
     input: true,
     event: ['oversize', 'clickUpload', 'clickPreview', 'clickReupload', 'closePreview', 'delete'],
     validate: ['array', 'string'],
+    sqlType: 'array',
     rule({t}) {
         return {
             type: name,

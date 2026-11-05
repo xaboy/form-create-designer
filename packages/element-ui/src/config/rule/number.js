@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeOptions, localeProps} from '../../utils';
+import {inputNumberSqlType} from '../../utils/sqlType';
 
 const label = '计数器';
 const name = 'inputNumber';
@@ -12,6 +13,7 @@ export default {
     input: true,
     event: ['blur', 'focus', 'change'],
     validate: ['number', 'integer', 'float'],
+    sqlType: inputNumberSqlType,
     rule({t}) {
         return {
             type: name,

@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeProps, makeTreeOptions, makeTreeOptionsRule} from '../../utils/index';
+import {treeSelectSqlType} from '../../utils/sqlType';
 
 const label = '树形选择';
 const name = 'elTreeSelect';
@@ -12,6 +13,7 @@ export default {
     input: true,
     event: ['change', 'visibleChange', 'removeTag', 'clear', 'blur', 'focus'],
     validate: ['string', 'number', 'array'],
+    sqlType: treeSelectSqlType,
     rule({t}) {
         return {
             type: name,

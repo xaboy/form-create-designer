@@ -1,5 +1,6 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeOptions, localeProps} from '../../utils';
+import {timePickerSqlType} from '../../utils/sqlType';
 
 const label = '时间区间';
 const name = 'timeRange';
@@ -11,6 +12,7 @@ export default {
     name,
     input: true,
     event: ['change', 'blur', 'focus', 'visibleChange'],
+    sqlType: timePickerSqlType,
     rule({t}) {
         return {
             type: 'timePicker',
