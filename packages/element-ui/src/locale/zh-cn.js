@@ -552,6 +552,8 @@ const ZhCn = {
                 size: '尺寸',
                 type: '类型',
                 plain: '是否朴素按钮',
+                text: '是否文字按钮',
+                bg: '是否显示文字按钮背景色',
                 round: '是否圆角按钮',
                 circle: '是否圆形按钮',
                 loading: '是否加载中状态',

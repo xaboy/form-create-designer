@@ -40,6 +40,21 @@ export default {
             }]
         }, {type: 'switch', field: 'plain'}, {
             type: 'switch',
+            field: 'text',
+            control: [
+                {
+                    value: true,
+                    rule: [
+                        {
+                            type: 'switch',
+                            field: 'bg',
+                            title: t('com.elButton.props.bg'),
+                        },
+                    ],
+                },
+            ],
+        }, {
+            type: 'switch',
             field: 'round'
         }, {type: 'switch', field: 'circle'}, {
             type: 'switch',

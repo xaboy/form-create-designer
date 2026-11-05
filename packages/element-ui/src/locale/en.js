@@ -552,6 +552,8 @@ const En = {
                 size: 'Size',
                 type: 'Type',
                 plain: 'Whether the button is plain',
+                text: 'Whether the button is a text button',
+                bg: 'Whether the text button shows a background',
                 round: 'Whether the button has rounded corners',
                 circle: 'Whether the button is round',
                 loading: 'Whether it is loading status',
