@@ -939,6 +939,7 @@ const ZhCn = {
             props: {
                 emptyText: '内容为空的时候展示的文本',
                 props: '配置选项',
+                disabled: '是否禁用',
                 renderAfterExpand: '是否在第一次展开某个树节点后才渲染其子节点',
                 defaultExpandAll: '是否默认展开所有节点',
                 expandOnClickNode: '是否在点击节点的时候展开或者收缩节点，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。',

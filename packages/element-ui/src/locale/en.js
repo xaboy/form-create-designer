@@ -937,6 +937,7 @@ const En = {
             props: {
                 emptyText: 'Text displayed when the content is empty',
                 props: 'Options',
+                disabled: 'Disabled',
                 renderAfterExpand: 'Whether to render its child nodes after expanding a tree node for the first time',
                 defaultExpandAll: 'Whether to expand all nodes by default',
                 expandOnClickNode: 'Whether to expand or contract the node when clicking the node, if it is false, the node will only be expanded or contracted when the arrow icon is clicked. ',

@@ -44,6 +44,9 @@ export default {
                 }
             }, {
                 type: 'switch',
+                field: 'disabled',
+            }, {
+                type: 'switch',
                 field: 'renderAfterExpand',
                 value: true
             }, {

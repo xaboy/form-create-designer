@@ -47,6 +47,10 @@ export default {
                 field: 'readonly',
             },
             {
+                type: 'switch',
+                field: 'clearable',
+            },
+            {
                 type: 'inputNumber',
                 field: 'visibleOptionNum',
                 value: 6,

@@ -755,6 +755,7 @@ const En = {
                 disabled: 'Disabled',
                 placeholder: 'Input box placeholder text',
                 readonly: 'Readonly',
+                clearable: 'Whether to enable the clear icon',
                 title: 'Top bar title',
                 visibleOptionNum: 'Number of visible options',
             }
