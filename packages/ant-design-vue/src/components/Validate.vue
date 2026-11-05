@@ -69,9 +69,12 @@
         <a-dropdown trigger="click" size="default">
             <a-button class="_fd-validate-btn _fd-plain-button" type="primary" ghost>{{ t('validate.rule') }} +</a-button>
             <template #overlay>
-                <a-menu @click="handleCommand">
+                <a-menu class="_fd-validate-pop" @click="handleCommand">
                     <a-menu-item v-for="(label, value) in modes" :key="value">
-                        <div>{{ label }}</div>
+                        <div class="_fd-validate-mode">
+                            <div class="_fd-validate-mode-label">{{ label }}</div>
+                            <div class="_fd-validate-mode-desc">{{ t('validate.modeDesc.' + value) }}</div>
+                        </div>
                     </a-menu-item>
                 </a-menu>
             </template>
@@ -248,6 +251,41 @@ export default defineComponent({
 ._fd-validate-btn {
     font-weight: 400;
     width: 100%;
+}
+
+._fd-validate-pop {
+    max-height: 360px;
+    overflow: auto;
+}
+
+._fd-validate-pop .ant-dropdown-menu-item,
+._fd-validate-pop.ant-menu .ant-menu-item {
+    height: auto;
+    line-height: 1.4;
+    white-space: normal;
+}
+
+._fd-validate-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 220px;
+    padding: 4px 0;
+}
+
+._fd-validate-mode-label {
+    font-size: 13px;
+    color: var(--fc-text-color-1, #333333);
+    line-height: 1.3;
+}
+
+._fd-validate-mode-desc {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--fc-text-color-3, #999999);
+    opacity: 0.85;
+    white-space: normal;
+    word-break: break-word;
 }
 
 ._fd-validate-item {

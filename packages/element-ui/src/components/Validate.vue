@@ -64,12 +64,15 @@
             </div>
         </template>
 
-        <el-dropdown trigger="click" size="default" popper-class="_fd-validate-pop" @command="handleCommand">
+        <el-dropdown trigger="click" size="default" popper-class="_fd-validate-pop" max-height="360px" @command="handleCommand">
             <el-button class="_fd-validate-btn" plain size="small">{{ t('validate.rule') }} + </el-button>
             <template #dropdown>
                 <el-dropdown-menu>
                     <el-dropdown-item :command="value" v-for="(label, value) in modes" :key="value">
-                        <div>{{ label }}</div>
+                        <div class="_fd-validate-mode">
+                            <div class="_fd-validate-mode-label">{{ label }}</div>
+                            <div class="_fd-validate-mode-desc">{{ t('validate.modeDesc.' + value) }}</div>
+                        </div>
                     </el-dropdown-item>
                 </el-dropdown-menu>
             </template>
@@ -251,7 +254,34 @@ export default defineComponent({
 }
 
 ._fd-validate-pop .el-dropdown-menu__item {
-    width: 248px;
+    width: 280px;
+    height: auto;
+    line-height: 1.4;
+    padding: 8px 16px;
+    white-space: normal;
+    align-items: flex-start;
+}
+
+._fd-validate-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+._fd-validate-mode-label {
+    font-size: 13px;
+    color: var(--fc-text-color-1, #333333);
+    line-height: 1.3;
+}
+
+._fd-validate-mode-desc {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--fc-text-color-3, #999999);
+    opacity: 0.85;
+    white-space: normal;
+    word-break: break-word;
 }
 
 ._fd-validate-item {
