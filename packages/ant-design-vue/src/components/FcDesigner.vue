@@ -364,10 +364,10 @@
                     <a-modal v-model:open="preview.state" width="80%" class="_fd-preview-dialog"
                              centered :destroyOnClose="true" :footer="null">
                         <a-tabs class="_fd-preview-tabs" v-model:activeKey="previewStatus">
-                            <a-tab-pane :tab="t('form.formMode')" key="form"></a-tab-pane>
-                            <a-tab-pane :tab="t('form.componentMode')" key="component"></a-tab-pane>
-                            <a-tab-pane :tab="t('form.htmlMode')" key="html"></a-tab-pane>
-                            <a-tab-pane :tab="t('form.sqlMode')" key="sql"></a-tab-pane>
+                            <a-tab-pane :tab="t('form.formMode')" key="form" v-if="getConfig('showPreviewForm', true) !== false"></a-tab-pane>
+                            <a-tab-pane :tab="t('form.componentMode')" key="component" v-if="getConfig('showPreviewComponent', true) !== false"></a-tab-pane>
+                            <a-tab-pane :tab="t('form.htmlMode')" key="html" v-if="getConfig('showPreviewHtml', true) !== false"></a-tab-pane>
+                            <a-tab-pane :tab="t('form.sqlMode')" key="sql" v-if="getConfig('showPreviewSql', true) !== false"></a-tab-pane>
                         </a-tabs>
                         <div class="_fd-preview-copy" v-if="['component', 'html', 'sql'].indexOf(previewStatus) > -1"
                              @click="copyCode">
@@ -800,7 +800,7 @@ export default defineComponent({
         watch(() => data.preview.state, function (n) {
             if (!n) {
                 nextTick(() => {
-                    data.previewStatus = 'form';
+                    data.previewStatus = methods.getDefaultPreviewStatus();
                     data.preview.rule = data.preview.option = null;
                 });
             }
@@ -1090,8 +1090,24 @@ export default defineComponent({
             previewReset(...args) {
                 vm.emit('previewReset', ...args);
             },
+            isPreviewTabVisible(name) {
+                const configKey = {
+                    form: 'showPreviewForm',
+                    component: 'showPreviewComponent',
+                    html: 'showPreviewHtml',
+                    sql: 'showPreviewSql',
+                }[name];
+                if (configKey && methods.getConfig(configKey, true) === false) {
+                    return false;
+                }
+                return true;
+            },
+            getDefaultPreviewStatus() {
+                return ['form', 'component', 'html', 'sql'].find(name => methods.isPreviewTabVisible(name)) || 'form';
+            },
             openPreview() {
                 data.preview.state = true;
+                data.previewStatus = methods.getDefaultPreviewStatus();
                 const rule = methods.getJson();
                 const options = methods.getOptionsJson();
                 data.preview.rule = designerForm.parseJson(rule);

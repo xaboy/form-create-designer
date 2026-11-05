@@ -200,6 +200,14 @@ export interface Config {
     showSaveBtn?: boolean;
     //是否显示预览按钮
     showPreviewBtn?: boolean;
+    //预览弹窗是否显示表单模式
+    showPreviewForm?: boolean;
+    //预览弹窗是否显示生成组件
+    showPreviewComponent?: boolean;
+    //预览弹窗是否显示生成HTML
+    showPreviewHtml?: boolean;
+    //预览弹窗是否显示生成SQL
+    showPreviewSql?: boolean;
     //是否显示右侧的配置界面
     showConfig?: boolean;
     //是否显示组件的基础配置表单

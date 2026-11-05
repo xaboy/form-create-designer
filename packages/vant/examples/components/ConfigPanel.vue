@@ -214,6 +214,15 @@ export default defineComponent({
                     ],
                 },
                 {
+                    label: '预览弹窗',
+                    children: [
+                        {label: '表单模式', value: 'showPreviewForm'},
+                        {label: '生成组件', value: 'showPreviewComponent'},
+                        {label: '生成HTML', value: 'showPreviewHtml'},
+                        {label: '生成SQL', value: 'showPreviewSql'},
+                    ],
+                },
+                {
                     label: '功能开关', children: [
                         {label: '快捷键', value: 'hotKey', img: 'https://view.form-create.com/img/hotkey.png'},
                         {
@@ -319,6 +328,10 @@ export default defineComponent({
                 showGridLine: true,
                 showQuickLayout: true,
                 showPreviewBtn: true,
+                showPreviewForm: true,
+                showPreviewComponent: true,
+                showPreviewHtml: true,
+                showPreviewSql: true,
                 showPrintBtn: true,
                 showConfig: true,
                 showVariable: true,
