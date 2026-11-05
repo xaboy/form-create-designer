@@ -1,7 +1,7 @@
 <template>
     <div class="_fd-tf-col" :style="colStyle">
         <div class="_fd-tf-title" :style="{textAlign: align || 'center'}">
-            <span v-if="required" class="_fd-tf-required">*</span>{{ label || '' }}
+            <span v-if="required" class="_fd-tf-required">*</span>{{ displayLabel }}
         </div>
         <div class="_fd-tf-con">
             <slot></slot>
@@ -12,6 +12,7 @@
 <script>
 import is from '@form-create/utils/lib/type';
 import {defineComponent} from 'vue';
+import {translateVar} from '../../utils/language';
 
 export default defineComponent({
     name: 'TableFormColumnView',
@@ -21,8 +22,13 @@ export default defineComponent({
         width: [Number, String],
         color: String,
         required: Boolean,
+        formCreateInject: Object,
     },
     computed: {
+        displayLabel() {
+            const api = this.formCreateInject && this.formCreateInject.api;
+            return translateVar(this.label, api && api.t ? key => api.t(key) : null);
+        },
         colStyle() {
             const w = this.width;
             const style = {width: is.Number(w) ? `${w}px` : ((!w || w === 'auto') ? '180px' : w)};

@@ -19,6 +19,7 @@
 
 <script>
 import {markRaw, reactive} from 'vue';
+import {translateVar} from '../../utils/language';
 
 export default {
     name: 'TableForm',
@@ -111,6 +112,10 @@ export default {
         };
     },
     methods: {
+        tl(text) {
+            const api = this.formCreateInject && this.formCreateInject.api;
+            return translateVar(text, api && api.t ? key => api.t(key) : null);
+        },
         getColspan() {
             const visibleCols = this.columns.filter(column => column.hidden !== true).length;
             let extra = this.formCreateInject.preview || !this.deletable ? 1 : 2;
@@ -268,7 +273,7 @@ export default {
                         style: {...(column.style || {}), textAlign: column.align || 'center'},
                         class: column.required ? '_fc-tf-head-required' : '',
                         props: {
-                            innerText: column.label || '',
+                            innerText: this.tl(column.label),
                         },
                     });
                     body.push({
