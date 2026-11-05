@@ -333,6 +333,17 @@
     animation: rotating 2s linear infinite;
 }
 
+._fc-search-input {
+    height: 32px;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 0;
+}
+
+._fc-search-input.ant-input-affix-wrapper-sm {
+    height: 28px;
+}
+
 ._fc-struct-tree {
     color: #262626;
     margin: 5px 0;

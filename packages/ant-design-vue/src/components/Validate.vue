@@ -275,14 +275,14 @@ export default defineComponent({
 
 ._fd-validate-mode-label {
     font-size: 13px;
-    color: var(--fc-text-color-1, #333333);
+    color: #333333;
     line-height: 1.3;
 }
 
 ._fd-validate-mode-desc {
     font-size: 12px;
     line-height: 1.45;
-    color: var(--fc-text-color-3, #999999);
+    color: #999999;
     opacity: 0.85;
     white-space: normal;
     word-break: break-word;

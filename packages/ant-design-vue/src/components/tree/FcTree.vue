@@ -1,11 +1,11 @@
 <template>
     <div class="_fd-tree-block">
         <div class="_fd-tree__search">
-            <el-input class="_fc-search-input" v-model="rawKeyword" :placeholder="placeholder" clearable @input="onInput">
+            <a-input class="_fc-search-input" v-model:value="rawKeyword" :placeholder="placeholder" allow-clear @change="onInput">
                 <template #suffix>
                     <i class="fc-icon icon-search"></i>
                 </template>
-            </el-input>
+            </a-input>
         </div>
 
         <div class="_fd-tree">
@@ -694,7 +694,7 @@ export default {
 </script>
 
 <style scoped>
-._fd-tree__search :deep(.el-input__wrapper) {
+._fd-tree__search :deep(.ant-input-affix-wrapper) {
     margin-bottom: 8px;
 }
 
