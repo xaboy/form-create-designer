@@ -11,7 +11,7 @@
                    destroy-on-close
                    :close-on-click-modal="false"
                    append-to-body width="800px">
-            <FnEditor ref="editor" v-model="value" :name="name" :args="args" :body="body" :fnx="fnx"></FnEditor>
+            <FnEditor ref="editor" v-model="value" :name="name" :args="args" :body="body" :fnx="fnx" :placeholder="placeholder"></FnEditor>
             <template #footer>
                 <div>
                     <el-button @click="visible = false" size="default">{{ t('props.cancel') }}</el-button>
@@ -39,6 +39,7 @@ export default defineComponent({
         title: String,
         body: Boolean,
         fnx: Boolean,
+        placeholder: String,
         defaultValue: {
             require: false
         },

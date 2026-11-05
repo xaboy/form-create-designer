@@ -46,6 +46,7 @@
                                     v-model="item[item.mode]"
                                     name="validator"
                                     :args="item.adapter ? ['value', 'callback'] : ['rule', 'value', 'callback']"
+                                    :placeholder="validatorPlaceholder"
                                     @change="onInput"
                                 >{{ t('validate.modes.validator') }}
                                 </FnInput>
@@ -85,6 +86,14 @@ import FnInput from './FnInput.vue';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
 import LanguageInput from './language/LanguageInput.vue';
 
+const validatorPlaceholder = `const api = this.api;
+
+if (!value) {
+  callback('请输入');
+  return;
+}
+callback();`;
+
 export default defineComponent({
     name: 'Validate',
     inject: ['designer'],
@@ -103,6 +112,7 @@ export default defineComponent({
     },
     data() {
         return {
+            validatorPlaceholder,
             validate: this.parseValue(this.modelValue || []),
         };
     },

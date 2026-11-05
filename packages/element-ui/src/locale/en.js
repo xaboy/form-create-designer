@@ -143,13 +143,7 @@ const En = {
         type: 'Type',
         info: 'Info',
         label: 'Field',
-        inject: {
-            api: 'API of current form',
-            rule: 'Generate rules for the current form',
-            self: 'Component generation rule',
-            option: 'Form configuration',
-            args: 'Original parameters of event',
-        }
+        injectDesc: 'Use $inject to access the form API, component rules, and event arguments for linkage logic.',
     },
     eventInfo: {
         blur: 'Triggered when focus is lost',

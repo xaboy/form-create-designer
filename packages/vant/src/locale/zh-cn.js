@@ -144,13 +144,7 @@ const ZhCn = {
         saveMsg: '请先保存当前正在编辑的事件',
         type: '类型',
         info: '说明',
-        inject: {
-            api: '当前表单的api',
-            rule: '当前表单的生成规则',
-            self: '组件的生成规则',
-            option: '表单的配置',
-            args: '事件的原始参数',
-        }
+        injectDesc: '可通过 $inject 访问表单 API、组件规则及事件参数，用于编写联动逻辑。',
     },
     eventInfo: {
         blur: '失去焦点时触发',

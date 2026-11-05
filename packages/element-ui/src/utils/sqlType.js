@@ -1,5 +1,3 @@
-/** @typedef {import('../../types/index.d.ts').SqlType} SqlType */
-
 export function inputNumberSqlType(rule) {
     const { precision, step, max, min } = rule.props || {};
     if (precision != null && precision >= 0) {

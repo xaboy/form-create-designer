@@ -417,9 +417,18 @@ export const getRuleDescription = (children) => {
 export function getInjectArg(t) {
     return {
         name: '$inject',
-        info: `$inject <a href="https://view.form-create.com/inject" target="_blank">${t('form.document')}</a>`,
+        info: `${t('event.injectDesc')} <a href="https://view.form-create.com/inject" target="_blank">${t('form.document')}</a>`,
     }
 }
+
+export const injectFnPlaceholder = `// $inject 参数说明
+// api    表单 API 实例
+// self   当前组件的生成规则
+// args   事件的原始参数数组
+
+// 示例
+const value = $inject.args[0];
+const api = $inject.api;`;
 
 export function isElementInside(x, y, element) {
     const rect = element.getBoundingClientRect();

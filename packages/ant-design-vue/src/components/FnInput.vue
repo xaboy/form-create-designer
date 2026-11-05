@@ -11,7 +11,7 @@
                  v-model:open="visible"
                  centered :maskClosable="false" :destroyOnClose="true"
                  width="800px">
-            <FnEditor ref="editor" v-model="value" :name="name" :args="args" :body="body" :fnx="fnx"></FnEditor>
+            <FnEditor ref="editor" v-model="value" :name="name" :args="args" :body="body" :fnx="fnx" :placeholder="placeholder"></FnEditor>
             <template #footer>
                 <div>
                     <a-button @click="visible = false" size="middle">{{ t('props.cancel') }}</a-button>
@@ -39,6 +39,7 @@ export default defineComponent({
         title: String,
         body: Boolean,
         fnx: Boolean,
+        placeholder: String,
         defaultValue: {
             require: false
         },

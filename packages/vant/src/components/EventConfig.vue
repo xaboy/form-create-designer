@@ -115,6 +115,7 @@
                         <el-main v-if="activeData">
                             <FnEditor ref="fn" v-model="eventStr" body :name="activeData.name"
                                       :args="fnArgs"
+                                      :placeholder="injectFnPlaceholder"
                                       style="height: 558px;"/>
                         </el-main>
                     </el-container>
@@ -140,7 +141,7 @@ import is from '@form-create/utils/lib/type';
 import {defineComponent} from 'vue';
 import FnEditor from './FnEditor.vue';
 import errorMessage from '../utils/message';
-import {getInjectArg} from '../utils';
+import {getInjectArg, injectFnPlaceholder} from '../utils';
 
 const $T = '$FNX:';
 
@@ -165,6 +166,7 @@ export default defineComponent({
     },
     data() {
         return {
+            injectFnPlaceholder,
             visible: false,
             activeData: null,
             val: null,

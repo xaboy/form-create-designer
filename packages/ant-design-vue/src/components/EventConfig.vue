@@ -100,7 +100,8 @@
                         </a-layout-header>
                         <a-layout-content v-if="activeData">
                             <FnEditor ref="fn" v-model="eventStr" body :name="activeData.name"
-                                      :args="fnArgs"/>
+                                      :args="fnArgs"
+                                      :placeholder="injectFnPlaceholder"/>
                         </a-layout-content>
                     </a-layout>
                 </a-layout-content>
@@ -120,7 +121,7 @@ import {deepCopy} from '@form-create/utils/lib/deepextend';
 import is from '@form-create/utils/lib/type';
 import {defineComponent} from 'vue';
 import FnEditor from './FnEditor.vue';
-import {getInjectArg} from '../utils';
+import {getInjectArg, injectFnPlaceholder} from '../utils';
 
 const $T = '$FNX:';
 
@@ -145,6 +146,7 @@ export default defineComponent({
     },
     data() {
         return {
+            injectFnPlaceholder,
             visible: false,
             activeData: null,
             val: null,

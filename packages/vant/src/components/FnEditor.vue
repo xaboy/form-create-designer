@@ -45,6 +45,7 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/hint/javascript-hint';
 import 'codemirror/addon/hint/anyword-hint';
+import 'codemirror/addon/display/placeholder';
 import {defineComponent, markRaw} from 'vue';
 import {addAutoKeyMap, toJSON} from '../utils';
 import { getGlobalStubForParamName } from '../utils/hintStubs';
@@ -63,6 +64,7 @@ export default defineComponent({
         body: Boolean,
         button: Boolean,
         fnx: Boolean,
+        placeholder: String,
     },
     inject: ['designer'],
     data() {
@@ -93,6 +95,11 @@ export default defineComponent({
                 }
             },
             deep: true,
+        },
+        placeholder(val) {
+            if (this.editor) {
+                this.editor.setOption('placeholder', val || '');
+            }
         },
     },
     computed: {
@@ -211,6 +218,7 @@ export default defineComponent({
                     line: true,
                     tabSize: 2,
                     lineWrapping: true,
+                    placeholder: this.placeholder || '',
                     value,
                 }));
                 this.editor.on('inputRead', (cm, change) => {
